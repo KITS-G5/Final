@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -23,8 +24,11 @@ public class Order {
     @ManyToOne
     private Card card;
 
+    @ManyToOne
+
     private Date rentingStartedDate;
     private Date rentingEndDate;
     private float totalFee;
     private boolean paymentStatus;
 }
+
