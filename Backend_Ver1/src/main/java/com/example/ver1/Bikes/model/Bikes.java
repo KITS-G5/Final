@@ -1,5 +1,6 @@
 package com.example.ver1.Bikes.model;
 
+import com.example.ver1.Order.Model.Order;
 import com.example.ver1.Stations.model.Stations;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "bikes")
@@ -32,4 +34,8 @@ public class Bikes {
 
     @Column(name = "status")
     private Boolean status;
+
+    @OneToMany(mappedBy = "bike", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Order> orders;
 }
