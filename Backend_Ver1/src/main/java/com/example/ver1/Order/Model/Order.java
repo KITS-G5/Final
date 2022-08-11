@@ -40,6 +40,6 @@ public class Order {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "rend_end_date")
     private LocalDateTime rentingEndDate;
-    private float totalFee; //timestampdiff mysql?
+    private Float totalFee; //timestampdiff mysql?
     private boolean paymentStatus;
 }
