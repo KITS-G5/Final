@@ -1,0 +1,33 @@
+.eco_bie {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(142,43,180,1) 0%, rgba(111,42,221,1) 23%, rgba(165,0,255,1) 79%);
+  .header_eco {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    .Logo_eco {
+      span {
+        font-size: 3rem;
+        color: white;
+      }
+
+    }
+  }
+  .language {
+    display: flex;
+    justify-content: flex-end;
+    .language_vn {
+      display: flex;
+      gap: 10px;
+      .tripple {
+        color: white;
+        margin:auto;
+        span {
+          padding: 15px;
+          font-size: 2rem;
+
+        }
+      }
+    }
+  }
+
+}

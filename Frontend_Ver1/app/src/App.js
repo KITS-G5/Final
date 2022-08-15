@@ -5,6 +5,8 @@ import {AuthContextProvider} from "./Context/AuthContext";
 import Signin from "./Components/Authentication/Signin";
 import Admin from "./Admin";
 import HomeAdmin from "./Admin/Page/Home/home.admin";
+import HomeEcoBicycle from "./EcoBicycle/Layout/Home/home.ecobicycle";
+import MainEco from "./EcoBicycle/Layout/Main/main.eco";
 
 function App() {
     return (
@@ -19,6 +21,16 @@ function App() {
                       <Route path='/admin/home' element={<Admin/>}>
                           <Route index element={<HomeAdmin/>}/>
                       </Route>
+
+                        {/*Eco*/}
+                    </Routes>
+
+                </BrowserRouter>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path='/ecobicycle' element={<HomeEcoBicycle/>}>
+                            <Route index element={<MainEco/>}/>
+                        </Route>
                     </Routes>
                 </BrowserRouter>
             </AuthContextProvider>

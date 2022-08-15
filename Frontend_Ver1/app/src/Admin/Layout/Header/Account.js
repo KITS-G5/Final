@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Account.scss'
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -6,9 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import {UserAuth} from "../../../Context/AuthContext";
@@ -38,7 +37,7 @@ export default function AccountMenu() {
         setAnchorEl(null);
     };
     return (
-        <React.Fragment className='accounts'>
+        <React.Fragment>
             <Box  sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', fontFamily:'Poppins' }}>
                 <Tooltip title="Account settings">
                     <IconButton
@@ -54,6 +53,7 @@ export default function AccountMenu() {
                 </Tooltip>
             </Box>
             <Menu
+
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
@@ -88,19 +88,19 @@ export default function AccountMenu() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
+                <MenuItem sx={{fontFamily:'\'Poppins\', sans-serif', fontSize:'1.4rem'}}>
                     <Avatar /> {user && user.email}
                 </MenuItem>
                 <Divider />
-                <MenuItem>
+                <MenuItem sx={{fontFamily:'\'Poppins\', sans-serif', fontSize:'1.4rem'}}>
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>
+                <MenuItem sx={{fontFamily:'\'Poppins\', sans-serif', fontSize:'1.4rem'}} onClick={handleLogout}>
                     <ListItemIcon>
-                        <Logout fontSize="small" />
+                        <Logout fontSize="medium" />
                     </ListItemIcon>
                     Logout
                 </MenuItem>
