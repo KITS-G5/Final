@@ -2,6 +2,7 @@ import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import logo from "./image/leaf-icon.png"
 import Footer from "../Footer/Footer";
 import {Outlet} from "react-router";
+import "./header_style.css";
 
 const Header = () => {
     return (
