@@ -1,20 +1,27 @@
-import './App.css';
 import Header from "./Header/Header";
 import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
 import Home from "./Home";
+import {AuthContextProvider} from "./Context/AuthContext";
+import Signin from "./Components/Authentication/Signin";
+import Admin from "./Admin";
+import HomeAdmin from "./Admin/Page/Home/home.admin";
 
 function App() {
     return (
         <>
-            <div>
+            <AuthContextProvider>
                 <BrowserRouter>
                     <Routes>
                       <Route path='/' element={<Header/>}>
                           <Route index element={<Home/>}/>
+                          <Route path='signin' element={<Signin/>}/>
+                      </Route>
+                      <Route path='/admin/home' element={<Admin/>}>
+                          <Route index element={<HomeAdmin/>}/>
                       </Route>
                     </Routes>
                 </BrowserRouter>
-            </div>
+            </AuthContextProvider>
         </>
     );
 }
