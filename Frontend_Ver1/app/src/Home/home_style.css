@@ -103,3 +103,16 @@
     width: 50%;
 }
 /*end of contact*/
+/*responsive*/
+@media screen and (max-width: 800px){
+    .faq .faqContent{
+        max-width: 100%;
+        margin-left: 15px!important;
+    }
+    .contact .contact_message {
+        width: 100%;
+    }
+    .contact .contact_input {
+        width: 100%;
+    }
+}

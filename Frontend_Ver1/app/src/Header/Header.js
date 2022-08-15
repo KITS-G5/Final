@@ -8,17 +8,10 @@ import {NavLink} from "react-router-dom";
 const Header = () => {
     return (
         <>
-            <Navbar bg="light" variant="light">
+            <Navbar bg="light" expand="lg">
                 <Container>
                     <Navbar.Brand href="#home">
-                        <img
-                            alt=""
-                            src={logo}
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />{' '}
-                        EcoBicycle
+                        <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top"/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -28,7 +21,7 @@ const Header = () => {
                             <NavDropdown title="Buy a card" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Prepaid</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">
-                                   Postpaid
+                                    Postpaid
                                 </NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link href="#link">Check your card</Nav.Link>
