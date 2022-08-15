@@ -4,7 +4,7 @@ import {Outlet} from 'react-router-dom'
 import logo from "../../../Header/image/leaf-icon.png"
 const HomeEcoBicycle = () => {
     return (
-        <div className='eco_bie container'>
+        <div className='eco_bie container-fluid'>
             {/*
                 Header
             */}

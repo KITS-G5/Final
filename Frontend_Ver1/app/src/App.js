@@ -6,7 +6,10 @@ import Signin from "./Components/Authentication/Signin";
 import Admin from "./Admin";
 import HomeAdmin from "./Admin/Page/Home/home.admin";
 import HomeEcoBicycle from "./EcoBicycle/Layout/Home/home.ecobicycle";
-import MainEco from "./EcoBicycle/Layout/Main/main.eco";
+import MainEco from "./EcoBicycle/Page/Main/main.eco";
+import Nopage from "./Layout/Nopage/Nopage";
+import BuyCardEco from "./EcoBicycle/Page/BuyCard";
+import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
 
 function App() {
     return (
@@ -17,12 +20,13 @@ function App() {
                       <Route path='/' element={<Header/>}>
                           <Route index element={<Home/>}/>
                           <Route path='signin' element={<Signin/>}/>
+
                       </Route>
                       <Route path='/admin/home' element={<Admin/>}>
                           <Route index element={<HomeAdmin/>}/>
                       </Route>
 
-                        {/*Eco*/}
+
                     </Routes>
 
                 </BrowserRouter>
@@ -30,6 +34,10 @@ function App() {
                     <Routes>
                         <Route path='/ecobicycle' element={<HomeEcoBicycle/>}>
                             <Route index element={<MainEco/>}/>
+                            <Route path='buy_card' element={<BuyCardEco/>}>
+                            </Route>
+                            <Route  path='buy_card/prepaid' element={<Prepaid/>}/>
+                            <Route path='*' element={<Nopage/>}/>
                         </Route>
                     </Routes>
                 </BrowserRouter>
