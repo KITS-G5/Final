@@ -5,6 +5,7 @@ import {AuthContextProvider} from "./Context/AuthContext";
 import Signin from "./Components/Authentication/Signin";
 import Admin from "./Admin";
 import HomeAdmin from "./Admin/Page/Home/home.admin";
+import BuyCardWeb from "./BuyCardWeb";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Routes>
                       <Route path='/' element={<Header/>}>
                           <Route index element={<Home/>}/>
+                          <Route path="/buyweb" element={<BuyCardWeb/>}/>
                           <Route path='signin' element={<Signin/>}/>
                       </Route>
                       <Route path='/admin/home' element={<Admin/>}>

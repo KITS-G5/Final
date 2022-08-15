@@ -25,7 +25,7 @@ const Home = () => {
     return (
         <>
             <Container fluid className={"p-0"} style={{overflow: "hidden"}}>
-                <div className={'banner ms-0 p-0'}>
+                <div className={'homeBanner ms-0 p-0'}>
                     <div className={"header_text ms-auto me-auto"}>
                         <h2>
                             Never be without a bike!
@@ -43,6 +43,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={"map"} id={"map"}>
+                    <h1>Stations across the country</h1>
                     <Row>
                         <Col md={12} >
                             <MapContainer style={{height: "100vh", width: "100%"}} className={'ms-auto me-auto'} center={HN_pos} zoom={7}
@@ -81,7 +82,7 @@ const Home = () => {
                         </Col>
                     </Row>
                 </div>
-                <div className={"how"}>
+                <div className={"how"} id={"how"}>
                     <h1 className={"ms-auto me-auto"}>
                         How it works
                     </h1>

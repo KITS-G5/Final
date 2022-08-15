@@ -16,7 +16,7 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link href="#home">How it works</Nav.Link>
+                            <Nav.Link href="/" onClick={(e)=>{e.preventDefault(); window.location.replace("/#how");}}>How it works</Nav.Link>
                             <Nav.Link href="#link">Search</Nav.Link>
                             <NavDropdown title="Buy a card" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Prepaid</NavDropdown.Item>

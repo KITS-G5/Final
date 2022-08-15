@@ -3,7 +3,7 @@
     font-family: "Open Sans", sans-serif;
 }
 /*banner*/
-.banner {
+.homeBanner {
     width: 100%;
     background-image: url("https://www.donkey.bike/wp-content/uploads/2021/11/a-woman-with-a-donkey-bike-in-copenhagen-scaled.jpg");
     min-height: 87.5vh;
@@ -12,29 +12,28 @@
     display: flex;
     align-items: center;
 }
-.banner img{
-    width: 100%;
-}
-.banner .header_text {
+.homeBanner .header_text {
     height: 100%;
     width: 100%;
     max-width: 1291px;
 }
-.banner .header_text h2 {
+.homeBanner .header_text h2 {
     font-weight: 900;
     font-size: 3rem;
 }
-.banner .header_text a {
+.homeBanner .header_text a {
     text-decoration: none;
     color: white;
 }
-.banner .header_text .header_button {
+.homeBanner .header_text .header_button {
     padding: 10px 20px;
 }
 /*end of banner*/
 /*map*/
-.map {
-    /*margin-top: 5rem;*/
+.map h1{
+    margin-top: 5rem;
+    font-weight: bolder;
+    text-align: center;
 }
 /*end of map*/
 /*how*/
