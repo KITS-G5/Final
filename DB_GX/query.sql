@@ -1,4 +1,4 @@
-create database projectfinal;
+tbl_ordercardcreate database projectfinal;
 use projectfinal;
 -- 
 drop database projectfinal;
@@ -157,34 +157,40 @@ insert into customer (name, address, phone) values ('Brandy Denman', '153 Welch 
 insert into card_type (card_type) values ('Postpaid');
 insert into card_type (card_type) values ('Prepaid');
 
--- select * from card;
-insert into card(balance, card_number, id_card_type, id_customer) values (4504817, '00112233445', 1, 1);
-insert into card(balance,  card_number,id_card_type, id_customer) values (5204063, '00112233445', 2, 2);
-insert into card(balance,  card_number,id_card_type, id_customer) values (5070358,'00112233445',  2, 3);
-insert into card(balance, card_number, id_card_type, id_customer) values (1478840,'00112233445',  1, 4);
-insert into card(balance,  card_number,id_card_type, id_customer) values (9619473,'00112233445',  1, 5);
-insert into card(balance,  card_number,id_card_type, id_customer) values (3612608, '00112233445', 1, 6);
-insert into card(balance,  card_number,id_card_type, id_customer) values (2249540, '00112233445', 2, 7);
-insert into card(balance,  card_number,id_card_type, id_customer) values (3898614,'00112233445',  2, 8);
-insert into card(balance,  card_number,id_card_type, id_customer) values (5282481,'00112233445',  1, 9);
-insert into card(balance,  card_number,id_card_type, id_customer) values (3028385,'00112233445',  1, 10);
-insert into card(balance,  card_number,id_card_type, id_customer) values (7120915,'00112233445',  2, 11);
-insert into card(balance,  card_number,id_card_type, id_customer) values (7645424,'00112233445',  2, 12);
-insert into card(balance,  card_number,id_card_type, id_customer) values (7500376,'00112233445',  1, 13);
-insert into card(balance,  card_number,id_card_type, id_customer) values (7078167,'00112233445',  2, 14);
-insert into card(balance,  card_number,id_card_type, id_customer) values (3266486, '00112233445', 1, 15);
-insert into card(balance,  card_number,id_card_type, id_customer) values (5506107,'00112233445',  2, 16);
-insert into card(balance,  card_number,id_card_type, id_customer) values (1056002, '00112233445', 1, 17);
-insert into card(balance,  card_number,id_card_type, id_customer) values (8062990, '00112233445', 1, 18);
-insert into card(balance,  card_number,id_card_type, id_customer) values (1510642, '00112233445', 1, 19);
-insert into card(balance,  card_number,id_card_type, id_customer) values (5630991,'00112233445',  1, 20);
-insert into card(balance,  card_number,id_card_type, id_customer) values (9902586,'00112233445',  1, 21);
-insert into card(balance,  card_number,id_card_type, id_customer) values (5329771, '00112233445', 2, 22);
-insert into card(balance,  card_number,id_card_type, id_customer) values (4300566, '00112233445', 1, 23);
-insert into card(balance,  card_number,id_card_type, id_customer) values (2954333,'00112233445',  2, 24);
-insert into card(balance,  card_number,id_card_type, id_customer) values (1655462,'00112233445',  2, 25);
-insert into card(balance,  card_number,id_card_type, id_customer) values (2865570,'00112233445',  2, 26);
-insert into card(balance,  card_number,id_card_type, id_customer) values (4434283,'00112233445',  1, 27);
-insert into card(balance,  card_number,id_card_type, id_customer) values (4087419, '00112233445', 1, 28);
-insert into card(balance,  card_number,id_card_type, id_customer) values (8681467, '00112233445', 1, 29);
-insert into card(balance,  card_number,id_card_type, id_customer) values (8614523, '00112233445', 1, 30);
+insert into card(balance, card_ccv,  card_num, id_card_type, id_customer) values (4504817, '123','00112233445', 1, 1);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (5204063,'123', '00112223445', 2, 2);
+insert into card(balance,card_ccv,    card_num,id_card_type, id_customer) values (5070358,'123','00112212445',  2, 3);
+insert into card(balance, card_ccv,  card_num, id_card_type, id_customer) values (1478840,'123','00112233446',  1, 4);
+insert into card(balance,card_ccv,    card_num,id_card_type, id_customer) values (9619473,'123','00112233447',  1, 5);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (3612608, '123','00112233485', 1, 6);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (2249540, '123','00112233495', 2, 7);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (3898614,'123','00112233441',  2, 8);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (5282481,'123','00112233433',  1, 9);
+insert into card(balance,card_ccv,    card_num,id_card_type, id_customer) values (3028385,'123','00112233411',  1, 10);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (7120915,'123','00112233422',  2, 11);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (7645424,'123','001122334333',  2, 12);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (7500376,'123','00112233466',  1, 13);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (7078167,'123','00112233477',  2, 14);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (3266486,'123', '00112233885', 1, 15);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (5506107,'123','00112233499',  2, 16);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (1056002,'123', '00112233005', 1, 17);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (8062990,'123', '00112233115', 1, 18);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (1510642,'123', '00112233225', 1, 19);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (5630991,'123','00112233433',  1, 20);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (9902586,'123','001122334456',  1, 21);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (5329771,'123', '00112233121', 2, 22);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (4300566,'123', '00112233666', 1, 23);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (2954333,'123','00112232222',  2, 24);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (1655462,'123','00112233000',  2, 25);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (2865570,'123','001122331111',  2, 26);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (4434283,'123','00112233444',  1, 27);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (4087419,'123', '00112211115', 1, 28);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (8681467,'123', '001122312125', 1, 29);
+insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values (8614523,'123', '00112233000', 1, 30);
+
+
+desc tbl_order;
+
+insert into tbl_order(payment_status, rend_end_date, rent_start_date, return_status, total_fee, bike_id, card_id)
+values
+(1, '2020-10-10', '2020-10-9', 1, 120000, 1, 1)
