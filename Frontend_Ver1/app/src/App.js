@@ -6,6 +6,7 @@ import Signin from "./Components/Authentication/Signin";
 import Admin from "./Admin";
 import HomeAdmin from "./Admin/Page/Home/home.admin";
 import BuyCardWeb from "./BuyCardWeb";
+import Search from "./Search";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                           <Route index element={<Home/>}/>
                           <Route path="/buyweb" element={<BuyCardWeb/>}/>
                           <Route path='signin' element={<Signin/>}/>
+                          <Route path="/search" element={<Search/>}/>
                       </Route>
                       <Route path='/admin/home' element={<Admin/>}>
                           <Route index element={<HomeAdmin/>}/>
