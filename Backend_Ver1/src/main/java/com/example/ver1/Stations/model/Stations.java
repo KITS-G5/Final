@@ -25,6 +25,15 @@ public class Stations {
     private long id;
     @Column(name = "station_name")
     private String stationName;
+
+    @Column(name = "station_address")
+    private String stationAddress;
+
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longtitude")
+    private double longtitude;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "city_id", nullable = false)
     private Cities city;

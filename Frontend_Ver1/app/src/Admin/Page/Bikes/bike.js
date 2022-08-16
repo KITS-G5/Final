@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-const Station = () => {
+const Bike = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
         console.log('user use effect!!');
-        let url = 'http://localhost:8080/api/v1/stations';
+        let url = 'http://localhost:8080/api/v1/bikes';
         console.log(url);
         fetch(url)
             .then((response) => response.json())
@@ -18,17 +18,19 @@ const Station = () => {
     let dataTable = data.map((item) => {
         return {
             id: item.id,
-            station: item.stationName,
-            city: item.city.cityName,
-            district: item.district.districtName
+            bikeName: item.bikeName,
+            station: item.station.stationName,
+            address: item.station.city.cityName + ', ' + item.station.district.districtName,
+            status: item.status,
             // <button></button>
         }
     })
     const columns = [
-        { field: 'id', headerName: 'ID', width: 200 },
-        { field: 'station', headerName: 'Station name', width: 300 },
-        { field: 'district', headerName: 'District', width: 300},
-        { field: 'city', headerName: 'City', width: 200},
+        { field: 'id', headerName: 'ID', width: 130 },
+        { field: 'bikeName', headerName: 'Bike name', width: 150 },
+        { field: 'station', headerName: 'Station name', width: 200 },
+        { field: 'address', headerName: 'Address', width: 400},
+        { field: 'status', headerName: 'Status', width: 130 },
         {
             field: "View",
             renderCell: (cellValues) => {
@@ -60,7 +62,7 @@ const Station = () => {
                     </Button>
                 );
             }
-        }];
+    }];
 
     // {
     //     field: 'age',
@@ -113,8 +115,8 @@ const Station = () => {
     // ];
 
     return (
-        <div style={{ height: '80vh'}} className={'container mt-5'}>
-            <h1 className={'text-center'} style={{ marginTop: '60px'}}>STATION MANAGEMENT SYSTEM</h1>
+        <div style={{ height: '80vh'}} className={'container'}>
+            <h1 className={'text-center'} style={{ marginTop: '60px'}}>BIKE MANAGEMENT SYSTEM</h1>
             <DataGrid
                 style={{ marginTop: '30px'}}
                 rows={dataTable}
@@ -128,4 +130,4 @@ const Station = () => {
     );
 };
 
-export default Station;
+export default Bike;

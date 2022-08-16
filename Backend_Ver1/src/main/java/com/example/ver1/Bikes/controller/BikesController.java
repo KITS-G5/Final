@@ -18,7 +18,7 @@ public class BikesController {
     private BikesService bikesService;
 
     @GetMapping("/bikes")
-    public List<Bikes> getAllEmployees() {
+    public List<Bikes> getAllBikes() {
         return bikesService.getAllBikes();
     }
 

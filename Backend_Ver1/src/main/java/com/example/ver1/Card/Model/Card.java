@@ -23,6 +23,9 @@ public class Card {
     @Column(name = "balance")
     private double balance;
 
+    @Column(name = "card_number")
+    private String cardNumber;
+
     @ManyToOne
     @JoinColumn(name = "id_card_type")
     @EqualsAndHashCode.Exclude
