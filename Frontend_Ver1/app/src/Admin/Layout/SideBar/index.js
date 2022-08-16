@@ -23,6 +23,10 @@ import MailIcon from '@mui/icons-material/Mail';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import {Outlet, useNavigate} from 'react-router-dom'
 import {Link} from 'react-router-dom'
+import PersonIcon from '@mui/icons-material/Person';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import {UserAuth} from "../../../Context/AuthContext";
 const drawerWidth = 200;
@@ -161,7 +165,7 @@ export default function SideBar() {
                 </List>
                 <Divider />
                 <List>
-                    {['Prodict', 'Trash', 'Spam'].map((text, index) => (
+                    {['Stations', 'Bikes'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -179,12 +183,12 @@ export default function SideBar() {
                                 >
                                     {index % 2 === 0
                                         ?
-                                        <Link to='user'>
-                                                <MailIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                        <Link to='stations'>
+                                                <LocationOnIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
                                         </Link>
                                         :
-                                        <Link to='/admin'>
-                                                <InboxIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                        <Link to='bikes'>
+                                                <PedalBikeIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
                                         </Link>
                                     }
                                 </ListItemIcon>
@@ -195,7 +199,7 @@ export default function SideBar() {
                 </List>
                 <Divider />
                 <List>
-                    {['Todo', 'Trash', 'Spam'].map((text, index) => (
+                    {['Cards', 'Users'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -211,14 +215,14 @@ export default function SideBar() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0
+                                    {index % 2 == 0
                                         ?
-                                        <Link to='admin/todos'>
-                                            <ListAltIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                                        <Link to='cards'>
+                                            <CreditCardIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
                                         </Link>
                                         :
-                                        <Link to='/admin'>
-                                            <DashboardIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                                        <Link to='users'>
+                                            <PersonIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
                                         </Link>
                                     }
                                 </ListItemIcon>

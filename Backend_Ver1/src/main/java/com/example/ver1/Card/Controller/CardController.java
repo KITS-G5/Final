@@ -1,16 +1,18 @@
 package com.example.ver1.Card.Controller;
 
+import com.example.ver1.Bikes.model.Bikes;
 import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Card.Service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(path = "card")
+@RequestMapping("api/v1")
 public class CardController {
     @Autowired
     CardService cardService;
@@ -23,6 +25,12 @@ public class CardController {
         }
         return cardService.getAllCard(1, pageSize);
     }
+
+    @GetMapping("/cards")
+    public List<Card> getAllCards() {
+        return cardService.getAllCard();
+    }
+
 
     @GetMapping(path = "{id}")
     Optional<Card> getCardById(@PathVariable long id){
