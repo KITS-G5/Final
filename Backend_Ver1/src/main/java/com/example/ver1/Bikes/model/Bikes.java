@@ -28,14 +28,14 @@ public class Bikes {
     @Column(name = "bike_name")
     private String bikeName;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "station_id", nullable = false)
     private Stations station;
 
     @Column(name = "status")
     private Boolean status;
 
-    @OneToMany(mappedBy = "bike", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bike")
     @JsonIgnore
     private Set<Order> orders;
 

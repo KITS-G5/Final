@@ -42,9 +42,11 @@ public class Card {
     @ToString.Exclude
     private Customer customer;
 
-    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "card")
     @JsonIgnore
-    private Set<Order> orders;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Order> ordersList;
 
     @Override
     public boolean equals(Object o) {

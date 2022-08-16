@@ -1,10 +1,13 @@
 package com.example.ver1.Order.service;
 
+import com.example.ver1.Bikes.model.Bikes;
+import com.example.ver1.Bikes.repository.BikesRepository;
 import com.example.ver1.Card.Model.Card;
+import com.example.ver1.Card.Repository.CardRepository;
 import com.example.ver1.Order.Model.Order;
 import com.example.ver1.Order.repository.OrderRepository;
 import com.example.ver1.Stations.model.Stations;
-import com.example.ver1.Stations.service.StationsService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,8 +15,9 @@ import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService{
-    @Autowired
-    private OrderRepository orderRepository;
+    @Autowired private OrderRepository orderRepository;
+    @Autowired private CardRepository cardRepository;
+    @Autowired private BikesRepository bikesRepository;
     @Override
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
@@ -32,7 +36,15 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void saveOrder(Order order) {
+    public void saveOrder(@NotNull Order order) {
+        Optional<Card> card = cardRepository.findById(order.getCard().getId());
+        Optional<Bikes> bikes = bikesRepository.findById(order.getBike().getId());
+        if(card.isPresent() && bikes.isPresent()){
+            //this bike status return to false while it is still renting
+            bikes.get().setStatus(false);
+            order.setBike(bikes.get());
+            order.setCard(card.get());
+        }
         orderRepository.save(order);
     }
     @Override
@@ -41,25 +53,27 @@ public class OrderServiceImpl implements OrderService{
         Order o = null;
         if (optional.isPresent()) {
             o = optional.get();
-            o.getBike().setStation(station); //save new station id
-
-            o.setPaymentStatus(true);
+            o.getBike().setStation(station); //save new station id to the bike
+            o.getBike().setStatus(true); //the bike now is available for rent
+            o.setReturnStatus(true);
             orderRepository.save(o);
 
             //save fee to order
-            float fee = calculateFee(order);
-            order.setTotalFee(fee);
+            float fee = calculateFee(o);
+            o.setTotalFee(fee);
 
             //subtract balance from card
-            Card card = order.getCard();
+            Card card = o.getCard();
             if(fee > card.getBalance()){
                 //payment failed
-                order.setPaymentStatus(false);
+                o.setPaymentStatus(false);
             } else {
-                order.setPaymentStatus(true);
+                //payment success
+                o.setPaymentStatus(true);
                 card.setBalance(card.getBalance() - fee);
             }
-            orderRepository.save(order);
+            orderRepository.save(o);
+            cardRepository.save(card);
         } else {
             throw new RuntimeException("Order does not exists");
         }
