@@ -2,6 +2,7 @@
 * {
     font-family: "Open Sans", sans-serif;
 }
+/*banner*/
 .buyBanner {
     width: 100%;
     background-image: url("https://cdn.donkey.bike/wp-content/uploads/2022/08/13223036/Pricing-Header.jpg");
@@ -26,3 +27,67 @@
     font-style: italic;
     font-weight: 100;
 }
+/*end of banner*/
+/*what*/
+.buyWhat {
+    margin-top: 5rem;
+}
+.buyWhatText {
+    text-align: center;
+}
+.buyWhatText h4 {
+    width: 50%;
+}
+.buyWhatImg {
+    position: relative;
+}
+#card1 {
+    position: absolute;
+    margin-top: 4.5rem;
+}
+#card2 {
+    position: absolute;
+    z-index: -1;
+    margin-left: 10rem;
+}
+/*end of what*/
+/*how much*/
+.howMuch {
+    margin-top: 5rem;
+    margin-left: 15.4rem;
+}
+.howMuchCosts {
+    width: 60%;
+    text-align: justify;
+}
+.howMuchTopUp {
+    margin-top: 3rem;
+}
+.howMuchTopUp li {
+    font-size: 1em;
+}
+.howMuchTopUp a {
+    font-size: 1em;
+}
+/*end of how much*/
+/*cancel*/
+.cancel {
+    margin-top: 5rem;
+    margin-left: 15.4rem;
+    margin-bottom: 5rem;
+}
+.cancelCard {
+    width: 60%;
+    text-align: justify;
+}
+.cancelCard a {
+    font-size: 1em;
+}
+.cancelLost {
+    width: 60%;
+    text-align: justify;
+}
+.cancelLost a {
+    font-size: 1em;
+}
+/*end of cancel*/
