@@ -10,6 +10,7 @@ import Search from "./Search";
 import Bike from "./Admin/Page/Bikes/bike";
 import Card from "./Admin/Page/Cards/card";
 import Station from "./Admin/Page/Station/station";
+import AddBike from "./Admin/Page/Bikes/addBike";
 
 function App() {
     return (
@@ -27,10 +28,13 @@ function App() {
                           <Route index element={<HomeAdmin/>}/>
                           <Route path='/admin/home/stations' element={<Station/>}></Route>
                           <Route path='/admin/home/orders' element={<Station/>}></Route>
-                          <Route path='/admin/home/bikes' element={<Bike/>}></Route>
+                          <Route path='/admin/home/bikes' element={<Bike/>}>
+
+                          </Route>
                           <Route path='/admin/home/cards' element={<Card/>}></Route>
                       </Route>
-                        <Route path='/test' element={<Station/>}></Route>
+                        <Route path='/add-bike' element={<AddBike/>}></Route>
+
                     </Routes>
                 </BrowserRouter>
             </AuthContextProvider>

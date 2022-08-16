@@ -71,7 +71,7 @@ const Bike = () => {
 <>
     <div style={{ height: '80vh'}} className={'container'}>
         <h1 className={'text-center'} style={{ marginTop: '80px'}}>BIKE MANAGEMENT SYSTEM</h1>
-        <Link to="#" class={'btn btn-danger'}>
+        <Link to="add-bike" class={'btn btn-danger'}>
             <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
         </Link>
         <Link to="#" class={'btn btn-primary mx-5'}>
