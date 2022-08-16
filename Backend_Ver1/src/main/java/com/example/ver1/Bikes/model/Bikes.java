@@ -38,4 +38,5 @@ public class Bikes {
     @OneToMany(mappedBy = "bike", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Order> orders;
+
 }

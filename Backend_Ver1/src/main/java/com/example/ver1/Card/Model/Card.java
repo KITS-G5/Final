@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -20,8 +21,14 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "balance")
+    @Column(name = "balance", nullable = false)
     private double balance;
+
+    @Column(name = "card_num", length = 100)
+    private String cardNum;
+
+    @Column(name = "card_ccv", length = 3)
+    private String cardCcv;
 
     @ManyToOne
     @JoinColumn(name = "id_card_type")
@@ -38,4 +45,17 @@ public class Card {
     @OneToMany(mappedBy = "card", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Order> orders;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return Objects.equals(cardNum, card.cardNum);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardNum);
+    }
 }

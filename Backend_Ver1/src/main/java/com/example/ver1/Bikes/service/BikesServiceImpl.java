@@ -66,7 +66,13 @@ public class BikesServiceImpl implements BikesService{
     @Override
     public Page<Bikes> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        Pageable pageable;
+        if(sortField != null) {
+            pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        }
+        else {
+            pageable = PageRequest.of(pageNo - 1, pageSize);
+        }
         return this.bikesRepository.findAll(pageable);
     }
 }

@@ -18,9 +18,18 @@ public class BikesController {
     private BikesService bikesService;
 
     @GetMapping("/bikes")
-    public List<Bikes> getAllEmployees() {
+    public List<Bikes> getAllBikes() {
         return bikesService.getAllBikes();
     }
+
+//    @GetMapping("/bikes/page/{pageNo}")
+//    public Page<Bikes> getAllBikes(@PathVariable (required = false) Integer pageNo) {
+//        int pageSize = 20;
+//        if(pageNo != null) {
+//            return bikesService.getAllBikes(pageNo, pageSize);
+//        }
+//        return bikesService.getAllBikes(1, pageSize);
+//    }
 
     @PostMapping("/bikes")
     public void newBikePage(@RequestBody Bikes bikes) {

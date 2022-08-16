@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class CardType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "card_type")
+    @Column(name = "card_type", length = 30)
     private String cardType;
 
     @OneToMany(mappedBy = "cardType", cascade = CascadeType.ALL)
@@ -27,4 +28,17 @@ public class CardType {
     @ToString.Exclude
     @JsonIgnore
     private Set<Card> listCard;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CardType cardType1 = (CardType) o;
+        return Objects.equals(cardType, cardType1.cardType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardType);
+    }
 }
