@@ -17,6 +17,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/leaflet.gridlayer.googlemutant": "^0.4.6",
+    "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "firebase": "^9.9.2",
     "leaflet": "^1.8.0",

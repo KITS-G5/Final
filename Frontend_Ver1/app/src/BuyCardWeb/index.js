@@ -2,6 +2,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import "./buycardweb.css";
 import card from "./img/frontcard.png";
 import cardback from "./img/backend.png";
+import {Link} from "react-router-dom";
 
 const BuyCardWeb = () => {
     return (
@@ -58,7 +59,7 @@ const BuyCardWeb = () => {
                                     <li>Any of our rental stations - <a href={'#'}>find your nearest station</a></li>
                                 </h4>
                                 <h4>
-                                    <li>Through the <a href={'#'}>payment portal</a> on our website</li>
+                                    <li>Through the <Link to={'/topup'}>payment portal</Link> on our website</li>
                                 </h4>
                             </ul>
                         </Col>

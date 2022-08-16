@@ -10,6 +10,8 @@ import Search from "./Search";
 import Bike from "./Admin/Page/Bikes/bike";
 import Card from "./Admin/Page/Cards/card";
 import Station from "./Admin/Page/Station/station";
+import Topup from "./BuyCardWeb/Topup";
+import PaymentMethod from "./BuyCardWeb/PaymentMethod";
 
 function App() {
     return (
@@ -22,6 +24,8 @@ function App() {
                           <Route path="/buyweb" element={<BuyCardWeb/>}/>
                           <Route path='signin' element={<Signin/>}/>
                           <Route path="/search" element={<Search/>}/>
+                          <Route path="/topup" element={<Topup/>}/>
+                          <Route path="/pay/:output" element={<PaymentMethod/>}/>
                       </Route>
                       <Route path='/admin/home' element={<Admin/>}>
                           <Route index element={<HomeAdmin/>}/>
