@@ -1,12 +1,12 @@
 package com.example.ver1.Order.service;
 
+import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Order.Model.Order;
 import com.example.ver1.Order.repository.OrderRepository;
+import com.example.ver1.Stations.model.Stations;
+import com.example.ver1.Stations.service.StationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,31 +33,41 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public void saveOrder(Order order) {
-        Order o = new Order();
-        o.setCard(order.getCard());
-        o.setBike(order.getBike());
-        o.setRentingStartedDate(LocalDateTime.now());
-        o.setRentingEndDate(null);
-        o.setTotalFee(null);
-        o.setPaymentStatus(false);
-        orderRepository.save(o);
+        orderRepository.save(order);
     }
-
     @Override
-    public void updateOrder(Order order, long id) {
+    public void updateOrder(Stations station, Order order, long id) {
         Optional<Order> optional = orderRepository.findById(id);
         Order o = null;
         if (optional.isPresent()) {
             o = optional.get();
-            o.setCard(order.getCard());
-            o.setBike(o.getBike());
-            o.setRentingEndDate(LocalDateTime.now());
-            o.setTotalFee((float) Duration.between(o.getRentingStartedDate(), order.getRentingEndDate()).toMinutes() * (2000/60));
+            o.getBike().setStation(station); //save new station id
+
             o.setPaymentStatus(true);
             orderRepository.save(o);
+
+            //save fee to order
+            float fee = calculateFee(order);
+            order.setTotalFee(fee);
+
+            //subtract balance from card
+            Card card = order.getCard();
+            if(fee > card.getBalance()){
+                //payment failed
+                order.setPaymentStatus(false);
+            } else {
+                order.setPaymentStatus(true);
+                card.setBalance(card.getBalance() - fee);
+            }
+            orderRepository.save(order);
         } else {
             throw new RuntimeException("Order does not exists");
         }
+    }
+
+    float calculateFee(Order order){
+        long rentHours = (order.getRentingEndDate().getTime() - order.getRentingStartedDate().getTime()) / 3600000;
+        return order.getTotalFee() + 2000 * rentHours;
     }
 
     @Override
@@ -69,4 +79,5 @@ public class OrderServiceImpl implements OrderService{
             throw new RuntimeException("Order does not exists");
         }
     }
+
 }
