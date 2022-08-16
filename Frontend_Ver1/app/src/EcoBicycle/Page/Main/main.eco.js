@@ -5,7 +5,7 @@ import AddCardIcon from '@mui/icons-material/AddCard';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import BadgeIcon from '@mui/icons-material/Badge';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
-import FactCheckIcon from '@mui/icons-material/FactCheck';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { useTypewriter} from 'react-simple-typewriter'
@@ -36,7 +36,8 @@ const MainEco = () => {
                     <div className='col-lg-6 card_item'>
                         <Link className='to_link'
                               to='buy_card'>
-                            <AddCardIcon/>
+                            <img src={'https://www.youbike.com.tw/region/assets/images/register-inner-icon1-1.svg'} alt="" width='80px' height='80px'/>
+                            {/*<AddCardIcon/>*/}
                             <br/>
                             <span className='text-center'>Top up to card</span>
                         </Link>
@@ -86,7 +87,7 @@ const MainEco = () => {
                     <div className='col-lg-6 card_item'>
                         <Link className='to_link'
                               to='buy_card'>
-                            <FactCheckIcon/>
+                            <WorkHistoryIcon/>
                             <br/>
                             <span className='text-center'>Todo</span>
                         </Link>

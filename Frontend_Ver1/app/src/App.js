@@ -10,6 +10,7 @@ import MainEco from "./EcoBicycle/Page/Main/main.eco";
 import Nopage from "./Layout/Nopage/Nopage";
 import BuyCardEco from "./EcoBicycle/Page/BuyCard";
 import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
+import ContentsEco from "./EcoBicycle/Layout/Contents/contents.eco";
 
 function App() {
     return (
@@ -33,7 +34,8 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path='/ecobicycle' element={<HomeEcoBicycle/>}>
-                            <Route index element={<MainEco/>}/>
+
+                            <Route index element={<ContentsEco/>}/>
                             <Route path='buy_card' element={<BuyCardEco/>}>
                             </Route>
                             <Route  path='buy_card/prepaid' element={<Prepaid/>}/>

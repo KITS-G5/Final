@@ -5,13 +5,7 @@ import './buycard.eco.scss'
 import '../../../Components/Authentication/Signin/style.scss'
 import PaymentIcon from '@mui/icons-material/Payment';
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Stack from '@mui/material/Stack';
 
-import CreditScoreIcon from "@mui/icons-material/CreditScore";
-import BadgeIcon from "@mui/icons-material/Badge";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
-import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 
 const BuyCardEco = () => {
     return (
