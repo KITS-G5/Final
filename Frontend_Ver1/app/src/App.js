@@ -12,6 +12,18 @@ import Card from "./Admin/Page/Cards/card";
 import Station from "./Admin/Page/Station/station";
 import Topup from "./BuyCardWeb/Topup";
 import PaymentMethod from "./BuyCardWeb/PaymentMethod";
+import HomeEcoBicycle from "./EcoBicycle/Layout/Home/home.ecobicycle";
+import MainEco from "./EcoBicycle/Page/Main/main.eco";
+import Nopage from "./Layout/Nopage/Nopage";
+import BuyCardEco from "./EcoBicycle/Page/BuyCard";
+import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
+import ContentsEco from "./EcoBicycle/Layout/Contents/contents.eco";
+import EcoSignin from "./EcoBicycle/Components/Authentication/Eco.SignIn/Eco.Signin";
+import EcoMembership from "./EcoBicycle/Components/Authentication/Eco.SignIn/Membership/Eco.Membership";
+import EcoCreateMember from "./EcoBicycle/Components/Authentication/Eco.SignIn/CreateMember/EcoCreateMember";
+import {Login} from "@mui/icons-material";
+import LoginAccount from "./EcoBicycle/Components/Authentication/Eco.Signup/LoginAccount";
+
 
 function App() {
     return (
@@ -23,9 +35,12 @@ function App() {
                           <Route index element={<Home/>}/>
                           <Route path="/buyweb" element={<BuyCardWeb/>}/>
                           <Route path='signin' element={<Signin/>}/>
+
                           <Route path="/search" element={<Search/>}/>
                           <Route path="/topup" element={<Topup/>}/>
                           <Route path="/pay/:output" element={<PaymentMethod/>}/>
+
+
                       </Route>
                       <Route path='/admin/home' element={<Admin/>}>
                           <Route index element={<HomeAdmin/>}/>
@@ -34,10 +49,30 @@ function App() {
                           <Route path='/admin/home/bikes' element={<Bike/>}></Route>
                           <Route path='/admin/home/cards' element={<Card/>}></Route>
                       </Route>
+
                         <Route path='/test' element={<Station/>}></Route>
+
+                    </Routes>
+
+
+
+
+                </BrowserRouter>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/ecobicycle" element={<HomeEcoBicycle />}>
+                            <Route index element={<ContentsEco/>}/>
+
+                            <Route path="signup" element={<EcoSignin />}/>
+                            <Route path="newsignin" element={<EcoMembership/>} />
+                            <Route path="create_account" element={<EcoCreateMember/>} />
+                            <Route path="sign_account" element={<LoginAccount/>} />
+                            <Route path="home" element={<MainEco />} />
+                        </Route>
                     </Routes>
                 </BrowserRouter>
             </AuthContextProvider>
+
         </>
     );
 }

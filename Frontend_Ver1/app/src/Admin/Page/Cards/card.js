@@ -123,7 +123,12 @@ const Card = () => {
             <div className={'d-flex justify-content-between'}>
                 <h1 style={{ marginTop: '60px', display: 'block'}}>CARD MANAGEMENT SYSTEM</h1>
             </div>
-           
+            <Link to="#" class={'btn btn-danger'}>
+                <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+            </Link>
+            <Link to="#" class={'btn btn-primary mx-5'}>
+                <DeleteOutlineIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+            </Link>
             <DataGrid
                 style={{ marginTop: '30px'}}
                 rows={dataTable}

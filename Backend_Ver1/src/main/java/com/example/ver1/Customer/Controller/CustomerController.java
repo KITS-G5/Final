@@ -1,5 +1,6 @@
 package com.example.ver1.Customer.Controller;
 
+import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Customer.Model.Customer;
 import com.example.ver1.Customer.Service.CustomerService;
 import org.springframework.beans.factory.ObjectProvider;
@@ -25,6 +26,13 @@ public class CustomerController {
         }
         return customerService.getAllCustomerByPage(1, pageSize);
     }
+
+    @GetMapping("/customers")
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomer();
+    }
+
+
 
     @GetMapping(path = "{id}")
     Optional<Customer> getCustomerById(@PathVariable long id){
