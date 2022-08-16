@@ -8,6 +8,7 @@ import HomeAdmin from "./Admin/Page/Home/home.admin";
 import BuyCardWeb from "./BuyCardWeb";
 import Search from "./Search";
 import Bike from "./Admin/Page/Bikes/bike";
+import EditBike from "./Admin/Page/Bikes/editBike";
 //import addbike
 import AddBike from "./Admin/Page/Bikes/addBike";
 import Card from "./Admin/Page/Cards/card";
@@ -47,6 +48,7 @@ function App() {
                         </Route>
                         <Route path='addbike' element={<AddBike />}></Route>
 
+                        <Route path='/admin/home/bikes/edit/:id' element={<EditBike />}></Route>
                     </Routes>
 
 
