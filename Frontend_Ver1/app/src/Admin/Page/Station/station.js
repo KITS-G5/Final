@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 const Station = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -115,6 +118,12 @@ const Station = () => {
     return (
         <div style={{ height: '80vh'}} className={'container mt-5'}>
             <h1 className={'text-center'} style={{ marginTop: '60px'}}>STATION MANAGEMENT SYSTEM</h1>
+            <Link to="#" class={'btn btn-danger'}>
+                <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+            </Link>
+            <Link to="#" class={'btn btn-primary mx-5'}>
+                <DeleteOutlineIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+            </Link>
             <DataGrid
                 style={{ marginTop: '30px'}}
                 rows={dataTable}
