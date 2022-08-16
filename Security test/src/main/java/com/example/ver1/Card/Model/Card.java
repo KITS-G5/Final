@@ -1,13 +1,12 @@
 package com.example.ver1.Card.Model;
-
-import com.example.ver1.Bikes.model.Bikes;
+import com.example.ver1.CardAndRole.Model.Role;
 import com.example.ver1.CardType.Model.CardType;
 import com.example.ver1.Customer.Model.Customer;
 import com.example.ver1.Order.Model.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,7 +26,7 @@ public class Card {
     @Column(name = "card_num", length = 20, unique = true, nullable = false, updatable = false)
     private String cardNum;
 
-    @Column(name = "card_ccv", length = 3, nullable = false)
+    @Column(name = "card_ccv", length = 255, nullable = false)
     private String cardCcv;
 
     @ManyToOne
@@ -48,6 +47,17 @@ public class Card {
     @ToString.Exclude
     private Set<Order> ordersList;
 
+
+    @ManyToMany
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+
+    @JoinTable(name = "card_and_role",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role> roleCollection;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,5 +70,6 @@ public class Card {
     public int hashCode() {
         return Objects.hash(cardNum);
     }
+
 
 }

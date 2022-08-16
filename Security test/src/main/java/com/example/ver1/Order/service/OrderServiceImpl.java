@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     float calculateFee(Order order){
-        int rentHours = (int) Math.ceil ((order.getRentingEndDate().getTime() - order.getRentingStartedDate().getTime()) / 3600000);
+        long rentHours = (order.getRentingEndDate().getTime() - order.getRentingStartedDate().getTime()) / 3600000;
         return order.getTotalFee() + 2000 * rentHours;
     }
 
