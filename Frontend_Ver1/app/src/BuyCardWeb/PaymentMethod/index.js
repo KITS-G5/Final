@@ -1,9 +1,6 @@
 import {Button, Col, Container, FormCheck, FormControl, FormLabel, Row, Table, Modal} from "react-bootstrap";
 import {useParams} from "react-router";
-import card from "../img/frontcard.png";
-import './paymentMethod.css';
-import {useForm} from "react-hook-form";
-import {useState} from "react";
+// import Payeezy from "react-payeezy";
 
 const PaymentMethod = () => {
     const params = useParams();

@@ -21,6 +21,8 @@ import EcoCreateMember from "./EcoBicycle/Components/Authentication/Eco.SignIn/C
 import LoginAccount from "./EcoBicycle/Components/Authentication/Eco.Signup/LoginAccount";
 import Contact from "./Contact";
 import AdminUser from "./AdminUser";
+import AddStation from "./Admin/Page/Station/addStation";
+import User from "./Admin/Page/User/user";
 
 
 function App() {
@@ -46,9 +48,11 @@ function App() {
                             <Route path='/admin/home/bikes' element={<Bike />}>
                                 {/* <Route path='addbike' element={<AddBike />}></Route> */}
                             </Route>
+                            <Route path='/admin/home/users' element={<User />}></Route>
                             <Route path='/admin/home/cards' element={<Card />}></Route>
                         </Route>
                         <Route path='addbike' element={<AddBike />}></Route>
+                        <Route path='addstation' element={<AddStation />}></Route>
                         <Route path='/edit/:id' element={<EditBike />}></Route>
                         <Route path={'/admin/user/'}>
                             {/*<Route index element={<AdminUser/>}/>*/}

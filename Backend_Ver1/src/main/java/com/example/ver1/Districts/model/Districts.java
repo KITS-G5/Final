@@ -31,5 +31,6 @@ public class Districts {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "city_id", nullable = false)
+
     private Cities city;
 }
