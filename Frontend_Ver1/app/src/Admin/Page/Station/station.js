@@ -56,7 +56,8 @@ const Station = () => {
                         variant="outlined"
                         color="error"
                         onClick={(event) => {
-                            alert('abc');
+                            deleteStation(cellValues.id);
+                            console.log('delete', cellValues.id);
                         }}
                     >
                         Delete
@@ -64,6 +65,21 @@ const Station = () => {
                 );
             }
         }];
+
+    const deleteStation = (id) => {
+        //fetch station
+        let url = 'http://localhost:8080/api/v1/stations/deleteStation/' + id;
+        fetch(url, {
+            method: 'DELETE',
+        }).then(() => {
+            console.log('delete successful!!');
+            let result = [...data];
+            result = result.filter((item) => {
+                return item.id != id;
+            });
+            setData(result);
+        });
+    };
 
     // {
     //     field: 'age',
@@ -103,17 +119,7 @@ const Station = () => {
     //     },
     // ];
 
-    // const rows = [
-    //     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    //     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    //     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    //     { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    //     { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    //     { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    //     { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    //     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    //     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    // ];
+
 
     return (
         <div style={{ height: '80vh'}} className={'container mt-5'}>

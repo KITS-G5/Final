@@ -33,40 +33,41 @@ const Card = () => {
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'cardNo', headerName: 'Card number', width: 250 },
         { field: 'balance', headerName: 'Balance', width: 300 },
-        { field: 'cardType', headerName: 'Type', width: 130},
-        { field: 'customer', headerName: 'Customer', width: 150},
-        {
-            field: "View",
-            renderCell: (cellValues) => {
-                return (
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={(event) => {
-                            alert('abc');
-                        }}
-                    >
-                        View
-                    </Button>
-                );
-            }
-        },
-        {
-            field: "Delete",
-            renderCell: (cellValues) => {
-                return (
-                    <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={(event) => {
-                            alert('abc');
-                        }}
-                    >
-                        Delete
-                    </Button>
-                );
-            }
-        }];
+        { field: 'cardType', headerName: 'Type', width: 240},
+        { field: 'customer', headerName: 'Customer', width: 200}
+        // {
+        //     field: "View",
+        //     renderCell: (cellValues) => {
+        //         return (
+        //             <Button
+        //                 variant="outlined"
+        //                 color="primary"
+        //                 onClick={(event) => {
+        //                     alert('abc');
+        //                 }}
+        //             >
+        //                 View
+        //             </Button>
+        //         );
+        //     }
+        // },
+        // {
+        //     field: "Delete",
+        //     renderCell: (cellValues) => {
+        //         return (
+        //             <Button
+        //                 variant="outlined"
+        //                 color="error"
+        //                 onClick={(event) => {
+        //                     alert('abc');
+        //                 }}
+        //             >
+        //                 Delete
+        //             </Button>
+        //         );
+        //     }
+        // }
+        ];
 
     // {
     //     field: 'age',
@@ -123,12 +124,12 @@ const Card = () => {
             <div className={'d-flex justify-content-between'}>
                 <h1 style={{ marginTop: '60px', display: 'block'}}>CARD MANAGEMENT SYSTEM</h1>
             </div>
-            <Link to="#" class={'btn btn-danger'}>
-                <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
-            </Link>
-            <Link to="#" class={'btn btn-primary mx-5'}>
-                <DeleteOutlineIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
-            </Link>
+            {/*<Link to="#" class={'btn btn-danger'}>*/}
+            {/*    <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>*/}
+            {/*</Link>*/}
+            {/*<Link to="#" class={'btn btn-primary mx-5'}>*/}
+            {/*    <DeleteOutlineIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>*/}
+            {/*</Link>*/}
             <DataGrid
                 style={{ marginTop: '30px'}}
                 rows={dataTable}

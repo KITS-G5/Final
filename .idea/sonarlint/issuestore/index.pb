@@ -1,25 +1,17 @@
 
 É
 SBackend_Ver1/src/main/java/com/example/ver1/Cities/repository/CitiesRepository.java,c\9\c999ce08e8b30b5fbcc9a2aea8885d2c5848daeb
-à
-XBackend_Ver1/src/main/java/com/example/ver1/Districts/repository/DistrictRepository.java,7\3\73363e2cc993c29efdd34100e0f5f79eded5613b
 }
 MBackend_Ver1/src/main/java/com/example/ver1/Cities/service/CitiesService.java,c\a\ca69d3ba0edc0ad6b166c62329e8c1a1bcc8815e
-Ü
-VBackend_Ver1/src/main/java/com/example/ver1/Districts/service/DistrictServiceImpl.java,3\1\31c642d15e4341fbb049d1200fc9d64aa64a58eb
 Å
 QBackend_Ver1/src/main/java/com/example/ver1/Cities/service/CitiesServiceImpl.java,1\e\1ecea6588ee3d945e1c83e3f0ca73953c3aa5784
 á
 WBackend_Ver1/src/main/java/com/example/ver1/Stations/repository/StationsRepository.java,f\c\fc50bc70bf00faa2cb04540b8b7103b38be3c972
-Ç
-RBackend_Ver1/src/main/java/com/example/ver1/Districts/service/DistrictService.java,b\4\b4cb86bc087076870c3e77db23bdae8153afd0bc
 Å
 QBackend_Ver1/src/main/java/com/example/ver1/Bikes/repository/BikesRepository.java,3\8\389d9785c3de4bada1f3d011994573e00668d9f2
 {
 KBackend_Ver1/src/main/java/com/example/ver1/Bikes/service/BikesService.java,d\6\d608a09f6baaaf770ed39c389f62ef8bd71e45f8
 Ö
 UBackend_Ver1/src/main/java/com/example/ver1/Stations/service/StationsServiceImpl.java,d\a\dad607cb4e7437e79910238e2503467f3181810e
-D
-Backend_Ver1/pom.xml,4\3\438c78631536876fa1fec20b064ff2552661aa53
 Å
 QBackend_Ver1/src/main/java/com/example/ver1/Stations/service/StationsService.java,c\f\cf3605f150635df2ba2beb47531f75e5318503d5

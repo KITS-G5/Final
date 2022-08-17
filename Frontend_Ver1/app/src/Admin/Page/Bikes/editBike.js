@@ -10,7 +10,7 @@ const EditBike = () => {
     const [station, setStaton] = useState([]);
     const [bike, setBike] = useState('');
     const [bikeStation, setBikeStation] = useState('');
-    let [status, setStatus] = useState('');
+    let [status, setStatus] = useState(false);
     let navigate = useNavigate();
     const params = useParams();
     // alert(params.id);
@@ -19,8 +19,10 @@ const EditBike = () => {
     useEffect(() => {
         let initData = {};
         initData.station = {};
-        initData.status = {};
+        initData.status = false;
         setBike(initData);
+        console.log("data");
+        console.log(bike);
         console.log(params.id);
         let url_bike = 'http://localhost:8080/api/v1/bikes/' + params.id;
         fetch(url_bike)
@@ -28,6 +30,9 @@ const EditBike = () => {
             .then(data => {
                 console.log(data)
                 setBike(data);
+                console(bike);
+                console.log(bike.id);
+                console.log(bike.station.stationName);
                 // alert(data);
             })
 
