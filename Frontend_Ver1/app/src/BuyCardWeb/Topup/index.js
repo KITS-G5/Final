@@ -23,30 +23,37 @@ const Topup = () => {
     const [show, setShow] = useState(false);
     const [cardData, setCardData] = useState([]);
     let cardList = [];
+    let cardCheck = false;
     // const validateClick = () => setShow(true);
-    const ValidateClick = (cardNo) => {
-        useEffect(() => {
-            let url = "http://localhost:8080/api/v1/cards";
-            fetch(url)
-                .then(res => res.json())
-                .then(data => setCardData(data));
-        },[]);
-        cardList = cardData.filter(no => no.id === cardNo);
-        console.log(cardList);
+    useEffect(() => {
+        let url = "http://localhost:8080/api/v1/cards";
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCardData(data));
+    },[]);
+    cardList = cardData.filter((item) => {
+        return item.id == cardNo;
+    });
+    cardCheck = cardList.length !== 0;
+
+    const ValidateClick = () => {
+        setShow(true)
     };
     const validateClose = () => setShow(false);
     useEffect(()=>{
-        let url = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/" + from;
+        let url = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/" + from +".json";
         fetch(url)
             .then(res => res.json())
             .then(data => setInfo(data))
     },[from])
     const convert = () => {
         let rate = 1;
-        if (from == "usd.json") {
+        if (from == "usd") {
             rate = info.usd.vnd;
-        } else if (from == "eur.json") {
+        } else if (from == "eur") {
             rate = info.eur.vnd;
+        } else if (from == "gbp") {
+            rate = info.gbp.vnd;
         }
         setOutput(input * rate);
     };
@@ -66,7 +73,7 @@ const Topup = () => {
                         <input name='cardNo' className={'form-control'} onChange={(e)=>setCardNo(e.target.value)}/>
                     </Col>
                     <Col md={3}  className={'text-center'}>
-                        <Button variant={"secondary"} onClick={ValidateClick}>Validate</Button>
+                        <Button className={'buttonVal'} variant={"secondary"} onClick={ValidateClick}>Validate</Button>
                     </Col>
                 </Row>
                 <Row className={'mt-5'}>
@@ -74,16 +81,16 @@ const Topup = () => {
                         Select currency to pay
                     </Col>
                     <Col md={2} style={{textAlign: "center"}}>
-                        <FormCheck inline label={"VND"} name={"curr"} type={"radio"} value={"vnd.json"} onChange={(e)=>setFrom(e.target.value)}/>
+                        <FormCheck inline label={"VND"} name={"curr"} type={"radio"} value={"vnd"} onChange={(e)=>setFrom(e.target.value)}/>
                     </Col>
                     <Col md={2} style={{textAlign: "center"}}>
-                        <FormCheck inline label={"USD"} name={"curr"} type={"radio"} value={"usd.json"} onChange={(e)=>setFrom(e.target.value)}/>
+                        <FormCheck inline label={"USD"} name={"curr"} type={"radio"} value={"usd"} onChange={(e)=>setFrom(e.target.value)}/>
                     </Col>
                     <Col md={2} style={{textAlign: "center"}}>
-                        <FormCheck inline label={"EUR"} name={"curr"} type={"radio"} value={"eur.json"} onChange={(e)=>setFrom(e.target.value)}/>
+                        <FormCheck inline label={"EUR"} name={"curr"} type={"radio"} value={"eur"} onChange={(e)=>setFrom(e.target.value)}/>
                     </Col>
                     <Col md={2} style={{textAlign: "center"}}>
-                        <FormCheck inline label={"GBP"} name={"curr"} type={"radio"} value={"gbp.json"} onChange={(e)=>setFrom(e.target.value)}/>
+                        <FormCheck inline label={"GBP"} name={"curr"} type={"radio"} value={"gbp"} onChange={(e)=>setFrom(e.target.value)}/>
                     </Col>
                 </Row>
                 <Row className={'mt-5'}>
@@ -93,16 +100,16 @@ const Topup = () => {
                 </Row>
                 <Row className={'mt-3 mb-3'}>
                     <Col md={5}>
-                        <div className={'input-group ms-auto'} style={{width: "50%"}}>
+                        <div className={'input-group ms-auto inputLeft'} style={{width: "50%"}}>
                             <input type={"text"} className={'form-control'} aria-describedby={"curr1"} onChange={(e)=> setInput(e.target.value)}/>
-                            <span className={'input-group-text'} id={"curr1"}>USD</span>
+                            <span className={'input-group-text'} id={"curr1"} style={{textTransform: "uppercase"}}>{from}</span>
                         </div>
                     </Col>
                     <Col md={1} className={'ms-auto me-auto mt-auto mb-auto'} style={{textAlign: "center", fontSize: "1.5em"}}>
                         =
                     </Col>
                     <Col md={5}>
-                        <div className={'input-group'} style={{width: "50%"}}>
+                        <div className={'input-group inputRight'} style={{width: "50%"}}>
                             <input type={"text"} className={'form-control'} aria-describedby={"curr2"} disabled value={output.toLocaleString() + " VND"}/>
                             <span className={'input-group-text'} id={"curr2"}>VND</span>
                         </div>
@@ -125,7 +132,11 @@ const Topup = () => {
                     <Modal.Header closeButton>
                         <Modal.Title>Validation</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Your card had been successfully validated</Modal.Body>
+                    {cardCheck == true ? (
+                        <Modal.Body>Your card had been successfully validated</Modal.Body>
+                    ): (
+                        <Modal.Body>Your card does not exists</Modal.Body>
+                    )}
                     <Modal.Footer>
                         <Button variant="secondary" onClick={validateClose}>
                             Close
