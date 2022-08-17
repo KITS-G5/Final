@@ -1,4 +1,15 @@
-import {Button, Col, Container, Dropdown, FormCheck, FormControl, FormLabel, FormSelect, Row} from "react-bootstrap";
+import {
+    Button,
+    Col,
+    Container,
+    Dropdown,
+    FormCheck,
+    FormControl,
+    FormLabel,
+    FormSelect,
+    Modal,
+    Row
+} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import './topup.css';
 import {Link} from "react-router-dom";
@@ -8,7 +19,22 @@ const Topup = () => {
     const [input, setInput] = useState(0);
     const [from, setFrom] = useState("usd");
     const [output, setOutput] = useState(0);
-
+    const [cardNo, setCardNo] = useState(0);
+    const [show, setShow] = useState(false);
+    const [cardData, setCardData] = useState([]);
+    let cardList = [];
+    // const validateClick = () => setShow(true);
+    const ValidateClick = (cardNo) => {
+        useEffect(() => {
+            let url = "http://localhost:8080/api/v1/cards";
+            fetch(url)
+                .then(res => res.json())
+                .then(data => setCardData(data));
+        },[]);
+        cardList = cardData.filter(no => no.id === cardNo);
+        console.log(cardList);
+    };
+    const validateClose = () => setShow(false);
     useEffect(()=>{
         let url = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/" + from;
         fetch(url)
@@ -37,10 +63,10 @@ const Topup = () => {
                         </FormLabel>
                     </Col>
                     <Col md={7}>
-                        <FormControl type={"text"}/>
+                        <input name='cardNo' className={'form-control'} onChange={(e)=>setCardNo(e.target.value)}/>
                     </Col>
-                    <Col md={3}>
-                        <Button variant={"secondary"}>Validate</Button>
+                    <Col md={3}  className={'text-center'}>
+                        <Button variant={"secondary"} onClick={ValidateClick}>Validate</Button>
                     </Col>
                 </Row>
                 <Row className={'mt-5'}>
@@ -89,11 +115,23 @@ const Topup = () => {
                 </Row>
                 <Row>
                     <Col md={12} style={{textAlign: "center"}}>
-                        <Link to={'/pay/' + output}>
+                        <Link to={'/pay/' + cardNo +"/"+ output}>
+                        {/*<Link to={{pathname: "/pay", state: {cardNo: "cardNo",cash: output}}}>*/}
                             <Button variant={"danger"} size={"lg"}>TOP UP</Button>
                         </Link>
                     </Col>
                 </Row>
+                <Modal show={show} onHide={validateClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Validation</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Your card had been successfully validated</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={validateClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </Container>
         </>
     );

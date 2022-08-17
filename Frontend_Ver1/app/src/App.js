@@ -34,8 +34,8 @@ function App() {
 
                             <Route path="/search" element={<Search />} />
                             <Route path="/topup" element={<Topup />} />
-                            <Route path="/pay/:output" element={<PaymentMethod />} />
-
+                            <Route path="/pay/:cardNo/:output" element={<PaymentMethod />} />
+                            {/*<Route path="/pay" element={<PaymentMethod/>}/>*/}
                         </Route>
                         <Route path='/admin/home' element={<Admin />}>
                             <Route index element={<HomeAdmin />} />
