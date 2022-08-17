@@ -49,7 +49,7 @@ public class CardServiceImplement implements CardService {
             found.get().setCardType(card.getCardType());
             found.get().setBalance(card.getBalance());
             found.get().setCustomer(card.getCustomer());
-            cardRepository.save(card);
+            cardRepository.save(found.get());
             return 1;
         }
         return 0;
