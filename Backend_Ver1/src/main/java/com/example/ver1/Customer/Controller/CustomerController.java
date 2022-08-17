@@ -34,7 +34,6 @@ public class CustomerController {
     }
 
 
-
     @GetMapping(path = "{id}")
     Optional<Customer> getCustomerById(@PathVariable long id){
         return customerService.getCustomerById(id);

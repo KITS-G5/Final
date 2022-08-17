@@ -1,7 +1,18 @@
 import {Button, Col, Container, FormCheck, FormControl, FormLabel, Row, Table} from "react-bootstrap";
 import {useParams} from "react-router";
+import Payeezy from "react-payeezy";
 
 const PaymentMethod = () => {
+    const onToken = (token) => {
+        fetch('/save-payeezy-token', {
+            method: 'POST',
+            body: JSON.stringify(token),
+        }).then(response => {
+            response.json().then(data => {
+                alert(`We are in business, ${data.email}`);
+            });
+        });
+    };
     const params = useParams();
     return (
         <>
@@ -36,7 +47,11 @@ const PaymentMethod = () => {
                             <tr style={{textAlign: "left"}}>
                                 <td> {params.output.toLocaleString()} VND</td>
                             </tr>
-                            <Button style={{marginTop: "5rem"}}>Submit</Button>
+                            {/*<Button style={{marginTop: "5rem"}}>Submit</Button>*/}
+                            <Payeezy
+                                token={this.onToken}
+                                PayeezyApiKey = 
+                            />
                             </tbody>
                         </Table>
                     </Col>

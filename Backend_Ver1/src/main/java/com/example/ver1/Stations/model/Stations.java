@@ -30,10 +30,10 @@ public class Stations {
     private String stationAddress;
 
     @Column(name = "latitude")
-    private double latitude;
+    private Double latitude;
 
     @Column(name = "longtitude")
-    private double longtitude;
+    private Double longtitude;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "city_id", nullable = false)
     private Cities city;
