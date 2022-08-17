@@ -31,7 +31,11 @@ const Header = () => {
                                 </Link>
                             </Nav.Link>
                             <Nav.Link href="#link">Check your card</Nav.Link>
-                            <Nav.Link href="#link">Contact us</Nav.Link>
+                            <Nav.Link href="/" onClick={(e)=>{e.preventDefault(); window.location.replace("/#contact")}}>
+                                {/*<Link style={{textDecoration: "none", color: "gray"}} to="/contact">*/}
+                                    Contact us
+                                {/*</Link>*/}
+                            </Nav.Link>
                             <Nav.Link as={NavLink} to='/signin'>Sign in</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

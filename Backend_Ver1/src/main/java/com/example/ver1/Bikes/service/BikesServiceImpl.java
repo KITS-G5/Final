@@ -22,6 +22,12 @@ public class BikesServiceImpl implements BikesService{
     }
 
     @Override
+    public Page<Bikes> getAllBikesByPage(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return bikesRepository.findAll(pageable);
+    }
+
+    @Override
     public Bikes getBikeById(long id) {
         Optional<Bikes> optional = bikesRepository.findById(id);
         Bikes b = null;

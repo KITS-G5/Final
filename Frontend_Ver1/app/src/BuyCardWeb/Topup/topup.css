@@ -10,3 +10,17 @@
 .label{
     text-align: center;
 }
+
+@media screen and (max-width: 800px) {
+    .buttonVal {
+        margin-top: 2rem;
+    }
+    .inputLeft {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .inputRight {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

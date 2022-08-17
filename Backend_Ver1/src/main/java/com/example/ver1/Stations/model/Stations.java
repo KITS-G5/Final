@@ -1,5 +1,4 @@
 package com.example.ver1.Stations.model;
-
 import com.example.ver1.Bikes.model.Bikes;
 import com.example.ver1.Cities.model.Cities;
 import com.example.ver1.Districts.model.Districts;
@@ -8,9 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
