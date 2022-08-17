@@ -28,10 +28,10 @@ public class StationsController {
         return stationsService.getAllStations();
     }
 
-//    @GetMapping("/stations/search")
-//    public List<Stations> searchStations(@RequestParam(value = "searchKeywords") String searchKeyWords) {
-//        return stationsService.searchStationsByDistrict(searchKeyWords);
-//    }
+    @GetMapping("/stations/search")
+    public List<Stations> searchStations(@RequestParam(value = "searchKeywords") String searchKeyWords) {
+        return stationsService.searchStationsByDistrict(searchKeyWords.toLowerCase());
+    }
 
     @PostMapping("/stations")
     public void newStationPage(@RequestBody Stations stations) {

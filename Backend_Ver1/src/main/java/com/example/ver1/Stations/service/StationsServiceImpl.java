@@ -70,8 +70,8 @@ public class StationsServiceImpl implements StationsService{
         return this.stationsRepository.findAll(pageable);
     }
 
-//    @Override
-//    public List<Stations> searchStationsByDistrict(String searchKeywords) {
-//        return stationsRepository.searchStations(searchKeywords);
-//    }
+    @Override
+    public List<Stations> searchStationsByDistrict(String searchKeywords) {
+        return stationsRepository.searchStations(searchKeywords);
+    }
 }
