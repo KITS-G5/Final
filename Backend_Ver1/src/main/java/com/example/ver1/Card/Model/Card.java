@@ -24,10 +24,10 @@ public class Card {
     @Column(name = "balance", nullable = false)
     private double balance;
 
-    @Column(name = "card_num", length = 100)
+    @Column(name = "card_num", length = 20, unique = true, nullable = false, updatable = false)
     private String cardNum;
 
-    @Column(name = "card_ccv", length = 3)
+    @Column(name = "card_ccv", length = 3, nullable = false)
     private String cardCcv;
 
     @ManyToOne
@@ -60,4 +60,5 @@ public class Card {
     public int hashCode() {
         return Objects.hash(cardNum);
     }
+
 }

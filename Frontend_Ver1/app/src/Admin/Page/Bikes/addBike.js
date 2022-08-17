@@ -1,100 +1,118 @@
-import React, {useState, useEffect} from 'react';
-import {Form} from "react-bootstrap";
-import Button from "@mui/material/Button";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { Form, FormControl, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
 
 const AddBike = () => {
-    const [data, setData] = useState([]);
-    const [bike, setBike] = useState(null);
+    const [station, setStaton] = useState([]);
+    const [bike, setBike] = useState('');
+    let navigate = useNavigate();
+    // fetch station data
     useEffect(() => {
-        console.log('user use effect!!');
-        let url = 'http://localhost:8080/api/v1/bikes';
-        console.log(url);
+        let initData = {};
+        initData.station = {};
+        initData.status = 'false';
+        setBike(initData);
+
+        let url = 'http://localhost:8080/api/v1/stations';
         fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('data', data);
-                setData(data);
-            });
+            .then(res => res.json())
+            .then(data => setStaton(data))
     }, []);
-    //render list station
-    let dataList = '';
-    dataList = data.map((item) => {
-        return (
-            <option value={item.station.id}>{item.station.stationName}</option>
-        )
-    })
-    // save new bike
-    // let initData = {};
-    // setBike(initData);
-    //
+
+    // handleChange = (e) => {
+    // }
     const handleChange = (event) => {
-        console.log(event);
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let data = {...bike};
+    
+        let data = { ...bike };
         data[name] = value;
-        console.log(data);
         setBike(data);
-    };
-    // const handleChangeStation = (event) => {
-    //     console.log(event);
-    //     const target = event.target;
-    //     const value = target.value;
-    //     const name = target.name;
-    //     let data = {...bike};
-    //     data.station[name]= value;
-    //     console.log(data);
-    //     setBike(data);
-    // };
-    //
+        console.log(bike);
+
+      };
+
+      const handleChangeStation = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        
+        let data = { ...bike };
+        data.station[name] = value;
+        setBike(data);
+        console.log(bike);
+        }
+    
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     fetch('http://localhost:8080/api/v1/bikes', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(bike)
+    //     })
+    // }
 
 
-
-    const saveBike = (e) => {
-        e.preventDefault();
-        fetch('http://localhost:8080/api/v1/bikes', {
-            method: 'POST',
-            body: JSON.stringify(bike),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
+    const saveData = () => {
+        console.log('save data', bike);
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bike),
+        };
+        fetch(
+          'http://localhost:8080/api/v1/bikes',
+          requestOptions
+        )
+          .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                }
+            )
+            .catch((error) => {
+                console.error('Error:', error);
             }
-        }).then(response => {
-            if(response.status === 201) {
-                alert("New website saved successfully");
-                window.location.href = '/';
-            }
-        });
+
+        );
+        navigate(-1);
+
     }
+
+    // station to option
+    const stationOption = station.map(station => {
+        return <option key={station.id} value={station.id}>{station.stationName}</option>
+    })
+
     return (
-        <div className={'container'}>
-            <Form onSubmit={saveBike}>
-                <Form.Group className="mb-3" controlId="bikeName">
-                    <Form.Label>Bike name</Form.Label>
-                    <Form.Control  onChange={(e) => handleChange(e)} name={'bikeName'} type="text" placeholder="Enter bike name" />
+        <div>
+            {/* // Add Bike */}
+            <h1 className="text-center mt-5">Add Bike</h1>
+            <Form className='container mt-5'>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Enter bike name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter bike name" name="bikeName" onChange={handleChange} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="station">
-                    <Form.Label>Select station</Form.Label>
-                    <Form.Select  onChange={(e) => handleChange(e)} name="station.id" aria-label="Default select example">
-                        <option value={''}>Choose station here</option>
-                        {dataList}
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="station">
-                    <Form.Label>Select station</Form.Label>
-                    <Form.Select  onChange={(e) => handleChange(e)} name="status" aria-label="Default select example">
-                        <option value={'true'}>True</option>
-                        <option value={'false'}>False</option>
-
+                <Form.Group className="mb-3">
+                    <Form.Label>Select station for new bike</Form.Label>
+                    <Form.Select name="id" value="bike.station.id"  onChange={(e) => {
+                                  handleChangeStation(e);
+                                }}>
+                        {stationOption}
                     </Form.Select>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="button" onClick={saveData}> 
                     Submit
                 </Button>
             </Form>
         </div>
-    );
-};
+    )
+}
+
 
 export default AddBike;

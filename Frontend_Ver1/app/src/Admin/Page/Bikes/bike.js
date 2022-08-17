@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {Link} from "@mui/material";
+import {Link} from 'react-router-dom'
 const Bike = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -27,6 +27,22 @@ const Bike = () => {
             // <button></button>
         }
     })
+
+    const deleteUser = (id) => {
+        //fetch bike
+        let url = 'http://localhost:8080/api/v1/bikes/deleteBike/' + id;
+        fetch(url, {
+          method: 'DELETE',
+        }).then(() => {
+          console.log('delete successful!!');
+          let result = [...data];
+          result = result.filter((item) => {
+            return item.id != id;
+          });
+          setData(result);
+        });
+      };
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 130 },
         { field: 'bikeName', headerName: 'Bike name', width: 150 },
@@ -57,7 +73,8 @@ const Bike = () => {
                         variant="outlined"
                         color="error"
                         onClick={(event) => {
-                            alert('abc');
+                            deleteUser(cellValues.id);
+                            console.log('delete', cellValues.id);
                         }}
                     >
                         Delete
@@ -71,7 +88,7 @@ const Bike = () => {
 <>
     <div style={{ height: '80vh'}} className={'container'}>
         <h1 className={'text-center'} style={{ marginTop: '80px'}}>BIKE MANAGEMENT SYSTEM</h1>
-        <Link to="add-bike" class={'btn btn-danger'}>
+        <Link to="/addbike" class={'btn btn-danger'}>
             <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
         </Link>
         <Link to="#" class={'btn btn-primary mx-5'}>
