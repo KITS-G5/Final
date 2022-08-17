@@ -36,7 +36,7 @@ public class Controller {
         return orderService.getAllOrderByCardNumber(cardNum, 1, pageSize);
     }
 
-    @GetMapping(path = {"/admin/{id}", "/user/{id}"})
+    @GetMapping(path = {"/admin/findById/{id}", "/user/findById/{id}"})
     Order getOrderById(@PathVariable long id){
         return orderService.getOrderById(id);
     }

@@ -97,6 +97,7 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
+    //calculate bike rental fee when customer return the bike
     float calculateFee(Order order){
         int rentHours = (int) Math.ceil ((order.getRentingEndDate().getTime() - order.getRentingStartedDate().getTime()) / 3600000);
         return order.getTotalFee() + 2000 * rentHours;
