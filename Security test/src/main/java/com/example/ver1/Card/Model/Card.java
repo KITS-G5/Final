@@ -6,7 +6,6 @@ import com.example.ver1.Order.Model.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -56,7 +55,7 @@ public class Card {
             joinColumns = @JoinColumn(name = "card_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Collection<Role> roleCollection;
+    private Set<Role> roleSet;
 
     @Override
     public boolean equals(Object o) {

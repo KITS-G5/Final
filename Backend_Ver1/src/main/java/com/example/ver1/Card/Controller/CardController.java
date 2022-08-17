@@ -37,17 +37,17 @@ public class CardController {
         return cardService.getCardById(id);
     }
 
-    @PostMapping(path = "")
+    @PostMapping(path = "/cards")
     void addCard(@RequestBody Card card){
         cardService.addCard(card);
     }
 
-    @PutMapping(path = "{id}")
+    @PutMapping(path = "/cards/{id}")
     void updateCard(@PathVariable long id, @RequestBody Card card){
         cardService.updateCard(id, card);
     }
 
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = "/cards/{id}")
     void deleteCard(@PathVariable long id){
         cardService.deleteCard(id);
     }
