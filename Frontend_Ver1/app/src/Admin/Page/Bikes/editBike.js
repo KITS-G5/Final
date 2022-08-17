@@ -2,18 +2,21 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
+// param
+import { useParams } from 'react-router-dom';
 
-const AddBike = () => {
+const EditBike = () => {
     const [station, setStaton] = useState([]);
     const [bike, setBike] = useState('');
     let navigate = useNavigate();
+    const params = useParams();
     // fetch station data
     useEffect(() => {
-        let initData = {};
-        initData.station = {};
-        initData.status = 'false';
-        setBike(initData);
-
+        let url_bike = 'http://localhost:8080/api/v1/bikes/' + params;
+        fetch(url_bike)
+            .then(res => res.json())
+            .then(data => setBike(data))
+    
         let url = 'http://localhost:8080/api/v1/stations';
         fetch(url)
             .then(res => res.json())
@@ -58,15 +61,15 @@ const AddBike = () => {
     // }
 
 
-    const saveData = () => {
-        console.log('save data', bike);
+    const updateData = () => {
+        console.log('update data', bike);
         const requestOptions = {
-          method: 'POST',
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(bike),
         };
         fetch(
-          'http://localhost:8080/api/v1/bikes',
+          'http://localhost:8080/api/v1/bikes/updateBike/' + id,
           requestOptions
         )
           .then((response) => response.json())
@@ -91,22 +94,22 @@ const AddBike = () => {
     return (
         <div>
             {/* // Add Bike */}
-            <h1 className="text-center mt-5">Add Bike</h1>
+            <h1 className="text-center mt-5">Edit Bike</h1>
             <Form className='container mt-5'>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Enter bike name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter bike name" name="bikeName" onChange={handleChange} />
+                    <Form.Label>New bike name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter bike name" name="bikeName" value={bike.bikeName} onChange={handleChange} />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Select station for new bike</Form.Label>
-                    <Form.Select name="id" value="bike.station.id"  onChange={(e) => {
+                    <Form.Select name="id" value={bike.station.id}  onChange={(e) => {
                                   handleChangeStation(e);
                                 }}>
                         {stationOption}
                     </Form.Select>
                 </Form.Group>
 
-                <Button variant="primary" type="button" onClick={saveData}> 
+                <Button variant="primary" type="button" onClick={updateData}> 
                     Submit
                 </Button>
             </Form>
@@ -115,4 +118,4 @@ const AddBike = () => {
 }
 
 
-export default AddBike;
+export default EditBike;
