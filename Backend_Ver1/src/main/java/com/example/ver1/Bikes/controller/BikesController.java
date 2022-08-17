@@ -33,6 +33,7 @@ public class BikesController {
 
     @PostMapping("/bikes")
     public void newBikePage(@RequestBody Bikes bikes) {
+
         bikesService.saveBike(bikes);
     }
 
