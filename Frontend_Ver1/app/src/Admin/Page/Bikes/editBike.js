@@ -68,20 +68,20 @@ const EditBike = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(bike),
         };
-        fetch(
-          'http://localhost:8080/api/v1/bikes/updateBike/' + id,
-          requestOptions
-        )
-          .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
-                }
-            )
-            .catch((error) => {
-                console.error('Error:', error);
-            }
-
-        );
+        // fetch(
+        //   'http://localhost:8080/api/v1/bikes/updateBike/' + id,
+        //   requestOptions
+        // )
+        //   .then((response) => response.json())
+        //     .then((data) => {
+        //         console.log('Success:', data);
+        //         }
+        //     )
+        //     .catch((error) => {
+        //         console.error('Error:', error);
+        //     }
+        //
+        // );
         navigate(-1);
 
     }

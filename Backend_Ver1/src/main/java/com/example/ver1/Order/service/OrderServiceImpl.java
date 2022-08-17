@@ -7,7 +7,6 @@ import com.example.ver1.Card.Repository.CardRepository;
 import com.example.ver1.Order.Model.Order;
 import com.example.ver1.Order.repository.OrderRepository;
 import com.example.ver1.Stations.model.Stations;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -36,7 +35,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void saveOrder(@NotNull Order order) {
+    public void saveOrder(Order order) {
         Optional<Card> card = cardRepository.findById(order.getCard().getId());
         Optional<Bikes> bikes = bikesRepository.findById(order.getBike().getId());
         if(card.isPresent() && bikes.isPresent()){
