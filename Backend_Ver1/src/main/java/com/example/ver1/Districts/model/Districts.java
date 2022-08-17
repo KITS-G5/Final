@@ -32,6 +32,5 @@ public class Districts {
     @ManyToOne(optional = false)
     @JoinColumn(name = "city_id", nullable = false)
 
-    @JsonIgnore
     private Cities city;
 }

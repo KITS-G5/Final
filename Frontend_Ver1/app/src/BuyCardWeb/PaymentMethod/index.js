@@ -1,6 +1,6 @@
 import {Button, Col, Container, FormCheck, FormControl, FormLabel, Row, Table} from "react-bootstrap";
 import {useParams} from "react-router";
-import Payeezy from "react-payeezy";
+// import Payeezy from "react-payeezy";
 
 const PaymentMethod = () => {
     const onToken = (token) => {
@@ -48,10 +48,10 @@ const PaymentMethod = () => {
                                 <td> {params.output.toLocaleString()} VND</td>
                             </tr>
                             {/*<Button style={{marginTop: "5rem"}}>Submit</Button>*/}
-                            <Payeezy
-                                token={this.onToken}
-                                PayeezyApiKey = 
-                            />
+                            {/*<Payeezy*/}
+                            {/*    token={this.onToken}*/}
+                            {/*    PayeezyApiKey = */}
+                            {/*/>*/}
                             </tbody>
                         </Table>
                     </Col>
