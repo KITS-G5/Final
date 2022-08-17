@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BikesService {
     List<Bikes> getAllBikes();
-
+    Page<Bikes> getAllBikesByPage(int pageNo, int pageSize);
     Bikes getBikeById(long id);
 
     void saveBike(Bikes bikes);

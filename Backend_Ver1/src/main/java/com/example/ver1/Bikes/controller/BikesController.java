@@ -22,14 +22,14 @@ public class BikesController {
         return bikesService.getAllBikes();
     }
 
-//    @GetMapping("/bikes/page/{pageNo}")
-//    public Page<Bikes> getAllBikes(@PathVariable (required = false) Integer pageNo) {
-//        int pageSize = 20;
-//        if(pageNo != null) {
-//            return bikesService.getAllBikes(pageNo, pageSize);
-//        }
-//        return bikesService.getAllBikes(1, pageSize);
-//    }
+    @GetMapping({"/bikes/page/{pageNo}", "/bikes/page"})
+    public Page<Bikes> getAllBikes(@PathVariable (required = false) Integer pageNo) {
+        int pageSize = 20;
+        if(pageNo != null) {
+            return bikesService.getAllBikesByPage(pageNo, pageSize);
+        }
+        return bikesService.getAllBikesByPage(1, pageSize);
+    }
 
     @PostMapping("/bikes")
     public void newBikePage(@RequestBody Bikes bikes) {

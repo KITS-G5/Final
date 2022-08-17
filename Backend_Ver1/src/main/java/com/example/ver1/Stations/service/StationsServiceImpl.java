@@ -69,4 +69,9 @@ public class StationsServiceImpl implements StationsService{
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.stationsRepository.findAll(pageable);
     }
+
+//    @Override
+//    public List<Stations> searchStationsByDistrict(String searchKeywords) {
+//        return stationsRepository.searchStations(searchKeywords);
+//    }
 }

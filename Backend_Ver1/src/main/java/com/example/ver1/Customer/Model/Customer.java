@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -29,4 +30,17 @@ public class Customer {
     @ToString.Exclude
     @JsonIgnore
     private Set<Card> listCard;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return id == customer.id || Objects.equals(phone, customer.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phone);
+    }
 }

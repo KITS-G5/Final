@@ -8,6 +8,9 @@ import com.example.ver1.Order.Model.Order;
 import com.example.ver1.Order.repository.OrderRepository;
 import com.example.ver1.Stations.model.Stations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +23,22 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
+    }
+
+    @Override
+    public Page<Order> getAllOrderByPage(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize - 1);
+        return orderRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Order> getAllOrderByCardNumber(String cardNum, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        Optional<Card> cardByCardNum = cardRepository.findCardByCardNum(cardNum);
+        if(cardByCardNum.isPresent()){
+            return orderRepository.findOrdersByCard(cardByCardNum.get(), pageable);
+        }
+        return null;
     }
 
     @Override
@@ -78,6 +97,7 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
+    //calculate bike rental fee when customer return the bike
     float calculateFee(Order order){
         int rentHours = (int) Math.ceil ((order.getRentingEndDate().getTime() - order.getRentingStartedDate().getTime()) / 3600000);
         return order.getTotalFee() + 2000 * rentHours;
