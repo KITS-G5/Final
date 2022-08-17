@@ -42,13 +42,12 @@ function App() {
                             <Route path='/admin/home/stations' element={<Station />}></Route>
                             <Route path='/admin/home/orders' element={<Station />}></Route>
                             <Route path='/admin/home/bikes' element={<Bike />}>
-                            <Route path='addbike' element={<AddBike />}></Route>
+                                {/* <Route path='addbike' element={<AddBike />}></Route> */}
                             </Route>
                             <Route path='/admin/home/cards' element={<Card />}></Route>
                         </Route>
                         <Route path='addbike' element={<AddBike />}></Route>
-
-                        <Route path='/admin/home/bikes/edit/:id' element={<EditBike />}></Route>
+                        <Route path='/edit/:id' element={<EditBike />}></Route>
                     </Routes>
 
 

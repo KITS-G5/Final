@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 const Bike = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -53,15 +53,11 @@ const Bike = () => {
             field: "View",
             renderCell: (cellValues) => {
                 return (
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={(event) => {
-                            alert('abc');
-                        }}
+                    <NavLink
+                        to={'/edit/' +  cellValues.id}
                     >
-                        View
-                    </Button>
+                        Edit
+                    </NavLink>
                 );
             }
         },
