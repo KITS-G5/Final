@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path = "/orders")
 public class Controller {
@@ -28,7 +28,7 @@ public class Controller {
     }
 
     @GetMapping(path = {"/user/{cardNum}/{pageNo}", "/user/{cardNum}"})
-    Page<Order> getAllOrderListByUserID(@PathVariable String cardNum, @PathVariable Integer pageNo){
+    Page<Order> getAllOrderListByUserID(@PathVariable String cardNum, @PathVariable(required = false) Integer pageNo){
         int pageSize = 20;
         if(pageNo != null) {
             return orderService.getAllOrderByCardNumber(cardNum, pageNo, pageSize);

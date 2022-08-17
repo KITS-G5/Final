@@ -1,25 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Container, Row, Table} from "react-bootstrap";
+import {useParams} from "react-router-dom";
 
 const AdminUser = () => {
+    const params = useParams();
     const [orderData, setOrderData] = useState([]);
     useEffect(() => {
-        let url = 'localhost:8080/orders';
+        let url = 'http://localhost:8080/orders/user/' + params.cardNum;
         fetch(url)
             .then(res => res.json())
             .then(data => setOrderData(data));
-    },[]);
+    }, []);
     let orderList = [];
-    orderList = orderData.map((item) => {
-        return (
-            <>
-                <td>{item.rend_end_date}</td>
-                <td>{item.rent_start_date}</td>
-                <td>{item.total_fee}</td>
-                <td>{item.payment_status}</td>
-            </>
-        )
-    });
+    let cardNum = "";
+    let cardBal = "";
+    if (orderData.content != null) {
+        orderList = orderData.content.map((item) => {
+            cardNum = item.card.cardNum;
+            cardBal = item.card.balance;
+            return (
+                <>
+                    <tr>
+                        <td>{item.rentingStartedDate}</td>
+                        <td>{item.rentingEndDate}</td>
+                        <td>{item.totalFee.toLocaleString()} VND</td>
+                        <td>{item.paymentStatus.toString()}</td>
+                    </tr>
+                </>
+            )
+        });
+    }
+    console.log(cardNum)
     return (
         <>
             <Container fluid className={'p-0 col-md-10 float-end'}>
@@ -29,9 +40,8 @@ const AdminUser = () => {
                 <Row>
                     <Col md={12}>
                         <h1>User management</h1>
-                        <h6>Your name: </h6>
-                        <h6>Your card number: </h6>
-                        <h6>Remaining balance: </h6>
+                        <h6>Your card number: {cardNum}</h6>
+                        <h6>Remaining balance: {cardBal.toLocaleString()} VND</h6>
                     </Col>
                 </Row>
                 <Row>
@@ -46,16 +56,14 @@ const AdminUser = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                {orderList}
-                            </tr>
+                            {orderList}
                             </tbody>
                         </Table>
                     </Col>
                 </Row>
             </Container>
             <Container fluid className={'col-md-2 float-start p-0'}>
-                <Col style={{height: "100vh", border:"1px red solid"}}>
+                <Col style={{height: "100vh", border: "1px red solid"}}>
                     SIDEBAR HERE
                 </Col>
             </Container>

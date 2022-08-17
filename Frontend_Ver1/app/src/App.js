@@ -51,7 +51,8 @@ function App() {
                         <Route path='addbike' element={<AddBike />}></Route>
                         <Route path='/edit/:id' element={<EditBike />}></Route>
                         <Route path={'/admin/user/'}>
-                            <Route index element={<AdminUser/>}/>
+                            {/*<Route index element={<AdminUser/>}/>*/}
+                            <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
                         </Route>
                     </Routes>
 
