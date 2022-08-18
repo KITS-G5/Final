@@ -1,4 +1,5 @@
 package com.example.ver1.Security;
+
 import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Card.Repository.CardRepository;
 import com.example.ver1.CardAndRole.Model.Role;
@@ -7,6 +8,7 @@ import com.example.ver1.CardType.Model.CardType;
 import com.example.ver1.CardType.Repository.CardTypeRepository;
 import com.example.ver1.Customer.Model.Customer;
 import com.example.ver1.Customer.Repository.CustomerRepository;
+import com.example.ver1.Security.Filter.CustomAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -28,11 +29,16 @@ import java.util.Optional;
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
-    @Autowired private CardRepository cardRepository;
-    @Autowired private RoleRepository roleRepository;
-    @Autowired private PasswordEncoder passwordEncoder;
-    @Autowired private CardTypeRepository cardTypeRepository;
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired
+    private CardRepository cardRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CardTypeRepository cardTypeRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
@@ -43,18 +49,29 @@ public class AuthController {
         return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);
     }
 
+/*
+    @PostMapping("/signin")
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
+        CustomAuthenticationFilter authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDto.getCardNum(), loginDto.getCardPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);
+    }
+*/
+
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
+    public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto) {
         //create a unique random card number
-        while(true) {
+        while (true) {
             boolean uniqueCardNum = createUniqueCardNum(signUpDto);
-            if(uniqueCardNum) {
+            if (uniqueCardNum) {
                 break;
             }
         }
 
         // add check for cardNum exists in a DB
-        if(cardRepository.existsCardByCardNum(signUpDto.getCardNum())){
+        if (cardRepository.existsCardByCardNum(signUpDto.getCardNum())) {
             return new ResponseEntity<>("CardNum is already taken!", HttpStatus.BAD_REQUEST);
         }
 
@@ -72,13 +89,12 @@ public class AuthController {
         //CREATE Customer who own this card
         //check if customer is exist in database
         Optional<Customer> customerByPhone = customerRepository.findCustomerByPhone(signUpDto.getPhone());
-        if(customerByPhone.isPresent()){
+        if (customerByPhone.isPresent()) {
             customerByPhone.get().setName(signUpDto.getName());
             customerByPhone.get().setAddress(signUpDto.getAddress());
             card.setCustomer(customerByPhone.get());
             customerRepository.save(customerByPhone.get());
-        }
-        else {
+        } else {
             Customer customer = new Customer();
             customer.setName(signUpDto.getName());
             customer.setAddress(signUpDto.getAddress());
@@ -91,22 +107,22 @@ public class AuthController {
         return new ResponseEntity<>("Card registered successfully", HttpStatus.OK);
     }
 
-    //create a unique and random cardnumber
-    boolean createUniqueCardNum(SignUpDto signUpDto){
+    //create a unique and random card number
+    boolean createUniqueCardNum(SignUpDto signUpDto) {
         StringBuilder stringBuffer = new StringBuilder();
-        for(int i = 0; i < 19; i++){
-            if(i == 4 || i == 9 || i == 14) {
+        for (int i = 0; i < 19; i++) {
+            if (i == 4 || i == 9 || i == 14) {
                 stringBuffer.append("-");
                 continue;
             }
-            int x = (int)(Math.random() * 10);
+            int x = (int) (Math.random() * 10);
             stringBuffer.append(x);
         }
         signUpDto.setCardNum(String.valueOf(stringBuffer));
         Card card = new Card();
         card.setCardNum(String.valueOf(stringBuffer));
         List<Card> all = cardRepository.findAll();
-        if(all.contains(card)) return false;
+        if (all.contains(card)) return false;
         return true;
     }
 
