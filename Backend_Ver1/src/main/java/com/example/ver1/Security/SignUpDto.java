@@ -7,7 +7,7 @@ import lombok.Data;
 public class SignUpDto {
     private double balance = 0;
     private String cardNum;
-    private String cardCcv = generateCardCVV();
+    private String cardCcv = generateCardCvv();
     private String cardPassword;
     private CardType cardType;
 
@@ -16,7 +16,7 @@ public class SignUpDto {
     private String address;
     private String phone;
 
-    public String generateCardCVV(){
+    public String generateCardCvv(){
         StringBuilder stringBuffer = new StringBuilder();
         for(int i = 0; i < 3; i++){
             int x = (int)(Math.random() * 10);

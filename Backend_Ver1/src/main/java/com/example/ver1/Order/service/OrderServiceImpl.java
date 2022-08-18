@@ -140,4 +140,9 @@ public class OrderServiceImpl implements OrderService{
         return rev;
     }
 
+    @Override
+    public List<Order> getOrdersByMonthAndYear(String month, String year) {
+        return orderRepository.findOrdersByMonthAndYear(month, year);
+    }
+
 }

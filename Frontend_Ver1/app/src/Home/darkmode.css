@@ -1,0 +1,136 @@
+:root {
+    --font-color: #333;
+    --background-color: #eee;
+    --link-color: cornflowerblue;
+    --background: url("https://www.donkey.bike/wp-content/uploads/2021/11/a-woman-with-a-donkey-bike-in-copenhagen-scaled.jpg");
+}
+[data-theme="dark"] {
+    --font-color: #eee;
+    --background-color: #333;
+    --link-color: lightblue;
+    --background: linear-gradient(
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.7)
+    ), url("https://www.donkey.bike/wp-content/uploads/2021/11/a-woman-with-a-donkey-bike-in-copenhagen-scaled.jpg");
+}
+
+body {
+    background-color: var(--background-color) !important;
+    color: var(--font-color) !important;
+}
+a {
+    color: var(--link-color);
+}
+/*.header_text {*/
+/*    color: #333!important;*/
+/*}*/
+.homeBanner {
+    background: var(--background)!important;
+}
+.contact_message {
+    background-color: var(--background-color)!important;
+    color: var(--font-color) !important;
+}
+.contact_message::placeholder {
+    color: #eee;
+}
+.contact_input .contactInput {
+    background-color: var(--background-color)!important;
+    color: var(--font-color) !important;
+}
+.contact_input .contactInput::placeholder {
+    color: #eeeeee;
+}
+.navbar{
+    background-color: var(--background-color)!important;
+    color: var(--font-color) !important;
+}
+.navbar a {
+    color: var(--font-color);
+}
+.css-1w5m2wr-MuiDataGrid-virtualScroller {
+    color: var(--font-color) !important;
+}
+.css-f3jnds-MuiDataGrid-columnHeaders {
+    color: var(--font-color) !important;
+}
+.filter .form-select {
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+.modalValid{
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+.modalValidTitle {
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+.modalValidBody {
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+.payMethCard {
+    background-color: var(--background-color) !important;
+    color: var(--font-color) !important;
+}
+/*darkmode button*/
+.toggle-theme-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.toggle-theme-wrapper span {
+    font-size: 28px;
+}
+
+.toggle-theme {
+    position: relative;
+    display: inline-block;
+    height: 34px;
+    width: 60px;
+}
+
+.toggle-theme input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    position: absolute;
+    cursor: pointer;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: 0.2s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 26px;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+input:checked + .slider {
+    background-color: cornflowerblue;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

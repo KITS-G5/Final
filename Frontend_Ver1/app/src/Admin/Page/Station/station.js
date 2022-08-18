@@ -6,11 +6,14 @@ import {Link} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {Form, InputGroup} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 const Station = () => {
     const [data, setData] = useState([]);
     const [city, setCity] = useState([]);
     const [district, setDistrict] = useState([]);
     const [dist, setDist] = useState([]);
+    const [searchCity, setSearchCity] = useState('');
+    const [searchKeys, setSearchKeys] = useState('');
 
     useEffect(() => {
         console.log('user use effect!!');
@@ -35,14 +38,45 @@ const Station = () => {
     }, []);
 
     let dataTable = data.map((item) => {
-        return {
-            id: item.id,
-            station: item.stationName,
-            city: item.city.cityName,
-            district: item.district.districtName
-            // <button></button>
-        }
-    })
+            return {
+                id: item.id,
+                station: item.stationName,
+                city: item.district.city.cityName,
+                district: item.district.districtName
+                // <button></button>
+            }
+        })
+
+
+    if (searchCity != '') {
+        let dataTable = data.filter(data => {
+                return data.district.city.id == searchCity
+            }
+        ).map(item => {
+            return {
+                id: item.id,
+                station: item.stationName,
+                city: item.district.city.cityName,
+                district: item.district.districtName
+                // <button></button>
+            }
+        })
+    }
+
+    if (searchKeys != null) {
+        let dataTable2 = data.filter(data => {
+            return data.district.id == searchKeys
+        }).map(item => {
+            return {
+                id: item.id,
+                station: item.stationName,
+                city: item.district.city.cityName,
+                district: item.district.districtName
+                // <button></button>
+            }
+        })
+    }
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 200 },
         { field: 'station', headerName: 'Station name', width: 300 },
@@ -147,13 +181,19 @@ const Station = () => {
 
     const pickCity = (e) => {
         let city_id = e.target.value;
+        setSearchCity(city_id);
         opt_district = district.filter(district => {
             return district.city.id == city_id
         })
         setDist(opt_district);
         console.log(e.target.value);
+        console.log(searchCity);
     }
 
+    const getSearchTerm = (e) => {
+        setSearchKeys(e.target.value);
+        console.log("search key =", searchKeys);
+    }
 
     return (
         <div style={{ height: '80vh'}} className={'container mt-5'}>
@@ -175,7 +215,7 @@ const Station = () => {
                        </Form.Select>
                    </Form.Group>
                    <Form.Group className="mb-3">
-                       <Form.Select name="id" value="station.district">
+                       <Form.Select name="id" onChange={getSearchTerm}>
                            <option value="">Choose district</option>
                            {dist.map((item) => {
                                return(
@@ -187,19 +227,20 @@ const Station = () => {
                        </Form.Select>
                    </Form.Group>
                </div>
-               <div className="searchBox w-50 mx-auto">
-                   <InputGroup className="mb-3">
-                       <Form.Control
-                           placeholder="Search..."
-                           aria-describedby="basic-addon2"
-                       />
-                       <Button className={'btn btn-primary'}>
-                           Search
-                       </Button>
-                   </InputGroup>
-               </div>
+               {/*<div className="searchBox w-50 mx-auto">*/}
+               {/*    <InputGroup className="mb-3">*/}
+               {/*        <Form.Control*/}
+               {/*            placeholder="Search..."*/}
+               {/*            aria-describedby="basic-addon2"*/}
+               {/*        />*/}
+               {/*        <Button className={'btn btn-primary'}>*/}
+               {/*            Search*/}
+               {/*        </Button>*/}
+               {/*    </InputGroup>*/}
+               {/*</div>*/}
 
            </div>
+
             <DataGrid
                 style={{ marginTop: '30px'}}
                 rows={dataTable}
