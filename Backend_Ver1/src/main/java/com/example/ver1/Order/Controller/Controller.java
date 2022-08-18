@@ -126,4 +126,19 @@ public class Controller {
         }
         return df.format(v);
     }
+
+    @GetMapping(path = "admin/findOrdersByMonthAndYear")
+    List<Order> getOrdersByMonthAndYear(@RequestParam(value = "month", required = false) String month,
+                                        @RequestParam(value = "year", required = false) String year){
+        List<Order> list;
+        if(month == null && year == null){
+            Date thisMonth = new Date();
+            int month1 = thisMonth.getMonth();
+            int year1 = thisMonth.getYear();
+            list = orderService.getOrdersByMonthAndYear(String.valueOf(month1), String.valueOf(year1));
+        } else {
+            list = orderService.getOrdersByMonthAndYear(month, year);
+        }
+        return list;
+    }
 }
