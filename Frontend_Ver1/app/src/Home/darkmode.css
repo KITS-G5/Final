@@ -2,11 +2,16 @@
     --font-color: #333;
     --background-color: #eee;
     --link-color: cornflowerblue;
+    --background: url("https://www.donkey.bike/wp-content/uploads/2021/11/a-woman-with-a-donkey-bike-in-copenhagen-scaled.jpg");
 }
 [data-theme="dark"] {
     --font-color: #eee;
     --background-color: #333;
     --link-color: lightblue;
+    --background: linear-gradient(
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.7)
+    ), url("https://www.donkey.bike/wp-content/uploads/2021/11/a-woman-with-a-donkey-bike-in-copenhagen-scaled.jpg");
 }
 
 body {
@@ -16,8 +21,11 @@ body {
 a {
     color: var(--link-color);
 }
-.header_text {
-    color: #333!important;
+/*.header_text {*/
+/*    color: #333!important;*/
+/*}*/
+.homeBanner {
+    background: var(--background)!important;
 }
 .contact_message {
     background-color: var(--background-color)!important;
