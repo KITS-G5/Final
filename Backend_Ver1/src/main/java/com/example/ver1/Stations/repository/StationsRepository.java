@@ -10,5 +10,6 @@ import java.util.List;
 public interface StationsRepository extends JpaRepository<Stations,Long> {
     @Query(value = "SELECT a.* FROM Stations a join Districts b on a.district_id = b.id WHERE lower(b.district_name) LIKE %:searchKeyWords%", nativeQuery = true)
     List<Stations> searchStations(@Param("searchKeyWords") String searchKeyWords);
+
 }
 
