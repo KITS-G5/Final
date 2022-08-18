@@ -8,12 +8,25 @@
 }
 /*end of header*/
 .label{
-    text-align: center;
+    /*text-align: center;*/
 }
-
+#card1 {
+    position: absolute;
+    margin-top: 10rem;
+    margin-right: 3rem;
+}
 @media screen and (max-width: 800px) {
+    #overallContainer {
+        overflow: hidden;
+    }
     .buttonVal {
         margin-top: 2rem;
+    }
+    .label {
+        text-align: center;
+    }
+    .form-control {
+        padding: 0;
     }
     .inputLeft {
         margin-left: auto;
@@ -22,5 +35,20 @@
     .inputRight {
         margin-left: auto;
         margin-right: auto;
+    }
+    #con1 {
+        padding-left: 0!important;
+        padding-right: 0;
+    }
+    #con2 {
+        padding: 0;
+        width: 100%;
+    }
+    #card1{
+        margin-top: 3rem;
+        margin-right: 0;
+        margin-left: 2rem;
+        position: unset;
+        width: 80%;
     }
 }
