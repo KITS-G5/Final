@@ -2,7 +2,6 @@ import {Button, Container, Modal} from "react-bootstrap";
 import {useParams} from "react-router";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
-// import Payeezy from "react-payeezy";
 import './paymentMethod.css';
 
 const PaymentMethod = () => {

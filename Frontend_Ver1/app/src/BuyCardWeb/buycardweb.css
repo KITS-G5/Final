@@ -91,3 +91,29 @@
     font-size: 1em;
 }
 /*end of cancel*/
+@media screen and (max-width: 800px) {
+    .buyWhatText h4 {
+        width: 100%;
+    }
+    #card1 {
+        visibility: hidden;
+    }
+    #card2 {
+        visibility: hidden;
+    }
+    .howMuch {
+        margin-left: 0;
+    }
+    .howMuchCosts {
+        width: 100%;
+    }
+    .cancel {
+        margin-left: 0;
+    }
+    .cancelCard {
+        width: 100%;
+    }
+    .cancelLost {
+        width: 100%;
+    }
+}

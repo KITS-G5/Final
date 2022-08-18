@@ -44,8 +44,8 @@ const User = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 130 },
-        { field: 'name', headerName: 'Bike name', width: 150 },
-        { field: 'phone', headerName: 'Station name', width: 200 },
+        { field: 'name', headerName: 'Customer name', width: 300 },
+        { field: 'phone', headerName: 'Phone', width: 200 },
         { field: 'address', headerName: 'Address', width: 400},
         {
             field: "View",
@@ -81,7 +81,7 @@ const User = () => {
     return (
 <>
     <div style={{ height: '80vh'}} className={'container'}>
-        <h1 className={'text-center'} style={{ marginTop: '80px'}}>BIKE MANAGEMENT SYSTEM</h1>
+        <h1 className={'text-center'} style={{ marginTop: '80px'}}>USER MANAGEMENT SYSTEM</h1>
         <Link to="/addbike" class={'btn btn-danger'}>
             <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
         </Link>
