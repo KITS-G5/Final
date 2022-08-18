@@ -19,7 +19,7 @@ const Station = () => {
         console.log('user use effect!!');
         let url1 = 'http://localhost:8080/api/v1/stations';
         if (searchKeys != '') {
-            url1 = 'http://localhost:8080/api/v1/stations' + '/search?searchKeywords=' + searchKeys;
+            url1 = 'http://localhost:8080/api/v1/stations' + '/search?q=' + searchKeys;
         }
         console.log(url1);
         fetch(url1)
@@ -146,16 +146,23 @@ const Station = () => {
 
     const pickCity = (e) => {
         let city_id = e.target.value;
-        setSearchCity(city_id);
+        console.log('city_id', city_id);    
         opt_district = district.filter(district => {
             return district.city.id == city_id
         })
         setDist(opt_district);
         console.log(e.target.value);
-        console.log(searchCity);
+        let city_name = city.filter(city => {
+            return city.id == city_id;
+        })
+        console.log(city_name[0].cityName);
+        setSearchKeys(city_name[0].cityName);
+        console.log('searchkey =' , searchKeys);
+        
     }
 
     const getSearchTerm = (e) => {
+        pickCity(e);
         setSearchKeys(e.target.value);
         console.log("search key =", searchKeys);
     }
@@ -174,7 +181,7 @@ const Station = () => {
                </div>
                <div className="filter d-flex">
                    <Form.Group className="mb-3">
-                       <Form.Select name="id" onChange={pickCity}>
+                       <Form.Select name="id" onChange={getSearchTerm}>
                            <option value="">Choose city</option>
                            {opt}
                        </Form.Select>

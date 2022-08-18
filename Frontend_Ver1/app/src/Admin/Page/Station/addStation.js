@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import {click} from "@testing-library/user-event/dist/click";
+import Geocode from 'react-geocode';
+
+//import api key from env
+
 
 const AddStation = () => {
     const [station, setStation] = useState([]);
@@ -147,6 +151,53 @@ const AddStation = () => {
     }
 
     // station to option
+
+    // GET LONGITUDE, LATITUDE FROM MAP
+    // const getLocation = () => {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(showPosition);
+    //     } else {
+    //         console.log("Geolocation is not supported by this browser.");
+    //     }
+    // }
+    // const showPosition = (position) => {
+    //     console.log(position.coords.latitude, position.coords.longitude);
+    //     let data = {...station};
+    //     data.longitude = position.coords.longitude;
+    //     data.latitude = position.coords.latitude;
+    //     setStation(data);
+    // }
+    
+    //usestate set long, set lat
+    const [long, setLong] = useState('');
+    const [lat, setLat] = useState('');
+    
+    const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    Geocode.setApiKey(apiKey);
+    Geocode.setLanguage('en');
+    Geocode.setRegion('vn');
+    Geocode.enableDebug();
+    //from address input get coordinates
+    const getCoordinates = (e) => {
+        // e.preventDefault();
+        // autocomplete address input
+        Geocode.fromAddress(e.target.value).then(
+            response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                console.log(lat, lng);
+                let data = {...station};
+                data.longitude = lng;
+                data.latitude = lat;
+                setStation(data);
+                setLong(lng);
+                setLat(lat);
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
+
     
     return (
         <div>
@@ -183,7 +234,13 @@ const AddStation = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Enter station address</Form.Label>
                     <Form.Control type="text" placeholder="Enter station address" name="stationAddress"
-                                  onChange={handleChange}/>
+                                  onChange={getCoordinates}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control type="text" placeholder="Lat" name="latitude"  value={lat} onChange={handleChange}/>
+                                
+                    <Form.Control type="text" placeholder="Long" name="longtitude" value={long} onChange={handleChange}/>
+                                 
                 </Form.Group>
                 {/*input search for location*/}
                 {/*return marker on map and get longtitude and latitude*/}
