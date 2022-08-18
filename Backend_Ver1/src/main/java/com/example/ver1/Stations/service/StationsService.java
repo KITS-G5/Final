@@ -17,5 +17,5 @@ public interface StationsService {
 
     Page<Stations> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
-//    List<Stations> searchStationsByDistrict(String district);
+    List<Stations> searchStationsByDistrict(String district);
 }
