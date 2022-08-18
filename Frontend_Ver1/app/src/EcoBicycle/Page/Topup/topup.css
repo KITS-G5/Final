@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+* {
+    font-family: "Open Sans", sans-serif;
+}
+/*header*/
+.topUpHeader {
+    text-align: center;
+}
+/*end of header*/
+.label{
+    /*text-align: center;*/
+}
+#card1 {
+    position: absolute;
+    margin-top: 10rem;
+    margin-right: 3rem;
+}
+@media screen and (max-width: 800px) {
+    #overallContainer {
+        overflow: hidden;
+    }
+    .buttonVal {
+        margin-top: 2rem;
+    }
+    .label {
+        text-align: center;
+    }
+    .form-control {
+        padding: 0;
+    }
+    .inputLeft {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .inputRight {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #con1 {
+        padding-left: 0!important;
+        padding-right: 0;
+    }
+    #con2 {
+        padding: 0;
+        width: 100%;
+    }
+    #card1{
+        margin-top: 3rem;
+        margin-right: 0;
+        margin-left: 2rem;
+        position: unset;
+        width: 80%;
+    }
+}
