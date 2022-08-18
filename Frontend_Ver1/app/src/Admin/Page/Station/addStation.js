@@ -74,7 +74,7 @@ const AddStation = () => {
 
         const pickCity = (e) => {
             let city_id = (e.target.value);
-            console.log(selectedCity);
+            // console.log(selectedCity);
             // districtOpt = district.filter(district => {
             //     return district.city.id == city
             // }).map(district => {
@@ -174,7 +174,7 @@ const AddStation = () => {
                     <Form.Select name="id" value="station.district" onChange={handleChangeAddress} >
                         {dist.map((item) => {
                             return(
-                                <option>
+                                <option value={item.id}>
                                     {item.districtName}
                                 </option>
                             )

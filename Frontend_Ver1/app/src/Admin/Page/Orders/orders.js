@@ -3,10 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {Link, NavLink} from 'react-router-dom';
-import "./styles.css";
-
-const HomeAdmin = () => {
+import {Link, NavLink} from 'react-router-dom'
+const Orders = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
         console.log('user use effect!!');
@@ -27,7 +25,6 @@ const HomeAdmin = () => {
             bike: item.bike.bikeName,
             from: item.rentingStartedDate,
             to: item.rentingEndDate,
-            total: 0,
             // <button></button>
         }
     })
@@ -48,11 +45,10 @@ const HomeAdmin = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'customer', headerName: 'Customer', width: 200 },
-        { field: 'bike', headerName: 'Bike ', width: 150 },
-        { field: 'from', headerName: 'From', width: 300},
-        { field: 'to', headerName: 'To', width: 300 },
-        { field: 'total', headerName: 'Total', width: 300 },
+        { field: 'customer', headerName: 'Customer name', width: 100 },
+        { field: 'bike', headerName: 'Bike name', width: 100 },
+        { field: 'from', headerName: 'From', width: 150},
+        { field: 'to', headerName: 'To', width: 150 },
         {
             field: "View",
             renderCell: (cellValues) => {
@@ -86,38 +82,11 @@ const HomeAdmin = () => {
 
     return (
         <>
-            <div style={{height: '80vh'}} className={'mx-auto dashboard-container'}>
-                <h1 style={{marginTop: '80px'}}>DASHBOARD</h1>
-                {/*insert chart*/}
+            <div style={{ height: '80vh'}} className={'container'}>
+                <h1 className={'text-center'} style={{ marginTop: '80px'}}>BIKE MANAGEMENT SYSTEM</h1>
                 {/*add filter to filter orders by date, by station*/}
-                <div className="d-flex justify-content-between cards">
-                    <div className="card-div">
-                        number of bikes
-                    </div>
-                    <div className="card-div">
-                        number of stations
-                    </div>
-                    <div className="card-div">
-                        revenue
-                    </div>
-                    <div className="card-div">
-                        abc
-                    </div>
-                </div>
-
-                {/*charts*/}
-
-                <div className="chart-container d-flex justify-content-between mt-5">
-                    <div className="chart-div">
-                        revenue chart
-                    </div>
-                    <div className="chart-div">
-                        user chart
-                    </div>
-                </div>
-                <h2 className={'mt-5'}>Orders</h2>
                 <DataGrid
-                    style={{marginTop: '30px'}}
+                    style={{ marginTop: '30px'}}
                     rows={dataTable}
                     columns={columns}
                     pageSize={10}
@@ -130,4 +99,4 @@ const HomeAdmin = () => {
     );
 };
 
-export default HomeAdmin;
+export default Orders;
