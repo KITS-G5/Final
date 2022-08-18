@@ -1,5 +1,9 @@
 package com.example.ver1.Security;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Card.Repository.CardRepository;
 import com.example.ver1.CardAndRole.Model.Role;
@@ -8,7 +12,8 @@ import com.example.ver1.CardType.Model.CardType;
 import com.example.ver1.CardType.Repository.CardTypeRepository;
 import com.example.ver1.Customer.Model.Customer;
 import com.example.ver1.Customer.Repository.CustomerRepository;
-import com.example.ver1.Security.Filter.CustomAuthenticationFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +24,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@Slf4j
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(path = "/api/auth")
 public class AuthController {
@@ -47,6 +59,44 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);
+    }
+    @GetMapping("/refreshTocken")
+    public void refreshTocken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String authorizationHeader = request.getHeader(AUTHORIZATION);
+        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            try {
+                String refresh_token = authorizationHeader.substring("Bearer ".length());
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                JWTVerifier verifier = JWT.require(algorithm).build();
+                DecodedJWT decodedJWT = verifier.verify(refresh_token);
+
+                String cardNum = decodedJWT.getSubject();
+                Card card = cardRepository.findCardByCardNum(cardNum).get();
+
+                String access_tocken = JWT.create()
+                        .withSubject(card.getCardNum())
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                        .withIssuer(request.getRequestURI().toString())
+                        .withClaim("roles", card.getRoleSet()
+                                .stream().map(Role::getTitle).collect(Collectors.toList()))
+                        .sign(algorithm);
+                Map<String, String> tokens = new HashMap<>();
+                tokens.put("access_tocken" , access_tocken);
+                tokens.put("refresh_tocken" , refresh_token);
+                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+            } catch (Exception exception) {
+                log.error("Error message in: {}", exception.getMessage());
+                response.setHeader("Error", exception.getMessage());
+                response.setStatus(FORBIDDEN.value());
+                //response.sendError(FORBIDDEN.value());
+                Map<String, String> error = new HashMap<>();
+                error.put("E rror_message", exception.getMessage());
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
+            }
+        } else {
+            throw new RuntimeException("Refresh tocken is missing");
+        }
     }
 
 /*
