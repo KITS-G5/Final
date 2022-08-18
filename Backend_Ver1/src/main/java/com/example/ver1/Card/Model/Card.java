@@ -29,7 +29,10 @@ public class Card {
     @Column(name = "card_num", length = 20, unique = true, nullable = false, updatable = false)
     private String cardNum;
 
-    @Column(name = "card_password", length = 20, nullable = false)
+    @Column(name = "card_ccv", length = 3, nullable = false, updatable = false)
+    private String cardCcv;
+
+    @Column(name = "card_password", length = 255, nullable = false)
     private String cardPassword;
 
     @ManyToOne

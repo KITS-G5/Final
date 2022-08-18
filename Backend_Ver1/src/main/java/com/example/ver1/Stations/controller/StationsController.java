@@ -4,6 +4,7 @@ import com.example.ver1.Stations.model.Stations;
 import com.example.ver1.Stations.service.StationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,11 @@ public class StationsController {
     @GetMapping("/stations")
     public List<Stations> getAllStations() {
         return stationsService.getAllStations();
+    }
+
+    @GetMapping("/stations/search")
+    public List<Stations> searchStations(@RequestParam(value = "searchKeywords") String searchKeyWords) {
+        return stationsService.searchStationsByDistrict(searchKeyWords.toLowerCase());
     }
 
     @PostMapping("/stations")

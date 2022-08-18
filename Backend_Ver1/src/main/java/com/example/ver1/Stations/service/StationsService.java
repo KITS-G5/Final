@@ -2,7 +2,6 @@ package com.example.ver1.Stations.service;
 
 import com.example.ver1.Stations.model.Stations;
 import org.springframework.data.domain.Page;
-
 import java.util.List;
 
 public interface StationsService {
@@ -17,4 +16,6 @@ public interface StationsService {
     void deleteStation(long id);
 
     Page<Stations> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+
+    List<Stations> searchStationsByDistrict(String district);
 }

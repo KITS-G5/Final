@@ -17,7 +17,7 @@ public class CardController {
     @Autowired
     CardService cardService;
 
-    @GetMapping(path = {"", "/pageNo"})
+    @GetMapping(path = {"", "/{pageNo}"})
     Page<Card> getAllCard(@PathVariable(required = false) Integer pageNo){
         int pageSize = 20;
         if(pageNo != null){
@@ -31,7 +31,10 @@ public class CardController {
         return cardService.getAllCard();
     }
 
-    @GetMapping(path = "{id}")
+
+
+    @GetMapping(path = "/cards/{id}")
+
     Optional<Card> getCardById(@PathVariable long id){
         return cardService.getCardById(id);
     }

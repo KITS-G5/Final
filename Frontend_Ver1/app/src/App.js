@@ -19,6 +19,10 @@ import EcoSignin from "./EcoBicycle/Components/Authentication/Eco.SignIn/Eco.Sig
 import EcoMembership from "./EcoBicycle/Components/Authentication/Eco.SignIn/Membership/Eco.Membership";
 import EcoCreateMember from "./EcoBicycle/Components/Authentication/Eco.SignIn/CreateMember/EcoCreateMember";
 import LoginAccount from "./EcoBicycle/Components/Authentication/Eco.Signup/LoginAccount";
+import Contact from "./Contact";
+import AdminUser from "./AdminUser";
+import AddStation from "./Admin/Page/Station/addStation";
+import User from "./Admin/Page/User/user";
 
 
 function App() {
@@ -34,21 +38,26 @@ function App() {
 
                             <Route path="/search" element={<Search />} />
                             <Route path="/topup" element={<Topup />} />
-                            <Route path="/pay/:output" element={<PaymentMethod />} />
-
+                            <Route path="/pay/:cardNo/:output" element={<PaymentMethod />} />
+                            {/*<Route path="/contact" element={<Contact/>}/>*/}
                         </Route>
                         <Route path='/admin/home' element={<Admin />}>
                             <Route index element={<HomeAdmin />} />
                             <Route path='/admin/home/stations' element={<Station />}></Route>
                             <Route path='/admin/home/orders' element={<Station />}></Route>
                             <Route path='/admin/home/bikes' element={<Bike />}>
-                            <Route path='addbike' element={<AddBike />}></Route>
+                                {/* <Route path='addbike' element={<AddBike />}></Route> */}
                             </Route>
+                            <Route path='/admin/home/users' element={<User />}></Route>
                             <Route path='/admin/home/cards' element={<Card />}></Route>
                         </Route>
                         <Route path='addbike' element={<AddBike />}></Route>
-
-                        <Route path='/admin/home/bikes/edit/:id' element={<EditBike />}></Route>
+                        <Route path='addstation' element={<AddStation />}></Route>
+                        <Route path='/edit/:id' element={<EditBike />}></Route>
+                        <Route path={'/admin/user/'}>
+                            {/*<Route index element={<AdminUser/>}/>*/}
+                            <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
+                        </Route>
                     </Routes>
 
 

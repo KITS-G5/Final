@@ -42,7 +42,7 @@ public class Order {
     @UpdateTimestamp
     private Date rentingEndDate;
 
-    private Float totalFee = 3000.00f; //timestampdiff mysql?
+    private Float totalFee = 3000.00f; //customer will be charged 3000 VND immediately when order created
 
     @Column(name = "payment_status", nullable = false)
     private boolean paymentStatus = false;

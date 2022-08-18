@@ -11,7 +11,7 @@ const AddBike = () => {
     useEffect(() => {
         let initData = {};
         initData.station = {};
-        initData.status = 'false';
+        initData.status = 'true';
         setBike(initData);
 
         let url = 'http://localhost:8080/api/v1/stations';

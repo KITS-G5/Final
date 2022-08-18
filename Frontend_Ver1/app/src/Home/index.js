@@ -184,7 +184,7 @@ const Home = () => {
                         </Row>
                     </Row>
                 </div>
-                <div className={"contact"}>
+                <div className={"contact"} id={"contact"}>
                     <h1>Get In Touch</h1>
                     <h4>Have any questions? Got suggestions? Simply want to chat? Contact us with the form below!</h4>
                     <Form>
@@ -197,7 +197,7 @@ const Home = () => {
                         <Row className={'me-auto ms-auto input-group mt-3 contact_input'}>
                             <Col md={4}>
                                 <input className={'form-control'} type={"email"} name={"contact_email"}
-                                       placeholder={"email"}/>
+                                       placeholder={"Email"}/>
                             </Col>
                             <Col md={4} className={'me-0 ms-0'}>
                                 <input className={'form-control'} type={"text"} name={"full_name"}
