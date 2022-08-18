@@ -1,4 +1,5 @@
 package com.example.ver1.Customer.Service;
+import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Customer.Model.Customer;
 import com.example.ver1.Customer.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public List<Customer> getAllCustomer() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public Optional<Customer> getCustomerByCardNumber(Card card) {
+        return customerRepository.findCustomerByListCardContaining(card);
     }
 
     @Override

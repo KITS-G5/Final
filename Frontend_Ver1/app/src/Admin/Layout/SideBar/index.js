@@ -29,7 +29,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import {UserAuth} from "../../../Context/AuthContext";
-const drawerWidth = 200;
+const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
