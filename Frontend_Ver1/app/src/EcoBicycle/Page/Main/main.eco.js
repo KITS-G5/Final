@@ -1,33 +1,60 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './main.eco.scss'
-import '../../../Components/GlobalStyles/GlobalStyles.scss'
 import AddCardIcon from '@mui/icons-material/AddCard';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import BadgeIcon from '@mui/icons-material/Badge';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
-import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { useTypewriter} from 'react-simple-typewriter'
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import PaidIcon from '@mui/icons-material/Paid';
 const MainEco = () => {
     const {text} = useTypewriter({
         words: ['Hello', 'Today I would like to ...','Hello', 'Today I would like to ...','Hello', 'Today I would like to ...','Hello', 'Today I would like to ...', ],
         loop: 10
     })
+
+    const params = useParams();
+    const [product, setProduct] = useState(null);
+    const [count, setCount] = useState(1);
+    useEffect(() => {
+        let url = 'http://localhost:8080/customer/findByCardNum/' + params.data ;
+        console.log(url);
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                setProduct(data);
+                console.log(data)
+            });
+    }, []);
+
+
     return (
+
         <div className=' row main_eco container' style={{margin:'auto'}}>
-            <div className='text-center text-light mt-5 col-sm-12 main_eco_content'>
+            {product !== null ? (
+                <div>
+                    <h1>{product.id}</h1>
+                    <h1>{product.cardPassword}</h1>
+                    <h1>{product.name}</h1>
+                    <h1>{product.phone}</h1>
+                    <h1>{product.address}</h1>
+                </div>
+            ) : (
+                <div>loding---</div>
+            )}
+             <div className='text-center text-light mt-5 col-sm-12 main_eco_content'>
                 <h1>Welcome to EcoBicycle Rentail !</h1>
-                {/*<span> {text}</span>*/}
+                <span> {text}</span>
             </div>
             <div className='mt-5 row main_eco_card'>
                 <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
                     <h3 className='text-center fs-1 text-white'>Card</h3>
                     <div className='col-lg-6 card_item'>
                         <Link className='to_link'
-                              to='home/buy_card'>
+                              to='buy_card'>
                             <PaidIcon/>
                             <br/>
                             <span className='text-center'>Buy a card</span>
@@ -36,8 +63,7 @@ const MainEco = () => {
                     <div className='col-lg-6 card_item'>
                         <Link className='to_link'
                               to='buy_card'>
-                            <img src={'https://www.youbike.com.tw/region/assets/images/register-inner-icon1-1.svg'} alt="" width='80px' height='80px'/>
-                            {/*<AddCardIcon/>*/}
+                            <AddCardIcon/>
                             <br/>
                             <span className='text-center'>Top up to card</span>
                         </Link>
@@ -87,7 +113,7 @@ const MainEco = () => {
                     <div className='col-lg-6 card_item'>
                         <Link className='to_link'
                               to='buy_card'>
-                            <WorkHistoryIcon/>
+                            <FactCheckIcon/>
                             <br/>
                             <span className='text-center'>Todo</span>
                         </Link>
