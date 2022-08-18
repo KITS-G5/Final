@@ -69,7 +69,9 @@ function App() {
 
                         <Route path="/ecobicycle" element={<HomeEcoBicycle />}>
                             <Route index element={<ContentsEco/>}/>
-                            <Route path='sign_account' element={<LoginAccount/>}/>
+                            {/*<Route path='sign_account' element={<LoginAccount/>}/>*/}
+                            <Route path='sign_account' element={<Demo/>}/>
+
                             <Route path='signup' element={<EcoSignin/>}></Route>
                             <Route  path='signup/new_signin' element={<EcoMembership/>}/>
                             <Route  path='signup/new_signin/create_account' element={<Demo/>}/>

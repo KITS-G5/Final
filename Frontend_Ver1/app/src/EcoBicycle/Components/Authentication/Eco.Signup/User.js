@@ -9,8 +9,6 @@ const Demo = () => {
     const [cardPassword, setCardPassword] = useState('')
     const [error, setError] = useState('');
 
-
-
     const navigate = useNavigate();
     useEffect(() => {
         if(localStorage.getItem('user_info')) {
