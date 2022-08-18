@@ -56,9 +56,8 @@ public class CustomerController {
     Optional<Customer> getCustomerByCardNum(@PathVariable String cardNum){
         Optional<Card> cardByCardNum = cardService.getCardByCardNum(cardNum);
         if(cardByCardNum.isPresent()){
-            Optional<Customer> customerByCardNumber = customerService.getCustomerByCardNumber(cardByCardNum.get());
-            return customerByCardNumber;
+            return customerService.getCustomerByCardNumber(cardByCardNum.get());
         }
-        return null;
+        return Optional.empty();
     }
 }

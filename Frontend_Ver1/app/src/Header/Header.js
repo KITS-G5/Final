@@ -9,14 +9,13 @@ import DarkMode from "../Home/darkMode";
 const Header = () => {
     return (
         <>
-            <Navbar expand="lg">
+            <Navbar expand="lg" style={{position: "sticky", top: 0, zIndex:"1"}}>
                 <Container fluid>
                     <Navbar.Brand href="/">
                         <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top"/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <DarkMode/>
                         <Nav className="ms-auto">
                             <Nav.Link href="/" onClick={(e) => {
                                 e.preventDefault();
@@ -38,6 +37,7 @@ const Header = () => {
                                 {/*</Link>*/}
                             </Nav.Link>
                             <Nav.Link as={NavLink} to='/signin'>Sign in</Nav.Link>
+                            <DarkMode/>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

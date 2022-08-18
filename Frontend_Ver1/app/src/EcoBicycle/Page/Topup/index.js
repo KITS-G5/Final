@@ -2,9 +2,9 @@ import {Button, Col, Container, FormCheck, FormLabel, Modal, Row} from "react-bo
 import {useEffect, useState} from "react";
 import './topup.css';
 import {Link} from "react-router-dom";
-import card from "../img/frontcard.png";
+import card from "../../../BuyCardWeb/img/frontcard.png";
 
-const Topup = () => {
+const EcoTopup = () => {
     const [info, setInfo] = useState([]);
     const [input, setInput] = useState(0);
     const [from, setFrom] = useState("usd");
@@ -60,11 +60,11 @@ const Topup = () => {
         }
     };
     return (
-        <>
+        <div className='container'>
             <Row id={"overallContainer"}>
                 <Container fluid className={'ms-0 col-md-9 ps-5'} id={'con1'}>
                     <Row className={'topUpHeader mt-5'}>
-                        <h1>Top up your prepaid card</h1>
+                        <h1>Top up to card</h1>
                     </Row>
                     <Row className={'mt-5'}>
                         <Col md={2} className={'label'}>
@@ -135,35 +135,33 @@ const Topup = () => {
                     </Row>
                     <Row>
                         <Col md={12} style={{textAlign: "center"}}>
-
-                            {/*<Link to={{pathname: "/pay", state: {cardNo: "cardNo",cash: output}}}>*/}
                             <Button variant={"danger"} id={'topUpButton'} size={"lg"} disabled={bool}>
-                                <Link to={'/pay/' + cardNo + "/" + output} style={{textDecoration: "none", color: "white"}}>TOP UP
+                                <Link to={'pay/' + cardNo + "/" + output} style={{textDecoration: "none", color: "white"}}>Top Up
                                 </Link>
                             </Button>
                         </Col>
                     </Row>
                     <Modal show={show} onHide={validateClose}>
-                        <Modal.Header closeButton  className={'modalValid'}>
-                            <Modal.Title className = 'modalValidTitle'>Validation</Modal.Title>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Validation</Modal.Title>
                         </Modal.Header>
-                        {cardCheck == true ? (
-                            <Modal.Body className = 'modalValidBody'>Your card had been successfully validated</Modal.Body>
+                        {cardCheck === true ? (
+                            <Modal.Body>Your card had been successfully validated</Modal.Body>
                         ) : (
-                            <Modal.Body className = 'modalValidBody'>Your card does not exists</Modal.Body>
+                            <Modal.Body>Your card does not exists</Modal.Body>
                         )}
-                        <Modal.Footer className={'modalValid'}>
+                        <Modal.Footer>
                             <Button variant="secondary" onClick={validateClose}>
                                 Close
                             </Button>
                         </Modal.Footer>
                     </Modal>
                 </Container>
-                <Container fluid className={'col-md-3'} id={'con2'}>
-                    <img alt="card" src={card} id={"card1"}/>
+                <Container  fluid className={'col-md-3'} id={'con2'}>
+                    <img style={{boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}} alt="card" src={card} id={"card1"}/>
                 </Container>
             </Row>
-        </>
+        </div>
     );
 };
-export default Topup;
+export default EcoTopup;

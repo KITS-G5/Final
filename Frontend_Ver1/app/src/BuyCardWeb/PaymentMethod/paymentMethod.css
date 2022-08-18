@@ -49,7 +49,7 @@
 }
 
 .payMethButton.payment {
-    background-color: #1c6acf;
+    /*background-color: #1c6acf;*/
     color: white;
     border-radius: 0px;
     height: 50px;
@@ -71,17 +71,24 @@
     position: absolute;
     left: 16px;
     top: 10px;
-    background-color: #fff;
-    color: #80868B;
+    /*background-color: #fff;*/
+    background-color: var(--background-color);
+    /*color: #80868B;*/
+    color: var(--font-color);
     font-size: 16px;
     transition: .3s;
     text-transform: uppercase;
 }
-
+.payMethForm .form-control {
+    background-color: var(--background-color);
+    color: var(--font-color)
+}
 .payMethForm .form-control:focus+.form__label {
     top: -8px;
     left: 12px;
-    color: #1A73E8;
+    /*color: #1A73E8;*/
+    background-color: var(--background-color);
+    color: var(--font-color);
     font-size: 12px;
     font-weight: 500;
     z-index: 10;
@@ -93,9 +100,13 @@
     font-size: 12px;
     font-weight: 500;
     z-index: 10;
+    background-color: var(--background-color);
+    color: var(--font-color)
 }
 
 .payMethForm .form-control:focus {
     border: 1.5px solid #1A73E8;
     box-shadow: none;
+    background-color: var(--background-color);
+    color: var(--font-color)
 }

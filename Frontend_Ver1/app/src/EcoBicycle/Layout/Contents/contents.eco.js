@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 
 const ContentsEco = () => {
     const images = [
-        "https://www.youbike.com.tw/region/_next/image?url=%2Fregion%2Fassets%2Fimages%2Flogin_icon.svg&w=96&q=75",
+        "https://st4.depositphotos.com/3275449/24615/v/600/depositphotos_246158128-stock-illustration-active-family-vacation-father-mother.jpg",
         "https://www.youbike.com.tw/region/assets/images/photos/equipment/2/02.jpg",
         "https://www.youbike.com.tw/region/assets/images/photos/equipment/2/03.jpg",
         "https://www.youbike.com.tw/region/assets/images/photos/equipment/2/04.jpg",
@@ -16,8 +16,8 @@ const ContentsEco = () => {
     ];
 
     return (
-        <div className='container-fluid' style={{padding:'unset'}}>
-            <div>
+        <div className='container-fluid mt-2' style={{padding:'unset'}}>
+            <div >
                 <Fade>
                     <div className="each-slide">
                         <div>
@@ -25,9 +25,9 @@ const ContentsEco = () => {
                         </div>
                         <div className='contentss'>
                             <div className='text_contents'>
-                                <p className='text-center text-light'>Sign up login</p><br/>
-                                <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
-                                <div className='res_content d-flex justify-content-around mt-5  text-light'>
+                                <p className='text-center '>Sign up login</p><br/>
+                                <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
+                                <div className='res_content d-flex justify-content-around mt-5 '>
                                     <Link to='sign_account'>
                                         <span>Sign in</span>
                                     </Link>
@@ -46,9 +46,9 @@ const ContentsEco = () => {
                         </div>
                         <div className='contentss'>
                             <div className='text_contents'>
-                                <p className='text-center text-light'>Sign up login</p><br/>
-                                <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
-                                <div className='res_content d-flex justify-content-around mt-5  text-light'>
+                                <p className='text-center '>Sign up login</p><br/>
+                                <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
+                                <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
                                         <span>Sign in</span>
                                     </Link>
@@ -66,9 +66,9 @@ const ContentsEco = () => {
                         </div>
                         <div className='contentss'>
                             <div className='text_contents'>
-                                <p className='text-center text-light'>Sign up login</p><br/>
-                                <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
-                                <div className='res_content d-flex justify-content-around mt-5  text-light'>
+                                <p className='text-center '>Sign up login</p><br/>
+                                <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
+                                <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
                                         <span>Sign in</span>
                                     </Link>
@@ -86,9 +86,9 @@ const ContentsEco = () => {
                         </div>
                         <div className='contentss'>
                             <div className='text_contents'>
-                                <p className='text-center text-light'>Sign up login</p><br/>
-                                <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
-                                <div className='res_content d-flex justify-content-around mt-5  text-light'>
+                                <p className='text-center '>Sign up login</p><br/>
+                                <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
+                                <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
                                         <span>Sign in</span>
                                     </Link>
@@ -106,10 +106,10 @@ const ContentsEco = () => {
                         </div>
                         <div className='contentss'>
                             <div className='text_contents'>
-                                <p className='text-center text-light'>Sign up login</p><br/>
-                                <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
+                                <p className='text-center '>Sign up login</p><br/>
+                                <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
 
-                                <div className='res_content d-flex justify-content-around mt-5  text-light'>
+                                <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
                                         <span>Sign in</span>
                                     </Link>
