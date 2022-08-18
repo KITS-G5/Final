@@ -30,7 +30,6 @@ const Header = () => {
                                     Buy a card
                                 </Link>
                             </Nav.Link>
-                            <Nav.Link href="#link">Check your card</Nav.Link>
                             <Nav.Link href="/" onClick={(e)=>{e.preventDefault(); window.location.replace("/#contact")}}>
                                 {/*<Link style={{textDecoration: "none", color: "gray"}} to="/contact">*/}
                                     Contact us

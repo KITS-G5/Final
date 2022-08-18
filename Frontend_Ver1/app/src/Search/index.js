@@ -5,7 +5,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import {AlgoliaProvider, SearchControl} from "leaflet-geosearch";
 import {useEffect, useState} from "react";
 import "leaflet-geosearch/dist/geosearch.css";
-import {setPosition} from "leaflet/src/dom/DomUtil";
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 

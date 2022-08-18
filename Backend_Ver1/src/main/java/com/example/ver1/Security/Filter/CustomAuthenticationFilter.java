@@ -37,6 +37,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         String cardNum = request.getParameter("cardNum");
 //        String cardNum1 = object mapper("cardNum");
         String cardPassword = request.getParameter("cardPassword");
+
         log.info("Card number is {}", cardNum);
         log.info("Password is {}", cardPassword);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(cardNum, cardPassword);

@@ -40,7 +40,7 @@ public class AuthController {
                 loginDto.getCardNum(), loginDto.getCardPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);
     }
 
     @PostMapping("/signup")
