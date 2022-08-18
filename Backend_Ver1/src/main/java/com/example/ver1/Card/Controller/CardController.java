@@ -31,7 +31,6 @@ public class CardController {
         return cardService.getAllCard();
     }
 
-
     @GetMapping(path = "{id}")
     Optional<Card> getCardById(@PathVariable long id){
         return cardService.getCardById(id);
