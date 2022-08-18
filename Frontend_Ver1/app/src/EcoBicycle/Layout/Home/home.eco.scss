@@ -1,13 +1,16 @@
+
+
 .eco_bie {
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background: linear-gradient(180deg, rgba(142,43,180,1) 0%, rgba(111,42,221,1) 23%, rgba(165,0,255,1) 79%);
+  //background-image: url('');
+  //background: linear-gradient(176deg, rgba(208,222,213,1) 5%, rgb(255, 255, 255) 24%, rgb(248, 242, 242) 52%, rgb(255, 255, 255) 58%, rgba(43,180,105,1) 77%, rgba(23,174,73,1) 94%, rgba(0,255,89,1) 100%);
   .header_eco {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     .Logo_eco {
       span {
-        font-size: 2.6rem;
-        color: white;
+        font-size: 1.6rem;
+
       }
 
     }
@@ -19,11 +22,11 @@
       display: flex;
       gap: 10px;
       .tripple {
-        color: white;
+
         margin:auto;
         span {
-          padding: 17px;
-          font-size: 1.3rem;
+          padding: 10px;
+          font-size: 1.2rem;
 
         }
       }

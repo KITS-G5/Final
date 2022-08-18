@@ -191,6 +191,9 @@ insert into card(balance, card_ccv,   card_num,id_card_type, id_customer) values
 
 desc tbl_order;
 
-insert into tbl_order(payment_status, rend_end_date, rent_start_date, return_status, total_fee, bike_id, card_id)
-values
-(1, '2020-10-10', '2020-10-9', 1, 120000, 1, 1)
+
+insert into tbl_order(payment_status, rend_end_date, rent_start_date, return_status, total_fee, bike_id, card_id) 
+values 
+(1, '2022-08-15',  '2022-08-18', 1, 200000, 1, 2)
+(1, '2022-08-13',  '2022-08-18', 1, 200000, 1, 2)
+(1, '2022-08-10',  '2022-08-18', 1, 200000, 1, 2)

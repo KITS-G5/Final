@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -41,8 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
+
+        //phần mở all authorization
         http.authorizeRequests().anyRequest().permitAll();
-//        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
+
+        //test security
+ /*       http.authorizeRequests().antMatchers("/signin").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/**").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers(POST, "/api/v1/**").hasAnyAuthority("admin");
+        http.authorizeRequests().anyRequest().authenticated();*/
+
         http.addFilter(customAuthenticationFilter);
     }
 

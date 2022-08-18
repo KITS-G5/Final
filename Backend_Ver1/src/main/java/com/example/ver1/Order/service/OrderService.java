@@ -25,4 +25,6 @@ public interface OrderService {
     double totalRevenueByDate(Date date1, Date date2);
     double netRevenueByDate(Date date1, Date date2);
     double notPaidRevenueByDate(Date date1, Date date2);
+
+    List<Order> getOrdersByMonthAndYear(String month, String year);
 }

@@ -19,6 +19,10 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     @NotNull Page<Order> findAll(@NotNull Pageable pageable);
     Page<Order> findOrdersByCard(Card card,Pageable pageable);
 
+    //query list of order by month and year
+    @Query(value = "SELECT a.* FROM tbl_order a where :month = (select month(a.rent_start_date) as month) and :year = (select year(a.rent_start_date) as year)", nativeQuery = true)
+    List<Order> findOrdersByMonthAndYear(@Param("month") String month, @Param("year") String year);
+
     //query total revenue all time
     @Query(value = "SELECT sum(a.total_fee) FROM tbl_order a", nativeQuery = true)
     Double totalRevenue();

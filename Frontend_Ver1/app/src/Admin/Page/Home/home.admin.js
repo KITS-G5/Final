@@ -4,10 +4,16 @@ import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Link, NavLink} from 'react-router-dom';
-import "./styles.css";
+import './styles.css'
 
 const HomeAdmin = () => {
     const [data, setData] = useState([]);
+    const [from, setFrom] = useState(null);
+    const [to, setTo] = useState(null);
+    const [revenue, setRevenue] = useState(0);
+    const [net, setNet] = useState(0);
+    const [loan, setLoan] = useState(0);
+
     useEffect(() => {
         console.log('user use effect!!');
         let url = 'http://localhost:8080/orders';
@@ -18,8 +24,40 @@ const HomeAdmin = () => {
                 console.log('data', data);
                 setData(data);
             });
-    }, []);
-    let i = 0;
+
+        let url_gross_revenue = 'http://localhost:3000/orders/admin/grossRevenueByDate';
+        let url_net_revenue = 'http://localhost:3000/orders/admin/netRevenueByDate';
+        let url_loan_revenue = 'http://localhost:3000/orders/admin/notPaidRevenueByDate';
+        if (from != null && to != null) {
+            url_gross_revenue = url_gross_revenue + '?date1=' + from + '&&date2=' + to;
+            url_net_revenue = url_net_revenue + '?date1=' + from + '&&date2=' + to;
+            url_loan_revenue = url_loan_revenue + '?date1=' + from + '&&date2=' + to;
+        }
+        console.log(url_gross_revenue);
+        fetch(url_gross_revenue)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Revenue =", data);
+                setRevenue(data);
+                console.log(data);
+            })
+
+        fetch(url_net_revenue)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Revenue =", data);
+                setNet(data);
+                console.log(data);
+            })
+
+        fetch(url_loan_revenue)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Revenue =", data);
+                setLoan(data);
+                console.log(data);
+            })
+    }, [from, to]);
     let dataTable = data.map((item) => {
         return {
             id: item.id,
@@ -115,6 +153,39 @@ const HomeAdmin = () => {
                         user chart
                     </div>
                 </div>
+                {/*Revenue report*/}
+
+                <div className="row collection justify-content-between">
+                    <div className="col-lg-6 col-md-12">
+                        <h5 className={'mt-5'}>Choose date to calculate revenue</h5>
+                        <br/>
+                        <div className="w-50 input-group ">
+                            <input onChange={(e) => setFrom(e.target.value)} className={'form-control'} type="date" name="from-date" id="from-date"/>
+                            <input onChange={(e) => setTo(e.target.value)}  className={'form-control mx-5'} type="date" name="to-date" id="to-date"/>
+                        </div>
+                    </div>
+                    <div className="col-lg-4 col-md-12 mt-5">
+                        {/*<h1>Revenue = ${revenue}</h1>*/}
+
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Gross revenue</th>
+                                    <td className={'text-center'}>${revenue}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Net Revenue</th>
+                                    <td className={'text-center'}>${net}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Not paid</th>
+                                    <td className={'text-center'}>${loan}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {/*end revenue report*/}
                 <h2 className={'mt-5'}>Orders</h2>
                 <DataGrid
                     style={{marginTop: '30px'}}

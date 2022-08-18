@@ -9,18 +9,19 @@
         padding: 10px;
       }
       .to_link {
+        border-radius: 10px;
         display: flex;
         gap:5px;
         text-decoration: none;
-        color: white;
-        padding: 10px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        color: #222;
+        padding: 15px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         span {
           margin: auto;
         }
         svg {
-            font-size: 8rem;
-            color: #fcca04;
+            font-size: 7rem;
+            color: rgb(135,255,157);
           }
 
         span {
