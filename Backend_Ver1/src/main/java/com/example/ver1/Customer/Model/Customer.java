@@ -25,7 +25,7 @@ public class Customer {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(mappedBy = "cardType", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore

@@ -1,6 +1,7 @@
 package com.example.ver1.Customer.Controller;
 
 import com.example.ver1.Card.Model.Card;
+import com.example.ver1.Card.Service.CardService;
 import com.example.ver1.Customer.Model.Customer;
 import com.example.ver1.Customer.Service.CustomerService;
 import org.springframework.beans.factory.ObjectProvider;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
+    @Autowired private CardService cardService;
 
     @GetMapping(path = {"/{pageNo}", ""})
     Page<Customer> getAllCustomer(@PathVariable(required = false) Integer pageNo){
@@ -47,5 +49,16 @@ public class CustomerController {
     @DeleteMapping(path = "{id}")
     void deleteCustomer(@PathVariable long id){
         customerService.deleteCustomer(id);
+    }
+
+
+    @GetMapping(path = "/findByCardNum/{cardNum}")
+    Optional<Customer> getCustomerByCardNum(@PathVariable String cardNum){
+        Optional<Card> cardByCardNum = cardService.getCardByCardNum(cardNum);
+        if(cardByCardNum.isPresent()){
+            Optional<Customer> customerByCardNumber = customerService.getCustomerByCardNumber(cardByCardNum.get());
+            return customerByCardNumber;
+        }
+        return null;
     }
 }

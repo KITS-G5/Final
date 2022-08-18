@@ -28,8 +28,9 @@ import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-import {UserAuth} from "../../../Context/AuthContext";
-const drawerWidth = 300;
+import {UserAuth} from "../../Context/AuthContext";
+
+const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -77,7 +78,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function SideBar() {
+export default function SideBarUser() {
 
 
 
@@ -131,7 +132,7 @@ export default function SideBar() {
                 <Divider />
 
                 <List sx={{fontSize:'1.6rem' }} >
-                    {['Home', 'Dashboard'].map((text, index) => (
+                    {['Home'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block'}}>
                             <ListItemButton
                                 sx={{
@@ -164,42 +165,10 @@ export default function SideBar() {
                     ))}
                 </List>
                 <Divider />
-                <List>
-                    {['Stations', 'Bikes'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0
-                                        ?
-                                        <Link to='stations'>
-                                                <LocationOnIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
-                                        </Link>
-                                        :
-                                        <Link to='bikes'>
-                                                <PedalBikeIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
-                                        </Link>
-                                    }
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+
                 <Divider />
                 <List>
-                    {['Cards', 'Users'].map((text, index) => (
+                    {['Top up'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -217,7 +186,7 @@ export default function SideBar() {
                                 >
                                     {index % 2 == 0
                                         ?
-                                        <Link to='cards'>
+                                        <Link to='../topup'>
                                             <CreditCardIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
                                         </Link>
                                         :

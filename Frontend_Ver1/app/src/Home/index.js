@@ -25,7 +25,7 @@ const Home = () => {
     return (
         <>
             <Container fluid className={"p-0"} style={{overflow: "hidden"}}>
-                <div className={'homeBanner ms-0 p-0'}>
+                <div className={'homeBanner ms-0 p-0'} id={'home'}>
                     <div className={"header_text ms-auto me-auto"}>
                         <h2>
                             Never be without a bike!
@@ -120,7 +120,7 @@ const Home = () => {
                         </Row>
                     </div>
                 </div>
-                <div className={'faq'}>
+                <div className={'faq'} id={"faq"}>
                     <Row>
                         <h1 style={{textAlign: "center"}}>
                             F.A.Q.
