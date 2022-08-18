@@ -1,12 +1,13 @@
-import {Button, Col, Container, FormCheck, FormControl, FormLabel, Row, Table, Modal} from "react-bootstrap";
+import {Button, Container, Modal} from "react-bootstrap";
 import {useParams} from "react-router";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 // import Payeezy from "react-payeezy";
+import './paymentMethod.css';
 
 const PaymentMethod = () => {
     const params = useParams();
-    const { register, formState:{errors}, handleSubmit } = useForm();
+    const {register, formState: {errors}, handleSubmit} = useForm();
     const [show, setShow] = useState(false);
     const onSubmit = () => setShow(true);
     const handleClose = () => setShow(false);
@@ -15,13 +16,13 @@ const PaymentMethod = () => {
             <Container fluid>
                 <div className="row">
                     <div className="col-12 mt-4">
-                        <div className="card p-3">
+                        <div className="card p-3 payMethCard">
                             <p className="mb-0 fw-bold h4">Payment Methods</p>
                         </div>
                     </div>
                     <div className="col-12">
-                        <div className="card p-3">
-                            <div className="card-body border p-0">
+                        <div className="card p-3 payMethCard">
+                            <div className="card-body  p-0 payMethCard">
                                 <p>
                                     <a className="payMethButton btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between"
                                        data-bs-toggle="collapse" href="#collapseExample" role="button"
@@ -34,18 +35,23 @@ const PaymentMethod = () => {
                                 </p>
                                 <div className="collapse p-3 pt-0" id="collapseExample">
                                     <div className="row">
-                                        <div className="col-12">
+                                        <div className="col-12  payMethForm">
                                             <p className="h4 mb-0">Summary</p>
-                                            <p className="mb-0"><span className="fw-bold">Top Up Card:</span><span
+                                            <p className="mb-0"><span className="fw-bold">Top Up Card: </span><span
                                                 className="c-green">{params.cardNo} </span></p>
                                             <p className="mb-0"><span className="fw-bold">Price:</span><span
                                                 className="c-green"> {params.output} VND</span></p>
-                                            <input className={'form-control mt-2'} type={'email'} placeholder={'Email'}/>
+                                            <div className={'form__div'}>
+                                                <input type="email" className="form-control mt-2"
+                                                       placeholder=" "
+                                                />
+                                                <label htmlFor="" className="form__label">Email</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="card-body border p-0">
+                            <div className="card-body  p-0 payMethCard">
                                 <p>
                                     <a className="payMethButton btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
                                        data-bs-toggle="collapse" href="#collapseExample" role="button"
@@ -72,49 +78,67 @@ const PaymentMethod = () => {
                                             </p>
                                         </div>
                                         <div className="col-lg-7">
-                                            <form action="" className="form payMethForm" onSubmit={handleSubmit(onSubmit)}>
+                                            <form action="" className="form payMethForm"
+                                                  onSubmit={handleSubmit(onSubmit)}>
                                                 <div className="row">
                                                     <div className="col-12">
                                                         <div className="form__div">
-                                                            <input type="text" className="form-control" placeholder=" " {...register("cardNumber", {required:"Card number required", minLength: 15, maxLength: 16})} />
+                                                            <input type="text" className="form-control"
+                                                                   placeholder=" " {...register("cardNumber", {
+                                                                required: "Card number required",
+                                                                minLength: 15,
+                                                                maxLength: 16
+                                                            })} />
                                                             {errors.cardNumber?.type === "required" && "Card number required"}
                                                             {errors.cardNumber?.type === "minLength" && "Card number is too short"}
                                                             {errors.cardNumber?.type === "maxLength" && "Card number is too long"}
-                                                                <label htmlFor="" className="form__label">Card
-                                                                    Number</label>
+                                                            <label htmlFor="" className="form__label">Card
+                                                                Number</label>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-6">
                                                         <div className="form__div">
-                                                            <input type="text" className="form-control" placeholder=" " {...register("expiry", {required: true, pattern: /^(1[0-2]|0[1-9]|\d)\/(20\d{2}|19\d{2}|0(?!0)\d|[1-9]\d)$/})}/>
+                                                            <input type="text" className="form-control"
+                                                                   placeholder=" " {...register("expiry", {
+                                                                required: true,
+                                                                pattern: /^(1[0-2]|0[1-9]|\d)\/(20\d{2}|19\d{2}|0(?!0)\d|[1-9]\d)$/
+                                                            })}/>
                                                             {errors.expiry?.type === "required" && "Date required"}
                                                             {errors.expiry?.type === "pattern" && "Invalid date"}
-                                                                <label htmlFor="" className="form__label" >MM /
-                                                                    yy</label>
+                                                            <label htmlFor="" className="form__label">MM /
+                                                                yy</label>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-6">
                                                         <div className="form__div">
                                                             <input type="password" className="form-control"
-                                                                   placeholder=" " {...register("cvv", {required: true, pattern: /^\d/,minLength: 3, maxLength: 4})}/>
+                                                                   placeholder=" " {...register("cvv", {
+                                                                required: true,
+                                                                pattern: /^\d/,
+                                                                minLength: 3,
+                                                                maxLength: 4
+                                                            })}/>
                                                             {errors.cvv && "Invalid CVV code"}
-                                                                <label htmlFor="" className="form__label">cvv
-                                                                    code</label>
+                                                            <label htmlFor="" className="form__label">cvv
+                                                                code</label>
                                                         </div>
                                                     </div>
                                                     <div className="col-12">
                                                         <div className="form__div">
-                                                            <input type="text" className="form-control" placeholder=" " {...register("name", {required: true})} />
+                                                            <input type="text" className="form-control"
+                                                                   placeholder=" " {...register("name", {required: true})} />
                                                             {errors.name && "Name required"}
-                                                                <label htmlFor="" className="form__label">name on the
-                                                                    card</label>
+                                                            <label htmlFor="" className="form__label">name on the
+                                                                card</label>
                                                         </div>
                                                     </div>
                                                     <div className="col-12">
                                                         <div>
-                                                            <input type={"submit"} className={'payMethButton btn btn-primary w-100'} value={"Submit"}/>
+                                                            <input type={"submit"}
+                                                                   className={'payMethButton btn btn-primary w-100'}
+                                                                   value={"Submit"}/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -126,7 +150,7 @@ const PaymentMethod = () => {
                         </div>
                     </div>
                     <div className="col-12">
-                        <div className="payMethButton btn btn-primary payment">
+                        <div className="payMethButton btn btn-danger payment">
                             Make Payment
                         </div>
                     </div>

@@ -144,15 +144,15 @@ const Topup = () => {
                         </Col>
                     </Row>
                     <Modal show={show} onHide={validateClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Validation</Modal.Title>
+                        <Modal.Header closeButton  className={'modalValid'}>
+                            <Modal.Title className = 'modalValidTitle'>Validation</Modal.Title>
                         </Modal.Header>
                         {cardCheck == true ? (
-                            <Modal.Body>Your card had been successfully validated</Modal.Body>
+                            <Modal.Body className = 'modalValidBody'>Your card had been successfully validated</Modal.Body>
                         ) : (
-                            <Modal.Body>Your card does not exists</Modal.Body>
+                            <Modal.Body className = 'modalValidBody'>Your card does not exists</Modal.Body>
                         )}
-                        <Modal.Footer>
+                        <Modal.Footer className={'modalValid'}>
                             <Button variant="secondary" onClick={validateClose}>
                                 Close
                             </Button>

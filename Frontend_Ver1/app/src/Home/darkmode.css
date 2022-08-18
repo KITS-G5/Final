@@ -50,6 +50,22 @@ a {
     background-color: var(--background-color) !important;
     color: var(--font-color)!important;
 }
+.modalValid{
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+.modalValidTitle {
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+.modalValidBody {
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+.payMethCard {
+    background-color: var(--background-color) !important;
+    color: var(--font-color) !important;
+}
 /*darkmode button*/
 .toggle-theme-wrapper {
     display: flex;
