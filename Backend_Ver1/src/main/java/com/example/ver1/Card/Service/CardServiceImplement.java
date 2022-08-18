@@ -31,6 +31,11 @@ public class CardServiceImplement implements CardService {
     }
 
     @Override
+    public Optional<Card> getCardByCardNum(String cardNUm) {
+        return cardRepository.findCardByCardNum(cardNUm);
+    }
+
+    @Override
     public int addCard(Card card) {
         List<Card> all = cardRepository.findAll();
         if(!all.contains(card)){

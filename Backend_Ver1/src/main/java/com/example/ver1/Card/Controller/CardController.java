@@ -30,11 +30,12 @@ public class CardController {
     public List<Card> getAllCards() {
         return cardService.getAllCard();
     }
-
-
+    @GetMapping("/cards/user/{cardNum}")
+    public Optional<Card> getCardByCardNum(@PathVariable String cardNum) {
+        return cardService.getCardByCardNum(cardNum);
+    }
 
     @GetMapping(path = "/cards/{id}")
-
     Optional<Card> getCardById(@PathVariable long id){
         return cardService.getCardById(id);
     }
