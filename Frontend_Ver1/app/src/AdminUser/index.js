@@ -9,12 +9,19 @@ import Button from "@mui/material/Button";
 const AdminUser = () => {
     const params = useParams();
     const [orderData, setOrderData] = useState([]);
+    const [cardData, setCardData] = useState([]);
     useEffect(() => {
         let url = 'http://localhost:8080/orders/user/' + params.cardNum;
         fetch(url)
             .then(res => res.json())
             .then(data => setOrderData(data));
     }, []);
+    useEffect(() => {
+        let url = 'http://localhost:8080/api/v1/cards/' + params.cardNum;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCardData(data));
+    },[]);
     let orderList = [];
     let cardNum = "";
     let cardBal = "";
@@ -35,8 +42,6 @@ const AdminUser = () => {
         //     )
         // });
         dataTable = orderData.content.map((item) => {
-            cardNum = item.card.cardNum;
-            cardBal = item.card.balance;
             return {
                 id: item.id,
                 rentstart: item.rentingStartedDate,
@@ -47,6 +52,30 @@ const AdminUser = () => {
             }
         })
     }
+    if (cardData != null) {
+        cardNum = cardData.cardNum;
+        // cardBal = cardData.balance;
+        // if (cardBal == null) {
+        //     if (cardData.cardType.id == 2) {
+        //         return (
+        //             <h3>This card is postpaid</h3>
+        //         );
+        //     } else {
+        //         return 0;
+        //     }
+        // }
+        if (cardData.balance == 0) {
+            if (cardData.cardType.id == 2) {
+                cardBal = "This card is postpaid";
+            } else {
+                cardBal = 0;
+            }
+        } else {
+            cardBal = cardData.balance.toLocaleString() + " VND"
+        }
+        // console.log(cardData.cardType.id);
+    }
+
     const columns = [
         {field: "id", headerName: "ID", width: 100},
         {field: 'rentstart', headerName: 'Rent Start', width: 300},
@@ -56,17 +85,28 @@ const AdminUser = () => {
         {
             field: "Pay",
             renderCell: (cellValues) => {
-                return (
+                if (cellValues.row.paystatus == "false") {
+                    return (
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={(event) => {
+                                alert('abc');
+                            }}
+                        >
+                            Pay
+                        </Button>
+                    );
+                }
+                else return (
                     <Button
                         variant="outlined"
-                        color="primary"
-                        onClick={(event) => {
-                            alert('abc');
-                        }}
-                    >
-                        Pay
+                        color="success"
+                        disabled
+                    style={{color: "green", borderColor: "green"}}>
+                        Done
                     </Button>
-                );
+                )
             }
         }];
     return (
@@ -104,7 +144,7 @@ const AdminUser = () => {
             <div style={{height: '80vh'}} className={'container mt-5'}>
                 <h1 className={'text-center'} style={{marginTop: '60px'}}>USER DATA</h1>
                 <h6>Your card number: {cardNum}</h6>
-                <h6>Remaining balance: {cardBal.toLocaleString()} VND</h6>
+                <h6>Remaining balance: {cardBal}</h6>
                 <DataGrid
                     style={{marginTop: '30px'}}
                     rows={dataTable}
