@@ -18,6 +18,9 @@ const Station = () => {
     useEffect(() => {
         console.log('user use effect!!');
         let url1 = 'http://localhost:8080/api/v1/stations';
+        if (searchKeys != '') {
+            url1 = 'http://localhost:8080/api/v1/stations' + '/search?searchKeywords=' + searchKeys;
+        }
         console.log(url1);
         fetch(url1)
             .then((response) => response.json())
@@ -35,7 +38,7 @@ const Station = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setCity(data))
-    }, []);
+    }, [searchKeys]);
 
     let dataTable = data.map((item) => {
             return {
@@ -48,34 +51,34 @@ const Station = () => {
         })
 
 
-    if (searchCity != '') {
-        let dataTable = data.filter(data => {
-                return data.district.city.id == searchCity
-            }
-        ).map(item => {
-            return {
-                id: item.id,
-                station: item.stationName,
-                city: item.district.city.cityName,
-                district: item.district.districtName
-                // <button></button>
-            }
-        })
-    }
-
-    if (searchKeys != null) {
-        let dataTable2 = data.filter(data => {
-            return data.district.id == searchKeys
-        }).map(item => {
-            return {
-                id: item.id,
-                station: item.stationName,
-                city: item.district.city.cityName,
-                district: item.district.districtName
-                // <button></button>
-            }
-        })
-    }
+    // if (searchCity != '') {
+    //     let dataTable = data.filter(data => {
+    //             return data.district.city.id == searchCity
+    //         }
+    //     ).map(item => {
+    //         return {
+    //             id: item.id,
+    //             station: item.stationName,
+    //             city: item.district.city.cityName,
+    //             district: item.district.districtName
+    //             // <button></button>
+    //         }
+    //     })
+    // }
+    //
+    // if (searchKeys != null) {
+    //     let dataTable2 = data.filter(data => {
+    //         return data.district.id == searchKeys
+    //     }).map(item => {
+    //         return {
+    //             id: item.id,
+    //             station: item.stationName,
+    //             city: item.district.city.cityName,
+    //             district: item.district.districtName
+    //             // <button></button>
+    //         }
+    //     })
+    // }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 200 },
@@ -131,44 +134,6 @@ const Station = () => {
         });
     };
 
-    // {
-    //     field: 'age',
-    //     headerName: 'Age',
-    //     type: 'number',
-    //     width: 90,
-    // },
-    // {
-    //     field: 'fullName',
-    //     headerName: 'Full name',
-    //     description: 'This column has a value getter and is not sortable.',
-    //     sortable: false,
-    //     width: 160,
-    //     valueGetter: (params) =>
-    //         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    // },
-    // ]
-
-    // const columns = [
-    //     { field: 'id', headerName: 'ID', width: 70 },
-    //     { field: 'firstName', headerName: 'First name', width: 130 },
-    //     { field: 'lastName', headerName: 'Last name', width: 130 },
-    //     {
-    //         field: 'age',
-    //         headerName: 'Age',
-    //         type: 'number',
-    //         width: 90,
-    //     },
-    //     {
-    //         field: 'fullName',
-    //         headerName: 'Full name',
-    //         description: 'This column has a value getter and is not sortable.',
-    //         sortable: false,
-    //         width: 160,
-    //         valueGetter: (params) =>
-    //             `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    //     },
-    // ];
-    //
     const opt = city.map((item) => {
         return (
             <option value={item.id}>
@@ -215,11 +180,11 @@ const Station = () => {
                        </Form.Select>
                    </Form.Group>
                    <Form.Group className="mb-3">
-                       <Form.Select name="id" onChange={getSearchTerm}>
+                       <Form.Select name="id" onChange={(e) => setSearchKeys(e.target.value)}>
                            <option value="">Choose district</option>
                            {dist.map((item) => {
                                return(
-                                   <option value={item.id}>
+                                   <option value={item.districtName}>
                                        {item.districtName}
                                    </option>
                                )

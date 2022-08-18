@@ -153,7 +153,7 @@ export default function SideBar() {
                                                 <HomeIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
                                         </Link>
                                         :
-                                        <Link to='/admin'>
+                                        <Link to='/admin/home'>
                                                 <DashboardIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
                                         </Link>
                                     }
