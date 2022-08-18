@@ -32,7 +32,9 @@ public class CardController {
     }
 
 
+
     @GetMapping(path = "/cards/{id}")
+
     Optional<Card> getCardById(@PathVariable long id){
         return cardService.getCardById(id);
     }

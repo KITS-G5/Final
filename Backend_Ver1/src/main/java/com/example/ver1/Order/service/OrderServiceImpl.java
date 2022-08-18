@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,6 +113,31 @@ public class OrderServiceImpl implements OrderService{
         } else {
             throw new RuntimeException("Order does not exists");
         }
+    }
+
+    @Override
+    public double totalRevenueByDate(Date date1, Date date2) {
+        Double rev = orderRepository.totalRevenueByDate(date1, date2);
+        if(rev == null) {
+            return 0;
+        }
+        return rev;
+    }
+
+    @Override
+    public double netRevenueByDate(Date date1, Date date2) {
+        Double rev = orderRepository.netRevenueByDate(date1, date2);
+        if(rev == null) {
+            return 0;
+        }
+        return rev;
+    }
+
+    @Override
+    public double notPaidRevenueByDate(Date date1, Date date2) {
+        Double rev = orderRepository.notPaidRevenueByDate(date1, date2);
+        if(rev == null) return 0;
+        return rev;
     }
 
 }
