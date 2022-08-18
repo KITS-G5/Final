@@ -54,7 +54,7 @@ public class Card {
     private Set<Order> ordersList;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinTable(name = "card_and_role",
