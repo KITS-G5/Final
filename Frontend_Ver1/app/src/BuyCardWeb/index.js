@@ -56,7 +56,7 @@ const BuyCardWeb = () => {
                             <h4 className={'mt-3'}>If you run out of credit on your card, it's easy to top up at:</h4>
                             <ul>
                                 <h4>
-                                    <li>Any of our rental stations - <a href={'#'}>find your nearest station</a></li>
+                                    <li>Any of our rental stations - <Link to={'/search'}>find your nearest station</Link></li>
                                 </h4>
                                 <h4>
                                     <li>Through the <Link to={'/topup'}>payment portal</Link> on our website</li>
@@ -75,7 +75,7 @@ const BuyCardWeb = () => {
                             </h4>
                             <h4 className={'mt-3'}>
                                 If your card is prepaid and still has credits in it, you can get the remaining amount
-                                refunded by <a href={'#'}>contacting us</a>
+                                refunded by <Link to={'/index'} onClick={(e)=>{e.preventDefault(); window.location.replace("/#contact")}}>contacting us</Link>
                             </h4>
                             <p style={{fontStyle: "italic"}}>
                                 *The 50.000 VND you paid for the card will not be refunded
@@ -90,7 +90,7 @@ const BuyCardWeb = () => {
                                 Card
                             </h4>
                             <h4 className={'mt-3'}>
-                                You will need to <a href={'#'}>contact our support</a> as soon as possible if your
+                                You will need to <Link to={'/index'} onClick={(e)=>{e.preventDefault(); window.location.replace("/#contact")}}>contact our support</Link> as soon as possible if your
                                 postpaid EcoBicycle Rental Card is lost or stolen in order to cancel the link between
                                 your card and the payment processor of your choosing
                             </h4>

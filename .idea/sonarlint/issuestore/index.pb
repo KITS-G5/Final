@@ -15,3 +15,17 @@ KBackend_Ver1/src/main/java/com/example/ver1/Bikes/service/BikesService.java,d\
 UBackend_Ver1/src/main/java/com/example/ver1/Stations/service/StationsServiceImpl.java,d\a\dad607cb4e7437e79910238e2503467f3181810e
 Å
 QBackend_Ver1/src/main/java/com/example/ver1/Stations/service/StationsService.java,c\f\cf3605f150635df2ba2beb47531f75e5318503d5
+
+OBackend_Ver1/src/main/java/com/example/ver1/Bikes/service/BikesServiceImpl.java,7\8\78fcef46f68875e4bd2db8ab6fdbc29c2b1df466
+Å
+QBackend_Ver1/src/main/java/com/example/ver1/Order/repository/OrderRepository.java,7\6\760c356015bcb7253a842fa62c4ddcd32c74cf30
+D
+Backend_Ver1/pom.xml,4\3\438c78631536876fa1fec20b064ff2552661aa53
+à
+XBackend_Ver1/src/main/java/com/example/ver1/Districts/repository/DistrictRepository.java,7\3\73363e2cc993c29efdd34100e0f5f79eded5613b
+Ç
+RBackend_Ver1/src/main/java/com/example/ver1/Districts/service/DistrictService.java,b\4\b4cb86bc087076870c3e77db23bdae8153afd0bc
+{
+KBackend_Ver1/src/main/java/com/example/ver1/Order/service/OrderService.java,f\a\fa29ab60c8a3388d2ab0c3151a19974079136a6d
+r
+BBackend_Ver1/src/main/java/com/example/ver1/Order/Model/Order.java,a\4\a46837756a352d19c352f5854551c7c7f2a455ad
