@@ -1,0 +1,32 @@
+.main_eco {
+  margin: auto;
+  .main_eco_content {
+    margin: auto;
+  }
+  .main_eco_card {
+    .buy_card {
+      .card_item {
+        padding: 10px;
+      }
+      .to_link {
+        display: flex;
+        gap:5px;
+        text-decoration: none;
+        color: white;
+        padding: 10px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        span {
+          margin: auto;
+        }
+        svg {
+            font-size: 8rem;
+            color: #fcca04;
+          }
+
+        span {
+
+        }
+      }
+    }
+  }
+}
