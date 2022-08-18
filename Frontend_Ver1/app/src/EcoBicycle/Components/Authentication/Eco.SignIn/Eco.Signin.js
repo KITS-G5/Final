@@ -96,12 +96,11 @@ const EcoSignin = () => {
                     </Link>
                 </div>
                 <div className="col-sm-6 col-lg-6">
-                    <Link to='/ecobicycle/newsignin'>
+                    <Link to='new_signin'>
                         <span>Experience now</span>
                     </Link>
                 </div>
             </div>
-            {/*<Outlet/>*/}
         </div>
     );
 };

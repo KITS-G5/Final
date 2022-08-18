@@ -17,7 +17,7 @@ const AdminUser = () => {
             .then(data => setOrderData(data));
     }, []);
     useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/cards/' + params.cardNum;
+        let url = 'http://localhost:8080/api/v1/cards/user/' + params.cardNum;
         fetch(url)
             .then(res => res.json())
             .then(data => setCardData(data));
@@ -54,32 +54,27 @@ const AdminUser = () => {
     }
     if (cardData != null) {
         cardNum = cardData.cardNum;
-        // cardBal = cardData.balance;
-        // if (cardBal == null) {
+        // if (cardData.balance == 0) {
         //     if (cardData.cardType.id == 2) {
-        //         return (
-        //             <h3>This card is postpaid</h3>
-        //         );
+        //         cardBal = "This card is postpaid";
         //     } else {
-        //         return 0;
+        //         cardBal = 0;
         //     }
         // }
-        if (cardData.balance == 0) {
+        if (cardData.balance != undefined) {
             if (cardData.cardType.id == 2) {
                 cardBal = "This card is postpaid";
             } else {
-                cardBal = 0;
+                cardBal = cardData.balance.toString() + " VND"
             }
-        } else {
-            cardBal = cardData.balance.toLocaleString() + " VND"
         }
         // console.log(cardData.cardType.id);
     }
 
     const columns = [
-        {field: "id", headerName: "ID", width: 100},
-        {field: 'rentstart', headerName: 'Rent Start', width: 300},
-        {field: 'rentend', headerName: 'Rent End', width: 300},
+        // {field: "id", headerName: "ID", width: 100},
+        {field: 'rentstart', headerName: 'Rent Start', width: 350},
+        {field: 'rentend', headerName: 'Rent End', width: 350},
         {field: 'fee', headerName: 'Fee', width: 200},
         {field: 'paystatus', headerName: 'Payment Status', width: 200},
         {

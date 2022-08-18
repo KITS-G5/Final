@@ -1,0 +1,23 @@
+.card-div {
+    background-color: #198754;
+    width: 20%;
+    height: 200px;
+    border: none;
+}
+
+.dashboard-container {
+    width: 90%
+}
+
+.chart-container {
+}
+
+.chart-div {
+    width: 46%;
+    background-color: #198754;
+    height: 500px;
+}
+
+InputGroup {
+    width: 50%;
+}

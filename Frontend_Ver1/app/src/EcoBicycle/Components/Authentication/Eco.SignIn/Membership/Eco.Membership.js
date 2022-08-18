@@ -24,7 +24,7 @@ const EcoMembership = () => {
                         </Link>
                     </div>
                     <div className="col-sm-6 col-lg-6">
-                        <Link to='/ecobicycle/create_account'>
+                        <Link to='create_account'>
                             <span>Next step</span>
                         </Link>
                     </div>

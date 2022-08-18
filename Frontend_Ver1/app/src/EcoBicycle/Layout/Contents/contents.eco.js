@@ -1,6 +1,6 @@
 import React from 'react';
 import { Fade } from 'react-slideshow-image';
-import "./contents.eco.scss"
+import './contents.eco.scss'
 import 'react-slideshow-image/dist/styles.css'
 import {Link} from 'react-router-dom'
 
@@ -28,11 +28,11 @@ const ContentsEco = () => {
                                 <p className='text-center text-light'>Sign up login</p><br/>
                                 <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5  text-light'>
+                                    <Link to='sign_account'>
+                                        <span>Sign in</span>
+                                    </Link>
                                     <Link to='signup'>
                                         <span>Sign up</span>
-                                    </Link>
-                                    <Link to='login'>
-                                        <span>Sign in</span>
                                     </Link>
                                 </div>
 
@@ -49,10 +49,10 @@ const ContentsEco = () => {
                                 <p className='text-center text-light'>Sign up login</p><br/>
                                 <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5  text-light'>
-                                    <Link to='login'>
-                                        <span>Login</span>
+                                    <Link to='sign_account'>
+                                        <span>Sign in</span>
                                     </Link>
-                                    <Link to='sign up'>
+                                    <Link to='signup'>
                                         <span>Sign up</span>
                                     </Link>
                                 </div>
@@ -69,10 +69,10 @@ const ContentsEco = () => {
                                 <p className='text-center text-light'>Sign up login</p><br/>
                                 <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5  text-light'>
-                                    <Link to='login'>
-                                        <span>Login</span>
+                                    <Link to='sign_account'>
+                                        <span>Sign in</span>
                                     </Link>
-                                    <Link to='sign up'>
+                                    <Link to='signup'>
                                         <span>Sign up</span>
                                     </Link>
                                 </div>
@@ -89,10 +89,10 @@ const ContentsEco = () => {
                                 <p className='text-center text-light'>Sign up login</p><br/>
                                 <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5  text-light'>
-                                    <Link to='login'>
-                                        <span>Login</span>
+                                    <Link to='sign_account'>
+                                        <span>Sign in</span>
                                     </Link>
-                                    <Link to='sign up'>
+                                    <Link to='signup'>
                                         <span>Sign up</span>
                                     </Link>
                                 </div>
@@ -110,8 +110,8 @@ const ContentsEco = () => {
                                 <span className='text-center text-light'>Register as a member using the official APP, website or EcoBicycle</span>
 
                                 <div className='res_content d-flex justify-content-around mt-5  text-light'>
-                                    <Link to='login'>
-                                        <span>Login</span>
+                                    <Link to='sign_account'>
+                                        <span>Sign in</span>
                                     </Link>
                                     <Link to='signup' className='text-decoration-none'>
                                         <span>Sign up</span>

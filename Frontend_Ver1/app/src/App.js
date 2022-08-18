@@ -23,6 +23,12 @@ import Contact from "./Contact";
 import AdminUser from "./AdminUser";
 import AddStation from "./Admin/Page/Station/addStation";
 import User from "./Admin/Page/User/user";
+import HomeEcoBicycle from "./EcoBicycle/Layout/Home/home.ecobicycle";
+import ContentsEco from "./EcoBicycle/Layout/Contents/contents.eco";
+import Demo from "./EcoBicycle/Components/Authentication/Eco.Signup/User";
+import MainEco from "./EcoBicycle/Page/Main/main.eco";
+import BuyCardEco from "./EcoBicycle/Page/BuyCard";
+import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
 
 
 function App() {
@@ -57,24 +63,20 @@ function App() {
                         <Route path={'/admin/user/'}>
                             {/*<Route index element={<AdminUser/>}/>*/}
                             <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
+                            <Route path={'/admin/user/topup'} element = {<Topup/>}/>
                         </Route>
-                    </Routes>
 
 
-
-
-                </BrowserRouter>
-                <BrowserRouter>
-                    <Routes>
-                        {/*<Route path="/ecobicycle" element={<HomeEcoBicycle />}>*/}
-                        {/*    <Route index element={<ContentsEco/>}/>*/}
-
-                        {/*    <Route path="signup" element={<EcoSignin />}/>*/}
-                        {/*    <Route path="newsignin" element={<EcoMembership/>} />*/}
-                        {/*    <Route path="create_account" element={<EcoCreateMember/>} />*/}
-                        {/*    <Route path="sign_account" element={<LoginAccount/>} />*/}
-                        {/*    <Route path="home" element={<MainEco />} />*/}
-                        {/*</Route>*/}
+                        <Route path="/ecobicycle" element={<HomeEcoBicycle />}>
+                            <Route index element={<ContentsEco/>}/>
+                            <Route path='sign_account' element={<LoginAccount/>}/>
+                            <Route path='signup' element={<EcoSignin/>}></Route>
+                            <Route  path='signup/new_signin' element={<EcoMembership/>}/>
+                            <Route  path='signup/new_signin/create_account' element={<Demo/>}/>
+                            <Route path='main/:data' element={<MainEco/>}></Route>
+                            <Route path='main/:data/buy_card' element={<BuyCardEco/>}></Route>
+                            <Route path='main/:data/buy_card/prepaid' element={<Prepaid/>}></Route>
+                        </Route>
                     </Routes>
                 </BrowserRouter>
             </AuthContextProvider>
