@@ -33,17 +33,18 @@ const MainEco = () => {
     return (
 
         <div className=' row main_eco container' style={{margin:'auto'}}>
+
             {product !== null ? (
                 <div>
-                    <div className='text-center text-light mt-5 col-sm-12 main_eco_content'>
+                    <div className='text-center  mt-5 col-sm-12 main_eco_content'>
                         <h1>Welcome to EcoBicycle Rentail !</h1>
                     </div>
                     <div className='mt-5 row main_eco_card'>
                         <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
-                            <h3 className='text-center fs-1 text-white'>Card</h3>
+                            <h3 className='text-center fs-1 '>Card</h3>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
-                                      to='buy_card'>
+                                      to='topup'>
                                     <PaidIcon/>
                                     <br/>
                                     <span className='text-center'>Buy a card</span>
@@ -60,7 +61,7 @@ const MainEco = () => {
                             </div>
                         </div>
                         <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
-                            <h3 className='text-center fs-1 text-white '>Bice</h3>
+                            <h3 className='text-center fs-1 '>Bice</h3>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
                                       to='buy_card'>
@@ -128,7 +129,9 @@ const MainEco = () => {
 
                 </div>*/
             ) : (
-                <div>loding---</div>
+                <div style={{margin:"auto", padding:100, display:"flex",justifyContent:'center'}}>
+                    <img src={'https://i.gifer.com/8tVa.gif'} alt=""/>
+                </div>
             )}
 
         </div>

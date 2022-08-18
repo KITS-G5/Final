@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Link, NavLink} from 'react-router-dom';
-import "./styles.css";
+import './styles.css'
 
 const HomeAdmin = () => {
     const [data, setData] = useState([]);

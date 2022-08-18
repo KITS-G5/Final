@@ -1,20 +1,23 @@
 .ecoLogin {
-  /*a {
-    margin-top: 100px;
-    color: white;
-    text-decoration: none;
-    span {
-      padding: 10px;
-      background-color: rgb(128,234,111);
-      border-radius: 20px;
-      font-size: 1.4rem;
-      &:hover {
-        background-color: rgb(109,179,63);
+  .next_teps {
+    .item_todo {
+      todo {
+        margin-top: 100px;
+        color: white;
+        text-decoration: none;
+        span {
+          padding: 10px;
+          background-color: rgb(128,234,111);
+          border-radius: 20px;
+          font-size: 1.4rem;
+          &:hover {
+            background-color: rgb(109,179,63);
+          }
+        }
       }
     }
-  }*/
+  }
   .login_card {
-
     .item_Group {
       .card_item {
           display: flex;
@@ -29,8 +32,9 @@
           height: 100px;
         }
         span {
-          color: #ffffff;
-          font-size: 1.4rem;
+          //color: #ffffff;
+          font-size: 0.7rem;
+          margin-bottom: 10px;
         }
       }
     }
@@ -52,8 +56,7 @@
           height: 100px;
         }
         span {
-          color: white;
-          font-size: 1.4rem;
+          font-size: 0.7rem;
         }
       }
     }

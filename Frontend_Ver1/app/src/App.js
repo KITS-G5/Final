@@ -29,6 +29,8 @@ import Demo from "./EcoBicycle/Components/Authentication/Eco.Signup/User";
 import MainEco from "./EcoBicycle/Page/Main/main.eco";
 import BuyCardEco from "./EcoBicycle/Page/BuyCard";
 import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
+import EcoPaymentMethod from "./EcoBicycle/Page/PaymentMethods/Eco.PaymentMethor";
+import EcoTopup from "./EcoBicycle/Page/Topup";
 
 
 function App() {
@@ -76,8 +78,8 @@ function App() {
                             <Route  path='signup/new_signin' element={<EcoMembership/>}/>
                             <Route  path='signup/new_signin/create_account' element={<Demo/>}/>
                             <Route path='main/:data' element={<MainEco/>}></Route>
-                            <Route path='main/:data/buy_card' element={<BuyCardEco/>}></Route>
-                            <Route path='main/:data/buy_card/prepaid' element={<Prepaid/>}></Route>
+                            <Route path='main/:data/topup' element={<EcoTopup/>}></Route>
+                            <Route path='main/:data/topup/pay/:cardNo/:output' element={<EcoPaymentMethod/>}></Route>
                         </Route>
                     </Routes>
                 </BrowserRouter>

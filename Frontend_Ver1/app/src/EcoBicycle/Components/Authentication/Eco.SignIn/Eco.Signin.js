@@ -4,7 +4,7 @@ import {Link, Outlet} from 'react-router-dom'
 const EcoSignin = () => {
     return (
         <div className='container-fluid ecoLogin' style={{marginTop:50}}>
-            <h3 className='text-center text-light mb-5'>Please prepare before registration</h3>
+            <h3 className='text-center mb-5'>Please prepare before registration</h3>
             <hr style={{width:'50%', color:'white', margin:'auto'}}/>
             <div className="row login_card mt-5">
                 <div className="item_Group col-sm-4 col-lg-4">
@@ -37,7 +37,7 @@ const EcoSignin = () => {
             </div>
             <div style={{marginTop:50}}></div>
             <hr style={{width:'50%', color:'white', margin:'auto'}}/>
-            <h3 className=' text-center text-light process mt-5 mb-5'>Registration process</h3>
+            <h3 className=' text-center process mt-5 mb-5'>Registration process</h3>
             <div className="row process_sign">
                 <div className=" process_sign_card col-sm-6 col-lg-2">
                     <div className='process_sign_item'>
@@ -89,18 +89,31 @@ const EcoSignin = () => {
                 </div>
 
             </div>
-            <div className="row container text-center mt-5 d-flex justify-content-center" style={{margin:"auto"}}>
-                <div className="col-sm-6 col-lg-6 ">
-                    <Link className='todo' to='/ecobicycle'>
-                        <span>Back Home</span>
+            <div className="row container next_teps text-center mt-5 d-flex justify-content-center" style={{margin:"auto"}}>
+                <div className=" item_todo col-sm-6 col-lg-6 ">
+                    <Link style={{textDecoration:'none', marginTop:100, marginBottom:100}} to='/ecobicycle'>
+                        <span style={{
+                            padding:8,
+                            backgroundColor:'rgb(128,234,111)',
+                            borderRadius:10,
+                            fontSize:'1.3rem',
+                            color:'whitesmoke'
+                        }}>Back Home</span>
                     </Link>
                 </div>
                 <div className="col-sm-6 col-lg-6">
-                    <Link to='new_signin'>
-                        <span>Experience now</span>
+                    <Link style={{textDecoration:'none', marginTop:100, marginBottom:100}} to='new_signin'>
+                        <span style={{
+                            padding:8,
+                            backgroundColor:'rgb(128,234,111)',
+                            borderRadius:10,
+                            fontSize:'1.3rem',
+                            color:'whitesmoke'
+                        }}>Experience now</span>
                     </Link>
                 </div>
             </div>
+            <div></div>
         </div>
     );
 };
