@@ -196,11 +196,11 @@ const Home = () => {
                         </Row>
                         <Row className={'me-auto ms-auto input-group mt-3 contact_input'}>
                             <Col md={4}>
-                                <input className={'form-control'} type={"email"} name={"contact_email"}
+                                <input className={'form-control contactInput'} type={"email"} name={"contact_email"}
                                        placeholder={"Email"}/>
                             </Col>
                             <Col md={4} className={'me-0 ms-0'}>
-                                <input className={'form-control'} type={"text"} name={"full_name"}
+                                <input className={'form-control contactInput'} type={"text"} name={"full_name"}
                                        placeholder={"Full name"}/>
                             </Col>
                             <Col md={4}>
