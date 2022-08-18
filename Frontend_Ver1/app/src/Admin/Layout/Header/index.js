@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AccountMenu from "./Account";
+import DarkMode from "../../../Home/darkMode";
 
 const drawerWidth = 200;
 const navItems = ['Home', 'About', 'Contact'];
@@ -84,6 +85,9 @@ function HeaderAdmin(props) {
                     </Box>
                     <Box>
                         <AccountMenu/>
+                    </Box>
+                    <Box>
+                        <DarkMode/>
                     </Box>
                 </Toolbar>
             </AppBar>

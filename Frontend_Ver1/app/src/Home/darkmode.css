@@ -40,6 +40,17 @@ a {
 .navbar a {
     color: var(--font-color);
 }
+.css-1w5m2wr-MuiDataGrid-virtualScroller {
+    color: var(--font-color) !important;
+}
+.css-f3jnds-MuiDataGrid-columnHeaders {
+    color: var(--font-color) !important;
+}
+.filter .form-select {
+    background-color: var(--background-color) !important;
+    color: var(--font-color)!important;
+}
+/*darkmode button*/
 .toggle-theme-wrapper {
     display: flex;
     flex-direction: row;
