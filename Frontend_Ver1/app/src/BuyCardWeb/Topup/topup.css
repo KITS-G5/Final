@@ -10,7 +10,7 @@
 .label{
     /*text-align: center;*/
 }
-#card1 {
+#card1Top {
     position: absolute;
     margin-top: 10rem;
     margin-right: 3rem;
@@ -44,7 +44,7 @@
         padding: 0;
         width: 100%;
     }
-    #card1{
+    #card1Top{
         margin-top: 3rem;
         margin-right: 0;
         margin-left: 2rem;

@@ -160,7 +160,7 @@ const Topup = () => {
                     </Modal>
                 </Container>
                 <Container fluid className={'col-md-3'} id={'con2'}>
-                    <img alt="card" src={card} id={"card1"}/>
+                    <img alt="card" src={card} id={"card1Top"}/>
                 </Container>
             </Row>
         </>
