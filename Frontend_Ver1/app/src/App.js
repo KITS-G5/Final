@@ -57,6 +57,7 @@ function App() {
                         <Route path={'/admin/user/'}>
                             {/*<Route index element={<AdminUser/>}/>*/}
                             <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
+                            <Route path={'/admin/user/topup'} element = {<Topup/>}/>
                         </Route>
                     </Routes>
 
