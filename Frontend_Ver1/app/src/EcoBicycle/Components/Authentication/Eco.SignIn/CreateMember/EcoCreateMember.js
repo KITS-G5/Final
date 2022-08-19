@@ -1,112 +1,166 @@
 import React, {useEffect, useState} from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import axios from 'axios'
+import {useNavigate, useParams} from "react-router-dom";
+import image from "../../../image/Atm.png";
 
+const EcoCreateMember = () => {
 
-function EcoCreateMember() {
-    const [validated, setValidated] = useState(false);
-    /*const [name, setName] = useState('')
+    const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
-    const navigate = useNavigate()*/
+    const [cardNum, setCardNum] = useState('')
+    const [cardPassword, setCardPassword] = useState('')
+    const [typeCard, setTypeCard] = useState('')
+    const [error, setError] = useState('');
+
+    const navigate = useNavigate();
+  /*  useEffect(() => {
+        fetch('http://localhost:8080/card-type')
+            .then((res) => res.json())
+            .then((res) => {
+                setTypeCard(res)
+                console.log(res)
+            })
+    },[])
+*/
+   /* const opt = typeCard.map((item) => {
+        return (
+            <option value={item.id}>
+                {item.cardType}
+            </option>
+        )
+    })*/
     // useEffect(() => {
     //     if(localStorage.getItem('user_info')) {
     //         navigate('/main')
     //     }
     // },[])
-    /*async function signup() {
-        let item = {name, address, phone}
-        console.warn(item)
-        let result = await fetch('https://62b297ff20cad3685c902f74.mockapi.io/product/', {
-            method:'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(item)
+    const handleLogin = (e) => {
+
+        e.preventDefault()
+        setError('')
+       // http://localhost:8080/customer/
+        axios.post('http://localhost:8080/api/auth/signup/', {
+            name:name,
+            address:address,
+            phone:phone,
+            typeCard:typeCard,
+            cardPassword:cardPassword
         })
-        result = await result.json()
-        localStorage.setItem("user_info",JSON.stringify(result))
-        navigate('/sign_account')
-    }*/
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+            .then(result => {
+                console.log(result)
+            })
+            .catch(err => {
+                setError(err.message)
+                alert(err.message)
+            })
+        // navigate(`sign_account}`)
+    }
+    const handlePass = (e) => {
+        setCardPassword(e.target.value)
 
-        setValidated(true);
-    };
+    }
 
+    const hanldeSelect = (e) => {
+        setTypeCard(e.target.value)
+        console.log(e.target.value)
+    }
     return (
-        <div>
-            <div style={{width:'40%',margin:'auto', height:'100vh',}}>
-                <Form style={{marginTop:150,padding:50, boxShadow:' rgba(0, 0, 0, 0.24) 0px 3px 8px'}} noValidate validated={validated} onSubmit={handleSubmit}>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} md="12" controlId="validationCustom01">
-                            <Form.Label
-                            >Name</Form.Label>
-                            <Form.Control
-                                // onChange={(e) => setName(e.target.value)}
-                                required
-                                type="text"
-                                placeholder="name"
-                                // value={name}
-                            />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                        </Form.Group>
-
-                    </Row>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} md="6" controlId="validationCustom03">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control
-                                // onChange={(e) => setAddress(e.target.value)}
-                                type="text"
-                                placeholder="City"
-                                required
-                                // value={address}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid Address.
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group as={Col} md="6" controlId="validationCustom04">
-                            <Form.Label>Number</Form.Label>
-                            <Form.Control type="number"
-                                          placeholder="phone number"
-                                          required
-                                          // onChange={(e) =>setPhone( e.target.value)}
-                                          // value={phone}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid state.
-                            </Form.Control.Feedback>
-                        </Form.Group>
-
-                    </Row>
-                    <Form.Group className="mb-3">
-                        <Form.Check
-                            required
-                            label="Agree to terms and conditions"
-                            feedback="You must agree before submitting."
-                            feedbackType="invalid"
-                        />
-                    </Form.Group>
-
-                    <Button type="submit">
-                        Submit form
-                    </Button>
-
-                </Form>
+        <div className='row' style={{width:'70%', margin:'auto'}}>
+            <div className='col-md-6 col-lg-6'>
+                <img src={image}
+                     alt=""
+                     width='100%'
+                />
             </div>
+            <div className='col-md-6 col-lg-6'>
+                <form className="row g-3 needs-validation mt-5" noValidate>
+                    <div className="col-md-6">
+                        <label htmlFor="validationCustom01" className="form-label">Name</label>
+                        <input type="text"
+                               className="form-control"
+                               id="validationCustom01"
+                               value={name}
+                               onChange={(e) => setName(e.target.value)}
+                               required/>
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="validationCustom02" className="form-label">Phone</label>
+                        <input type="number"
+                               className="form-control"
+                               id="validationCustom02"
+                               value={phone}
+                               onChange={(e) => setPhone(e.target.value)}
+                               required/>
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="validationCustom03" className="form-label">Address</label>
+                        <input type="phone"
+                               value={address}
+                               onChange={(e) => setAddress(e.target.value)}
+                               className="form-control"
+                               id="validationCustom03"
+                               required/>
+                        <div className="invalid-feedback">
+                            Please provide a valid address
+                        </div>
+                    </div>
+
+                    <div className="col-md-6">
+                        <label htmlFor="validationCustom01" className="form-label">Type Card</label>
+                        <div className="select-container">
+                            <select
+                                name="cardType"
+                                value={typeCard.cardName}
+                                onChange={hanldeSelect}
+                            >
+                                <option value={typeCard.cardName}>abc</option>
+                                <option value={typeCard.cardName}>xxx</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="validationCustom01" className="form-label">Password</label>
+                        <input type="password"
+                               className="form-control"
+                               id="validationCustom01"
+                               value={cardPassword}
+                               onChange={handlePass}
+                               required/>
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div className="col-12">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
+                            <label className="form-check-label" htmlFor="invalidCheck">
+                                Agree to terms and conditions
+                            </label>
+                            <div className="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12">
+                        <button className="btn btn-primary" type="button" onClick={handleLogin}>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
-
-
     );
-}
+};
 
-export default EcoCreateMember
+export default EcoCreateMember;
