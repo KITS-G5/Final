@@ -146,33 +146,16 @@ const AddStation = () => {
             }
 
         );
-        navigate(-1);
+        // navigate(-1);
 
     }
 
-    // station to option
-
-    // GET LONGITUDE, LATITUDE FROM MAP
-    // const getLocation = () => {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(showPosition);
-    //     } else {
-    //         console.log("Geolocation is not supported by this browser.");
-    //     }
-    // }
-    // const showPosition = (position) => {
-    //     console.log(position.coords.latitude, position.coords.longitude);
-    //     let data = {...station};
-    //     data.longitude = position.coords.longitude;
-    //     data.latitude = position.coords.latitude;
-    //     setStation(data);
-    // }
-    
     //usestate set long, set lat
     const [long, setLong] = useState('');
     const [lat, setLat] = useState('');
     
-    const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    // const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    const apiKey = "AIzaSyANFMqjP61LclOlGZxkQMJ61PX0mZqCPWo";
     Geocode.setApiKey(apiKey);
     Geocode.setLanguage('en');
     Geocode.setRegion('vn');
@@ -186,7 +169,8 @@ const AddStation = () => {
                 const { lat, lng } = response.results[0].geometry.location;
                 console.log(lat, lng);
                 let data = {...station};
-                data.longitude = lng;
+                data.streetAddress = e.target.value;
+                data.longtitude = lng;
                 data.latitude = lat;
                 setStation(data);
                 setLong(lng);
