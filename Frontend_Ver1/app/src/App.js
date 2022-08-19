@@ -77,7 +77,7 @@ function App() {
 
                             <Route path='signup' element={<EcoSignin/>}></Route>
                             <Route  path='signup/new_signin' element={<EcoMembership/>}/>
-                            <Route  path='signup/new_signin/create_account' element={<Demo/>}/>
+                            <Route  path='signup/new_signin/create_account' element={<EcoCreateMember/>}/>
                             <Route path='main/:data' element={<MainEco/>}></Route>
                             <Route path='main/:data/topup' element={<EcoTopup/>}></Route>
                             <Route path='rentbike/:id' element={<RentBike/>}></Route>

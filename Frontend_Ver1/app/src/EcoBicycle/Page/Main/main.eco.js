@@ -46,7 +46,7 @@ const MainEco = () => {
                             <h3 className='text-center fs-1 '>Card</h3>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
-                                      to='topup'>
+                                      to='buy_card'>
                                     <PaidIcon/>
                                     <br/>
                                     <span className='text-center'>Buy a card</span>
@@ -54,12 +54,11 @@ const MainEco = () => {
                             </div>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
-                                      to='buy_card'>
+                                      to='topup'>
                                     <AddCardIcon/>
                                     <br/>
                                     <span className='text-center'>Top up to card</span>
                                 </Link>
-
                             </div>
                         </div>
                         <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
@@ -93,10 +92,10 @@ const MainEco = () => {
                             </div>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
-                                      to='#'>
+                                      to=''>
                                     <BadgeIcon/>
                                     <br/>
-                                    <span className='text-center'><CardInfo/></span>
+                                    <span className='text-center'><CardInfo data={product}/></span>
                                 </Link>
                             </div>
                         </div>
