@@ -72,7 +72,6 @@ const AddStation = () => {
     //         body: JSON.stringify(bike)
     //     })
     // }
-    let districtOpt2 = '';
     let district_filter = [];
     const [dist, setDist] = useState([]);
 
@@ -146,6 +145,7 @@ const AddStation = () => {
             }
 
         );
+
         // navigate(-1);
 
     }
@@ -155,7 +155,7 @@ const AddStation = () => {
     const [lat, setLat] = useState('');
     
     // const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
-    const apiKey = 
+    const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
     Geocode.setApiKey(apiKey);
     Geocode.setLanguage('en');
     Geocode.setRegion('vn');
