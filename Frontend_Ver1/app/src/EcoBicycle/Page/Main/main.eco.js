@@ -10,6 +10,7 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { useTypewriter} from 'react-simple-typewriter'
 import {Link, useParams} from "react-router-dom";
 import PaidIcon from '@mui/icons-material/Paid';
+import CardInfo from "../CardInfo/CardInfo";
 const MainEco = () => {
 
     const params = useParams();
@@ -91,10 +92,10 @@ const MainEco = () => {
                             </div>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
-                                      to='buy_card'>
+                                      to='#'>
                                     <BadgeIcon/>
                                     <br/>
-                                    <span className='text-center'>Card Info</span>
+                                    <span className='text-center'><CardInfo/></span>
                                 </Link>
                             </div>
                         </div>
