@@ -36,6 +36,7 @@ const MainEco = () => {
         <div className=' row main_eco container' style={{margin:'auto'}}>
 
             {product !== null ? (
+
                 <div>
                     <div className='text-center  mt-5 col-sm-12 main_eco_content'>
                         <h1>Welcome to EcoBicycle Rentail !</h1>
@@ -65,7 +66,7 @@ const MainEco = () => {
                             <h3 className='text-center fs-1 '>Bice</h3>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
-                                      to='buy_card'>
+                                      to={`/ecobicycle/rentbike/${product.id}`}>
                                     <DirectionsBikeIcon/>
                                     <br/>
                                     <span className='text-center'>Rent a bike</span>
@@ -73,7 +74,7 @@ const MainEco = () => {
                             </div>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
-                                      to='buy_card'>
+                                      to={`rentbike/${product.id}`}>
                                     <ShoppingCartCheckoutIcon/>
                                     <br/>
                                     <span className='text-center'>Return Bike</span>

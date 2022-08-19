@@ -31,6 +31,7 @@ import BuyCardEco from "./EcoBicycle/Page/BuyCard";
 import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
 import EcoPaymentMethod from "./EcoBicycle/Page/PaymentMethods/Eco.PaymentMethor";
 import EcoTopup from "./EcoBicycle/Page/Topup";
+import RentBike from "./EcoBicycle/Page/RentBike/RentBike";
 
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
                             <Route  path='signup/new_signin/create_account' element={<Demo/>}/>
                             <Route path='main/:data' element={<MainEco/>}></Route>
                             <Route path='main/:data/topup' element={<EcoTopup/>}></Route>
+                            <Route path='rentbike/:id' element={<RentBike/>}></Route>
                             <Route path='main/:data/topup/pay/:cardNo/:output' element={<EcoPaymentMethod/>}></Route>
                         </Route>
                     </Routes>
