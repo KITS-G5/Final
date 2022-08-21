@@ -2,38 +2,16 @@ import React from 'react';
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const ListALlBikesBYStation = ({data}) => {
+const ListALlBikesBYStation = (props) => {
+    console.log("check id from bikes", props.idStation )
+    let stationID = props.idStation
 
-    //selection box for station name
-
-   /* useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/stations';
-        console.log(url);
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                setStations(data);
-                console.log(data)
-            });
-    }, []);
-    console.log("check station list ", stations)
-
-    var check = []
-    if(stations != null) {
-        check = stations.map((item) => {
-                return (
-                    <option value={item.id}>{item.stationName} {stations.stationAddress}</option>
-                )
-            }
-        )
-    }
-*/
     //autoload bikes in the stations when customer choose the station
     const [bikes, setBikes] = useState(null);
 
     useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/station/bikes/' + data ;
-        console.log(url);
+        let url = "http://localhost:8080/api/v1/station/bikes/" + {stationID} ;
+        console.log('check url', url);
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -43,7 +21,7 @@ const ListALlBikesBYStation = ({data}) => {
     }, []);
     console.log("check bikes list: ", bikes)
     let bikeCheck =[]
-    if(bikes != null) {
+/*    if(bikes != null) {
         bikeCheck = bikes.map((item) => {
             return(
                 <div className="form-check d-flex justify-content-around align-items-center"
@@ -60,18 +38,17 @@ const ListALlBikesBYStation = ({data}) => {
                 </div>
             )
         })
-    }
+    }*/
 
 
     return (
         <div className={"container"}>
-            <h3>Welcome to station name:</h3>
-            <h3>Total available bikes in the station</h3>
-            <hr/>
+            <h3>Total available bikes in the station: </h3>
             <h3>Select your bike: </h3>
             <div className={"d-flex flex-wrap justify-content-evenly align-items-center"}>
                 {bikeCheck}
             </div>
+
         </div>
     );
 };
