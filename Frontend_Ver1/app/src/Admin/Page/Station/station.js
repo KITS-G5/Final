@@ -18,8 +18,8 @@ const Station = () => {
     useEffect(() => {
         console.log('user use effect!!');
         let url1 = 'http://localhost:8080/api/v1/stations';
-        if (searchKeys != '') {
-            url1 = 'http://localhost:8080/api/v1/stations' + '/search?q=' + searchKeys;
+        if (searchKeys != '' || searchCity != '') {
+            url1 = 'http://localhost:8080/api/v1/stations' + '/search?q=' + searchKeys + "&&c=" + searchCity;
         }
         console.log(url1);
         fetch(url1)
@@ -38,7 +38,7 @@ const Station = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setCity(data))
-    }, [searchKeys]);
+    }, [searchKeys, searchCity]);
 
     let dataTable = data.map((item) => {
             return {
@@ -156,15 +156,15 @@ const Station = () => {
             return city.id == city_id;
         })
         console.log(city_name[0].cityName);
-        setSearchKeys(city_name[0].cityName);
-        console.log('searchkey =' , searchKeys);
+        setSearchCity(city_name[0].id);
+        console.log('searchkey =' , searchCity);
         
     }
 
     const getSearchTerm = (e) => {
         pickCity(e);
-        setSearchKeys(e.target.value);
-        console.log("search key =", searchKeys);
+        setSearchCity(e.target.value);
+        console.log("search key =", searchCity);
     }
 
     return (
