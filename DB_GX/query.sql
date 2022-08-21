@@ -1,4 +1,4 @@
-tbl_ordercardcreate database projectfinal;
+create database projectfinal;
 use projectfinal;
 -- 
 drop database projectfinal;
