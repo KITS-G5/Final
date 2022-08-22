@@ -8,38 +8,16 @@ const EcoCreateMember = () => {
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
-    const [cardNum, setCardNum] = useState('')
     const [cardPassword, setCardPassword] = useState('')
     const [typeCard, setTypeCard] = useState('')
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
-  /*  useEffect(() => {
-        fetch('http://localhost:8080/card-type')
-            .then((res) => res.json())
-            .then((res) => {
-                setTypeCard(res)
-                console.log(res)
-            })
-    },[])
-*/
-   /* const opt = typeCard.map((item) => {
-        return (
-            <option value={item.id}>
-                {item.cardType}
-            </option>
-        )
-    })*/
-    // useEffect(() => {
-    //     if(localStorage.getItem('user_info')) {
-    //         navigate('/main')
-    //     }
-    // },[])
     const handleLogin = (e) => {
 
         e.preventDefault()
         setError('')
-       // http://localhost:8080/customer/
+
         axios.post('http://localhost:8080/api/auth/signup/', {
             name:name,
             address:address,
