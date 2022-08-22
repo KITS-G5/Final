@@ -6,7 +6,6 @@ import CardNum from "./CardNum";
 import card1 from "../../../BuyCardWeb/img/frontcard.png";
 import card2 from "../../../BuyCardWeb/img/backend.png";
 
-
 const RentBike = () => {
     const params = useParams();
 
@@ -77,7 +76,6 @@ const RentBike = () => {
     const [cardData, setCardData] = useState([]);
     useEffect(() => {
         let url = 'http://localhost:8080/api/v1/cards/user/' + cardNum;
-        console.log(url)
         fetch(url)
             .then(res => res.json())
             .then(data => setCardData(data));
@@ -98,7 +96,6 @@ const RentBike = () => {
                     "cardCcv": cardChosenCcv
                 }
         }
-
         const requestOption = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
