@@ -100,9 +100,21 @@ const AdminUser = () => {
                     .then(res => res.json())
                     .then(data => setOrderData(data.id));
                 window.location.reload();
+            } else {
+                nav('/pay/' + cardData.cardNum + "/" + fee);
+                const requestOpt2 = {
+                    method: "PUT",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        id: orderData.content.id,
+                        // totalFee: 0,
+                        // paymentStatus: true
+                    })
+                };
+                fetch('http://localhost:8080/orders/user/makePayment/' + params.cardNum, requestOpt2)
+                    .then(res => res.json())
+                    .then(data => setOrderData(data.id));
             }
-        } else {
-            nav('/pay/' + cardData.cardNum + "/" + fee);
         }
     };
     const columns = [

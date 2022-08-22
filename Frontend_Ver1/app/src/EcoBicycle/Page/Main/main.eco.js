@@ -62,7 +62,7 @@ const MainEco = () => {
                             </div>
                         </div>
                         <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
-                            <h3 className='text-center fs-1 '>Bice</h3>
+                            <h3 className='text-center fs-1 '>Bike</h3>
                             <div className='col-lg-6 card_item'>
                                 <Link className='to_link'
                                       to={`/ecobicycle/rentbike/${product.id}`}>
