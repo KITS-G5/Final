@@ -92,11 +92,11 @@ const AdminUser = () => {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         id: orderData.content.id,
-                        totalFee: 0,
-                        paymentStatus: true
+                        // totalFee: 0,
+                        // paymentStatus: true
                     })
                 };
-                fetch('http://localhost:8080/orders/user/', requestOpt2)
+                fetch('http://localhost:8080/orders/user/makePayment/' + params.cardNum, requestOpt2)
                     .then(res => res.json())
                     .then(data => setOrderData(data.id));
                 window.location.reload();

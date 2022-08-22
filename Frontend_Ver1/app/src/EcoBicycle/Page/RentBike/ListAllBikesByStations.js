@@ -8,6 +8,7 @@ const ListALlBikesBYStation = (props) => {
 
     //autoload bikes in the stations when customer choose the station
     const [bikes, setBikes] = useState(null);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         let url = "http://localhost:8080/api/v1/station/bikes/" + {stationID} ;
@@ -19,7 +20,14 @@ const ListALlBikesBYStation = (props) => {
                 console.log(data)
             });
     }, []);
-    console.log("check bikes list: ", bikes)
+    if (bikes != null) {
+        let countNum = 0;
+        if (bikes.status == true) {
+            setCount(countNum++);
+        }
+    }
+    console.log(count)
+    console.log("check bikes list: ", bikes);
     let bikeCheck =[]
 /*    if(bikes != null) {
         bikeCheck = bikes.map((item) => {
