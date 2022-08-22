@@ -22,7 +22,7 @@ const RentBike = () => {
 
     //selection box for station name
     let [stations, setStations] = useState(null);
-    let [selectedStationID, setSelectedStationID] = useState(null);
+    let [selectedStationID, setSelectedStationID] = useState("1");
     let [selectedStation, setSelectedStation] = useState(null);
 
     console.log("Check selected ", selectedStationID)
@@ -49,17 +49,11 @@ const RentBike = () => {
     let station_filter = [];
     const pickStation = (e) => {
         let sId = (e.target.value);
-        if (stations != null) {
-            station_filter = stations.filter(item => {
-                return item.id == sId;
-            })
-            setSelectedStationID(station_filter);
-        }
+        setSelectedStationID(sId);
     };
     const [bikes, setBikes] = useState([]);
+    console.log(selectedStationID)
     useEffect(() => {
-        if (stations != null) {
-            console.log(stations)
             let url = "http://localhost:8080/api/v1/station/bikes/" + selectedStationID;
             console.log('check url', url);
             fetch(url)
@@ -67,8 +61,7 @@ const RentBike = () => {
                 .then((data) => {
                     setBikes(data);
                 });
-        }
-    }, []);
+        }, [selectedStationID]);
     let bikeList = [];
     console.log(bikes)
     //anh luyen sua day
@@ -97,8 +90,8 @@ const RentBike = () => {
             {product !== null ? <h1>{product.id}</h1> : 'loading'}
             <h3>Welcome to station name: {selectedStationID}</h3>
             <select className="form-select" aria-label="Default select example"
-                onChange={(e) => setSelectedStationID(e.target.value)}
-                //     onChange={pickStation}
+                // onChange={(e) => setSelectedStationID(e.target.value)}
+                    onChange={pickStation}
             >
                 <option defaultValue={1} disabled>Please selection your station</option>
                 {checkStation}

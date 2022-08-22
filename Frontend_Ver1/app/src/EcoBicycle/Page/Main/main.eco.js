@@ -39,7 +39,7 @@ const MainEco = () => {
 
                 <div>
                     <div className='text-center  mt-5 col-sm-12 main_eco_content'>
-                        <h1>Welcome to EcoBicycle Rentail !</h1>
+                        <h1>Welcome to EcoBicycle Rental !</h1>
                     </div>
                     <div className='mt-5 row main_eco_card'>
                         <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
