@@ -60,6 +60,9 @@ public class Controller {
             if(notPaidOrder.isPresent()) {
                 return new ResponseObj("Failed", "You still have an order which is not paid", notPaidOrder.get());
             }
+            else if(card.get().getBalance() < 1000000){
+                return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 to start renting", "");
+            }
             else {
                 orderService.saveOrder(order);
                 return new ResponseObj("OK", "Rent bike success", order);
