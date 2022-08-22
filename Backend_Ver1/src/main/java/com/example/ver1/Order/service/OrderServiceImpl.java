@@ -112,7 +112,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
-    //return bike call this method
+    //return bike call this method for Van Hai
     @Override
     public int updateOrder(Card card, Stations station) {
         Optional<Order> optional = orderRepository.findOrderByCardAndPaymentStatus(card, false);
