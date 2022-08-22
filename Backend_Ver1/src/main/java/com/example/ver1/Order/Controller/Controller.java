@@ -89,8 +89,8 @@ public class Controller {
         Stations station = stationsService.getStationById(idStation);
         Optional<Card> card1 = cardRepository.findById(card.getId());
         if(card1.isPresent()){
-            if(!Objects.equals(card1.get().getCardCcv(), card.getCardCcv())) {
-                return new ResponseObj("Failed", "Wrong cvv number", "");
+            if(!Objects.equals(card1.get().getCardCcv(), card.getCardCcv()) || !card1.get().getCardNum().equals(card.getCardNum())) {
+                return new ResponseObj("Failed", "Wrong card number or cvv number", "");
             }
             int check = orderService.updateOrder(card1.get(), station);
             if(check == -1) return new ResponseObj("Failed", "All payment are made", "");
