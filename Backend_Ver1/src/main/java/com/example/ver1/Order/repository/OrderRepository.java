@@ -20,6 +20,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     @NotNull Page<Order> findAll(@NotNull Pageable pageable);
 
     Optional<Order> findOrderByCardAndPaymentStatus(Card card, boolean paymentStatus);
+    Optional<Order> findOrderByCardAndPaymentStatusAndReturnStatus(Card card, boolean paymentStatus, boolean returnStatus);
     Page<Order> findOrdersByCard(Card card,Pageable pageable);
 
     //query list of order by month and year

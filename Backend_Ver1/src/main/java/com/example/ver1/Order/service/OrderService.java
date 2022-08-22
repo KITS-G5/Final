@@ -23,6 +23,7 @@ public interface OrderService {
 
     void updateOrder(Stations station, Order order, long id);
     int updateOrder(Card card, Stations stations);
+    int makePayment(Card card);
 
     void deleteOrder(long id);
 

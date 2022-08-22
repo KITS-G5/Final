@@ -100,6 +100,17 @@ public class Controller {
         return new ResponseObj("Failed", "Not found card information", "");
     }
 
+    // hà hải call this method and payment status auto update to true
+    @PutMapping(path = {"/user/makePayment/{cardNum}"})
+    ResponseObj updatePayment(@PathVariable String cardNum) {
+        Optional<Card> found = cardRepository.findCardByCardNum(cardNum);
+        if(found.isPresent()) {
+            orderService.makePayment(found.get());
+            return new ResponseObj("OK", "Paid order", found.get());
+        }
+        return new ResponseObj("Failed", "Not found unpaid order", "");
+    }
+
     @GetMapping(path = "/admin/grossRevenueByDate")
     String totalRevenueByDate(@RequestParam(required = false, value = "date1")String date1, @RequestParam(required = false, value = "date2") String date2)
     {

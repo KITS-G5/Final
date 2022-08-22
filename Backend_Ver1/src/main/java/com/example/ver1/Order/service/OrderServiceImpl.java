@@ -139,6 +139,16 @@ public class OrderServiceImpl implements OrderService{
         return -1;
     }
 
+    @Override
+    public int makePayment(Card card) {
+        Optional<Order> found = orderRepository.findOrderByCardAndPaymentStatusAndReturnStatus(card, false, true);
+        if(found.isPresent()) {
+            found.get().setPaymentStatus(true);
+            orderRepository.save(found.get());
+            return 1;
+        } else return 0;
+    }
+
     //calculate bike rental fee when customer return the bike
     float calculateFee(Order order){
         int rentHours = (int) Math.ceil ((order.getRentingEndDate().getTime() - order.getRentingStartedDate().getTime()) / 3600000);
