@@ -49,9 +49,8 @@ public class CardServiceImplement implements CardService {
     public int updateCard(long id, Card card) {
         Optional<Card> found = cardRepository.findById(id);
         if(found.isPresent()){
-            found.get().setCardType(card.getCardType());
+            // found.get().setCardType(card.getCardType());
             found.get().setBalance(card.getBalance());
-            found.get().setCustomer(card.getCustomer());
             cardRepository.save(found.get());
             return 1;
         }
