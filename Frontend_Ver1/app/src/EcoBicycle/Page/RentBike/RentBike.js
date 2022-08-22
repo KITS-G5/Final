@@ -5,7 +5,6 @@ import ListALlBikesBYStation from "./ListAllBikesByStations";
 import CardNum from "./CardNum";
 
 
-
 const RentBike = () => {
     const params = useParams();
     const [product, setProduct] = useState(null);
@@ -19,7 +18,6 @@ const RentBike = () => {
                 setProduct(data);
             });
     }, []);
-
 
 
     //selection box for station name
@@ -40,17 +38,51 @@ const RentBike = () => {
                 console.log(data)
             });
     }, []);
-
     useEffect(() => {
-        if(stations != null) {
+        if (stations != null) {
             setSelectedStation(stations.filter(item => item.id = selectedStationID))
             console.log("check station ", selectedStation)
         }
 
     }, []);
-
-    var checkStation = []
-    if(stations != null) {
+    let station_filter = [];
+    const pickStation = (e) => {
+        let sId = (e.target.value);
+        if (stations != null) {
+            station_filter = stations.filter(item => {
+                return item.id == sId;
+            })
+            setSelectedStationID(station_filter);
+        }
+    };
+    const [bikes, setBikes] = useState([]);
+    useEffect(() => {
+        if (stations != null) {
+            console.log(stations)
+            let url = "http://localhost:8080/api/v1/station/bikes/" + selectedStationID;
+            console.log('check url', url);
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    setBikes(data);
+                });
+        }
+    }, []);
+    let bikeList = [];
+    console.log(bikes)
+    //anh luyen sua day
+    if (bikes != null) {
+        bikeList = bikes.map((item) => {
+            return (
+                <>
+                    <h1>{item.id}</h1>
+                    <h1>{item.bikeName}</h1>
+                </>
+            )
+        });
+    }
+    var checkStation = [];
+    if (stations != null) {
         checkStation = stations.map((item) => {
                 return (
                     <option value={item.id} key={item.id}>{item.stationName} {stations.stationAddress}</option>
@@ -63,7 +95,10 @@ const RentBike = () => {
         <div className={"container"}>
             {product !== null ? <h1>{product.id}</h1> : 'loading'}
             <h3>Welcome to station name: {selectedStationID}</h3>
-            <select className="form-select" aria-label="Default select example" onChange={(e) => setSelectedStationID(e.target.value)}>
+            <select className="form-select" aria-label="Default select example"
+                onChange={(e) => setSelectedStationID(e.target.value)}
+                //     onChange={pickStation}
+            >
                 <option defaultValue={1} disabled>Please selection your station</option>
                 {checkStation}
             </select>
@@ -71,12 +106,13 @@ const RentBike = () => {
             <hr/>
 
             <div className={"d-flex flex-wrap justify-content-evenly align-items-center"}>
-                {stations !== null ? <ListALlBikesBYStation idStation={selectedStationID}/> : ""}
+                {/*{stations !== null ? <ListALlBikesBYStation idStation={selectedStationID}/> : ""}*/}
+                {bikeList}
             </div>
             <hr/>
 
             <h3>Enter your card information</h3>
-            <CardNum />
+            <CardNum/>
             <button type="submit" className="btn btn-primary">Submit</button>
         </div>
     );
