@@ -61,7 +61,7 @@ public class Controller {
                 return new ResponseObj("Failed", "This card number had an order which is not paid", notPaidOrder.get());
             }
             else if(card.get().getBalance() < 1000000){
-                return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 to start renting", "");
+                return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 VND to start renting", "");
             }
             else {
                 int i = orderService.saveOrder(order);
