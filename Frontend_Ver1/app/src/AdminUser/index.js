@@ -78,13 +78,28 @@ const AdminUser = () => {
                 const requestOpt = {
                     method: "PUT",
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({balance: cardData.balance - fee})
+                    body: JSON.stringify({
+                        id: cardData.id,
+                        balance: cardData.balance - fee
+                    })
                 };
-                console.log(cardData.balance)
-                console.log(fee)
-                fetch('http://localhost:8080/api/v1/cards/user/' + cardData.id,requestOpt)
+                fetch('http://localhost:8080/api/v1/cards/' + cardData.id, requestOpt)
+                    // .then(res => res.json())
+                    .then(data => setCardData(data.id));
+
+                const requestOpt2 = {
+                    method: "PUT",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        id: orderData.content.id,
+                        totalFee: 0,
+                        paymentStatus: true
+                    })
+                };
+                fetch('http://localhost:8080/orders/user/', requestOpt2)
                     .then(res => res.json())
-                    .then(data=>setCardData(data))
+                    .then(data => setOrderData(data.id));
+                window.location.reload();
             }
         } else {
             nav('/pay/' + cardData.cardNum + "/" + fee);
@@ -105,7 +120,6 @@ const AdminUser = () => {
                             variant="outlined"
                             color="primary"
                             onClick={(event) => payMethod(cellValues.row.fee)}
-                            // onClick = {(e)=> alert(cellValues.row.fee)}
                         >
                             Pay
                         </Button>
