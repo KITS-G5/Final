@@ -32,6 +32,8 @@ import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
 import EcoPaymentMethod from "./EcoBicycle/Page/PaymentMethods/Eco.PaymentMethor";
 import EcoTopup from "./EcoBicycle/Page/Topup";
 import RentBike from "./EcoBicycle/Page/RentBike/RentBike";
+import ReturnBikeTest from "./EcoBicycle/Page/ReturnBike/Test02";
+import CheckValue from "./EcoBicycle/Page/ReturnBike/Checkvalue";
 
 
 function App() {
@@ -81,6 +83,8 @@ function App() {
                             <Route path='main/:data' element={<MainEco/>}></Route>
                             <Route path='main/:data/topup' element={<EcoTopup/>}></Route>
                             <Route path='rentbike/:id' element={<RentBike/>}></Route>
+                            <Route path='return_bike' element={<ReturnBikeTest />}></Route>
+                            <Route path='return_bike/:id' element={<CheckValue />}></Route>
                             <Route path='main/:data/topup/pay/:cardNo/:output' element={<EcoPaymentMethod/>}></Route>
                         </Route>
                     </Routes>

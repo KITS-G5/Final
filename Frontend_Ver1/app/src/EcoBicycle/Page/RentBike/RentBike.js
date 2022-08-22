@@ -30,26 +30,28 @@ const RentBike = () => {
     const [bikes, setBikes] = useState([]);
     const [countBikes, setCountBikes] = useState(0);
     useEffect(() => {
-            console.log(stations)
-            let url = "http://localhost:8080/api/v1/station/bikes/" + selectedStationID;
-            console.log('check url', url);
-            fetch(url)
-                .then((response) => response.json())
-                .then((data) => {
-                    setBikes(data);
-                });
-        }, [selectedStationID]);
+        console.log(stations)
+        let url = "http://localhost:8080/api/v1/station/bikes/" + selectedStationID;
+        console.log('check url', url);
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                setBikes(data);
+            });
+    }, [selectedStationID]);
+
 
     let bikeList = [];
     console.log(bikes)
     const [chosenBike, setChosenBike] = useState("");
     //anh luyen sua day
     if (bikes != null) {
-        bikeList = bikes.map((item) => {
+        bikeList = bikes.map((item, index) => {
             return (
                 <div className="d-inline-flex justify-content-center align-items-center bike-gap"
-                     style={{border: "solid", width: "45%"}}>
-                    <input className="form-check-input" type="radio" name="bike" id="bike" disabled={!item.status} value={item.id} onChange={(e)=>setChosenBike(e.target.value)}/>
+                     style={{border: "solid", width: "45%"}} key={index}>
+                    <input className="form-check-input" type="radio" name="bike" id="bike" disabled={!item.status}
+                           value={item.id} onChange={(e) => setChosenBike(e.target.value)}/>
                     <label className="form-check-label" htmlFor="bike">
                         <div className="card" style={{width: '18rem'}}>
                             <div className="card-body">
@@ -79,7 +81,7 @@ const RentBike = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setCardData(data));
-    },[cardNum]);
+    }, [cardNum]);
     const handleRent = () => {
         let cardChosenId = cardData.id;
         let cardChosenNum = cardData.cardNum;
@@ -90,11 +92,11 @@ const RentBike = () => {
                     "id": chosenBike
                 }
             ,
-            "card":{
-                    "id": cardChosenId,
-                    "cardNum": cardChosenNum,
-                    "cardCcv": cardChosenCcv
-                }
+            "card": {
+                "id": cardChosenId,
+                "cardNum": cardChosenNum,
+                "cardCcv": cardChosenCcv
+            }
         }
         const requestOption = {
             method: "POST",
@@ -109,12 +111,14 @@ const RentBike = () => {
             });
         window.location.reload();
     };
+
+
     return (
         <div className={"container"}>
             <h3>Welcome to station name: {selectedStationID}</h3>
 
             <select className="form-select"
-                onChange={(e) => setSelectedStationID(e.target.value)}
+                    onChange={(e) => setSelectedStationID(e.target.value)}
 
             >
                 <option defaultValue={1} disabled>Please selection your station</option>
@@ -132,7 +136,7 @@ const RentBike = () => {
             <hr/>
 
 
-{/*
+            {/*
             card number section
 */}
             <h3>Enter your card information</h3>
@@ -140,11 +144,13 @@ const RentBike = () => {
                 <form className={'cardNum-left'}>
                     <div className="mb-3">
                         <label htmlFor="cardNum" className="form-label">Card number</label>
-                        <input type="text" className="form-control" onChange={(event)=>setCardNum(event.target.value)}/>
+                        <input type="text" className="form-control"
+                               onChange={(event) => setCardNum(event.target.value)}/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="CVV" className="form-label">CVV</label>
-                        <input type="number" className="form-control" onChange={(event)=>setCardCcv(event.target.value)}/>
+                        <input type="number" className="form-control"
+                               onChange={(event) => setCardCcv(event.target.value)}/>
                     </div>
                 </form>
                 <div className={'cardNum-right'}>
@@ -152,7 +158,7 @@ const RentBike = () => {
                     <img src={card2} alt={'cardIMG'} className={'cardNum-right2'}/>
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary" onClick={()=>handleRent()}>Rent this bike</button>
+            <button type="submit" className="btn btn-primary" onClick={() => handleRent()}>Rent this bike</button>
         </div>
     );
 };

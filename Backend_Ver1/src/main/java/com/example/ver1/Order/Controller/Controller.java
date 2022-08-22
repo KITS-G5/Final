@@ -58,7 +58,7 @@ public class Controller {
         if(card.isPresent()){
             Optional<Order> notPaidOrder = orderService.getOrderNotPaid(card.get(), false);
             if(notPaidOrder.isPresent()) {
-                return new ResponseObj("Failed", "You still have an order which is not paid", notPaidOrder.get());
+                return new ResponseObj("Failed", "This card number had an order which is not paid", notPaidOrder.get());
             }
             else if(card.get().getBalance() < 1000000){
                 return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 to start renting", "");
