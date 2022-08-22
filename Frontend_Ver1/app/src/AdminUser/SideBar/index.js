@@ -186,7 +186,7 @@ export default function SideBarUser() {
                                 >
                                     {index % 2 == 0
                                         ?
-                                        <Link to='../topup'>
+                                        <Link to={'../topup/'}>
                                             <CreditCardIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
                                         </Link>
                                         :
