@@ -42,7 +42,6 @@ const RentBike = () => {
     }, []);
 
     useEffect(() => {
-
         if(stations != null) {
             setSelectedStation(stations.filter(item => item.id = selectedStationID))
             console.log("check station ", selectedStation)
