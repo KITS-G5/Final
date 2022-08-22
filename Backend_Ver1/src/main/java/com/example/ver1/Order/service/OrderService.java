@@ -22,6 +22,7 @@ public interface OrderService {
     void saveOrder(Order order);
 
     void updateOrder(Stations station, Order order, long id);
+    int updateOrder(Card card, Stations stations);
 
     void deleteOrder(long id);
 

@@ -104,6 +104,41 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
+
+    //return bike call this method
+    @Override
+    public int updateOrder(Card card, Stations station) {
+        Optional<Order> optional = orderRepository.findOrderByCardAndPaymentStatus(card, false);
+        Order o = null;
+        if (optional.isPresent()) {
+            o = optional.get();
+            o.getBike().setStation(station); //save new station id to the bike
+            o.getBike().setStatus(true); //the bike now is available for rent
+            o.setReturnStatus(true);
+            orderRepository.save(o);
+
+            //save fee to order
+            float fee = calculateFee(o);
+            o.setTotalFee(fee);
+
+            //subtract balance from card
+            if(fee > card.getBalance()){
+                //payment failed
+                o.setPaymentStatus(false);
+                orderRepository.save(o);
+                return 0;
+            } else {
+                //payment success
+                o.setPaymentStatus(true);
+                card.setBalance(card.getBalance() - fee);
+                orderRepository.save(o);
+                cardRepository.save(card);
+                return 1;
+            }
+        }
+        return -1;
+    }
+
     //calculate bike rental fee when customer return the bike
     float calculateFee(Order order){
         int rentHours = (int) Math.ceil ((order.getRentingEndDate().getTime() - order.getRentingStartedDate().getTime()) / 3600000);

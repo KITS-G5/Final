@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -58,7 +59,11 @@ public class Controller {
             Optional<Order> notPaidOrder = orderService.getOrderNotPaid(card.get(), false);
             if(notPaidOrder.isPresent()) {
                 return new ResponseObj("Failed", "You still have an order which is not paid", notPaidOrder.get());
-            } else {
+            }
+            else if(card.get().getBalance() < 1000000){
+                return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 to start renting", "");
+            }
+            else {
                 orderService.saveOrder(order);
                 return new ResponseObj("OK", "Rent bike success", order);
             }
@@ -75,6 +80,24 @@ public class Controller {
             orderService.updateOrder(stations, order, idOrder);
         }
         return order;
+    }
+
+
+    // Văn Hải call this method to return a bike, truyền vào path một id stations và body là một card object
+    @PutMapping(path = {"/user/{idStation}", "/admin/{idStation}"})
+    ResponseObj updateOrder(@RequestBody Card card, @PathVariable long idStation){
+        Stations station = stationsService.getStationById(idStation);
+        Optional<Card> card1 = cardRepository.findById(card.getId());
+        if(card1.isPresent()){
+            if(!Objects.equals(card1.get().getCardCcv(), card.getCardCcv()) || !card1.get().getCardNum().equals(card.getCardNum())) {
+                return new ResponseObj("Failed", "Wrong card number or cvv number", "");
+            }
+            int check = orderService.updateOrder(card1.get(), station);
+            if(check == -1) return new ResponseObj("Failed", "All payment are made", "");
+            if(check == 0) return new ResponseObj("Payment failed", "Return bike success, payment failed(not enough money)", "");
+            if(check == 1) return new ResponseObj("OK", "Make payment success", "");
+        }
+        return new ResponseObj("Failed", "Not found card information", "");
     }
 
     @GetMapping(path = "/admin/grossRevenueByDate")
