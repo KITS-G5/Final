@@ -43,13 +43,14 @@ const RentBike = () => {
 
     let bikeList = [];
     console.log(bikes)
+    const [chosenBike, setChosenBike] = useState("");
     //anh luyen sua day
     if (bikes != null) {
         bikeList = bikes.map((item) => {
             return (
                 <div className="d-inline-flex justify-content-center align-items-center bike-gap"
                      style={{border: "solid", width: "45%"}}>
-                    <input className="form-check-input" type="radio" name="bike" id="bike" disabled={!item.status}/>
+                    <input className="form-check-input" type="radio" name="bike" id="bike" disabled={!item.status} value={item.id} onChange={(e)=>setChosenBike(e.target.value)}/>
                     <label className="form-check-label" htmlFor="bike">
                         <div className="card" style={{width: '18rem'}}>
                             <div className="card-body">
@@ -62,7 +63,6 @@ const RentBike = () => {
             )
         });
     }
-
     var checkStation = [];
     if (stations != null) {
         checkStation = stations.map((item) => {
@@ -72,8 +72,46 @@ const RentBike = () => {
             }
         )
     }
-    
+    const [cardNum, setCardNum] = useState("");
+    const [cardCcv, setCardCcv] = useState("");
+    const [cardData, setCardData] = useState([]);
+    useEffect(() => {
+        let url = 'http://localhost:8080/api/v1/cards/user/' + cardNum;
+        console.log(url)
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCardData(data));
+    },[cardNum]);
+    const handleRent = () => {
+        let cardChosenId = cardData.id;
+        let cardChosenNum = cardData.cardNum;
+        let cardChosenCcv = cardData.cardCcv;
+        let rentData = {
+            "bike":
+                {
+                    "id": chosenBike
+                }
+            ,
+            "card":{
+                    "id": cardChosenId,
+                    "cardNum": cardChosenNum,
+                    "cardCcv": cardChosenCcv
+                }
+        }
 
+        const requestOption = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(rentData)
+        };
+        console.log(requestOption)
+        fetch("http://localhost:8080/orders", requestOption)
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message)
+            });
+        window.location.reload();
+    };
     return (
         <div className={"container"}>
             <h3>Welcome to station name: {selectedStationID}</h3>
@@ -105,11 +143,11 @@ const RentBike = () => {
                 <form className={'cardNum-left'}>
                     <div className="mb-3">
                         <label htmlFor="cardNum" className="form-label">Card number</label>
-                        <input type="text" className="form-control"/>
+                        <input type="text" className="form-control" onChange={(event)=>setCardNum(event.target.value)}/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="CVV" className="form-label">CVV</label>
-                        <input type="number" className="form-control" />
+                        <input type="number" className="form-control" onChange={(event)=>setCardCcv(event.target.value)}/>
                     </div>
                 </form>
                 <div className={'cardNum-right'}>
@@ -117,7 +155,7 @@ const RentBike = () => {
                     <img src={card2} alt={'cardIMG'} className={'cardNum-right2'}/>
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary">Rent this bike</button>
+            <button type="submit" className="btn btn-primary" onClick={()=>handleRent()}>Rent this bike</button>
         </div>
     );
 };
