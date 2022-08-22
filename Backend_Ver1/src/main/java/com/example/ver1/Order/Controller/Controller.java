@@ -83,7 +83,7 @@ public class Controller {
     }
 
 
-    // Văn Hải call this method to return a bike, truyền vào path một id stations và body là một card object
+    // Văn Hải call this method to return a bike, truyền vào path một id stations (chính là return station) và body là một card object
     @PutMapping(path = {"/user/{idStation}", "/admin/{idStation}"})
     ResponseObj updateOrder(@RequestBody Card card, @PathVariable long idStation){
         Stations station = stationsService.getStationById(idStation);
