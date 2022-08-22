@@ -64,11 +64,12 @@ public class Controller {
                 return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 to start renting", "");
             }
             else {
-                orderService.saveOrder(order);
+                int i = orderService.saveOrder(order);
+                if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
+                if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
                 return new ResponseObj("OK", "Rent bike success", order);
             }
         }
-
         return new ResponseObj("Failed", "Can not find this card number", "");
     }
 

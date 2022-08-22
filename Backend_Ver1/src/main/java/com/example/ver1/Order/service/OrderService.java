@@ -2,6 +2,7 @@ package com.example.ver1.Order.service;
 
 import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Order.Model.Order;
+import com.example.ver1.Order.Model.ResponseObj;
 import com.example.ver1.Stations.model.Stations;
 import org.springframework.data.domain.Page;
 
@@ -19,7 +20,7 @@ public interface OrderService {
 
     Order getOrderById(long id);
 
-    void saveOrder(Order order);
+    int saveOrder(Order order);
 
     void updateOrder(Stations station, Order order, long id);
     int updateOrder(Card card, Stations stations);
