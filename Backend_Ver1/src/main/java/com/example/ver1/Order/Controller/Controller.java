@@ -64,11 +64,12 @@ public class Controller {
                 return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 to start renting", "");
             }
             else {
-                orderService.saveOrder(order);
+                int i = orderService.saveOrder(order);
+                if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
+                if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
                 return new ResponseObj("OK", "Rent bike success", order);
             }
         }
-
         return new ResponseObj("Failed", "Can not find this card number", "");
     }
 
@@ -98,6 +99,17 @@ public class Controller {
             if(check == 1) return new ResponseObj("OK", "Make payment success", "");
         }
         return new ResponseObj("Failed", "Not found card information", "");
+    }
+
+    // hà hải call this method and payment status auto update to true
+    @PutMapping(path = {"/user/makePayment/{cardNum}"})
+    ResponseObj updatePayment(@PathVariable String cardNum) {
+        Optional<Card> found = cardRepository.findCardByCardNum(cardNum);
+        if(found.isPresent()) {
+            orderService.makePayment(found.get());
+            return new ResponseObj("OK", "Paid order", found.get());
+        }
+        return new ResponseObj("Failed", "Not found unpaid order", "");
     }
 
     @GetMapping(path = "/admin/grossRevenueByDate")

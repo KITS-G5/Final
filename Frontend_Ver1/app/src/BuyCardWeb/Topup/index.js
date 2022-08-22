@@ -29,13 +29,15 @@ const Topup = () => {
     });
     const ValidateClick = () => {
         if (cardList.length !== 0) {
-            setCardCheck(true)
+            setCardCheck(true);
             setBool2(true);
             if (bool3 == true) {
                 setBool(false)
             }
+        } else {
+            setCardCheck(false);
         }
-        setShow(true)
+        setShow(true);
     };
     const validateClose = () => setShow(false);
     useEffect(() => {

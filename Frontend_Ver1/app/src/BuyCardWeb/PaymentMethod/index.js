@@ -1,15 +1,27 @@
 import {Button, Container, Modal} from "react-bootstrap";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import './paymentMethod.css';
 
 const PaymentMethod = () => {
     const params = useParams();
+    const nav = useNavigate();
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [show, setShow] = useState(false);
+    const [show2, setShow2] = useState(false);
     const onSubmit = () => setShow(true);
     const handleClose = () => setShow(false);
+    const payHandle = () => {
+        setShow2(true);
+    };
+    const handleClose2 = () => setShow2(false);
+    const navBack = () => {
+        nav(-1);
+    };
+    const navHome = () => {
+        nav("/");
+    };
     return (
         <>
             <Container fluid>
@@ -149,7 +161,7 @@ const PaymentMethod = () => {
                         </div>
                     </div>
                     <div className="col-12">
-                        <div className="payMethButton btn btn-danger payment">
+                        <div className="payMethButton btn btn-danger payment" onClick={payHandle}>
                             Make Payment
                         </div>
                     </div>
@@ -162,6 +174,20 @@ const PaymentMethod = () => {
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={show2} onHide={handleClose2}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Payment</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Your payment is successful</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={navBack}>
+                            Go back
+                        </Button>
+                        <Button variant="secondary" onClick={navHome}>
+                            Home
                         </Button>
                     </Modal.Footer>
                 </Modal>

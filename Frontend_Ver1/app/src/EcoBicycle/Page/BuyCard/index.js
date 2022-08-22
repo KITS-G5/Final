@@ -10,7 +10,7 @@ const BuyCardEco = () => {
     return (
         <div className=' row main_eco container' style={{margin:'auto'}}>
             <div className='text-center text-light mt-5 col-sm-12 main_eco_content'>
-                <h1>Buy an EcoBicycle Rentail Card !</h1>
+                <h1>Buy an EcoBicycle Retail Card !</h1>
                 <span>Pick your card type</span>
             </div>
             <div className='mt-5 row main_eco_card'>

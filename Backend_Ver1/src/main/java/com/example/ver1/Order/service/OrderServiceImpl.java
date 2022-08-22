@@ -61,16 +61,23 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void saveOrder(Order order) {
+    public int saveOrder(Order order) {
         Optional<Card> card = cardRepository.findById(order.getCard().getId());
         Optional<Bikes> bikes = bikesRepository.findById(order.getBike().getId());
         if(card.isPresent() && bikes.isPresent()){
-            //this bike status return to false while it is still renting
-            bikes.get().setStatus(false);
-            order.setBike(bikes.get());
-            order.setCard(card.get());
+            if(card.get().getCardNum().equals(order.getCard().getCardNum()) && card.get().getCardCcv().equals(order.getCard().getCardCcv())) {
+                //this bike status return to false while it is still renting
+                bikes.get().setStatus(false);
+                order.setBike(bikes.get());
+                order.setCard(card.get());
+                orderRepository.save(order);
+                return 1;
+            }
+            else {
+                return 0;
+            }
         }
-        orderRepository.save(order);
+        return -1;
     }
     @Override
     public void updateOrder(Stations station, Order order, long id) {
@@ -137,6 +144,16 @@ public class OrderServiceImpl implements OrderService{
             }
         }
         return -1;
+    }
+
+    @Override
+    public int makePayment(Card card) {
+        Optional<Order> found = orderRepository.findOrderByCardAndPaymentStatusAndReturnStatus(card, false, true);
+        if(found.isPresent()) {
+            found.get().setPaymentStatus(true);
+            orderRepository.save(found.get());
+            return 1;
+        } else return 0;
     }
 
     //calculate bike rental fee when customer return the bike

@@ -26,3 +26,7 @@
     z-index: -1;
     position: absolute;
 }
+
+.bike-gap {
+    margin-bottom: 10px;
+}
