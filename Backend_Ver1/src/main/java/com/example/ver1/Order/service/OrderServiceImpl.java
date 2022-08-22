@@ -34,6 +34,11 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Optional<Order> getOrderNotPaid(Card card, boolean paymentStatus) {
+        return orderRepository.findOrderByCardAndPaymentStatus(card, paymentStatus);
+    }
+
+    @Override
     public Page<Order> getAllOrderByCardNumber(String cardNum, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Optional<Card> cardByCardNum = cardRepository.findCardByCardNum(cardNum);

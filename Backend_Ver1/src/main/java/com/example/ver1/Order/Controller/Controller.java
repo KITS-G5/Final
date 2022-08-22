@@ -1,5 +1,8 @@
 package com.example.ver1.Order.Controller;
+import com.example.ver1.Card.Model.Card;
+import com.example.ver1.Card.Repository.CardRepository;
 import com.example.ver1.Order.Model.Order;
+import com.example.ver1.Order.Model.ResponseObj;
 import com.example.ver1.Order.service.OrderService;
 import com.example.ver1.Stations.model.Stations;
 import com.example.ver1.Stations.service.StationsService;
@@ -11,12 +14,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path = "/orders")
 public class Controller {
     @Autowired private OrderService orderService;
     @Autowired private StationsService stationsService;
+    @Autowired private CardRepository cardRepository;
 
     @GetMapping(path = "")
     List<Order> getAllOrderList(){
@@ -46,9 +52,19 @@ public class Controller {
     }
 
     @PostMapping(path = "")
-    Order addOrder(@RequestBody Order order){
-        orderService.saveOrder(order);
-        return order;
+    ResponseObj addOrder(@RequestBody Order order){
+        Optional<Card> card = cardRepository.findById(order.getCard().getId());
+        if(card.isPresent()){
+            Optional<Order> notPaidOrder = orderService.getOrderNotPaid(card.get(), false);
+            if(notPaidOrder.isPresent()) {
+                return new ResponseObj("Failed", "You still have an order which is not paid", notPaidOrder.get());
+            } else {
+                orderService.saveOrder(order);
+                return new ResponseObj("OK", "Rent bike success", order);
+            }
+        }
+
+        return new ResponseObj("Failed", "Can not find this card number", "");
     }
 
     @PutMapping(path = {"/user/{idOrder}/{idStation}", "/admin/{idOrder}/{idStation}"})

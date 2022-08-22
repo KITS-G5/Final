@@ -13,10 +13,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order,Long> {
     @NotNull Page<Order> findAll(@NotNull Pageable pageable);
+
+    Optional<Order> findOrderByCardAndPaymentStatus(Card card, boolean paymentStatus);
     Page<Order> findOrdersByCard(Card card,Pageable pageable);
 
     //query list of order by month and year

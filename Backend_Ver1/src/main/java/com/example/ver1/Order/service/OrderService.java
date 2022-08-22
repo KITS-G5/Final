@@ -7,10 +7,13 @@ import org.springframework.data.domain.Page;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
     List<Order> getAllOrders();
     Page<Order> getAllOrderByPage(int pageNo, int pageSize);
+
+    Optional<Order> getOrderNotPaid(Card card, boolean paymentStatus);
 
     Page<Order> getAllOrderByCardNumber(String cardNum, int pageNo, int pageSize);
 
