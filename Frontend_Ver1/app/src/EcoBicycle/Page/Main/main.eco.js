@@ -42,28 +42,9 @@ const MainEco = () => {
                         <h1>Welcome to EcoBicycle Rental !</h1>
                     </div>
                     <div className='mt-5 row main_eco_card'>
-                        <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
-                            <h3 className='text-center fs-1 '>Card</h3>
-                            <div className='col-lg-6 card_item'>
-                                <Link className='to_link'
-                                      to='buy_card'>
-                                    <PaidIcon/>
-                                    <br/>
-                                    <span className='text-center'>Buy a card</span>
-                                </Link>
-                            </div>
-                            <div className='col-lg-6 card_item'>
-                                <Link className='to_link'
-                                      to='topup'>
-                                    <AddCardIcon/>
-                                    <br/>
-                                    <span className='text-center'>Top up to card</span>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
-                            <h3 className='text-center fs-1 '>Bike</h3>
-                            <div className='col-lg-6 card_item'>
+                        <h3 className='text-center fs-1 '>Bike</h3>
+                        <div className=' col-sm-12 col-md-12 col-lg-6 buy_card'>
+                            <div className='card_item'>
                                 <Link className='to_link'
                                       to={`/ecobicycle/rentbike/${product.id}`}>
                                     <DirectionsBikeIcon/>
@@ -71,7 +52,10 @@ const MainEco = () => {
                                     <span className='text-center'>Rent a bike</span>
                                 </Link>
                             </div>
-                            <div className='col-lg-6 card_item'>
+
+                        </div>
+                        <div className=' col-sm-12 col-md-12 col-lg-6 buy_card'>
+                            <div className=' card_item'>
                                 <Link className='to_link'
                                       to={`/ecobicycle/return_bike`}>
                                     <ShoppingCartCheckoutIcon/>
@@ -80,55 +64,8 @@ const MainEco = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
-                            <div style={{padding:20}}></div>
-                            <div className='col-lg-6 card_item'>
-                                <Link className='to_link'
-                                      to='buy_card'>
-                                    <CreditScoreIcon/>
-                                    <br/>
-                                    <span className='text-center'>Return a card</span>
-                                </Link>
-                            </div>
-                            <div className='col-lg-6 card_item'>
-                                <Link className='to_link'
-                                      to=''>
-                                    <BadgeIcon/>
-                                    <br/>
-                                    <span className='text-center'><CardInfo data={product}/></span>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className=' row col-sm-12 col-md-12 col-lg-6 buy_card'>
-                            <div style={{padding:20}}></div>
-                            <div className='col-lg-6 card_item'>
-                                <Link className='to_link'
-                                      to='buy_card'>
-                                    <FactCheckIcon/>
-                                    <br/>
-                                    <span className='text-center'>Todo</span>
-                                </Link>
-                            </div>
-                            <div className='col-lg-6 card_item'>
-                                <Link className='to_link'
-                                      to='buy_card'>
-                                    <PhoneInTalkIcon/>
-                                    <br/>
-                                    <span className='text-center'>Contact us</span>
-                                </Link>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-                /*<div>
-                    {/!*<h1>{product.id}</h1>
-                    <h1>{product.cardPassword}</h1>
-                    <h1>{product.name}</h1>
-                    <h1>{product.phone}</h1>
-                    <h1>{product.address}</h1>*!/}
-
-                </div>*/
+            </div>
             ) : (
                 <div style={{margin:"auto", padding:100, display:"flex",justifyContent:'center'}}>
                     <img src={'https://i.gifer.com/8tVa.gif'} alt=""/>

@@ -27,16 +27,14 @@ import HomeEcoBicycle from "./EcoBicycle/Layout/Home/home.ecobicycle";
 import ContentsEco from "./EcoBicycle/Layout/Contents/contents.eco";
 import Demo from "./EcoBicycle/Components/Authentication/Eco.Signup/User";
 import MainEco from "./EcoBicycle/Page/Main/main.eco";
-import BuyCardEco from "./EcoBicycle/Page/BuyCard";
-import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
 import EcoPaymentMethod from "./EcoBicycle/Page/PaymentMethods/Eco.PaymentMethor";
 import EcoTopup from "./EcoBicycle/Page/Topup";
 import RentBike from "./EcoBicycle/Page/RentBike/RentBike";
 import ReturnBikeTest from "./EcoBicycle/Page/ReturnBike/Test02";
 import CheckValue from "./EcoBicycle/Page/ReturnBike/Checkvalue";
-import ReturnBice from "./EcoBicycle/Page/ReturnBike/Test";
 import {LoggerContext} from "./Context/GlobalContext";
 import {Fragment} from "react";
+import SigninHome from "./Components/Authentication/Signin/SigninHome";
 
 
 function App() {
@@ -48,7 +46,7 @@ function App() {
                         <Route path='/' element={<Header />}>
                             <Route index element={<Home />} />
                             <Route path="/buyweb" element={<BuyCardWeb />} />
-                            <Route path='signin' element={<Signin />} />
+                            <Route path='signin' element={<SigninHome />} />
 
                             <Route path="/search" element={<Search />} />
                             <Route path="/topup" element={<Topup />} />
@@ -69,7 +67,7 @@ function App() {
                         <Route path='addstation' element={<AddStation />}></Route>
                         <Route path='/edit/:id' element={<EditBike />}></Route>
                         <Route path={'/admin/user/'}>
-                            {/*<Route index element={<AdminUser/>}/>*/}
+                            <Route index element={<AdminUser/>}/>
                             <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
                             <Route path={'/admin/user/topup'} element = {<Topup/>}/>
                         </Route>

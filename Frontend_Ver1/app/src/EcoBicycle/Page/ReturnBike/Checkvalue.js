@@ -4,13 +4,11 @@ import {useNavigate, useParams} from 'react-router-dom';
 import image from "../../Components/image/Atm.png";
 
 
-
 export default function Checkvalue() {
     const params = useParams()
     let navigate = useNavigate();
     const [cardNum, setCardNum] = useState('');
     const [cardCcv, setCardCcv] = useState('');
-
     const [idcus, setIdCus] = useState("")
 
     useEffect(() => {
