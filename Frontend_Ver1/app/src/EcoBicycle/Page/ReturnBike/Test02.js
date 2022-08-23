@@ -1,8 +1,9 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
-import { Form, InputGroup } from "react-bootstrap";
+import {useState, useEffect} from 'react';
+import {Form, InputGroup} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import {NavDropdown, Table} from "react-bootstrap";
+
 export default function ReturnBikeTest() {
 
     const [data, setData] = useState([]);
@@ -14,15 +15,12 @@ export default function ReturnBikeTest() {
     const [searchKeys, setSearchKeys] = useState('');
 
 
-
     useEffect(() => {
         let url = 'http://localhost:8080/api/v1/stations/'
         fetch(url)
             .then(res => res.json())
             .then(res => setStation(res))
     }, [searchKeys]);
-
-
 
 
     useEffect(() => {
@@ -33,11 +31,14 @@ export default function ReturnBikeTest() {
     }, []);
 
 
-
     const myList = station.map((item, index) => (
-        <Link to={`/ecobicycle/return_bike/${item.id}`} >
-                {item.stationName}
-        </Link>
+        <>
+            <div className={'col-md-4'}>
+                <Link to={`/ecobicycle/return_bike/${item.id}`}>
+                    {item.stationName}
+                </Link>
+            </div>
+        </>
     ))
 
 
@@ -62,10 +63,11 @@ export default function ReturnBikeTest() {
             <div className={"container"}>
                 <h3>Welcome to station name:</h3>
                 <h3>Total available bikes in the station</h3>
-                <div className=' col-sm-6 ' style={{display:'flex', gap:20}}>
-                    {myList}
+                <div className={'row'}>
+                    <div>
+                        {myList}
+                    </div>
                 </div>
-
 
 
             </div>

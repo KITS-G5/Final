@@ -99,13 +99,23 @@ const RentBike = () => {
             });
         }
         var checkStation = [];
+        let statName = "";
+        if (stations != null) {
+            statName = stations.filter((item)=>item.id == selectedStationID).map((item) => {
+                return (
+                    <h3>Welcome to station: {item.stationName}</h3>
+                );
+            });
+        }
         if (stations != null) {
             checkStation = stations.map((item) => {
                     return (
+                        <>
                         <option value={item.id} key={item.id}>{item.stationName} {stations.stationAddress}</option>
+                        </>
                     )
                 }
-            )
+            );
         }
         const [cardNum, setCardNum] = useState("");
         const [cardCcv, setCardCcv] = useState("");
@@ -149,8 +159,9 @@ const RentBike = () => {
 
         return (
             <div className={"container"}>
-                <h3>Welcome to station name: {selectedStationID}</h3>
-
+                {/*<h3>Welcome to station name: {selectedStationID}</h3>*/}
+                {/*<h3>Welcome to station: {selectedStationID}</h3>*/}
+                {statName}
                 <select className="form-select"
                         onChange={(e) => setSelectedStationID(e.target.value)}
 
