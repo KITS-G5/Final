@@ -29,10 +29,7 @@ const ContentsEco = () => {
                                 <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5 '>
                                     <Link to='sign_account'>
-                                        <span>Sign in</span>
-                                    </Link>
-                                    <Link to='signup'>
-                                        <span>Sign up</span>
+                                        <span>Next Steps</span>
                                     </Link>
                                 </div>
 
@@ -50,10 +47,7 @@ const ContentsEco = () => {
                                 <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
-                                        <span>Sign in</span>
-                                    </Link>
-                                    <Link to='signup'>
-                                        <span>Sign up</span>
+                                        <span>Next Steps</span>
                                     </Link>
                                 </div>
                             </div>
@@ -70,10 +64,7 @@ const ContentsEco = () => {
                                 <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
-                                        <span>Sign in</span>
-                                    </Link>
-                                    <Link to='signup'>
-                                        <span>Sign up</span>
+                                        <span>Next Steps</span>
                                     </Link>
                                 </div>
                             </div>
@@ -90,10 +81,7 @@ const ContentsEco = () => {
                                 <span className='text-center '>Register as a member using the official APP, website or EcoBicycle</span>
                                 <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
-                                        <span>Sign in</span>
-                                    </Link>
-                                    <Link to='signup'>
-                                        <span>Sign up</span>
+                                        <span>Next Steps</span>
                                     </Link>
                                 </div>
                             </div>
@@ -111,10 +99,7 @@ const ContentsEco = () => {
 
                                 <div className='res_content d-flex justify-content-around mt-5  '>
                                     <Link to='sign_account'>
-                                        <span>Sign in</span>
-                                    </Link>
-                                    <Link to='signup' className='text-decoration-none'>
-                                        <span>Sign up</span>
+                                        <span>Next Steps</span>
                                     </Link>
                                 </div>
                             </div>
