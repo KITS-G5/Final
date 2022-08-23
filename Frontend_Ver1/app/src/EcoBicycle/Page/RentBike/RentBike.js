@@ -8,6 +8,13 @@ import card2 from "../../../BuyCardWeb/img/backend.png";
 
 const RentBike = () => {
         const params = useParams();
+        let style1 = {
+            border : "green"
+        }
+        let style2 = {
+            border : "grey"
+        }
+
 
         //selection box for station name
         let [stations, setStations] = useState(null);
