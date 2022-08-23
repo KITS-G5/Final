@@ -36,7 +36,6 @@ export default function ReturnBikeTest() {
             <Link
                 to={`/ecobicycle/return_bike/${item.id}`}
                 style={{textDecoration:'none', color:'#222', padding:60,margin:10, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", fontWeight:600}}
-
             >
                 {item.stationName}
             </Link>

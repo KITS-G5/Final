@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import image from "../../Components/image/Atm.png";
 
-
 export default function Checkvalue() {
     const params = useParams()
     let navigate = useNavigate();
     const [cardNum, setCardNum] = useState('');
     const [cardCcv, setCardCcv] = useState('');
     const [idcus, setIdCus] = useState("")
+    const [status, setStatus] = useState(false)
 
     useEffect(() => {
         if(cardNum === '') return
@@ -38,6 +38,7 @@ export default function Checkvalue() {
             .then(response => response.json())
             .then(data => alert(data.message));
         window.location.reload();
+        setStatus(true)
         navigate(-1)
     }
     const onSubmit = (e) => {

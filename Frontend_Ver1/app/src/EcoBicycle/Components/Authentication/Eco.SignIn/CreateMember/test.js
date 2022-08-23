@@ -1,3 +1,4 @@
+/*
 import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import {useNavigate, useParams} from "react-router-dom";
@@ -11,21 +12,17 @@ const EcoCreateMember = () => {
     const [cardPassword, setCardPassword] = useState('')
     const [typeCard, setTypeCard] = useState('')
     const [error, setError] = useState('');
-    const [idTypeCard, setIdTypeCard] = useState(1)
-
 
     const navigate = useNavigate();
-    /*const handleLogin = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault()
         setError('')
+
         axios.post('http://localhost:8080/api/auth/signup/', {
             name:name,
             address:address,
             phone:phone,
-            cardType: {
-                id : idTypeCard,
-                cardType:cardType
-            },
+            typeCard:typeCard,
             cardPassword:cardPassword
         })
             .then(result => {
@@ -35,68 +32,15 @@ const EcoCreateMember = () => {
                 setError(err.message)
                 alert(err.message)
             })
-        const requestOption = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                name:name,
-                address:address,
-                phone:phone,
-                cardType: {
-                    id : idTypeCard,
-                    cardType:cardType
-                },
-            })
-        };
-        console.log(requestOption)
-        fetch("http://localhost:8080/orders", requestOption)
-            .then(res => res.json())
-            .then(data => {
-                alert(data.message)
-            });
-        window.location.reload();
-    };*/
         // navigate(`sign_account}`)
-    //}
-    const handleLogin = () => {
-
-        const requestOption = {
-            method: "POST",
-            headers : {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                name:name,
-                address:address,
-                phone:phone,
-                cardType: {
-                    id : idTypeCard,
-                    cardType:typeCard
-                },
-                cardPassword:cardPassword
-            })
-        };
-        console.log(requestOption)
-        console.log(requestOption.body.slice(12,31))
-        fetch("http://localhost:8080/api/auth/signup/", requestOption)
-            .then(res => res.json())
-            .then(data => {
-                alert(data.message)
-                console.log(data.body.slice(12,31))
-                // navigate('/')
-            });
-        // window.location.reload();
-    };
+    }
     const handlePass = (e) => {
         setCardPassword(e.target.value)
 
     }
+
     const hanldeSelect = (e) => {
         setTypeCard(e.target.value)
-        if(setTypeCard(e.target.value) === 'Banking') {
-            setIdTypeCard(2)
-        }
         console.log(e.target.value)
     }
     return (
@@ -149,13 +93,13 @@ const EcoCreateMember = () => {
                     <div className="col-md-6">
                         <label htmlFor="validationCustom01" className="form-label">Type Card</label>
                         <div className="select-container">
-                            <select className="form-select" aria-label="Default select example"
+                            <select
                                 name="cardType"
                                 value={typeCard.cardName}
                                 onChange={hanldeSelect}
                             >
-                                <option defaultValue={1} value={typeCard.cardName}>Prepaid</option>
-                                <option defaultValue={2} value={typeCard.cardName}>Banking</option>
+                                <option value={typeCard.cardName}>abc</option>
+                                <option value={typeCard.cardName}>xxx</option>
                             </select>
                         </div>
 
@@ -197,4 +141,4 @@ const EcoCreateMember = () => {
     );
 };
 
-export default EcoCreateMember;
+export default EcoCreateMember;*/

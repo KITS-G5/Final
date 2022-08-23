@@ -65,13 +65,13 @@ const MainEco = () => {
                             </div>
                         </div>
                     </div>
+
             </div>
             ) : (
                 <div style={{margin:"auto", padding:100, display:"flex",justifyContent:'center'}}>
                     <img src={'https://i.gifer.com/8tVa.gif'} alt=""/>
                 </div>
             )}
-
         </div>
     );
 };
