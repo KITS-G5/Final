@@ -9,10 +9,14 @@ import card2 from "../../../BuyCardWeb/img/backend.png";
 const RentBike = () => {
         const params = useParams();
         let style1 = {
-            border : "green"
+            marginLeft : "10px",
+            border : "2x solid green",
+            color : "green"
         }
         let style2 = {
-            border : "grey"
+            marginLeft : "10px",
+            border : "grey",
+            color: "grey"
         }
 
 
@@ -53,10 +57,10 @@ const RentBike = () => {
         let totalBikes
         if (countBikes > 1) {
             totalBikes = <><h3>There are total {countBikes} bikes available in the station</h3>
-                <h3>Select your bike: </h3></>
+                <h3 className={'mt-3'}>Select your bike: </h3></>
         } else if (countBikes === 1) {
             totalBikes = <><h3>There is {countBikes} bike available in the station</h3>
-                <h3>Select your bike: </h3></>
+                <h3 className={'mt-3'}>Select your bike: </h3></>
         } else {
             totalBikes = <h3>There is no bike available in the station</h3>
         }
@@ -82,11 +86,11 @@ const RentBike = () => {
         if (bikes != null) {
             bikeList = bikes.map((item, index) => {
                 return (
-                    <div className="d-inline-flex justify-content-center align-items-center bike-gap"
-                         style={{border: "solid", width: "45%"}} key={index}>
+                    <div className="d-inline-flex justify-content-center align-items-center bike-gap mt-3"
+                         style={{border: "none", width: "45%"}} key={index}>
                         <input className="form-check-input" type="radio" name="bike" id="bike" disabled={!item.status}
                                value={item.id} onChange={(e) => setChosenBike(e.target.value)}/>
-                        <label className="form-check-label" htmlFor="bike">
+                        <label className="form-check-label" htmlFor="bike" style={item.status ? style1 : style2}>
                             <div className="card" style={{width: '18rem'}}>
                                 <div className="card-body">
                                     <h5 className="card-title">Bike {item.bikeName}</h5>
@@ -103,7 +107,7 @@ const RentBike = () => {
         if (stations != null) {
             statName = stations.filter((item)=>item.id == selectedStationID).map((item) => {
                 return (
-                    <h3>Welcome to station: {item.stationName}</h3>
+                    <h2 className={'text-center mt-5'}>Welcome to station: {item.stationName}</h2>
                 );
             });
         }
@@ -129,7 +133,7 @@ const RentBike = () => {
         const handleRent = () => {
             let cardChosenId = cardData.id;
             let cardChosenNum = cardData.cardNum;
-            let cardChosenCcv = cardData.cardCcv;
+           // let cardChosenCcv = cardCcv;
             let rentData = {
                 "bike":
                     {
@@ -139,7 +143,7 @@ const RentBike = () => {
                 "card": {
                     "id": cardChosenId,
                     "cardNum": cardChosenNum,
-                    "cardCcv": cardChosenCcv
+                    "cardCcv": cardCcv
                 }
             }
             const requestOption = {
@@ -158,7 +162,7 @@ const RentBike = () => {
 
 
         return (
-            <div className={"container"}>
+            <div className={"container mb-5"}>
                 {/*<h3>Welcome to station name: {selectedStationID}</h3>*/}
                 {/*<h3>Welcome to station: {selectedStationID}</h3>*/}
                 {statName}
@@ -170,7 +174,7 @@ const RentBike = () => {
                     {checkStation}
                 </select>
 
-                <hr/>
+                <hr className={'mt-4 mb-3'}/>
 
                 <div className={"d-flex flex-wrap justify-content-evenly align-items-center"}>
                     {/*{stations !== null ? <ListALlBikesBYStation idStation={selectedStationID}/> : ""}*/}
@@ -179,7 +183,7 @@ const RentBike = () => {
                 {totalBikes}
                 {bikeList}
 
-                <hr/>
+                <hr className={'mt-4'}/>
 
 
                 {/*card number section*/}
@@ -190,12 +194,12 @@ const RentBike = () => {
                         <div className="mb-3">
                             <label htmlFor="cardNum" className="form-label">Card number</label>
                             <input type="text" className="form-control"
-                                   onChange={(event) => setCardNum(event.target.value)}/>
+                                   onChange={(event) => setCardNum(event.target.value)} value={cardNum}/>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="CVV" className="form-label">CVV</label>
                             <input type="number" className="form-control"
-                                   onChange={(event) => setCardCcv(event.target.value)}/>
+                                   onChange={(event) => setCardCcv(event.target.value)} value={cardCcv}/>
                         </div>
                     </form>
                     <div className={'cardNum-right'}>
@@ -203,7 +207,7 @@ const RentBike = () => {
                         <img src={card2} alt={'cardIMG'} className={'cardNum-right2'}/>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={() => handleRent()}>Rent this bike</button>
+                <button type="submit" className="btn btn-primary" onClick={() => handleRent()} disabled={countBikes===0 && true}>Rent this bike</button>
             </div>
         );
     }

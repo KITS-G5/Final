@@ -71,6 +71,7 @@ public class OrderServiceImpl implements OrderService{
                 order.setBike(bikes.get());
                 order.setCard(card.get());
                 orderRepository.save(order);
+                bikesRepository.save(bikes.get());
                 return 1;
             }
             else {
