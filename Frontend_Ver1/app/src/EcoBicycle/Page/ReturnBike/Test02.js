@@ -32,43 +32,38 @@ export default function ReturnBikeTest() {
 
 
     const myList = station.map((item, index) => (
-        <>
-            <div className={'col-md-4'}>
-                <Link to={`/ecobicycle/return_bike/${item.id}`}>
-                    {item.stationName}
-                </Link>
-            </div>
-        </>
+        <div style={{display:'flex'}} >
+            <Link
+                to={`/ecobicycle/return_bike/${item.id}`}
+                style={{textDecoration:'none', color:'#222', padding:60,margin:10, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", fontWeight:600}}
+
+            >
+                {item.stationName}
+            </Link>
+        </div>
     ))
-
-
-    // let opt_district = [];
-    // const pickBike = (e) => {
-    //     let station_id = e.target.value;
-    //     opt_district = data.filter(databike => {
-    //         return databike.station.id === station_id
-    //     })
-    //     setBike(opt_district);
-    // }
-    //
-    // const getSearchTerm = (e) => {
-    //     pickBike(e);
-    //     setSearchKeys(e.target.value);
-    //     console.log("search key =", searchKeys);
-    // }
 
     return (
         <div className="container-fluid mt-5">
 
-            <div className={"container"}>
-                <h3>Welcome to station name:</h3>
-                <h3>Total available bikes in the station</h3>
-                <div className={'row'}>
-                    <div>
-                        {myList}
-                    </div>
+            <div className={"container-fulid"}>
+                <div>
+                    <h3 className='text-center'>Welcome to EcoBicycle</h3>
+                    <h3  className='text-center'>Please select the address to return the bike</h3>
                 </div>
 
+                <div style={{
+                    display:"flex",
+                    width:'80%',
+                    flexDirection:'row',
+                    flexWrap:'wrap',
+                    justifyContent:'center',
+                    alignItems:'stretch',
+                    alignContent:'center',
+                    margin:"auto"
+                }}>
+                    {myList}
+                </div>
 
             </div>
         </div>

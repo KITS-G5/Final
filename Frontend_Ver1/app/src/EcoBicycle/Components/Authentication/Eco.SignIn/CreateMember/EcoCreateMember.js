@@ -14,7 +14,6 @@ const EcoCreateMember = () => {
 
     const navigate = useNavigate();
     const handleLogin = (e) => {
-
         e.preventDefault()
         setError('')
 

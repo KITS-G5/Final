@@ -78,7 +78,7 @@ function HeaderAdmin(props) {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color:'#222',fontSize:'1.6rem' }}>
+                            <Button key={item} sx={{ color:'#222',fontSize:'1.2rem' }}>
                                 {item}
                             </Button>
                         ))}

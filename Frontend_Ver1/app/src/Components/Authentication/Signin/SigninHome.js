@@ -4,14 +4,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react";
 import image from "../../../EcoBicycle/Components/image/Atm.png";
 
-const SigninHome = () => {
 
+const SigninHome = () => {
     const [cardNum, setCardNum] = useState('')
     const [cardPassword, setCardPassword] = useState('')
     const [error, setError] = useState('');
     const [isLogger, setIsLogger] = useState('')
     const [admin, setAdmin] = useState('')
-
+    const [status, setStatus] = useState(false)
     const navigate = useNavigate();
 
 
@@ -46,17 +46,14 @@ const SigninHome = () => {
                 console.log(res.roleSet[0].title)
             })
         if(admin === 'admin'){
-
             navigate('/admin/home')
         }else {
             navigate('/admin/user')
         }
-
     },[isLogger])
 
 
 
-    
     const SubPass = (e) => {
         setCardPassword(e.target.value)
     }
@@ -116,7 +113,6 @@ const SigninHome = () => {
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     );

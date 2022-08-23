@@ -24,11 +24,9 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import {Outlet, useNavigate} from 'react-router-dom'
 import {Link} from 'react-router-dom'
 import PersonIcon from '@mui/icons-material/Person';
-import PedalBikeIcon from '@mui/icons-material/PedalBike';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-import {UserAuth} from "../../Context/AuthContext";
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+
 
 const drawerWidth = 200;
 
@@ -80,9 +78,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function SideBarUser() {
 
-
-
-
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -107,11 +102,11 @@ export default function SideBarUser() {
                         onClick={handleDrawerOpen}
                         edge="start"
                         sx={{
-                            marginRight: 5,
+                            marginRight: 3,
                             ...(open && { display: 'none' }),
                         }}
                     >
-                        <ChevronRightIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                        <ChevronRightIcon sx={{fontSize:'2rem',color:'#ffffff'}} />
                     </IconButton>
                 </Toolbar>
                 <DrawerHeader
@@ -119,26 +114,26 @@ export default function SideBarUser() {
 
                         margin:'auto',
                         position:"absolute",
-                        top:14,
+                        top:8,
                         left:136,
                         display:"none",
                         ...(open && { display: 'block' }),
                     }}
                 >
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} /> : <ChevronLeftIcon  sx={{fontSize:'2.5rem',color:'#ffffff'}}/>}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{fontSize:'2rem',color:'#ffffff'}} /> : <ChevronLeftIcon  sx={{fontSize:'2rem',color:'#ffffff'}}/>}
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
 
-                <List sx={{fontSize:'1.6rem' }} >
+                <List sx={{fontSize:'1.3rem' }} >
                     {['Home'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block'}}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
+                                    px: 2,
                                 }}
                             >
                                 <ListItemIcon
@@ -151,15 +146,15 @@ export default function SideBarUser() {
                                     {index % 2 === 0
                                         ?
                                         <Link to='/'>
-                                                <HomeIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                                                <HomeIcon sx={{fontSize:'2rem',color:'#ffffff'}} />
                                         </Link>
                                         :
                                         <Link to='/admin'>
-                                                <DashboardIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                                                <DashboardIcon sx={{fontSize:'2rem',color:'#ffffff'}} />
                                         </Link>
                                     }
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color:'#ffffff'}} />
                             </ListItemButton>
                         </ListItem>
                     ))}
@@ -174,7 +169,7 @@ export default function SideBarUser() {
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
+                                    px: 2,
                                 }}
                             >
                                 <ListItemIcon
@@ -184,24 +179,23 @@ export default function SideBarUser() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 == 0
+                                    {index % 2 === 0
                                         ?
                                         <Link to={'../topup/'}>
-                                            <CreditCardIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                            <CreditCardIcon sx={{fontSize: '2rem', color: '#ffffff'}}/>
                                         </Link>
                                         :
                                         <Link to='users'>
-                                            <PersonIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                            <PersonIcon sx={{fontSize: '2rem', color: '#ffffff'}}/>
                                         </Link>
                                     }
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color:'#ffffff' }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
             </Drawer>
-
             <Outlet/>
         </Box>
     );
