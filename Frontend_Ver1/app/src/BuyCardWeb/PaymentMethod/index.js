@@ -1,7 +1,7 @@
 import {Button, Container, Modal} from "react-bootstrap";
 import {useNavigate, useParams} from "react-router";
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import './paymentMethod.css';
 
 const PaymentMethod = () => {
@@ -12,7 +12,30 @@ const PaymentMethod = () => {
     const [show2, setShow2] = useState(false);
     const onSubmit = () => setShow(true);
     const handleClose = () => setShow(false);
+    const [cardData, setCardData] = useState([]);
+    const [cardId, setCardId] = useState("");
+    useEffect(() => {
+        let url = "http://localhost:8080/api/v1/cards/user/" + params.cardNo;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCardData(data));
+    },[]);
+
     const payHandle = () => {
+        setCardId(cardData.id);
+        let newBalance = parseInt(params.output);
+        const requestOpt = {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                id: cardId,
+                balance: newBalance
+            })
+        };
+        let url = "http://localhost:8080/api/v1/cards/" + cardId
+        fetch(url, requestOpt)
+            // .then(res => res.json());
+            .then();
         setShow2(true);
     };
     const handleClose2 = () => setShow2(false);
