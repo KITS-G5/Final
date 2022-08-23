@@ -2,6 +2,7 @@ import  {useState} from 'react';
 import axios from 'axios'
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react";
+import {Link} from 'react-router-dom'
 import image from "../../../EcoBicycle/Components/image/Atm.png";
 
 
@@ -68,8 +69,13 @@ const SigninHome = () => {
                     />
                 </div>
                 <div className='col-md-6 col-lg-6'>
+                    <p className='text-center'>
+                        Don't have an account yet?{' '}
+                        <Link to='/signup' >
+                            Sign up.
+                        </Link>
+                    </p>
                     <form className="row g-3 needs-validation mt-5" noValidate>
-
                         <div className="col-md-6">
                             <label htmlFor="validationCustom03" className="form-label">Card num</label>
                             <input type="phone"
@@ -94,7 +100,6 @@ const SigninHome = () => {
                                 Looks good!
                             </div>
                         </div>
-
                         <div className="col-12">
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required/>

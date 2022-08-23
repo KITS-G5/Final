@@ -47,7 +47,7 @@ function App() {
                             <Route index element={<Home />} />
                             <Route path="/buyweb" element={<BuyCardWeb />} />
                             <Route path='signin' element={<SigninHome />} />
-
+                            <Route path='signup' element={<EcoCreateMember />} />
                             <Route path="/search" element={<Search />} />
                             <Route path="/topup" element={<Topup />} />
                             <Route path="/pay/:cardNo/:output" element={<PaymentMethod />} />
@@ -80,7 +80,7 @@ function App() {
 
                             <Route path='signup' element={<EcoSignin/>}></Route>
                             <Route  path='signup/new_signin' element={<EcoMembership/>}/>
-                            <Route  path='signup/new_signin/create_account' element={<EcoCreateMember/>}/>
+                            {/*<Route  path='signup/new_signin/create_account' element={<EcoCreateMember/>}/>*/}
                             <Route path='main/:data' element={<MainEco/>}></Route>
                             <Route path='main/:data/topup' element={<EcoTopup/>}></Route>
                             <Route path='rentbike/:id' element={<RentBike/>}></Route>
