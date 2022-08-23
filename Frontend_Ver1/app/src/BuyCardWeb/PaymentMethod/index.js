@@ -74,7 +74,7 @@ const PaymentMethod = () => {
                                             <p className="mb-0"><span className="fw-bold">Top Up Card: </span><span
                                                 className="c-green">{params.cardNo} </span></p>
                                             <p className="mb-0"><span className="fw-bold">Price:</span><span
-                                                className="c-green"> {params.output} VND</span></p>
+                                                className="c-green"> {parseInt(params.output).toLocaleString()} VND</span></p>
                                             <div className={'form__div'}>
                                                 <input type="email" className="form-control mt-2"
                                                        placeholder=" "
@@ -108,7 +108,7 @@ const PaymentMethod = () => {
                                             </p>
                                             <p className="mb-0">
                                                 <span className="fw-bold">Price:</span>
-                                                <span className="c-green"> {params.output} VND</span>
+                                                <span className="c-green"> {parseInt(params.output).toLocaleString()} VND</span>
                                             </p>
                                         </div>
                                         <div className="col-lg-7">

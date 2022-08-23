@@ -65,7 +65,7 @@ const AdminUser = () => {
             if (cardData.cardType.id == 2) {
                 cardBal = "This card is postpaid";
             } else {
-                cardBal = cardData.balance.toString() + " VND"
+                cardBal = cardData.balance.toLocaleString() + " VND"
             }
         }
         // console.log(cardData.cardType.id);
