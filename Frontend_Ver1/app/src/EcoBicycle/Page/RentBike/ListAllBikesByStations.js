@@ -22,7 +22,7 @@ const ListALlBikesBYStation = (props) => {
     }, []);
     if (bikes != null) {
         let countNum = 0;
-        if (bikes.status == true) {
+        if (bikes.status === true) {
             setCount(countNum++);
         }
     }
@@ -56,7 +56,6 @@ const ListALlBikesBYStation = (props) => {
             <div className={"d-flex flex-wrap justify-content-evenly align-items-center"}>
                 {bikeCheck}
             </div>
-
         </div>
     );
 };

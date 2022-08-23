@@ -34,12 +34,15 @@ import EcoTopup from "./EcoBicycle/Page/Topup";
 import RentBike from "./EcoBicycle/Page/RentBike/RentBike";
 import ReturnBikeTest from "./EcoBicycle/Page/ReturnBike/Test02";
 import CheckValue from "./EcoBicycle/Page/ReturnBike/Checkvalue";
+import ReturnBice from "./EcoBicycle/Page/ReturnBike/Test";
+import {LoggerContext} from "./Context/GlobalContext";
+import {Fragment} from "react";
 
 
 function App() {
     return (
-        <>
-            <AuthContextProvider>
+        <Fragment>
+            <LoggerContext.Provider >
                 <BrowserRouter>
                     <Routes>
                         <Route path='/' element={<Header />}>
@@ -89,9 +92,9 @@ function App() {
                         </Route>
                     </Routes>
                 </BrowserRouter>
-            </AuthContextProvider>
+            </LoggerContext.Provider>
 
-        </>
+        </Fragment>
     );
 }
 
