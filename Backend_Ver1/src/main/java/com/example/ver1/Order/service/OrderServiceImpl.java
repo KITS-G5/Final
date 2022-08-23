@@ -119,10 +119,14 @@ public class OrderServiceImpl implements OrderService{
         Order o = null;
         if (optional.isPresent()) {
             o = optional.get();
-            o.getBike().setStation(station); //save new station id to the bike
-            o.getBike().setStatus(true); //the bike now is available for rent
-            o.setReturnStatus(true);
-            orderRepository.save(o);
+
+            //check if this bike had been returned
+            if(!o.isReturnStatus()) {
+                o.getBike().setStation(station); //save new station id to the bike
+                o.getBike().setStatus(true); //the bike now is available for rent
+                o.setReturnStatus(true);
+                orderRepository.save(o);
+            }
 
             //save fee to order
             float fee = calculateFee(o);
