@@ -160,7 +160,6 @@ const RentBike = () => {
             window.location.reload();
         };
 
-
         return (
             <div className={"container mb-5"}>
                 {/*<h3>Welcome to station name: {selectedStationID}</h3>*/}
