@@ -1,5 +1,5 @@
 import Header from "./Header/Header";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Router, Routes, useParams} from "react-router-dom";
 import Home from "./Home";
 import { AuthContextProvider } from "./Context/AuthContext";
 import Signin from "./Components/Authentication/Signin";
@@ -33,15 +33,19 @@ import RentBike from "./EcoBicycle/Page/RentBike/RentBike";
 import ReturnBikeTest from "./EcoBicycle/Page/ReturnBike/Test02";
 import CheckValue from "./EcoBicycle/Page/ReturnBike/Checkvalue";
 import {LoggerContext} from "./Context/GlobalContext";
-import {Fragment} from "react";
+import {Fragment, useState} from "react";
 import SigninHome from "./Components/Authentication/Signin/SigninHome";
 import Confirm from "./Components/Authentication/ProtectedRoute/Confirm";
-
+import {useEffect} from "react";
 
 function App() {
+
+    const[logger, setLogger] = useState(false)
+    const [user, setUser] = useState('')
+    const[cardLogin, setCardLogin] = useState('')
     return (
         <Fragment>
-            <LoggerContext.Provider >
+            <LoggerContext.Provider value={{logger, setLogger,user, setUser, cardLogin, setCardLogin}} >
                 <BrowserRouter>
                     <Routes>
                         <Route path='/' element={<Header />}>
@@ -54,6 +58,11 @@ function App() {
                             <Route path="/topup" element={<Topup />} />
                             <Route path="/pay/:cardNo/:output" element={<PaymentMethod />} />
                             {/*<Route path="/contact" element={<Contact/>}/>*/}
+                            <Route path={'/admin/user/'}>
+                                <Route index element={<AdminUser/>}/>
+                                <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
+                                <Route path={'/admin/user/topup'} element = {<Topup/>}/>
+                            </Route>
                         </Route>
                         <Route path='/admin/home' element={<Admin />}>
                             <Route index element={<HomeAdmin />} />
@@ -68,11 +77,7 @@ function App() {
                         <Route path='addbike' element={<AddBike />}></Route>
                         <Route path='addstation' element={<AddStation />}></Route>
                         <Route path='/edit/:id' element={<EditBike />}></Route>
-                        <Route path={'/admin/user/'}>
-                            <Route index element={<AdminUser/>}/>
-                            <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
-                            <Route path={'/admin/user/topup'} element = {<Topup/>}/>
-                        </Route>
+
 
 
                         <Route path="/ecobicycle" element={<HomeEcoBicycle />}>
@@ -80,12 +85,11 @@ function App() {
                             {/*<Route path='sign_account' element={<LoginAccount/>}/>*/}
                             <Route path='sign_account' element={<Demo/>}/>
 
-                            <Route path='signup' element={<EcoSignin/>}></Route>
                             <Route  path='signup/new_signin' element={<EcoMembership/>}/>
                             {/*<Route  path='signup/new_signin/create_account' element={<EcoCreateMember/>}/>*/}
-                            <Route path='main/:data' element={<MainEco/>}></Route>
+                            <Route path='main' element={<MainEco/>}></Route>
                             <Route path='main/:data/topup' element={<EcoTopup/>}></Route>
-                            <Route path='rentbike/:id' element={<RentBike/>}></Route>
+                            <Route path='rentbike' element={<RentBike/>}></Route>
                             <Route path='return_bike' element={<ReturnBikeTest />}></Route>
                             <Route path='return_bike/:id' element={<CheckValue />}></Route>
                             <Route path='main/:data/topup/pay/:cardNo/:output' element={<EcoPaymentMethod/>}></Route>

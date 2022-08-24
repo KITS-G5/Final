@@ -13,19 +13,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import CardInfo from "../CardInfo/CardInfo";
 const MainEco = () => {
 
-    const params = useParams();
-    const [product, setProduct] = useState(null);
-    const [count, setCount] = useState(1);
-    useEffect(() => {
-        let url = 'http://localhost:8080/customer/findByCardNum/' + params.data ;
-        console.log(url);
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                setProduct(data);
-                console.log(data)
-            });
-    }, []);
+
 
     const {text} = useTypewriter({
         words: ['Hello', 'Today I would like to ...' ],
@@ -34,8 +22,6 @@ const MainEco = () => {
     return (
 
         <div className=' row main_eco container' style={{margin:'auto'}}>
-
-            {product !== null ? (
 
                 <div>
                     <div className='text-center  mt-5 col-sm-12 main_eco_content'>
@@ -46,7 +32,7 @@ const MainEco = () => {
                         <div className=' col-sm-12 col-md-12 col-lg-6 buy_card'>
                             <div className='card_item'>
                                 <Link className='to_link'
-                                      to={`/ecobicycle/rentbike/${product.id}`}>
+                                      to={`/ecobicycle/rentbike/`}>
                                     <DirectionsBikeIcon/>
                                     <br/>
                                     <span className='text-center' style={{color: "var(--font-color)"}}>Rent a bike</span>
@@ -67,11 +53,7 @@ const MainEco = () => {
                     </div>
 
             </div>
-            ) : (
-                <div style={{margin:"auto", padding:100, display:"flex",justifyContent:'center'}}>
-                    <img src={'https://i.gifer.com/8tVa.gif'} alt=""/>
-                </div>
-            )}
+
         </div>
     );
 };

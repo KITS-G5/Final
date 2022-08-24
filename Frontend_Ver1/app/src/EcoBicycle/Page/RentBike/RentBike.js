@@ -7,7 +7,7 @@ import card1 from "../../../BuyCardWeb/img/frontcard.png";
 import card2 from "../../../BuyCardWeb/img/backend.png";
 
 const RentBike = () => {
-        const params = useParams();
+
         let style1 = {
             marginLeft : "10px",
             border : "2x solid green",

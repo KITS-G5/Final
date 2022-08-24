@@ -1,12 +1,14 @@
-import  {useState} from 'react';
+import {useContext, useState} from 'react';
 import axios from 'axios'
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react";
+import {LoggerContext} from "../../../Context/GlobalContext";
 import {Link} from 'react-router-dom'
 import image from "../../../EcoBicycle/Components/image/Atm.png";
 
 
 const SigninHome = () => {
+    const{setCardLogin, setLogger} = useContext(LoggerContext)
     const [cardNum, setCardNum] = useState('')
     const [cardPassword, setCardPassword] = useState('')
     const [error, setError] = useState('');
@@ -15,6 +17,11 @@ const SigninHome = () => {
     const [status, setStatus] = useState(false)
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if(localStorage.getItem('user_info')) {
+            navigate('/')
+        }
+    },[])
 
     const handleLogin = (e) => {
         if(cardNum === '' || cardPassword === '') {
@@ -27,9 +34,17 @@ const SigninHome = () => {
             cardPassword:cardPassword
         })
             .then(result => {
+                let idNum = result.config.data.slice(12,31)
                 console.log(result.config.data.slice(12,31))
                 setIsLogger(result.config.data.slice(12,31))
-
+                setCardLogin((item) => [...item, idNum])
+                setLogger(true)
+                localStorage.setItem('user_info',JSON.stringify(result))
+                navigate('/')
+                /*const timeout = setTimeout(() => {
+                    navigate('/')
+                },1000)
+                return () => clearTimeout(timeout)*/
             })
             .catch(err => {
                 setError(err.message)
@@ -38,20 +53,6 @@ const SigninHome = () => {
 
     }
 
-    useEffect(() => {
-        if(isLogger === '') return
-        fetch('http://localhost:8080/api/v1/cards/user/' + isLogger)
-            .then((res) => res.json())
-            .then((res) => {
-                setAdmin(res.roleSet[0].title)
-                console.log(res.roleSet[0].title)
-            })
-        if(admin === 'admin'){
-            navigate('/admin/home')
-        }else {
-            navigate('/admin/user/'+ isLogger)
-        }
-    },[isLogger])
 
 
     const SubPass = (e) => {
