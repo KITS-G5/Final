@@ -34,7 +34,7 @@ const Home = () => {
                             Bikes for the occasional and eco-friendly needs.
                         </h4>
                         <Button variant={"success"} className={'header_button mt-5'}>
-                            <a href={"#"}>
+                            <a href={"/signin"}>
                                 <h1>
                                     Rent one now!
                                 </h1>
