@@ -49,7 +49,7 @@ const MainEco = () => {
                                       to={`/ecobicycle/rentbike/${product.id}`}>
                                     <DirectionsBikeIcon/>
                                     <br/>
-                                    <span className='text-center'>Rent a bike</span>
+                                    <span className='text-center' style={{color: "var(--font-color)"}}>Rent a bike</span>
                                 </Link>
                             </div>
 
@@ -60,7 +60,7 @@ const MainEco = () => {
                                       to={`/ecobicycle/return_bike`}>
                                     <ShoppingCartCheckoutIcon/>
                                     <br/>
-                                    <span className='text-center'>Return Bike</span>
+                                    <span className='text-center' style={{color: "var(--font-color)"}}>Return Bike</span>
                                 </Link>
                             </div>
                         </div>

@@ -32,14 +32,14 @@ a {
     color: var(--font-color) !important;
 }
 .contact_message::placeholder {
-    color: #eee;
+    color: var(--font-color)!important;
 }
 .contact_input .contactInput {
     background-color: var(--background-color)!important;
     color: var(--font-color) !important;
 }
 .contact_input .contactInput::placeholder {
-    color: #eeeeee;
+    color: var(--font-color)!important;
 }
 .navbar{
     background-color: var(--background-color)!important;
