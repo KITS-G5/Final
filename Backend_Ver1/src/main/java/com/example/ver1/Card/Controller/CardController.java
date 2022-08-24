@@ -3,6 +3,7 @@ package com.example.ver1.Card.Controller;
 import com.example.ver1.Bikes.model.Bikes;
 import com.example.ver1.Card.Model.Card;
 import com.example.ver1.Card.Service.CardService;
+import com.example.ver1.Order.Model.ResponseObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +54,13 @@ public class CardController {
     @DeleteMapping(path = "/cards/{id}")
     void deleteCard(@PathVariable long id){
         cardService.deleteCard(id);
+    }
+
+
+    //note: Văn Hải gọi phương thức này. cho tang confirm order. (Chỉ trả về giá trị card của lần mua gần nhất)
+    @GetMapping(path = "/cardByPhoneNumber/{phoneNumber}")
+    ResponseObj getCardByPhoneNumber(@PathVariable String phoneNumber) {
+        Optional<Card> cardByPhoneNumber = cardService.getCardByPhoneNumber(phoneNumber);
+        return cardByPhoneNumber.map(card -> new ResponseObj("OK", "Found card number", card)).orElseGet(() -> new ResponseObj("Failed", "Can not find card with this phone number", ""));
     }
 }

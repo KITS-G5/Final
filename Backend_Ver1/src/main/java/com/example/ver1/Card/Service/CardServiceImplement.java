@@ -31,6 +31,11 @@ public class CardServiceImplement implements CardService {
     }
 
     @Override
+    public Optional<Card> getCardByPhoneNumber(String phoneNumber) {
+        return cardRepository.findCardByPhoneNumber(phoneNumber);
+    }
+
+    @Override
     public Optional<Card> getCardByCardNum(String cardNUm) {
         return cardRepository.findCardByCardNum(cardNUm);
     }
