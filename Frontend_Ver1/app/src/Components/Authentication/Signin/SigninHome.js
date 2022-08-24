@@ -49,10 +49,9 @@ const SigninHome = () => {
         if(admin === 'admin'){
             navigate('/admin/home')
         }else {
-            navigate('/admin/user')
+            navigate('/admin/user/'+ isLogger)
         }
     },[isLogger])
-
 
 
     const SubPass = (e) => {
@@ -71,8 +70,8 @@ const SigninHome = () => {
                 <div className='col-md-6 col-lg-6'>
                     <p className='text-center'>
                         Don't have an account yet?{' '}
-                        <Link to='/signup' >
-                            Sign up.
+                        <Link to='/buycard' >
+                            Buy Card
                         </Link>
                     </p>
                     <form className="row g-3 needs-validation mt-5" noValidate>
