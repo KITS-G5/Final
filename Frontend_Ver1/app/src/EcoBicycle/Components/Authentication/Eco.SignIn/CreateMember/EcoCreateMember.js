@@ -52,7 +52,10 @@ const EcoCreateMember = () => {
 
             });
         // window.location.reload();
-        navigate('/confirm/' + phone)
+        const timeout = setTimeout(() => {
+            navigate('/confirm/' + phone)
+        },1000)
+        return () => clearTimeout(timeout)
     };
     const handlePass = (e) => {
         setCardPassword(e.target.value)

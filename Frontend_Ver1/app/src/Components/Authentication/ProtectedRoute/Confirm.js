@@ -14,6 +14,7 @@ const Confirm = () => {
                 setCardInfo(res.object)
                 console.log(res.object)
             })
+
     },[])
 
     const home = () => {
@@ -44,7 +45,7 @@ const Confirm = () => {
                                             {cardInfo.cardNum}
                                         </h3>
                                         <h3 className=" mt-4">Card Ccv:  {cardInfo.cardCcv}</h3>
-
+                                        <h3 className=" mt-4">Card Ccv:  {cardInfo.cardType.cardType}</h3>
 
                                     </div>
                                 </div>
