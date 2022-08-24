@@ -10,56 +10,21 @@ const EcoCreateMember = () => {
     const [phone, setPhone] = useState('')
     const [cardPassword, setCardPassword] = useState('')
     const [typeCard, setTypeCard] = useState('')
-    const [error, setError] = useState('');
+    const [confirm, setConfirm] = useState('');
     const [idTypeCard, setIdTypeCard] = useState(1)
 
 
     const navigate = useNavigate();
-    /*const handleLogin = (e) => {
-        e.preventDefault()
-        setError('')
-        axios.post('http://localhost:8080/api/auth/signup/', {
-            name:name,
-            address:address,
-            phone:phone,
-            cardType: {
-                id : idTypeCard,
-                cardType:cardType
-            },
-            cardPassword:cardPassword
-        })
-            .then(result => {
-                console.log(result)
-            })
-            .catch(err => {
-                setError(err.message)
-                alert(err.message)
-            })
-        const requestOption = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                name:name,
-                address:address,
-                phone:phone,
-                cardType: {
-                    id : idTypeCard,
-                    cardType:cardType
-                },
-            })
-        };
-        console.log(requestOption)
-        fetch("http://localhost:8080/orders", requestOption)
-            .then(res => res.json())
-            .then(data => {
-                alert(data.message)
-            });
-        window.location.reload();
-    };*/
-        // navigate(`sign_account}`)
-    //}
+    // useEffect(() => {
+    //     if(phone === '') return
+    //     fetch('http://localhost:8080/api/v1/cardByPhoneNumber/' + phone)
+    //         .then((res) => res.json())
+    //         .then((res) => {
+    //             setConfirm(res.object.customer.phone)
+    //             console.log(res.object.customer.phone)
+    //         })
+    // },[])
     const handleLogin = () => {
-
         const requestOption = {
             method: "POST",
             headers : {
@@ -78,19 +43,22 @@ const EcoCreateMember = () => {
             })
         };
         console.log(requestOption)
-        console.log(requestOption.body.slice(12,31))
+        console.log(requestOption.body)
         fetch("http://localhost:8080/api/auth/signup/", requestOption)
             .then(res => res.json())
             .then(data => {
                 alert(data.message)
-                console.log(data.body.slice(12,31))
-                // navigate('/')
+                console.log(data.body.slice(54,64))
+
             });
         // window.location.reload();
+        const timeout = setTimeout(() => {
+            navigate('/confirm/' + phone)
+        },1000)
+        return () => clearTimeout(timeout)
     };
     const handlePass = (e) => {
         setCardPassword(e.target.value)
-
     }
     const hanldeSelect = (e) => {
         setTypeCard(e.target.value)
@@ -99,6 +67,10 @@ const EcoCreateMember = () => {
         }
         console.log(e.target.value)
     }
+
+
+
+
     return (
         <div className='row' style={{width:'70%', margin:'auto'}}>
             <div className='col-md-6 col-lg-6'>

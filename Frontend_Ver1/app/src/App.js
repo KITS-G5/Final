@@ -35,6 +35,7 @@ import CheckValue from "./EcoBicycle/Page/ReturnBike/Checkvalue";
 import {LoggerContext} from "./Context/GlobalContext";
 import {Fragment} from "react";
 import SigninHome from "./Components/Authentication/Signin/SigninHome";
+import Confirm from "./Components/Authentication/ProtectedRoute/Confirm";
 
 
 function App() {
@@ -47,7 +48,8 @@ function App() {
                             <Route index element={<Home />} />
                             <Route path="/buyweb" element={<BuyCardWeb />} />
                             <Route path='signin' element={<SigninHome />} />
-                            <Route path='signup' element={<EcoCreateMember />} />
+                            <Route path='buycard' element={<EcoCreateMember />} />
+                            <Route path='confirm/:phone' element={<Confirm />} />
                             <Route path="/search" element={<Search />} />
                             <Route path="/topup" element={<Topup />} />
                             <Route path="/pay/:cardNo/:output" element={<PaymentMethod />} />
