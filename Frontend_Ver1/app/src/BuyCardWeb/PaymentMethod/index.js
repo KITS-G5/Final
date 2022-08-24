@@ -23,7 +23,7 @@ const PaymentMethod = () => {
 
     const payHandle = () => {
         setCardId(cardData.id);
-        let newBalance = parseInt(params.output);
+        let newBalance = cardData.balance + parseInt(params.output);
         const requestOpt = {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
