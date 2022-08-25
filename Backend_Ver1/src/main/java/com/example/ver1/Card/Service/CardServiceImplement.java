@@ -63,6 +63,17 @@ public class CardServiceImplement implements CardService {
     }
 
     @Override
+    public int topUpCard(long id, Card card) {
+        Optional<Card> found = cardRepository.findById(id);
+        if(found.isPresent()){
+            found.get().setBalance(card.getBalance() + found.get().getBalance());
+            cardRepository.save(found.get());
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
     public int deleteCard(long id) {
         Optional<Card> found = cardRepository.findById(id);
         if(found.isPresent()){
