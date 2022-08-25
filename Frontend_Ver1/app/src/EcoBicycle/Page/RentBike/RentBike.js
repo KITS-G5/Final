@@ -155,9 +155,10 @@ const RentBike = () => {
             fetch("http://localhost:8080/orders", requestOption)
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data)
                     alert(data.message)
                 });
-            window.location.reload();
+            //window.location.reload();
         };
 
         return (

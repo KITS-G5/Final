@@ -57,7 +57,7 @@ public class Controller {
             if(notPaidOrder.isPresent()) {
                 return new ResponseObj("Failed", "This card number had an order which is not paid", notPaidOrder.get());
             }
-            if(card.get().getId() == 2) {
+            if(card.get().getCardType().getId() == 2) {
                 int i = orderService.saveOrder(order);
                 if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
                 if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
@@ -70,7 +70,7 @@ public class Controller {
                 int i = orderService.saveOrder(order);
                 if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
                 if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
-                return new ResponseObj("OK", "Rent bike success", order);
+                return new ResponseObj("OK", "Rent bike success at " + order.getRentingStartedDate() , order);
             }
         }
 

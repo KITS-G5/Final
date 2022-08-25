@@ -139,7 +139,7 @@ public class OrderServiceImpl implements OrderService{
             o.setTotalFee(fee);
 
             //subtract balance from card
-            if(card.getId() == 1) { //khi card là prepaid
+            if(card.getCardType().getId() == 1) { //khi card là prepaid
                 if(fee > card.getBalance()){
                     //payment failed
                     o.setPaymentStatus(false);
