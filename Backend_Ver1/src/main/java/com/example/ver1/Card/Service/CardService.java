@@ -17,4 +17,6 @@ public interface CardService {
     int addCard(Card card);
     int updateCard(long id, Card card);
     int deleteCard(long id);
+
+    public int topUpCard(long id, Card card);
 }

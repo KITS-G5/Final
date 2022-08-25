@@ -51,6 +51,15 @@ public class CardController {
         cardService.updateCard(id, card);
     }
 
+    @PutMapping(path = "/topUpCard/{id}")
+    ResponseObj topUpCard(@PathVariable long id, @RequestBody Card card) {
+        int i = cardService.topUpCard(id, card);
+        if(i == 1) {
+            return new ResponseObj("OK", "Top up successfully", "");
+        }
+        return new ResponseObj("Failed", "Can not find card number", "");
+    }
+
     @DeleteMapping(path = "/cards/{id}")
     void deleteCard(@PathVariable long id){
         cardService.deleteCard(id);
