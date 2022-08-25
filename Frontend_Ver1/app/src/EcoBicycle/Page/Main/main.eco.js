@@ -8,11 +8,10 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { useTypewriter} from 'react-simple-typewriter'
-import {Link, useParams} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import PaidIcon from '@mui/icons-material/Paid';
 import CardInfo from "../CardInfo/CardInfo";
 const MainEco = () => {
-
 
 
     const {text} = useTypewriter({

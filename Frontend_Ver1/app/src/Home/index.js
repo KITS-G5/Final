@@ -120,7 +120,7 @@ const Home = () => {
                         </Row>
                     </div>
                 </div>
-                <div className={'faq'} id={"faq"}>
+                <div className={'faq container'} id={"faq"}>
                     <Row>
                         <h1 style={{textAlign: "center"}}>
                             F.A.Q.

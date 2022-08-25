@@ -5,6 +5,7 @@ import ListALlBikesBYStation from "./ListAllBikesByStations";
 import CardNum from "./CardNum";
 import card1 from "../../../BuyCardWeb/img/frontcard.png";
 import card2 from "../../../BuyCardWeb/img/backend.png";
+import {Button, Modal} from "react-bootstrap";
 
 const RentBike = () => {
 
@@ -130,7 +131,11 @@ const RentBike = () => {
                 .then(res => res.json())
                 .then(data => setCardData(data));
         }, [cardNum]);
+        const [show, setShow] = useState(false);
+        const handleClose = () => setShow(false);
+        const [rentMessage, setRentMessage] = useState("");
         const handleRent = () => {
+            setShow(true);
             let cardChosenId = cardData.id;
             let cardChosenNum = cardData.cardNum;
            // let cardChosenCcv = cardCcv;
@@ -156,14 +161,16 @@ const RentBike = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    alert(data.message)
+                    // alert(data.message)
+                    setRentMessage(data.message);
                 });
-            setTimeout(function(){
-                window.location.reload();
-            }, 2000);
+            // setTimeout(function(){
+            //     window.location.reload();
+            // }, 2000);
         };
 
         return (
+            <>
             <div className={"container mb-5"}>
                 {/*<h3>Welcome to station name: {selectedStationID}</h3>*/}
                 {/*<h3>Welcome to station: {selectedStationID}</h3>*/}
@@ -211,6 +218,18 @@ const RentBike = () => {
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={() => handleRent()} disabled={countBikes===0 && true}>Rent this bike</button>
             </div>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Bike rented</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{rentMessage}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                </>
         );
     }
 ;

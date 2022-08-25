@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import image from "../../Components/image/Atm.png";
+import {Button, Modal} from "react-bootstrap";
 
 export default function Checkvalue() {
     const params = useParams()
@@ -21,8 +22,16 @@ export default function Checkvalue() {
                 console.log(res.id)
             });
     }, [cardNum]);
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false);
+        window.location.reload();
+        setStatus(true)
+        navigate(-2);
+    };
+    const [returnMesg, setReturnMesg] = useState("");
     const showData = () => {
+        setShow(true);
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -36,15 +45,19 @@ export default function Checkvalue() {
         console.log(url)
         fetch(url, requestOptions)
             .then(response => response.json())
-            .then(data => alert(data.message));
-        window.location.reload();
-        setStatus(true)
-        navigate(-1)
+            .then(data =>
+                // alert(data.message)
+                setReturnMesg(data.message)
+            );
+        // window.location.reload();
+        // setStatus(true)
+        // navigate(-1)
     }
     const onSubmit = (e) => {
         e.preventDefault();
     }
     return (
+        <>
         <div>
             <div>
                 <div className='row mt-5' style={{width:'70%', margin:'auto'}}>
@@ -83,20 +96,20 @@ export default function Checkvalue() {
                                     Looks good!
                                 </div>
                             </div>
-                            <div className="col-12">
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required />
-                                    <label className="form-check-label" htmlFor="invalidCheck">
-                                        Agree to terms and conditions
-                                    </label>
-                                    <div className="invalid-feedback">
-                                        You must agree before submitting.
-                                    </div>
-                                </div>
-                            </div>
+                            {/*<div className="col-12">*/}
+                            {/*    <div className="form-check">*/}
+                            {/*        <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required />*/}
+                            {/*        <label className="form-check-label" htmlFor="invalidCheck">*/}
+                            {/*            Agree to terms and conditions*/}
+                            {/*        </label>*/}
+                            {/*        <div className="invalid-feedback">*/}
+                            {/*            You must agree before submitting.*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                             <div className="col-12">
                                 <button className="btn btn-primary" type="button"  onClick={showData} >
-                                    Submit
+                                    PAY NOW
                                 </button>
                             </div>
                         </form>
@@ -105,6 +118,17 @@ export default function Checkvalue() {
                 </div>
             </div>
         </div>
-
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Bike return</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{returnMesg}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+</>
     );
 }
