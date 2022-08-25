@@ -20,22 +20,18 @@ const PaymentMethod = () => {
             .then(res => res.json())
             .then(data => setCardData(data));
     },[]);
-
     const payHandle = () => {
-        setCardId(cardData.id);
         let newBalance = parseInt(params.output);
         const requestOpt = {
             method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                id: cardId,
-                balance: newBalance
-            })
+            headers: {"Content-Type": "application/json"}
         };
-        let url = "http://localhost:8080/api/v1/cards/" + cardId
-
+        // let url = "http://localhost:8080/api/v1/cards/" + cardId
+        let url = "http://localhost:8080/api/v1/topUpCard/" + params.cardNo + "/" + parseInt(params.output);
+        console.log(url)
         fetch(url, requestOpt)
-            // .then(res => res.json());
+            .then(res => res.json())
+            .then(data=> alert(data.message))
             .then();
         setShow2(true);
     };

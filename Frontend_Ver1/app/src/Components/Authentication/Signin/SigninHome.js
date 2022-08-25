@@ -39,7 +39,6 @@ const SigninHome = () => {
                 setIsLogger(result.config.data.slice(12,31))
                 setCardLogin((item) => [...item, idNum])
                 setLogger(true)
-                localStorage.setItem('user_info',JSON.stringify(result))
                 navigate('/')
                 /*const timeout = setTimeout(() => {
                     navigate('/')
