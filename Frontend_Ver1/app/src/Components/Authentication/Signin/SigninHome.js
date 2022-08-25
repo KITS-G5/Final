@@ -53,7 +53,20 @@ const SigninHome = () => {
 
     }
 
-
+    useEffect(() => {
+        if(isLogger === '') return
+        fetch('http://localhost:8080/api/v1/cards/user/' + isLogger)
+            .then((res) => res.json())
+            .then((res) => {
+                setAdmin(res.roleSet[0].title)
+                console.log(res.roleSet[0].title)
+            })
+        if(admin === 'admin'){
+            navigate('/admin/home')
+        }else {
+            navigate('/admin/user/'+ isLogger)
+        }
+    },[isLogger])
 
     const SubPass = (e) => {
         setCardPassword(e.target.value)
