@@ -23,7 +23,7 @@ const PaymentMethod = () => {
 
     const payHandle = () => {
         setCardId(cardData.id);
-        let newBalance = cardData.balance + parseInt(params.output);
+        let newBalance = parseInt(params.output);
         const requestOpt = {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
@@ -33,6 +33,7 @@ const PaymentMethod = () => {
             })
         };
         let url = "http://localhost:8080/api/v1/cards/" + cardId
+
         fetch(url, requestOpt)
             // .then(res => res.json());
             .then();
