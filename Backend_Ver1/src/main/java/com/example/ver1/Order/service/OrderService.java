@@ -16,6 +16,8 @@ public interface OrderService {
 
     Optional<Order> getOrderNotPaid(Card card, boolean paymentStatus);
 
+    Optional<Order> getLatestOrderByCard(Card card);
+
     Page<Order> getAllOrderByCardNumber(String cardNum, int pageNo, int pageSize);
 
     Order getOrderById(long id);

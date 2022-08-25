@@ -39,6 +39,11 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Optional<Order> getLatestOrderByCard(Card card) {
+        return orderRepository.findLatestPaidOrderOfACard(card.getId());
+    }
+
+    @Override
     public Page<Order> getAllOrderByCardNumber(String cardNum, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Optional<Card> cardByCardNum = cardRepository.findCardByCardNum(cardNum);

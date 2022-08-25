@@ -115,7 +115,11 @@ public class Controller {
             int check = orderService.updateOrder(card1.get(), station);
             if(check == -1) return new ResponseObj("Failed", "All payment are made", "");
             if(check == 0) return new ResponseObj("Payment failed", "Return bike success, payment failed(not enough money)", "");
-            if(check == 1) return new ResponseObj("OK", "Make payment success", "");
+            if(check == 1){
+                //get order detail here
+                Optional<Order> latestOrderByCard = orderService.getLatestOrderByCard(card1.get());
+                return new ResponseObj("OK", "Make payment success. You paid " + latestOrderByCard.get().getTotalFee() + " VND", latestOrderByCard.get());
+            }
         }
         return new ResponseObj("Failed", "Not found card information", "");
     }

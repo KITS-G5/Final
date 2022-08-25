@@ -21,6 +21,10 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
 
     Optional<Order> findOrderByCardAndPaymentStatus(Card card, boolean paymentStatus);
     Optional<Order> findOrderByCardAndPaymentStatusAndReturnStatus(Card card, boolean paymentStatus, boolean returnStatus);
+
+    //this method to return nearest paid order of a card
+    @Query(value = "select a.* from tbl_order a where a.card_id = :cardId and a.payment_status = 1 amd a.return_status = 1 order by a.id desc limit 1", nativeQuery = true)
+    Optional<Order> findLatestPaidOrderOfACard(@Param("cardId") long cardId);
     Page<Order> findOrdersByCard(Card card,Pageable pageable);
 
     //query list of order by month and year
