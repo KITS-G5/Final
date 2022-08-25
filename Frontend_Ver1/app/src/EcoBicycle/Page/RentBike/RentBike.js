@@ -108,7 +108,10 @@ const RentBike = () => {
         if (stations != null) {
             statName = stations.filter((item)=>item.id == selectedStationID).map((item) => {
                 return (
-                    <h2 className={'text-center mt-5'}>Welcome to station: {item.stationName}</h2>
+                    <>
+                        <h2 className={'text-center mt-5'}>Welcome to station: {item.stationName}</h2>
+                        <h5 className={'text-center mt-2'}>Your current location: {item.stationAddress}</h5>
+                    </>
                 );
             });
         }
