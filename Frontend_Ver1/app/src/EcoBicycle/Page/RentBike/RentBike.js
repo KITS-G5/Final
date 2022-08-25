@@ -158,7 +158,9 @@ const RentBike = () => {
                     console.log(data)
                     alert(data.message)
                 });
-            //window.location.reload();
+            setTimeout(function(){
+                window.location.reload();
+            }, 2000);
         };
 
         return (
