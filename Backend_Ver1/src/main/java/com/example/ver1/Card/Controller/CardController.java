@@ -51,9 +51,9 @@ public class CardController {
         cardService.updateCard(id, card);
     }
 
-    @PutMapping(path = "/topUpCard/{id}")
-    ResponseObj topUpCard(@PathVariable long id, @RequestBody Card card) {
-        int i = cardService.topUpCard(id, card);
+    @PutMapping(path = "/topUpCard/{cardNum}/{topUpAmount}")
+    ResponseObj topUpCard(@PathVariable String cardNum, @PathVariable Double topUpAmount) {
+        int i = cardService.topUpCard(topUpAmount, cardNum);
         if(i == 1) {
             return new ResponseObj("OK", "Top up successfully", "");
         }

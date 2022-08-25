@@ -18,5 +18,5 @@ public interface CardService {
     int updateCard(long id, Card card);
     int deleteCard(long id);
 
-    public int topUpCard(long id, Card card);
+    public int topUpCard(double topUpAmount, String cardNum);
 }
