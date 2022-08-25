@@ -27,7 +27,7 @@ const BuyCardWeb = () => {
                                 all your biking needs at any EcoBicycle station. Put money on your rental card or link
                                 it to your bank account and you're ready to go!</h4>
                             <Button variant={"success"}>
-                                <Link to={'/buycard'} style={{textDecoration: "none", color: "var(--font-color)"}}>
+                                <Link to={'/buycard'} style={{textDecoration: "none", color: "#eee"}}>
                                     Buy an EcoBicycle Rental Card
                                 </Link>
                             </Button>

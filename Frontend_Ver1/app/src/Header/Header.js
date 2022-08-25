@@ -25,18 +25,18 @@ const Header = () => {
             return []
         }
     })
-    const cardNumber = todos.config.data.slice(12,31)
-    console.log(todos.config.data.slice(12,31))
-    useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/cards/user/' + cardNumber
-        console.log(url)
-        fetch(url)
-            .then(res => res.json())
-            .then((res) => {
-                setAdmin(res)
-                console.log(res.cardNum)
-            })
-    },[]);
+    // const cardNumber = todos.config.data.slice(12,31)
+    // console.log(todos.config.data.slice(12,31))
+    // useEffect(() => {
+    //     let url = 'http://localhost:8080/api/v1/cards/user/' + cardNumber
+    //     console.log(url)
+    //     fetch(url)
+    //         .then(res => res.json())
+    //         .then((res) => {
+    //             setAdmin(res)
+    //             console.log(res.cardNum)
+    //         })
+    // },[]);
 
     const userLink = () => {
         return (
@@ -45,11 +45,11 @@ const Header = () => {
                     <Dropdown.Toggle >
                         <AccountCircleIcon/>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#">{admin.cardNum}</Dropdown.Item>
-                        <Dropdown.Item href={`/admin/user/${cardNumber}`}>Profile</Dropdown.Item>
-                        <Dropdown.Item href="#">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
+                    {/*<Dropdown.Menu>*/}
+                    {/*    <Dropdown.Item href="#">{admin.cardNum}</Dropdown.Item>*/}
+                    {/*    <Dropdown.Item href={`/admin/user/${cardNumber}`}>Profile</Dropdown.Item>*/}
+                    {/*    <Dropdown.Item href="#">Logout</Dropdown.Item>*/}
+                    {/*</Dropdown.Menu>*/}
                 </Dropdown>
             </div>
         )
@@ -83,7 +83,7 @@ const Header = () => {
                                     Contact us
                                 {/*</Link>*/}
                             </Nav.Link>
-                            {cardNumber ? <Nav.Link as={NavLink} to={`/admin/user/${cardNumber}`}>{userLink}</Nav.Link> :  <Nav.Link as={NavLink} to='/signin'>Sign in </Nav.Link> }
+                            {/*{cardNumber ? <Nav.Link as={NavLink} to={`/admin/user/${cardNumber}`}>{userLink}</Nav.Link> :  <Nav.Link as={NavLink} to='/signin'>Sign in </Nav.Link> }*/}
 
 
                             <DarkMode/>
