@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -55,7 +52,29 @@ public class Controller {
     @PostMapping(path = "")
     ResponseObj addOrder(@RequestBody Order order){
         Optional<Card> card = cardRepository.findById(order.getCard().getId());
-        if(card.isPresent()){
+        if(card.isPresent()) {
+            Optional<Order> notPaidOrder = orderService.getOrderNotPaid(card.get(), false);
+            if(notPaidOrder.isPresent()) {
+                return new ResponseObj("Failed", "This card number had an order which is not paid", notPaidOrder.get());
+            }
+            if(card.get().getId() == 2) {
+                int i = orderService.saveOrder(order);
+                if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
+                if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
+                return new ResponseObj("OK", "Rent bike success", order);
+            }
+            if(card.get().getBalance() < 1000000){
+                return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 VND to start renting", "");
+            }
+            else {
+                int i = orderService.saveOrder(order);
+                if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
+                if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
+                return new ResponseObj("OK", "Rent bike success", order);
+            }
+        }
+
+/*        if(card.isPresent()){
             Optional<Order> notPaidOrder = orderService.getOrderNotPaid(card.get(), false);
             if(notPaidOrder.isPresent()) {
                 return new ResponseObj("Failed", "This card number had an order which is not paid", notPaidOrder.get());
@@ -69,7 +88,7 @@ public class Controller {
                 if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
                 return new ResponseObj("OK", "Rent bike success", order);
             }
-        }
+        }*/
         return new ResponseObj("Failed", "Can not find this card number", "");
     }
 

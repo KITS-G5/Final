@@ -97,14 +97,19 @@ public class OrderServiceImpl implements OrderService{
 
             //subtract balance from card
             Card card = o.getCard();
-            if(fee > card.getBalance()){
-                //payment failed
-                o.setPaymentStatus(false);
+            if(card.getId() == 1) {
+                if(fee > card.getBalance()){
+                    //payment failed
+                    o.setPaymentStatus(false);
+                } else {
+                    //payment success
+                    o.setPaymentStatus(true);
+                    card.setBalance(card.getBalance() - fee);
+                }
             } else {
-                //payment success
                 o.setPaymentStatus(true);
-                card.setBalance(card.getBalance() - fee);
             }
+
             orderRepository.save(o);
             cardRepository.save(card);
         } else {
@@ -134,19 +139,26 @@ public class OrderServiceImpl implements OrderService{
             o.setTotalFee(fee);
 
             //subtract balance from card
-            if(fee > card.getBalance()){
-                //payment failed
-                o.setPaymentStatus(false);
-                orderRepository.save(o);
-                return 0;
-            } else {
-                //payment success
+            if(card.getId() == 1) { //khi card là prepaid
+                if(fee > card.getBalance()){
+                    //payment failed
+                    o.setPaymentStatus(false);
+                    orderRepository.save(o);
+                    return 0;
+                } else {
+                    //payment success
+                    o.setPaymentStatus(true);
+                    card.setBalance(card.getBalance() - fee);
+                    orderRepository.save(o);
+                    cardRepository.save(card);
+                    return 1;
+                }
+            } else { //khi card la postpaid
                 o.setPaymentStatus(true);
-                card.setBalance(card.getBalance() - fee);
                 orderRepository.save(o);
-                cardRepository.save(card);
                 return 1;
             }
+
         }
         return -1;
     }
