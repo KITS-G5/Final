@@ -42,7 +42,7 @@ const BuyCardWeb = () => {
                     <Row className={'howMuchCosts'}>
                         <Col md={12}>
                             <h1>How much does it costs?</h1>
-                            <h4>A rental card costs only 50.000 VND. The card will never expires - it will be yours
+                            <h4>A rental card is <span style={{color: "limegreen", fontSize: "1.5rem"}}>FREE</span>! The card will never expires - it will be yours
                                 forever! A card can be either a prepaid or postpaid card. You can get a card directly at
                                 one of our rental station in the city.
                             </h4>
