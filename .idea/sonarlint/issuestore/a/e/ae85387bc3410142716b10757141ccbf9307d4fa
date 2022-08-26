@@ -1,0 +1,10 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(µşŠ¾ûÿÿÿÿ
+V
+java:S4684#"@Replace this persistent entity with a simple POJO or DTO object.(û¯Í¥
+V
+java:S4684."@Replace this persistent entity with a simple POJO or DTO object.(È¡Îœ
+h
+java:S1128"FRemove this unused import 'org.springframework.stereotype.Controller'.(øŠ—Öùÿÿÿÿ8ÑŠÑôª0
+[
+java:S1128"9Remove this unused import 'org.springframework.ui.Model'.(ê†ıÿÿÿÿ8ÑŠÑôª0

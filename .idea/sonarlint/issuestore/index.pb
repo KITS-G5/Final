@@ -29,3 +29,7 @@ RBackend_Ver1/src/main/java/com/example/ver1/Districts/service/DistrictService.j
 KBackend_Ver1/src/main/java/com/example/ver1/Order/service/OrderService.java,f\a\fa29ab60c8a3388d2ab0c3151a19974079136a6d
 r
 BBackend_Ver1/src/main/java/com/example/ver1/Order/Model/Order.java,a\4\a46837756a352d19c352f5854551c7c7f2a455ad
+Å
+QBackend_Ver1/src/main/java/com/example/ver1/Bikes/controller/BikesController.java,a\e\ae85387bc3410142716b10757141ccbf9307d4fa
+r
+BBackend_Ver1/src/main/java/com/example/ver1/Bikes/model/Bikes.java,7\4\7421df9453d80505d46b7d7f065defe2f1483dc8
