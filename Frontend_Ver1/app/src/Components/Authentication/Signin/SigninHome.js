@@ -51,22 +51,25 @@ const SigninHome = () => {
             })
 
     }
-
+    const [role, setRole] = useState("");
     useEffect(() => {
         if(isLogger === '') return
-        fetch('http://localhost:8080/api/v1/cards/user/' + isLogger)
-            .then((res) => res.json())
-            .then((res) => {
-                setAdmin(res.roleSet[0].title)
-                console.log(res.roleSet[0].title)
+        let url = 'http://localhost:8080/api/v1/cards/user/' + isLogger;
+        fetch(url)
+            .then(res => res.json())
+            .then(data=>{
+                setAdmin(data.roleSet[0].id)
             })
-        if(admin !== 'admin'){
-            navigate('/admin/home')
-        }else {
-            navigate('/admin/user/'+ isLogger)
-        }
-    },[isLogger])
+        handleLoginNav(admin)
+    })
+    const handleLoginNav = (e) => {
 
+        if (e === 1) {
+            navigate("/admin/user/" + isLogger)
+        } else if (e === 2 || e === 3) {
+            navigate("/admin/home")
+        }
+    };
     const SubPass = (e) => {
         setCardPassword(e.target.value)
     }
