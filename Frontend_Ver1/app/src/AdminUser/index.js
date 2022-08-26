@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Container} from "react-bootstrap";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import HeaderAdmin from "../Admin/Layout/Header";
 import SideBarUser from "./SideBar";
 import {DataGrid} from "@mui/x-data-grid";
@@ -46,7 +46,7 @@ const AdminUser = () => {
                 id: item.id,
                 rentstart: item.rentingStartedDate,
                 rentend: item.rentingEndDate,
-                fee: item.totalFee.toLocaleString() + " VND",
+                fee: item.totalFee,
                 paystatus: item.paymentStatus.toString()
                 // <button></button>
             }
@@ -65,17 +65,63 @@ const AdminUser = () => {
             if (cardData.cardType.id == 2) {
                 cardBal = "This card is postpaid";
             } else {
-                cardBal = cardData.balance.toString() + " VND"
+                cardBal = cardData.balance.toLocaleString() + " VND"
             }
         }
         // console.log(cardData.cardType.id);
     }
+    const nav = useNavigate();
+    const payMethod = (e) => {
+        let fee = parseFloat(e);
+        if (cardData != null && orderData.content != null) {
+            if (cardData.cardType.id == 1) {
+                const requestOpt = {
+                    method: "PUT",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        id: cardData.id,
+                        balance: cardData.balance - fee
+                    })
+                };
+                fetch('http://localhost:8080/api/v1/cards/' + cardData.id, requestOpt)
+                    // .then(res => res.json())
+                    .then(data => setCardData(data.id));
 
+                const requestOpt2 = {
+                    method: "PUT",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        id: orderData.content.id,
+                        // totalFee: 0,
+                        // paymentStatus: true
+                    })
+                };
+                fetch('http://localhost:8080/orders/user/makePayment/' + params.cardNum, requestOpt2)
+                    .then(res => res.json())
+                    .then(data => setOrderData(data.id));
+                window.location.reload();
+            } else {
+                nav('/pay/' + cardData.cardNum + "/" + fee);
+                const requestOpt2 = {
+                    method: "PUT",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        id: orderData.content.id,
+                        // totalFee: 0,
+                        // paymentStatus: true
+                    })
+                };
+                fetch('http://localhost:8080/orders/user/makePayment/' + params.cardNum, requestOpt2)
+                    .then(res => res.json())
+                    .then(data => setOrderData(data.id));
+            }
+        }
+    };
     const columns = [
         // {field: "id", headerName: "ID", width: 100},
         {field: 'rentstart', headerName: 'Rent Start', width: 350},
         {field: 'rentend', headerName: 'Rent End', width: 350},
-        {field: 'fee', headerName: 'Fee', width: 200},
+        {field: 'fee', headerName: 'Fee (VND)', width: 200},
         {field: 'paystatus', headerName: 'Payment Status', width: 200},
         {
             field: "Pay",
@@ -85,9 +131,7 @@ const AdminUser = () => {
                         <Button
                             variant="outlined"
                             color="primary"
-                            onClick={(event) => {
-                                alert('abc');
-                            }}
+                            onClick={(event) => payMethod(cellValues.row.fee)}
                         >
                             Pay
                         </Button>
@@ -107,35 +151,6 @@ const AdminUser = () => {
     return (
         <>
             <HeaderAdmin/>
-            {/*<Container fluid className={'p-0 col-md-10 float-end'} style={{marginTop: "5rem", marginRight: "5rem"}}>*/}
-            {/*    /!*<div style={{border: "red 1px solid", height: "100px"}}>*!/*/}
-            {/*    /!*    HEADER HERE*!/*/}
-            {/*    /!*</div>*!/*/}
-            {/*    <Row>*/}
-            {/*        <Col md={12}>*/}
-            {/*            <h1>User management</h1>*/}
-            {/*            <h6>Your card number: {cardNum}</h6>*/}
-            {/*            <h6>Remaining balance: {cardBal.toLocaleString()} VND</h6>*/}
-            {/*        </Col>*/}
-            {/*    </Row>*/}
-            {/*    <Row>*/}
-            {/*        <Col md={12}>*/}
-            {/*            <Table>*/}
-            {/*                <thead>*/}
-            {/*                <tr>*/}
-            {/*                    <th>Rent start</th>*/}
-            {/*                    <th>Rent end</th>*/}
-            {/*                    <th>Fee</th>*/}
-            {/*                    <th>Payment status</th>*/}
-            {/*                </tr>*/}
-            {/*                </thead>*/}
-            {/*                <tbody>*/}
-            {/*                {orderList}*/}
-            {/*                </tbody>*/}
-            {/*            </Table>*/}
-            {/*        </Col>*/}
-            {/*    </Row>*/}
-            {/*</Container>*/}
             <div style={{height: '80vh'}} className={'container mt-5'}>
                 <h1 className={'text-center'} style={{marginTop: '60px'}}>USER DATA</h1>
                 <h6>Your card number: {cardNum}</h6>
@@ -150,9 +165,6 @@ const AdminUser = () => {
                 />
             </div>
             <Container fluid className={'col-md-2 float-start p-0'}>
-                {/*<Col style={{height: "100vh", border: "1px red solid"}}>*/}
-                {/*    SIDEBAR HERE*/}
-                {/*</Col>*/}
                 <SideBarUser/>
             </Container>
         </>

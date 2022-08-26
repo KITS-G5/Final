@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import {click} from "@testing-library/user-event/dist/click";
+import Geocode from 'react-geocode';
+
+//import api key from env
+
 
 const AddStation = () => {
     const [station, setStation] = useState([]);
@@ -68,7 +72,6 @@ const AddStation = () => {
     //         body: JSON.stringify(bike)
     //     })
     // }
-    let districtOpt2 = '';
     let district_filter = [];
     const [dist, setDist] = useState([]);
 
@@ -142,11 +145,43 @@ const AddStation = () => {
             }
 
         );
-        navigate(-1);
+
+        // navigate(-1);
 
     }
 
-    // station to option
+    //usestate set long, set lat
+    const [long, setLong] = useState('');
+    const [lat, setLat] = useState('');
+    
+    // const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    Geocode.setApiKey(apiKey);
+    Geocode.setLanguage('en');
+    Geocode.setRegion('vn');
+    Geocode.enableDebug();
+    //from address input get coordinates
+    const getCoordinates = (e) => {
+        // e.preventDefault();
+        // autocomplete address input
+        Geocode.fromAddress(e.target.value).then(
+            response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                console.log(lat, lng);
+                let data = {...station};
+                data.streetAddress = e.target.value;
+                data.longtitude = lng;
+                data.latitude = lat;
+                setStation(data);
+                setLong(lng);
+                setLat(lat);
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
+
     
     return (
         <div>
@@ -183,7 +218,13 @@ const AddStation = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Enter station address</Form.Label>
                     <Form.Control type="text" placeholder="Enter station address" name="stationAddress"
-                                  onChange={handleChange}/>
+                                  onChange={getCoordinates}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control type="text" placeholder="Lat" name="latitude"  value={lat} onChange={handleChange}/>
+                                
+                    <Form.Control type="text" placeholder="Long" name="longtitude" value={long} onChange={handleChange}/>
+                                 
                 </Form.Group>
                 {/*input search for location*/}
                 {/*return marker on map and get longtitude and latitude*/}

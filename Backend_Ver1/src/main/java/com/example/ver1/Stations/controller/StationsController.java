@@ -29,8 +29,8 @@ public class StationsController {
     }
 
     @GetMapping("/stations/search")
-    public List<Stations> searchStations(@RequestParam(value = "q") String searchKeyWords) {
-        return stationsService.searchStationsByDistrict(searchKeyWords.toLowerCase());
+    public List<Stations> searchStations( @RequestParam(value="c") Integer searchCity, @RequestParam(value = "q") String searchDistrict) {
+        return stationsService.searchStationsByDistrict(searchCity, searchDistrict.toLowerCase());
     }
 
     @PostMapping("/stations")

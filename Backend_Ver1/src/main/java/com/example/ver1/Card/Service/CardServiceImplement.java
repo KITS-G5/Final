@@ -31,6 +31,11 @@ public class CardServiceImplement implements CardService {
     }
 
     @Override
+    public Optional<Card> getCardByPhoneNumber(String phoneNumber) {
+        return cardRepository.findCardByPhoneNumber(phoneNumber);
+    }
+
+    @Override
     public Optional<Card> getCardByCardNum(String cardNUm) {
         return cardRepository.findCardByCardNum(cardNUm);
     }
@@ -49,9 +54,19 @@ public class CardServiceImplement implements CardService {
     public int updateCard(long id, Card card) {
         Optional<Card> found = cardRepository.findById(id);
         if(found.isPresent()){
-            found.get().setCardType(card.getCardType());
+            // found.get().setCardType(card.getCardType());
             found.get().setBalance(card.getBalance());
-            found.get().setCustomer(card.getCustomer());
+            cardRepository.save(found.get());
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public int topUpCard(double topUpAmount, String cardNum) {
+        Optional<Card> found = cardRepository.findCardByCardNum(cardNum);
+        if(found.isPresent()){
+            found.get().setBalance(topUpAmount + found.get().getBalance());
             cardRepository.save(found.get());
             return 1;
         }

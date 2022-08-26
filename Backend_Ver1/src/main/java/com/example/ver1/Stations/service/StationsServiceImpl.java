@@ -71,7 +71,7 @@ public class StationsServiceImpl implements StationsService{
     }
 
     @Override
-    public List<Stations> searchStationsByDistrict(String searchKeywords) {
-        return stationsRepository.searchStations(searchKeywords);
+    public List<Stations> searchStationsByDistrict(Integer searchCity, String searchDistrict ) {
+        return stationsRepository.searchStations(searchCity, searchDistrict );
     }
 }

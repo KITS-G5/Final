@@ -30,7 +30,7 @@ const Demo = () => {
         })
             .then(result => {
                 console.log(result.config.data.slice(12,31))
-                navigate(`/ecobicycle/main/${result.config.data.slice(12,31)}`)
+                navigate(`/ecobicycle/main/`)
             })
             .catch(err => {
                 setError(err.message)

@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Link, NavLink} from 'react-router-dom';
+import {Form, InputGroup} from "react-bootstrap";
+
 import './styles.css'
 
 const HomeAdmin = () => {
@@ -13,6 +15,7 @@ const HomeAdmin = () => {
     const [revenue, setRevenue] = useState(0);
     const [net, setNet] = useState(0);
     const [loan, setLoan] = useState(0);
+    const [revenueByMonth, setRevenueByMonth] = useState([]);
 
     useEffect(() => {
         console.log('user use effect!!');
@@ -24,6 +27,7 @@ const HomeAdmin = () => {
                 console.log('data', data);
                 setData(data);
             });
+
 
         let url_gross_revenue = 'http://localhost:3000/orders/admin/grossRevenueByDate';
         let url_net_revenue = 'http://localhost:3000/orders/admin/netRevenueByDate';
@@ -58,6 +62,50 @@ const HomeAdmin = () => {
                 console.log(data);
             })
     }, [from, to]);
+
+    //  useState set month, year to calculate revenue
+    const [month, setMonth] = useState(0);
+    const [year, setYear] = useState(0);
+
+    useEffect(() => {
+        let url_get_revenue_by_month = "http://localhost:8080/orders/admin";
+        if (month!= null && year != null) {
+            url_get_revenue_by_month = url_get_revenue_by_month+ "/findOrdersByMonthAndYear?month=" + month + "&&year=" + year; 
+        }
+         fetch(url_get_revenue_by_month)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Revenue by month =", data);
+                setRevenueByMonth(data);
+                console.log(data);
+            })
+
+
+    }, [month, year]);
+
+    // let revenueTbl = revenueByMonth.map(item => {
+    //     return (
+    //         <>
+    //             <h1>
+    //             {item.rentingStartedDate}
+    //             </h1>
+    //             <h3>
+    //                 {item.rentingEndDate}
+    //             </h3>
+    //             <h3>
+    //                 {item.totalFee}
+    //             </h3>
+    //         </>
+    //         )
+    // })
+
+    
+    let table = revenueByMonth.map((item) => {
+        return (
+            <h5>{item.totalFee}</h5>
+        )
+    })
+
     let dataTable = data.map((item) => {
         return {
             id: item.id,
@@ -69,20 +117,8 @@ const HomeAdmin = () => {
             // <button></button>
         }
     })
-    // const deleteOrder = (id) => {
-    //     //fetch bike
-    //     let url = 'http://localhost:8080/api/v1/bikes/deleteBike/' + id;
-    //     fetch(url, {
-    //         method: 'DELETE',
-    //     }).then(() => {
-    //         console.log('delete successful!!');
-    //         let result = [...data];
-    //         result = result.filter((item) => {
-    //             return item.id != id;
-    //         });
-    //         setData(result);
-    //     });
-    // };
+
+// get data table column
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
@@ -142,9 +178,45 @@ const HomeAdmin = () => {
                         abc
                     </div>
                 </div>
-
+                <div>CHART DATA TEST</div>
+                {table}
                 {/*charts*/}
-
+                {/* get revenue for chart data */}
+                 <div className="row collection justify-content-between">
+                    <div className="col-lg-12 col-md-12">
+                        <h5 className={'mt-5'}>Chooe period to list orders</h5>
+                        <br/>
+                        <div className="w-50 input-group ">
+                            {/* <input onChange={(e) => setMonth(e.target.value)} className={'form-control'} type="text" name="month"/> */}
+                               <Form.Group className="mb-3">
+                                 <Form.Select name="id" onChange={(e) => setMonth(e.target.value)}>
+                                   <option value="">Choose month</option>
+                                   <option value="1">Jan</option>
+                                   <option value="2">Feb</option>
+                                   <option value="3">March</option>
+                                   <option value="4">April</option>
+                                   <option value="5">May</option>
+                                   <option value="6">June</option>
+                                   <option value="7">July</option>
+                                   <option value="8">August</option>
+                                   <option value="9">September</option>
+                                   <option value="10">October</option>
+                                   <option value="11">November</option>
+                                   <option value="12">December</option>
+                                 </Form.Select>
+                                </Form.Group>
+                            {/* <input onChange={(e) => setYear(e.target.value)}  className={'form-control mx-5'} type="text" name="year"/> */}
+                            <Form.Group className="mb-3 mx-5">
+                                 <Form.Select name="id" onChange={(e) => setYear(e.target.value)}>
+                                   <option value="">Choose month</option>
+                                   <option value="2020">2020</option>
+                                   <option value="2021">2021</option>
+                                   <option value="2022">2022</option>
+                                 </Form.Select>
+                                </Form.Group>
+                        </div>
+                    </div>
+                </div>
                 <div className="chart-container d-flex justify-content-between mt-5">
                     <div className="chart-div">
                         revenue chart
@@ -153,6 +225,7 @@ const HomeAdmin = () => {
                         user chart
                     </div>
                 </div>
+         
                 {/*Revenue report*/}
 
                 <div className="row collection justify-content-between">

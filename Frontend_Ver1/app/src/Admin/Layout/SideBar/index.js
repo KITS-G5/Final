@@ -29,7 +29,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import {UserAuth} from "../../../Context/AuthContext";
-const drawerWidth = 300;
+const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -79,9 +79,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function SideBar() {
 
-
-
-
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -106,11 +103,11 @@ export default function SideBar() {
                         onClick={handleDrawerOpen}
                         edge="start"
                         sx={{
-                            marginRight: 5,
+                            marginRight: 3,
                             ...(open && { display: 'none' }),
                         }}
                     >
-                        <ChevronRightIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                        <ChevronRightIcon sx={{fontSize:'2rem',color:'#ffffff'}} />
                     </IconButton>
                 </Toolbar>
                 <DrawerHeader
@@ -118,26 +115,25 @@ export default function SideBar() {
 
                         margin:'auto',
                         position:"absolute",
-                        top:14,
+                        top:8,
                         left:136,
                         display:"none",
                         ...(open && { display: 'block' }),
                     }}
                 >
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} /> : <ChevronLeftIcon  sx={{fontSize:'2.5rem',color:'#ffffff'}}/>}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{fontSize:'2rem',color:'#ffffff'}} /> : <ChevronLeftIcon  sx={{fontSize:'2rem',color:'#ffffff'}}/>}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
-
-                <List sx={{fontSize:'1.6rem' }} >
+                <hr style={{margin:"unset",color:'#ffffff'}}/>
+                <List sx={{fontSize:'1.3rem' }} >
                     {['Home', 'Dashboard'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block'}}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
+                                    px: 2,
                                 }}
                             >
                                 <ListItemIcon
@@ -150,20 +146,20 @@ export default function SideBar() {
                                     {index % 2 === 0
                                         ?
                                         <Link to='/'>
-                                                <HomeIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                                                <HomeIcon sx={{fontSize:'2rem',color:'#ffffff'}} />
                                         </Link>
                                         :
                                         <Link to='/admin/home'>
-                                                <DashboardIcon sx={{fontSize:'2.5rem',color:'#ffffff'}} />
+                                                <DashboardIcon sx={{fontSize:'2rem',color:'#ffffff'}} />
                                         </Link>
                                     }
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 , color:'#ffffff', fontFamily:'\'Poppins\', sans-serif'}} />
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
-                <Divider />
+                <hr style={{margin:"unset",color:'#ffffff'}}/>
                 <List>
                     {['Stations', 'Bikes'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -171,7 +167,7 @@ export default function SideBar() {
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
+                                    px: 2,
                                 }}
                             >
                                 <ListItemIcon
@@ -184,20 +180,20 @@ export default function SideBar() {
                                     {index % 2 === 0
                                         ?
                                         <Link to='stations'>
-                                                <LocationOnIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                                <LocationOnIcon sx={{fontSize: '2rem', color: '#ffffff'}}/>
                                         </Link>
                                         :
                                         <Link to='bikes'>
-                                                <PedalBikeIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                                <PedalBikeIcon sx={{fontSize: '2rem', color: '#ffffff'}}/>
                                         </Link>
                                     }
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color:'#ffffff' }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
-                <Divider />
+                <hr style={{margin:"unset",color:'#ffffff'}}/>
                 <List>
                     {['Cards', 'Users'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -205,7 +201,7 @@ export default function SideBar() {
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
+                                    px: 2,
                                 }}
                             >
                                 <ListItemIcon
@@ -215,18 +211,18 @@ export default function SideBar() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 == 0
+                                    {index % 2 === 0
                                         ?
                                         <Link to='cards'>
-                                            <CreditCardIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                            <CreditCardIcon sx={{fontSize: '2rem', color: '#ffffff'}}/>
                                         </Link>
                                         :
                                         <Link to='users'>
-                                            <PersonIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                                            <PersonIcon sx={{fontSize: '2rem', color: '#ffffff'}}/>
                                         </Link>
                                     }
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color:'#ffffff' }} />
                             </ListItemButton>
                         </ListItem>
                     ))}

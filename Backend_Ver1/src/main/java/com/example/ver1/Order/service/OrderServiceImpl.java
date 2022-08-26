@@ -34,6 +34,16 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Optional<Order> getOrderNotPaid(Card card, boolean paymentStatus) {
+        return orderRepository.findOrderByCardAndPaymentStatus(card, paymentStatus);
+    }
+
+    @Override
+    public Optional<Order> getLatestOrderByCard(Card card) {
+        return orderRepository.findLatestPaidOrderOfACard(card.getId());
+    }
+
+    @Override
     public Page<Order> getAllOrderByCardNumber(String cardNum, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Optional<Card> cardByCardNum = cardRepository.findCardByCardNum(cardNum);
@@ -56,16 +66,24 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void saveOrder(Order order) {
+    public int saveOrder(Order order) {
         Optional<Card> card = cardRepository.findById(order.getCard().getId());
         Optional<Bikes> bikes = bikesRepository.findById(order.getBike().getId());
         if(card.isPresent() && bikes.isPresent()){
-            //this bike status return to false while it is still renting
-            bikes.get().setStatus(false);
-            order.setBike(bikes.get());
-            order.setCard(card.get());
+            if(card.get().getCardNum().equals(order.getCard().getCardNum()) && card.get().getCardCcv().equals(order.getCard().getCardCcv())) {
+                //this bike status return to false while it is still renting
+                bikes.get().setStatus(false);
+                order.setBike(bikes.get());
+                order.setCard(card.get());
+                orderRepository.save(order);
+                bikesRepository.save(bikes.get());
+                return 1;
+            }
+            else {
+                return 0;
+            }
         }
-        orderRepository.save(order);
+        return -1;
     }
     @Override
     public void updateOrder(Stations station, Order order, long id) {
@@ -84,19 +102,80 @@ public class OrderServiceImpl implements OrderService{
 
             //subtract balance from card
             Card card = o.getCard();
-            if(fee > card.getBalance()){
-                //payment failed
-                o.setPaymentStatus(false);
+            if(card.getId() == 1) {
+                if(fee > card.getBalance()){
+                    //payment failed
+                    o.setPaymentStatus(false);
+                } else {
+                    //payment success
+                    o.setPaymentStatus(true);
+                    card.setBalance(card.getBalance() - fee);
+                }
             } else {
-                //payment success
                 o.setPaymentStatus(true);
-                card.setBalance(card.getBalance() - fee);
             }
+
             orderRepository.save(o);
             cardRepository.save(card);
         } else {
             throw new RuntimeException("Order does not exists");
         }
+    }
+
+
+    //return bike call this method for Van Hai
+    @Override
+    public int updateOrder(Card card, Stations station) {
+        Optional<Order> optional = orderRepository.findOrderByCardAndPaymentStatus(card, false);
+        Order o = null;
+        if (optional.isPresent()) {
+            o = optional.get();
+
+            //check if this bike had been returned
+            if(!o.isReturnStatus()) {
+                o.getBike().setStation(station); //save new station id to the bike
+                o.getBike().setStatus(true); //the bike now is available for rent
+                o.setReturnStatus(true);
+                orderRepository.save(o);
+            }
+
+            //save fee to order
+            float fee = calculateFee(o);
+            o.setTotalFee(fee);
+
+            //subtract balance from card
+            if(card.getCardType().getId() == 1) { //khi card là prepaid
+                if(fee > card.getBalance()){
+                    //payment failed
+                    o.setPaymentStatus(false);
+                    orderRepository.save(o);
+                    return 0;
+                } else {
+                    //payment success
+                    o.setPaymentStatus(true);
+                    card.setBalance(card.getBalance() - fee);
+                    orderRepository.save(o);
+                    cardRepository.save(card);
+                    return 1;
+                }
+            } else { //khi card la postpaid
+                o.setPaymentStatus(true);
+                orderRepository.save(o);
+                return 1;
+            }
+
+        }
+        return -1;
+    }
+
+    @Override
+    public int makePayment(Card card) {
+        Optional<Order> found = orderRepository.findOrderByCardAndPaymentStatusAndReturnStatus(card, false, true);
+        if(found.isPresent()) {
+            found.get().setPaymentStatus(true);
+            orderRepository.save(found.get());
+            return 1;
+        } else return 0;
     }
 
     //calculate bike rental fee when customer return the bike

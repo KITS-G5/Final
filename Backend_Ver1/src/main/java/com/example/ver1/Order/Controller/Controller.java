@@ -1,5 +1,8 @@
 package com.example.ver1.Order.Controller;
+import com.example.ver1.Card.Model.Card;
+import com.example.ver1.Card.Repository.CardRepository;
 import com.example.ver1.Order.Model.Order;
+import com.example.ver1.Order.Model.ResponseObj;
 import com.example.ver1.Order.service.OrderService;
 import com.example.ver1.Stations.model.Stations;
 import com.example.ver1.Stations.service.StationsService;
@@ -9,14 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path = "/orders")
 public class Controller {
     @Autowired private OrderService orderService;
     @Autowired private StationsService stationsService;
+    @Autowired private CardRepository cardRepository;
 
     @GetMapping(path = "")
     List<Order> getAllOrderList(){
@@ -46,9 +50,46 @@ public class Controller {
     }
 
     @PostMapping(path = "")
-    Order addOrder(@RequestBody Order order){
-        orderService.saveOrder(order);
-        return order;
+    ResponseObj addOrder(@RequestBody Order order){
+        Optional<Card> card = cardRepository.findById(order.getCard().getId());
+        if(card.isPresent()) {
+            Optional<Order> notPaidOrder = orderService.getOrderNotPaid(card.get(), false);
+            if(notPaidOrder.isPresent()) {
+                return new ResponseObj("Failed", "This card number had an order which is not paid", notPaidOrder.get());
+            }
+            if(card.get().getCardType().getId() == 2) {
+                int i = orderService.saveOrder(order);
+                if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
+                if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
+                return new ResponseObj("OK", "Rent bike success", order);
+            }
+            if(card.get().getBalance() < 1000000){
+                return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 VND to start renting", "");
+            }
+            else {
+                int i = orderService.saveOrder(order);
+                if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
+                if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
+                return new ResponseObj("OK", "Rent bike success at " + order.getRentingStartedDate() , order);
+            }
+        }
+
+/*        if(card.isPresent()){
+            Optional<Order> notPaidOrder = orderService.getOrderNotPaid(card.get(), false);
+            if(notPaidOrder.isPresent()) {
+                return new ResponseObj("Failed", "This card number had an order which is not paid", notPaidOrder.get());
+            }
+            else if(card.get().getBalance() < 1000000){
+                return new ResponseObj("Failed", "Card balance must have minimum 1,000,000 VND to start renting", "");
+            }
+            else {
+                int i = orderService.saveOrder(order);
+                if(i == -1) return new ResponseObj("Failed", "Not valid card", order);
+                if(i == 0) return new ResponseObj("Failed", "Card number or cvv not valid", order);
+                return new ResponseObj("OK", "Rent bike success", order);
+            }
+        }*/
+        return new ResponseObj("Failed", "Can not find this card number", "");
     }
 
     @PutMapping(path = {"/user/{idOrder}/{idStation}", "/admin/{idOrder}/{idStation}"})
@@ -59,6 +100,39 @@ public class Controller {
             orderService.updateOrder(stations, order, idOrder);
         }
         return order;
+    }
+
+
+    // Văn Hải call this method to return a bike, truyền vào path một id stations (chính là return station) và body là một card object
+    @PutMapping(path = {"/user/{idStation}", "/admin/{idStation}"})
+    ResponseObj updateOrder(@RequestBody Card card, @PathVariable long idStation){
+        Stations station = stationsService.getStationById(idStation);
+        Optional<Card> card1 = cardRepository.findById(card.getId());
+        if(card1.isPresent()){
+            if(!Objects.equals(card1.get().getCardCcv(), card.getCardCcv()) || !card1.get().getCardNum().equals(card.getCardNum())) {
+                return new ResponseObj("Failed", "Wrong card number or cvv number", "");
+            }
+            int check = orderService.updateOrder(card1.get(), station);
+            if(check == -1) return new ResponseObj("Failed", "All payment are made", "");
+            if(check == 0) return new ResponseObj("Payment failed", "Return bike success, payment failed(not enough money)", "");
+            if(check == 1){
+                //get order detail here
+                Optional<Order> latestOrderByCard = orderService.getLatestOrderByCard(card1.get());
+                return new ResponseObj("OK", "Make payment success. You paid " + latestOrderByCard.get().getTotalFee() + " VND", latestOrderByCard.get());
+            }
+        }
+        return new ResponseObj("Failed", "Not found card information", "");
+    }
+
+    // hà hải call this method and payment status auto update to true
+    @PutMapping(path = {"/user/makePayment/{cardNum}"})
+    ResponseObj updatePayment(@PathVariable String cardNum) {
+        Optional<Card> found = cardRepository.findCardByCardNum(cardNum);
+        if(found.isPresent()) {
+            orderService.makePayment(found.get());
+            return new ResponseObj("OK", "Paid order", found.get());
+        }
+        return new ResponseObj("Failed", "Not found unpaid order", "");
     }
 
     @GetMapping(path = "/admin/grossRevenueByDate")

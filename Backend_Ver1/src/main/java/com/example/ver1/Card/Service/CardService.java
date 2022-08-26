@@ -11,9 +11,12 @@ public interface CardService {
     List<Card> getAllCard();
     Page<Card> getAllCard(int pageNo, int pageSize);
     Optional<Card> getCardById(long id);
+    Optional<Card> getCardByPhoneNumber(String phoneNumber);
 
     Optional<Card> getCardByCardNum(String cardNUm);
     int addCard(Card card);
     int updateCard(long id, Card card);
     int deleteCard(long id);
+
+    public int topUpCard(double topUpAmount, String cardNum);
 }

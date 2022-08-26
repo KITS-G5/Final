@@ -2,6 +2,7 @@ package com.example.ver1.Security;
 
 import com.example.ver1.Card.Service.CustomCardDetailService;
 import com.example.ver1.Security.Filter.CustomAuthenticationFilter;
+import com.example.ver1.Security.Filter.CustomAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -48,12 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().permitAll();
 
         //test security
- /*       http.authorizeRequests().antMatchers("/signin").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/**").hasAnyAuthority("user");
-        http.authorizeRequests().antMatchers(POST, "/api/v1/**").hasAnyAuthority("admin");
+      /*  http.authorizeRequests().antMatchers("/signin", "/refreshTocken").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers(POST, "/api/v1/*").hasAnyAuthority("admin");
         http.authorizeRequests().anyRequest().authenticated();*/
 
         http.addFilter(customAuthenticationFilter);
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

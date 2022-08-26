@@ -1,5 +1,5 @@
 import Header from "./Header/Header";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Router, Routes, useParams} from "react-router-dom";
 import Home from "./Home";
 import { AuthContextProvider } from "./Context/AuthContext";
 import Signin from "./Components/Authentication/Signin";
@@ -27,27 +27,42 @@ import HomeEcoBicycle from "./EcoBicycle/Layout/Home/home.ecobicycle";
 import ContentsEco from "./EcoBicycle/Layout/Contents/contents.eco";
 import Demo from "./EcoBicycle/Components/Authentication/Eco.Signup/User";
 import MainEco from "./EcoBicycle/Page/Main/main.eco";
-import BuyCardEco from "./EcoBicycle/Page/BuyCard";
-import Prepaid from "./EcoBicycle/Page/BuyCard/Prepaid/Prepaid";
 import EcoPaymentMethod from "./EcoBicycle/Page/PaymentMethods/Eco.PaymentMethor";
 import EcoTopup from "./EcoBicycle/Page/Topup";
-
+import RentBike from "./EcoBicycle/Page/RentBike/RentBike";
+import ReturnBikeTest from "./EcoBicycle/Page/ReturnBike/Test02";
+import CheckValue from "./EcoBicycle/Page/ReturnBike/Checkvalue";
+import {LoggerContext} from "./Context/GlobalContext";
+import {Fragment, useState} from "react";
+import SigninHome from "./Components/Authentication/Signin/SigninHome";
+import Confirm from "./Components/Authentication/ProtectedRoute/Confirm";
+import {useEffect} from "react";
 
 function App() {
+
+    const[logger, setLogger] = useState(false)
+    const [user, setUser] = useState('')
+    const[cardLogin, setCardLogin] = useState('')
     return (
-        <>
-            <AuthContextProvider>
+        <Fragment>
+            <LoggerContext.Provider value={{logger, setLogger,user, setUser, cardLogin, setCardLogin}} >
                 <BrowserRouter>
                     <Routes>
                         <Route path='/' element={<Header />}>
                             <Route index element={<Home />} />
                             <Route path="/buyweb" element={<BuyCardWeb />} />
-                            <Route path='signin' element={<Signin />} />
-
+                            <Route path='signin' element={<SigninHome />} />
+                            <Route path='buycard' element={<EcoCreateMember />} />
+                            <Route path='confirm/:phone' element={<Confirm />} />
                             <Route path="/search" element={<Search />} />
                             <Route path="/topup" element={<Topup />} />
                             <Route path="/pay/:cardNo/:output" element={<PaymentMethod />} />
                             {/*<Route path="/contact" element={<Contact/>}/>*/}
+                            <Route path={'/admin/user/'}>
+                                <Route index element={<AdminUser/>}/>
+                                <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
+                                <Route path={'/admin/user/topup'} element = {<Topup/>}/>
+                            </Route>
                         </Route>
                         <Route path='/admin/home' element={<Admin />}>
                             <Route index element={<HomeAdmin />} />
@@ -62,11 +77,7 @@ function App() {
                         <Route path='addbike' element={<AddBike />}></Route>
                         <Route path='addstation' element={<AddStation />}></Route>
                         <Route path='/edit/:id' element={<EditBike />}></Route>
-                        <Route path={'/admin/user/'}>
-                            {/*<Route index element={<AdminUser/>}/>*/}
-                            <Route path={'/admin/user/:cardNum'} element={<AdminUser/>}/>
-                            <Route path={'/admin/user/topup'} element = {<Topup/>}/>
-                        </Route>
+
 
 
                         <Route path="/ecobicycle" element={<HomeEcoBicycle />}>
@@ -74,18 +85,20 @@ function App() {
                             {/*<Route path='sign_account' element={<LoginAccount/>}/>*/}
                             <Route path='sign_account' element={<Demo/>}/>
 
-                            <Route path='signup' element={<EcoSignin/>}></Route>
                             <Route  path='signup/new_signin' element={<EcoMembership/>}/>
-                            <Route  path='signup/new_signin/create_account' element={<Demo/>}/>
-                            <Route path='main/:data' element={<MainEco/>}></Route>
+                            {/*<Route  path='signup/new_signin/create_account' element={<EcoCreateMember/>}/>*/}
+                            <Route path='main' element={<MainEco/>}></Route>
                             <Route path='main/:data/topup' element={<EcoTopup/>}></Route>
+                            <Route path='rentbike' element={<RentBike/>}></Route>
+                            <Route path='return_bike' element={<ReturnBikeTest />}></Route>
+                            <Route path='return_bike/:id' element={<CheckValue />}></Route>
                             <Route path='main/:data/topup/pay/:cardNo/:output' element={<EcoPaymentMethod/>}></Route>
                         </Route>
                     </Routes>
                 </BrowserRouter>
-            </AuthContextProvider>
+            </LoggerContext.Provider>
 
-        </>
+        </Fragment>
     );
 }
 

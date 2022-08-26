@@ -1,0 +1,34 @@
+.cardNum {
+    /*border: 1px solid red;*/
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.cardNum-left, .cardNum-right {
+    width: 50%;
+    margin-right: 20px;
+}
+
+/*
+.cardNum-right {
+    border : 1px solid red;
+}
+*/
+
+.cardNum-right1 {
+    /*border : 1px solid black;*/
+    margin-top: 1rem;
+    margin-right: 3rem;
+    position: absolute;
+}
+
+.cardNum-right2 {
+    /*border : 1px solid black;*/
+    margin-left: 12rem;
+    z-index: -1;
+    position: absolute;
+}
+
+.bike-gap {
+    margin-bottom: 10px;
+}

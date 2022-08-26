@@ -18,8 +18,8 @@ const Station = () => {
     useEffect(() => {
         console.log('user use effect!!');
         let url1 = 'http://localhost:8080/api/v1/stations';
-        if (searchKeys != '') {
-            url1 = 'http://localhost:8080/api/v1/stations' + '/search?searchKeywords=' + searchKeys;
+        if (searchKeys != '' || searchCity != '') {
+            url1 = 'http://localhost:8080/api/v1/stations' + '/search?q=' + searchKeys + "&&c=" + searchCity;
         }
         console.log(url1);
         fetch(url1)
@@ -38,7 +38,7 @@ const Station = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setCity(data))
-    }, [searchKeys]);
+    }, [searchKeys, searchCity]);
 
     let dataTable = data.map((item) => {
             return {
@@ -146,18 +146,25 @@ const Station = () => {
 
     const pickCity = (e) => {
         let city_id = e.target.value;
-        setSearchCity(city_id);
+        console.log('city_id', city_id);    
         opt_district = district.filter(district => {
             return district.city.id == city_id
         })
         setDist(opt_district);
         console.log(e.target.value);
-        console.log(searchCity);
+        let city_name = city.filter(city => {
+            return city.id == city_id;
+        })
+        console.log(city_name[0].cityName);
+        setSearchCity(city_name[0].id);
+        console.log('searchkey =' , searchCity);
+        
     }
 
     const getSearchTerm = (e) => {
-        setSearchKeys(e.target.value);
-        console.log("search key =", searchKeys);
+        pickCity(e);
+        setSearchCity(e.target.value);
+        console.log("search key =", searchCity);
     }
 
     return (
@@ -174,7 +181,7 @@ const Station = () => {
                </div>
                <div className="filter d-flex">
                    <Form.Group className="mb-3">
-                       <Form.Select name="id" onChange={pickCity}>
+                       <Form.Select name="id" onChange={getSearchTerm}>
                            <option value="">Choose city</option>
                            {opt}
                        </Form.Select>

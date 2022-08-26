@@ -1,15 +1,47 @@
 import {Button, Container, Modal} from "react-bootstrap";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import './paymentMethod.css';
 
 const PaymentMethod = () => {
     const params = useParams();
+    const nav = useNavigate();
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [show, setShow] = useState(false);
+    const [show2, setShow2] = useState(false);
     const onSubmit = () => setShow(true);
     const handleClose = () => setShow(false);
+    const [cardData, setCardData] = useState([]);
+    const [cardId, setCardId] = useState("");
+    useEffect(() => {
+        let url = "http://localhost:8080/api/v1/cards/user/" + params.cardNo;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCardData(data));
+    },[]);
+    const payHandle = () => {
+        let newBalance = parseInt(params.output);
+        const requestOpt = {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"}
+        };
+        // let url = "http://localhost:8080/api/v1/cards/" + cardId
+        let url = "http://localhost:8080/api/v1/topUpCard/" + params.cardNo + "/" + parseInt(params.output);
+        console.log(url)
+        fetch(url, requestOpt)
+            .then(res => res.json())
+            .then(data=> alert(data.message))
+            .then();
+        setShow2(true);
+    };
+    const handleClose2 = () => setShow2(false);
+    const navBack = () => {
+        nav(-1);
+    };
+    const navHome = () => {
+        nav("/");
+    };
     return (
         <>
             <Container fluid>
@@ -39,7 +71,7 @@ const PaymentMethod = () => {
                                             <p className="mb-0"><span className="fw-bold">Top Up Card: </span><span
                                                 className="c-green">{params.cardNo} </span></p>
                                             <p className="mb-0"><span className="fw-bold">Price:</span><span
-                                                className="c-green"> {params.output} VND</span></p>
+                                                className="c-green"> {parseInt(params.output).toLocaleString()} VND</span></p>
                                             <div className={'form__div'}>
                                                 <input type="email" className="form-control mt-2"
                                                        placeholder=" "
@@ -73,7 +105,7 @@ const PaymentMethod = () => {
                                             </p>
                                             <p className="mb-0">
                                                 <span className="fw-bold">Price:</span>
-                                                <span className="c-green"> {params.output} VND</span>
+                                                <span className="c-green"> {parseInt(params.output).toLocaleString()} VND</span>
                                             </p>
                                         </div>
                                         <div className="col-lg-7">
@@ -149,7 +181,7 @@ const PaymentMethod = () => {
                         </div>
                     </div>
                     <div className="col-12">
-                        <div className="payMethButton btn btn-danger payment">
+                        <div className="payMethButton btn btn-danger payment" onClick={payHandle}>
                             Make Payment
                         </div>
                     </div>
@@ -162,6 +194,20 @@ const PaymentMethod = () => {
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={show2} onHide={handleClose2}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Payment</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Your payment is successful</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={navBack}>
+                            Go back
+                        </Button>
+                        <Button variant="secondary" onClick={navHome}>
+                            Home
                         </Button>
                     </Modal.Footer>
                 </Modal>

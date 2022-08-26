@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class SignUpDto {
     private double balance = 0;
-    private String cardNum;
-    private String cardCcv = generateCardCvv();
+    private String cardNum; //auto gen
+    private String cardCcv = generateCardCvv(); //auto gen
     private String cardPassword;
     private CardType cardType;
 

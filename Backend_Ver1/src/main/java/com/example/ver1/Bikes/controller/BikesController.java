@@ -22,6 +22,11 @@ public class BikesController {
         return bikesService.getAllBikes();
     }
 
+    @GetMapping(path = "station/bikes/{stationId}")
+    public List<Bikes> getBikesByStationId(@PathVariable long stationId){
+        return bikesService.getBikesByStation(stationId);
+    }
+
     @GetMapping({"/bikes/page/{pageNo}", "/bikes/page"})
     public Page<Bikes> getAllBikes(@PathVariable (required = false) Integer pageNo) {
         int pageSize = 20;
