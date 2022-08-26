@@ -5,6 +5,8 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Link, NavLink} from 'react-router-dom';
 import {Form, InputGroup} from "react-bootstrap";
+import {Line} from "react-chartjs-2";
+import LineChart from 'react-linechart';
 
 import './styles.css'
 
@@ -156,7 +158,23 @@ const HomeAdmin = () => {
                 );
             }
         }];
+    let pointsData = [];
+    let i=0;
+    pointsData = revenueByMonth.map((item) => {
+        return {
+            x: i++,
+            y: Math.random()
+        }
+    })
 
+    // let pointsData = [{x: 1, y: 2}, {x: 3, y: 5}, {x: 7, y: -3}]
+    console.log(pointsData);
+    const dataChart =  [
+        {
+            color: "steelblue",
+            points: pointsData
+        }
+    ];
 
     return (
         <>
@@ -165,64 +183,72 @@ const HomeAdmin = () => {
                 {/*insert chart*/}
                 {/*add filter to filter orders by date, by station*/}
                 <div className="d-flex justify-content-between cards">
-                    <div className="card-div">
-                        number of bikes
+                    <div className="card-div text-center">
+                        <h2 className={'mt-3'}>1500
+                        </h2>
+                        <h3>BIKES</h3>
                     </div>
-                    <div className="card-div">
-                        number of stations
+                    <div className="card-div text-center">
+                        <h2 className={'mt-3'}>500
+                        </h2>
+                        <h2>STATIONS</h2>
                     </div>
-                    <div className="card-div">
-                        revenue
+                    <div className="card-div text-center">
+                        <h2 className={'mt-3'}>120.000
+                        </h2>
+                        <h3>USERS</h3>
                     </div>
-                    <div className="card-div">
-                        abc
+                    <div className="card-div text-center">
+                        <h2 className={'mt-3'}>$1.000.000
+                        </h2>
+                        <h3>REVENUE</h3>
                     </div>
                 </div>
-                <div>CHART DATA TEST</div>
-                {table}
                 {/*charts*/}
                 {/* get revenue for chart data */}
-                 <div className="row collection justify-content-between">
-                    <div className="col-lg-12 col-md-12">
-                        <h5 className={'mt-5'}>Chooe period to list orders</h5>
-                        <br/>
-                        <div className="w-50 input-group ">
-                            {/* <input onChange={(e) => setMonth(e.target.value)} className={'form-control'} type="text" name="month"/> */}
-                               <Form.Group className="mb-3">
-                                 <Form.Select name="id" onChange={(e) => setMonth(e.target.value)}>
-                                   <option value="">Choose month</option>
-                                   <option value="1">Jan</option>
-                                   <option value="2">Feb</option>
-                                   <option value="3">March</option>
-                                   <option value="4">April</option>
-                                   <option value="5">May</option>
-                                   <option value="6">June</option>
-                                   <option value="7">July</option>
-                                   <option value="8">August</option>
-                                   <option value="9">September</option>
-                                   <option value="10">October</option>
-                                   <option value="11">November</option>
-                                   <option value="12">December</option>
-                                 </Form.Select>
+
+                <div className="chart-container d-flex justify-content-between mt-5">
+                    <div className="row collection justify-content-between">
+                        <div className="">
+                            <h5 className={'mt-5'}>Chooe period to list orders</h5>
+                            <br/>
+                            <div className="input-group ">
+                                {/* <input onChange={(e) => setMonth(e.target.value)} className={'form-control'} type="text" name="month"/> */}
+                                <Form.Group className="mb-3">
+                                    <Form.Select name="id" onChange={(e) => setMonth(e.target.value)}>
+                                        <option value="">Choose month</option>
+                                        <option value="1">Jan</option>
+                                        <option value="2">Feb</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </Form.Select>
                                 </Form.Group>
-                            {/* <input onChange={(e) => setYear(e.target.value)}  className={'form-control mx-5'} type="text" name="year"/> */}
-                            <Form.Group className="mb-3 mx-5">
-                                 <Form.Select name="id" onChange={(e) => setYear(e.target.value)}>
-                                   <option value="">Choose month</option>
-                                   <option value="2020">2020</option>
-                                   <option value="2021">2021</option>
-                                   <option value="2022">2022</option>
-                                 </Form.Select>
+                                {/* <input onChange={(e) => setYear(e.target.value)}  className={'form-control mx-5'} type="text" name="year"/> */}
+                                <Form.Group className="mb-3 mx-5">
+                                    <Form.Select name="id" onChange={(e) => setYear(e.target.value)}>
+                                        <option value="">Choose month</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                    </Form.Select>
                                 </Form.Group>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="chart-container d-flex justify-content-between mt-5">
                     <div className="chart-div">
-                        revenue chart
-                    </div>
-                    <div className="chart-div">
-                        user chart
+                        <LineChart
+                            width={700}
+                            height={500}
+                            data={dataChart}
+                        />
                     </div>
                 </div>
          
