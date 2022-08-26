@@ -60,7 +60,7 @@ const SigninHome = () => {
                 setAdmin(res.roleSet[0].title)
                 console.log(res.roleSet[0].title)
             })
-        if(admin === 'admin'){
+        if(admin !== 'admin'){
             navigate('/admin/home')
         }else {
             navigate('/admin/user/'+ isLogger)
