@@ -19,7 +19,7 @@ import java.util.Set;
 public class Stations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "station_name")
     private String stationName;
 

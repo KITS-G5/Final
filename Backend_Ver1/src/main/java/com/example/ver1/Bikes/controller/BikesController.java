@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -43,12 +44,13 @@ public class BikesController {
     }
 
     @GetMapping("/bikes/{id}")
-    public void getOneBike(@PathVariable Long id) {
-        bikesService.getBikeById(id);
+    @ResponseBody
+    Optional<Bikes> getOneBike(@PathVariable long id) {
+       return bikesService.getBikeById(id);
     }
 
     @PutMapping("/bikes/updateBike/{id}")
-    public void updateBike(@RequestBody Bikes bikes, @PathVariable Long id) {
+    public void updateBike(@RequestBody Bikes bikes, @PathVariable long id) {
         bikesService.updateBike(bikes,id);
     }
 

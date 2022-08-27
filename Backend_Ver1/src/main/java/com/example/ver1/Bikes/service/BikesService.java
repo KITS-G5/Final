@@ -5,11 +5,12 @@ import com.example.ver1.Stations.model.Stations;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BikesService {
     List<Bikes> getAllBikes();
     Page<Bikes> getAllBikesByPage(int pageNo, int pageSize);
-    Bikes getBikeById(long id);
+    public Optional<Bikes> getBikeById(long id);
 
     void saveBike(Bikes bikes);
 

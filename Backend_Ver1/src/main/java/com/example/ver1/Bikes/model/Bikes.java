@@ -23,7 +23,7 @@ import java.util.Set;
 public class Bikes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "bike_name")
     private String bikeName;

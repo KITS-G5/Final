@@ -30,15 +30,8 @@ public class BikesServiceImpl implements BikesService{
     }
 
     @Override
-    public Bikes getBikeById(long id) {
-        Optional<Bikes> optional = bikesRepository.findById(id);
-        Bikes b = null;
-        if (optional.isPresent()) {
-            b = optional.get();
-        } else {
-            throw new RuntimeException("Bike not found");
-        }
-        return b;
+    public Optional<Bikes> getBikeById(long id) {
+        return bikesRepository.findById(id);
     }
 
     @Override

@@ -114,6 +114,12 @@ const EditBike = () => {
         return <option key={station.id} value={station.id}>{station.stationName}</option>
     })
 
+    let checked = (bike.status == true ? console.log('abc') : false)
+    let vsChecked = false;
+      if (!checked) {
+          vsChecked = true;
+      }
+
     return (
       <>
           {bike != null? (
@@ -139,8 +145,8 @@ const EditBike = () => {
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                 >
-                    <FormControlLabel value="false" control={<Radio />} label="Not available" />
-                    <FormControlLabel value="true" control={<Radio />} label="Available" />
+                    <FormControlLabel value="false" checked={{checked}} control={<Radio />} label="Not available"  />
+                    <FormControlLabel value="true" checked={{vsChecked}} control={<Radio />} label="Available" />
                 </RadioGroup>
             </Form.Group>
 

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -39,8 +40,8 @@ public class StationsController {
     }
 
     @GetMapping("/stations/{id}")
-    public void getOneStation(@PathVariable Long id) {
-        stationsService.getStationById(id);
+    public Optional<Stations> getOneStation(@PathVariable Long id) {
+        return Optional.ofNullable(stationsService.getStationById(id));
     }
 
     @PutMapping("/stations/updateStation/{id}")
