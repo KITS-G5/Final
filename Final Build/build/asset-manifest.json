@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3c6a2e88.css",
+    "main.js": "/static/js/main.662f3d92.js",
+    "static/media/Atm.png": "/static/media/Atm.1cffa5ba9e1fae1d11cd.png",
+    "static/media/frontcard.png": "/static/media/frontcard.c3823639202de0707670.png",
+    "static/media/confirmcard.png": "/static/media/confirmcard.3e010ff54b3af8b8adb9.png",
+    "static/media/backend.png": "/static/media/backend.fb2b9457eb2d963e5588.png",
+    "static/media/Background.png": "/static/media/Background.c2512abbb191f5d8c395.png",
+    "static/media/leaf-icon.png": "/static/media/leaf-icon.842a6508eadced6de9f7.png",
+    "index.html": "/index.html",
+    "main.3c6a2e88.css.map": "/static/css/main.3c6a2e88.css.map",
+    "main.662f3d92.js.map": "/static/js/main.662f3d92.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3c6a2e88.css",
+    "static/js/main.662f3d92.js"
+  ]
+}

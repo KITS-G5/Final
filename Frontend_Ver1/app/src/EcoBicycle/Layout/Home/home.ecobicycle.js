@@ -5,7 +5,7 @@ import logo from "../../Components/image/leaf-icon.png"
 import {useTypewriter} from "react-simple-typewriter";
 import image from '../../Components/image/Background.png'
 import DarkMode from "../../../Home/darkMode";
-
+import {Link} from 'react-router-dom'
 const HomeEcoBicycle = () => {
 
 
@@ -29,7 +29,10 @@ const HomeEcoBicycle = () => {
 
             <div className='row header_eco'>
                 <div className='mt-3 Logo_eco col-sm-12 col-md-6 col-lg-3'>
-                    <img src={logo} alt="" width='50px' height='50px'/>
+                    <Link to={'/'}>
+                        <img src={logo} alt="" width='50px' height='50px'/>
+                    </Link>
+
                     <span>EcoBicycle</span>
                 </div>
                 <div className='text-center mt-4 col-sm-12 col-md-6 col-lg-6'>

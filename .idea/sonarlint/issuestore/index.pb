@@ -19,8 +19,6 @@ QBackend_Ver1/src/main/java/com/example/ver1/Stations/service/StationsService.ja
 OBackend_Ver1/src/main/java/com/example/ver1/Bikes/service/BikesServiceImpl.java,7\8\78fcef46f68875e4bd2db8ab6fdbc29c2b1df466
 Å
 QBackend_Ver1/src/main/java/com/example/ver1/Order/repository/OrderRepository.java,7\6\760c356015bcb7253a842fa62c4ddcd32c74cf30
-D
-Backend_Ver1/pom.xml,4\3\438c78631536876fa1fec20b064ff2552661aa53
 à
 XBackend_Ver1/src/main/java/com/example/ver1/Districts/repository/DistrictRepository.java,7\3\73363e2cc993c29efdd34100e0f5f79eded5613b
 Ç
