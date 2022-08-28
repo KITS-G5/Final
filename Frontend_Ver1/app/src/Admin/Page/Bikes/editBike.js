@@ -11,6 +11,8 @@ const EditBike = () => {
     const [bike, setBike] = useState('');
     const [bikeStation, setBikeStation] = useState('');
     let [status, setStatus] = useState(false);
+    const [selectedOpt, setSelectedOpt] = useState('');
+
     let navigate = useNavigate();
     const params = useParams();
     // alert(params.id);
@@ -30,9 +32,8 @@ const EditBike = () => {
             .then(data => {
                 console.log(data)
                 setBike(data);
-                console(bike);
-                console.log(bike.id);
-                console.log(bike.station.stationName);
+                setSelectedOpt(data.station.id);
+                console.log(selectedOpt);
                 // alert(data);
             })
 
@@ -51,6 +52,13 @@ const EditBike = () => {
     
         let data = { ...bike };
         data[name] = value;
+
+        if (name == "status") {
+            data[name] = str2bool(value);
+            console.log('status');
+            console.log(data[name]);
+        }
+
         setBike(data);
         console.log(bike);
 
@@ -65,7 +73,6 @@ const EditBike = () => {
         let data = { ...bike };
         data.station[name] = value;
         setBike(data);
-        console.log(bike);
         }
     
 
@@ -111,14 +118,16 @@ const EditBike = () => {
 
     // station to option
     const stationOption = station.map(station => {
-        return <option key={station.id} value={station.id}>{station.stationName}</option>
+        return <option key={station.id} value={station.id}>{station.id}</option>
     })
 
-    // let checked = (bike.status == true ? console.log('abc') : false)
-    // let vsChecked = false;
-    //   if (!checked) {
-    //       vsChecked = true;
-    //   }
+    var str2bool = (value) => {
+        if (value && typeof value === 'string') {
+            if (value.toLowerCase() === 'true') return true;
+            if (value.toLowerCase() === 'false') return false;
+        }
+        return value;
+    };
 
     return (
       <>
@@ -133,21 +142,29 @@ const EditBike = () => {
               </Form.Group>
               <Form.Group className="mb-3">
               <Form.Label>Select station for new bike</Form.Label>
-              <Form.Select name="id" value="bike.station.id"  onChange={(e) => {
+              <Form.Select name="id" defaultValue="bike.station.id"  onChange={(e) => {
               handleChangeStation(e);
           }}>
           {stationOption}
               </Form.Select>
               </Form.Group>
-            <Form.Group onChange={handleOnSelected}>
-                <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                >
-                    <FormControlLabel value="false"  control={<Radio />} label="Not available"  />
-                    <FormControlLabel value="true"  control={<Radio />} label="Available" />
-                </RadioGroup>
+            <Form.Group >
+                <input
+                    type="radio"
+                    value="false"
+                    checked={bike.status == false}
+                    name="status"
+                    onChange={handleChange}
+                />
+                Not available
+                <input
+                    type="radio"
+                    value="true"
+                    checked={bike.status == true}
+                    name="status"
+                    onChange={handleChange}
+                />
+                Available
             </Form.Group>
 
               <Button variant="primary" type="button" onClick={updateData}>
