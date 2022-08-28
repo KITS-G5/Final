@@ -37,6 +37,7 @@ import {Fragment, useState} from "react";
 import SigninHome from "./Components/Authentication/Signin/SigninHome";
 import Confirm from "./Components/Authentication/ProtectedRoute/Confirm";
 import {useEffect} from "react";
+import EditStation from "./Admin/Page/Station/editStation";
 
 function App() {
 
@@ -77,7 +78,7 @@ function App() {
                         <Route path='addbike' element={<AddBike />}></Route>
                         <Route path='addstation' element={<AddStation />}></Route>
                         <Route path='/edit/:id' element={<EditBike />}></Route>
-
+                        <Route path='/editStation/:id' element={<EditStation />}></Route>
 
 
                         <Route path="/ecobicycle" element={<HomeEcoBicycle />}>

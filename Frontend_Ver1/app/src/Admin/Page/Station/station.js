@@ -89,15 +89,11 @@ const Station = () => {
             field: "View",
             renderCell: (cellValues) => {
                 return (
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={(event) => {
-                            alert('abc');
-                        }}
+                    <NavLink
+                        to={'/editStation/' +  cellValues.id}
                     >
-                        View
-                    </Button>
+                        Edit
+                    </NavLink>
                 );
             }
         },
