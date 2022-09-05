@@ -33,7 +33,19 @@ const SigninHome = () => {
             cardNum:cardNum,
             cardPassword:cardPassword
         })
+        .then(response => {
+            console.log(response.data);
+            const token = response.data.access_tocken;
+            localStorage.setItem("token", token);
+            if (token) {
+                axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            } else {
+                delete axios.defaults.headers.common["Authorization"];
+            }
+            console.log(token);
+        })
             .then(result => {
+                console.log(result.data)
                 let idNum = result.config.data.slice(12,31)
                 console.log(result.config.data.slice(12,31))
                 setIsLogger(result.config.data.slice(12,31))

@@ -12,6 +12,7 @@ import com.example.ver1.CardType.Model.CardType;
 import com.example.ver1.CardType.Repository.CardTypeRepository;
 import com.example.ver1.Customer.Model.Customer;
 import com.example.ver1.Customer.Repository.CustomerRepository;
+import com.example.ver1.Security.Filter.CustomAuthenticationFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -54,11 +56,14 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+/*        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getCardNum(), loginDto.getCardPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);*/
+    //    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
+        System.out.println("this is test!");
+        return new ResponseEntity<>(OK);
     }
     @GetMapping("/refreshTocken")
     public void refreshTocken(HttpServletRequest request, HttpServletResponse response) throws IOException {
