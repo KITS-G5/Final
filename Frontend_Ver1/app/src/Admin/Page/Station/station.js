@@ -79,7 +79,8 @@ const Station = () => {
     //         }
     //     })
     // }
-
+    const [ids, setIds] = useState([]);
+    let rowsId = [];
     const columns = [
         { field: 'id', headerName: 'ID', width: 200 },
         { field: 'station', headerName: 'Station name', width: 300 },
@@ -111,6 +112,16 @@ const Station = () => {
                     >
                         Delete
                     </Button>
+                );
+            }
+        },
+        {
+            field: "Check",
+            renderCell: (cellValues) => {
+                return (
+                    <input type="checkbox" name="checkToDel" onChange={(e) => {
+                        rowsId.push(cellValues.id);
+                    }}/>
                 );
             }
         }];
@@ -163,6 +174,13 @@ const Station = () => {
         console.log("search key =", searchCity);
     }
 
+    const deleteMulti = (e) => {
+       rowsId.forEach(id => {
+           deleteStation(id);
+       });
+    }
+
+
     return (
         <div style={{ height: '80vh'}} className={'container mt-5'}>
             <h1 className={'text-center'} style={{ marginTop: '60px'}}>STATION MANAGEMENT SYSTEM</h1>
@@ -172,8 +190,9 @@ const Station = () => {
                        <AddIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
                    </Link>
                    <Link to="#" class={'btn btn-primary mx-5'}>
-                       <DeleteOutlineIcon sx={{fontSize: '2.5rem', color: '#ffffff'}}/>
+                       <Button onClick={deleteMulti}>DELETE</Button>
                    </Link>
+
                </div>
                <div className="filter d-flex">
                    <Form.Group className="mb-3">
@@ -215,7 +234,7 @@ const Station = () => {
                 columns={columns}
                 pageSize={10}
                 rowsPerPageOptions={[5]}
-                checkboxSelection
+                // checkboxSelection
                 BaseButton
             />
         </div>

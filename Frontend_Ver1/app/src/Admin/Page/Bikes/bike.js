@@ -76,9 +76,31 @@ const Bike = () => {
                         Delete
                     </Button>
                 );
-            }
-    }];
-
+            },
+    },
+        {
+            field: "Check",
+            renderCell: (cellValues) => {
+                return (
+                    <input type="checkbox" name="delCheckbox"/>
+                );
+            },
+        }];
+    const deleteMulti = (e, ids) => {
+        return (
+            <Button
+                variant="outlined"
+                color="error"
+                onClick={(e) => {
+                    ids.foreach(id => {
+                        deleteUser(id)
+                    })
+                }}
+            >
+                Delete
+            </Button>
+        )
+    }
 
     return (
 <>
@@ -96,7 +118,6 @@ const Bike = () => {
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[5]}
-            checkboxSelection
             BaseButton
         />
     </div>
