@@ -58,12 +58,9 @@ public class AuthController {
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
 /*        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getCardNum(), loginDto.getCardPassword()));
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);*/
     //    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
-
-
         System.out.println("this is test!");
         return new ResponseEntity<>(OK);
     }
@@ -97,7 +94,7 @@ public class AuthController {
                 response.setStatus(FORBIDDEN.value());
                 //response.sendError(FORBIDDEN.value());
                 Map<String, String> error = new HashMap<>();
-                error.put("E rror_message", exception.getMessage());
+                error.put("Error_message", exception.getMessage());
                 response.setContentType(APPLICATION_JSON_VALUE);
                 new ObjectMapper().writeValue(response.getOutputStream(), error);
             }
