@@ -41,6 +41,7 @@ const SigninHome = () => {
             localStorage.setItem("token", token);
             localStorage.setItem("login", true);
             localStorage.setItem("role", role);
+            localStorage.setItem("cardNum", cardNum);
             if (token) {
                 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             } else {
@@ -51,7 +52,8 @@ const SigninHome = () => {
                 navigate("/admin/home");
             } else {
                 // window.location.href = "/admin/user/" + cardNum;
-                navigate("/admin/user/" + cardNum);
+                // navigate("/admin/user/" + cardNum);
+                window.location.href = "/";
             }
         })
             // .then(result => {
