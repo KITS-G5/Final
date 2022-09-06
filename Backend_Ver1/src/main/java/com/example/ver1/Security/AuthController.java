@@ -62,6 +62,7 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);*/
     //    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
+
         System.out.println("this is test!");
         return new ResponseEntity<>(OK);
     }
