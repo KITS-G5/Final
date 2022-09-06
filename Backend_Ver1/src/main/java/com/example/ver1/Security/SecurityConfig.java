@@ -47,13 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
 
         //phần mở all authorization
-        http.authorizeRequests().anyRequest().permitAll();
+       // http.authorizeRequests().anyRequest().permitAll();
 
         //test security
-      /*  http.authorizeRequests().antMatchers("/signin", "/refreshTocken").permitAll();
+        http.authorizeRequests().antMatchers("api/auth/signin/", "/refreshTocken").permitAll(); //login
+        http.authorizeRequests().antMatchers("api/auth/signup").permitAll(); //buy a new card api
+        http.authorizeRequests().antMatchers("/api/v1/*").permitAll(); //buy a new card api
         http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
-        http.authorizeRequests().antMatchers(POST, "/api/v1/*").hasAnyAuthority("admin");
-        http.authorizeRequests().anyRequest().authenticated();*/
+        //http.authorizeRequests().antMatchers(POST, "/api/v1/*").hasAnyAuthority("admin");
+        http.authorizeRequests().anyRequest().authenticated();
 
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class); //lop filter kiem tra request
