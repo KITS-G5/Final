@@ -6,6 +6,7 @@ import com.example.ver1.Security.Filter.CustomAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -50,9 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        // http.authorizeRequests().anyRequest().permitAll();
 
         //test security
-        http.authorizeRequests().antMatchers("api/auth/signin/", "/refreshTocken").permitAll(); //login
-        http.authorizeRequests().antMatchers("api/auth/signup").permitAll(); //buy a new card api
+        http.authorizeRequests().antMatchers("/api/auth/signin/", "/refreshTocken").permitAll(); //login
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth/signup").permitAll(); //buy a new card api
+        http.authorizeRequests().antMatchers("/api/v1/**").permitAll(); //buy a new card api
         http.authorizeRequests().antMatchers("/api/v1/*").permitAll(); //buy a new card api
+       // http.authorizeRequests().antMatchers("/api/v1/**").permitAll(); //buy a new card api
+
         http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
         //http.authorizeRequests().antMatchers(POST, "/api/v1/*").hasAnyAuthority("admin");
         http.authorizeRequests().anyRequest().authenticated();
