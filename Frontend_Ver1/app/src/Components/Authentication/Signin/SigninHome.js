@@ -29,34 +29,39 @@ const SigninHome = () => {
         }
         e.preventDefault()
         setError('')
-        axios.post('http://localhost:8080/api/auth/signin', {
+
+        axios.post('/api/auth/signin/', {
             cardNum:cardNum,
             cardPassword:cardPassword
         })
         .then(response => {
-            console.log(response.data);
+            //console.log(response.data);
             const token = response.data.access_tocken;
             localStorage.setItem("token", token);
+            localStorage.setItem("login", true);
+            localStorage.setItem("cardNum", cardNum);
             if (token) {
                 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             } else {
                 delete axios.defaults.headers.common["Authorization"];
             }
-            console.log(token);
+            //console.log(token);
+            //window.location.href = "/";
         })
-            .then(result => {
-                console.log(result.data)
-                let idNum = result.config.data.slice(12,31)
-                console.log(result.config.data.slice(12,31))
-                setIsLogger(result.config.data.slice(12,31))
-                setCardLogin((item) => [...item, idNum])
-                setLogger(true)
-                // navigate('/')
-                /*const timeout = setTimeout(() => {
-                    navigate('/')
-                },1000)
-                return () => clearTimeout(timeout)*/
-            })
+            // .then(result => {
+            //     console.log("44444")
+            //     console.log(result)
+            //     let idNum = result.config.data.slice(12,31)
+            //     console.log(result.config.data.slice(12,31))
+            //     setIsLogger(result.config.data.slice(12,31))
+            //     setCardLogin((item) => [...item, idNum])
+            //     setLogger(true)
+            //     // navigate('/')
+            //     /*const timeout = setTimeout(() => {
+            //         navigate('/')
+            //     },1000)
+            //     return () => clearTimeout(timeout)*/
+            // })
             .catch(err => {
                 setError(err.message)
                 alert(err.message)
