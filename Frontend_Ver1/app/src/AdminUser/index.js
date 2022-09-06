@@ -18,7 +18,10 @@ const AdminUser = () => {
     }, []);
     useEffect(() => {
         let url = 'http://localhost:8080/api/v1/cards/user/' + params.cardNum;
-        fetch(url)
+        fetch(url,{
+            headers: {'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + localStorage.getItem('token')}
+        })
             .then(res => res.json())
             .then(data => setCardData(data));
     },[]);
@@ -77,7 +80,8 @@ const AdminUser = () => {
             if (cardData.cardType.id == 1) {
                 const requestOpt = {
                     method: "PUT",
-                    headers: {'Content-Type': 'application/json'},
+                    headers: {'Content-Type': 'application/json',
+                    'Authorization' : 'Bearer ' + localStorage.getItem('token')},
                     body: JSON.stringify({
                         id: cardData.id,
                         balance: cardData.balance - fee
