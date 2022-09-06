@@ -37,16 +37,22 @@ const SigninHome = () => {
         .then(response => {
             //console.log(response.data);
             const token = response.data.access_tocken;
+            const role = response.data.role;
             localStorage.setItem("token", token);
             localStorage.setItem("login", true);
-            localStorage.setItem("cardNum", cardNum);
+            localStorage.setItem("role", role);
             if (token) {
                 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             } else {
                 delete axios.defaults.headers.common["Authorization"];
             }
-            //console.log(token);
-            //window.location.href = "/";
+            if (role.includes("admin")) {
+                // window.location.href = "/admin/home";
+                navigate("/admin/home");
+            } else {
+                // window.location.href = "/admin/user/" + cardNum;
+                navigate("/admin/user/" + cardNum);
+            }
         })
             // .then(result => {
             //     console.log("44444")
