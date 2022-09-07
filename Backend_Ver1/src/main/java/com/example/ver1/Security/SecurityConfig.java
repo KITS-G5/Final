@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
 
         //phần mở all authorization
-       // http.authorizeRequests().anyRequest().permitAll();
+        //http.authorizeRequests().anyRequest().permitAll();
 
         //test security
         http.authorizeRequests().antMatchers("/api/auth/signin/", "/refreshTocken").permitAll(); //login
