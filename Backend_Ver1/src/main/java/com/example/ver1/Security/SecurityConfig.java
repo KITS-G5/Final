@@ -54,6 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("api/auth/signup").permitAll(); //buy a new card api
         http.authorizeRequests().antMatchers("/api/v1/*").permitAll(); //buy a new card api
         http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
+        http.authorizeRequests().antMatchers("/swagger-ui/").permitAll();
+        http.authorizeRequests().antMatchers("/swagger-ui/index.html").permitAll();
+        http.authorizeRequests().antMatchers("/api-docs/").permitAll();
         //http.authorizeRequests().antMatchers(POST, "/api/v1/*").hasAnyAuthority("admin");
         http.authorizeRequests().anyRequest().authenticated();
 
