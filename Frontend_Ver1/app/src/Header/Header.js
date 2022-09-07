@@ -109,7 +109,7 @@ const Header = () => {
                                 {/*</Link>*/}
                             </Nav.Link>
                             {/*{cardNumber ? <Nav.Link as={NavLink} to={`/admin/user/${cardNumber}`}>{userLink}</Nav.Link> :  <Nav.Link as={NavLink} to='/signin'>Sign in </Nav.Link> }*/}
-                            {localStorage.getItem("token") != null ?
+                            {localStorage.getItem("cardNum") != null ?
 
                                 <>
                                     {/*<Nav.Link as={NavLink} to={'/admin/user/' + localStorage.getItem("cardNum")}><AccountCircleOutlinedIcon/></Nav.Link>*/}
