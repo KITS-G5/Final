@@ -44,7 +44,7 @@ const EcoCreateMember = () => {
         };
         console.log(requestOption)
         console.log(requestOption.body)
-        fetch("http://localhost:8080/api/auth/signup/", requestOption)
+        fetch("http://localhost:8080/api/auth/signup", requestOption)
             .then(res => res.json())
             .then(data => {
                 alert(data.message)
