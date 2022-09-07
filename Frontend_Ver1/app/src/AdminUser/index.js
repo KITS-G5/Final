@@ -10,6 +10,10 @@ const AdminUser = () => {
     const params = useParams();
     const [orderData, setOrderData] = useState([]);
     const [cardData, setCardData] = useState([]);
+    if (params.cardNum !== localStorage.getItem("cardNum")) {
+        alert("Invalid access");
+        window.location.href = "/";
+    }
     useEffect(() => {
         let url = 'http://localhost:8080/orders/user/' + params.cardNum;
         fetch(url)

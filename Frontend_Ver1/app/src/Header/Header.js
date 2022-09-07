@@ -79,7 +79,6 @@ const Header = () => {
             window.location.href = "/";
         }
     }
-
     return (
         <>
             <Navbar expand="lg" style={{position: "sticky", top: 0, zIndex:"1"}}>
