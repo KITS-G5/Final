@@ -17,8 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -50,19 +49,52 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //phần mở all authorization
         //http.authorizeRequests().anyRequest().permitAll();
 
-        //test security
+        //authentication controller
         http.authorizeRequests().antMatchers("/api/auth/signin/", "/refreshTocken").permitAll(); //login
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth/signup").permitAll(); //buy a new card api
-        http.authorizeRequests().antMatchers("/api/v1/**").permitAll(); //buy a new card api
-        http.authorizeRequests().antMatchers("/api/v1/*").permitAll(); //buy a new card api
-       // http.authorizeRequests().antMatchers("/api/v1/**").permitAll(); //buy a new card api
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth/signup").permitAll(); //buy a new card api or signup
+        http.authorizeRequests().antMatchers("/error").permitAll();
+
+        http.authorizeRequests().antMatchers("/error").permitAll();
+
+        //bikes controller
+        http.authorizeRequests().antMatchers(GET, "/api/v1/bikes").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/bikes/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/station/bikes/*").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/bikes").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(DELETE, "/api/v1/bikes/*").hasAnyAuthority("admin");
+
+        //Station controller
+        http.authorizeRequests().antMatchers(GET,"/api/v1/stations").permitAll(); //
+        http.authorizeRequests().antMatchers(GET,"/api/v1/station/**").permitAll(); //
+        http.authorizeRequests().antMatchers(POST,"/api/v1/station").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(PUT,"/api/v1/station/**").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(DELETE,"/api/v1/station/**").hasAnyAuthority("admin"); //
+
+
+        //Card controller
+        http.authorizeRequests().antMatchers(GET,"/api/v1").hasAnyAuthority("user"); //
+        http.authorizeRequests().antMatchers(GET,"/api/v1/**").hasAnyAuthority("user"); //
+        http.authorizeRequests().antMatchers(POST,"/api/v1/cards").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(PUT,"/api/v1/cards/*").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(PUT,"/api/v1/topUpCard/**").hasAnyAuthority("user"); //
+
+
+        //card type controller
+        http.authorizeRequests().antMatchers(GET, "/card-type").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers(POST, "/card-type").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(GET, "/card-type/*").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers(PUT, "/card-type/*").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(DELETE, "/card-type/*").hasAnyAuthority("admin");
+
+        //cities controller
+        http.authorizeRequests().antMatchers(GET, "/api/v1/cities").hasAnyAuthority("user");
+
 
         http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
         http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
         http.authorizeRequests().antMatchers("/swagger-ui/").permitAll();
         http.authorizeRequests().antMatchers("/swagger-ui/index.html").permitAll();
         http.authorizeRequests().antMatchers("/api-docs/").permitAll();
-        //http.authorizeRequests().antMatchers(POST, "/api/v1/*").hasAnyAuthority("admin");
         http.authorizeRequests().anyRequest().permitAll();
 
         http.addFilter(customAuthenticationFilter);
