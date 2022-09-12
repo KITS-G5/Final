@@ -64,9 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(DELETE, "/api/v1/bikes/*").hasAnyAuthority("admin");
 
         //Station controller
-        http.authorizeRequests().antMatchers(GET,"/api/v1/stations").permitAll(); //
+        http.authorizeRequests().antMatchers(GET,"/api/v1/stations/").permitAll(); //
         http.authorizeRequests().antMatchers(GET,"/api/v1/station/**").permitAll(); //
-        http.authorizeRequests().antMatchers(POST,"/api/v1/station").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(POST,"/api/v1/station/").hasAnyAuthority("admin"); //
         http.authorizeRequests().antMatchers(PUT,"/api/v1/station/**").hasAnyAuthority("admin"); //
         http.authorizeRequests().antMatchers(DELETE,"/api/v1/station/**").hasAnyAuthority("admin"); //
 
