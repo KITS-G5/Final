@@ -89,8 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //cities controller
         http.authorizeRequests().antMatchers(GET, "/api/v1/cities").hasAnyAuthority("user");
 
-<<<<<<< Updated upstream
-=======
+
         //orders controller
         http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
         http.authorizeRequests().antMatchers( "/orders/**").hasAnyAuthority("admin");
@@ -98,7 +97,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
         http.authorizeRequests().antMatchers( PUT,"/user?**").permitAll();
         http.authorizeRequests().antMatchers( PUT,"/user?**").hasAnyAuthority("user");
->>>>>>> Stashed changes
 
         http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
         http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
