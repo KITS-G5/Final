@@ -160,7 +160,7 @@ const RentBike = () => {
                 body: JSON.stringify(rentData)
             };
             console.log(requestOption)
-            fetch("http://localhost:8080/orders", requestOption)
+            fetch("/orders", requestOption)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)

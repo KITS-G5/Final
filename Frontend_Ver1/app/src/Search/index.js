@@ -38,7 +38,7 @@ const CurrentLocation = () => {
         map.locate().on("locationfound", function (e){
             setPosition(e.latlng);
             map.flyTo(e.latlng, 15);
-            const radius = e.accuracy;
+            const radius = 500;
             const circle = L.circle(e.latlng, radius);
             circle.addTo(map);
         })

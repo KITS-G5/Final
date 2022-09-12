@@ -73,7 +73,6 @@ const Header = () => {
             let theme = localStorage.getItem("theme");
             localStorage.clear();
             localStorage.setItem("theme", theme);
-            console.log(localStorage.getItem("token"))
             window.location.href = "/";
         } catch (err) {
             window.location.href = "/";
@@ -110,10 +109,7 @@ const Header = () => {
                             </Nav.Link>
                             {/*{cardNumber ? <Nav.Link as={NavLink} to={`/admin/user/${cardNumber}`}>{userLink}</Nav.Link> :  <Nav.Link as={NavLink} to='/signin'>Sign in </Nav.Link> }*/}
                             {localStorage.getItem("cardNum") != null ?
-
                                 <>
-                                    {/*<Nav.Link as={NavLink} to={'/admin/user/' + localStorage.getItem("cardNum")}><AccountCircleOutlinedIcon/></Nav.Link>*/}
-                                    {/*<button onClick={handleLogout} >Logout</button>*/}
                                     <Dropdown>
                                         <Dropdown.Toggle variant={"secondary"} style={{color: "var(--font-color)",backgroundColor: "var(--background-color)"}}>
                                             <AccountCircleOutlinedIcon/>
@@ -126,7 +122,6 @@ const Header = () => {
                                 </>
                                 :
                                 <Nav.Link as={NavLink} to='/signin'>Sign in </Nav.Link>
-                                // <Nav.Link as={NavLink}>{userLink}</Nav.Link>
                             }
 
 
