@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //Station controller
         http.authorizeRequests().antMatchers(GET,"/api/v1/stations/").permitAll(); //
         http.authorizeRequests().antMatchers(GET,"/api/v1/station/**").permitAll(); //
-        http.authorizeRequests().antMatchers(POST,"/api/v1/station").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(POST,"/api/v1/station/").hasAnyAuthority("admin"); //
         http.authorizeRequests().antMatchers(PUT,"/api/v1/station/**").hasAnyAuthority("admin"); //
         http.authorizeRequests().antMatchers(DELETE,"/api/v1/station/**").hasAnyAuthority("admin"); //
 
@@ -91,13 +91,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         //orders controller
+        http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
         http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
         http.authorizeRequests().antMatchers( "/orders/**").hasAnyAuthority("admin");
         http.authorizeRequests().antMatchers( GET,"/orders/**").hasAnyAuthority("user");
-        http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
         http.authorizeRequests().antMatchers( PUT,"/user?**").permitAll();
         http.authorizeRequests().antMatchers( PUT,"/user?**").hasAnyAuthority("user");
-
 
         http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
         http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
