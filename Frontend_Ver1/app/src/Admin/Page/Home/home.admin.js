@@ -18,11 +18,9 @@ const HomeAdmin = () => {
     const [net, setNet] = useState(0);
     const [loan, setLoan] = useState(0);
     const [revenueByMonth, setRevenueByMonth] = useState([]);
-
+    console.log(localStorage.getItem("role"))
     useEffect(() => {
-        console.log('user use effect!!');
         let url = 'http://localhost:8080/orders';
-        console.log(url);
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -31,16 +29,19 @@ const HomeAdmin = () => {
             });
 
 
-        let url_gross_revenue = 'http://localhost:3000/orders/admin/grossRevenueByDate';
-        let url_net_revenue = 'http://localhost:3000/orders/admin/netRevenueByDate';
-        let url_loan_revenue = 'http://localhost:3000/orders/admin/notPaidRevenueByDate';
+        let url_gross_revenue = '/orders/admin/grossRevenueByDate';
+        let url_net_revenue = '/orders/admin/netRevenueByDate';
+        let url_loan_revenue = '/orders/admin/notPaidRevenueByDate';
         if (from != null && to != null) {
             url_gross_revenue = url_gross_revenue + '?date1=' + from + '&&date2=' + to;
             url_net_revenue = url_net_revenue + '?date1=' + from + '&&date2=' + to;
             url_loan_revenue = url_loan_revenue + '?date1=' + from + '&&date2=' + to;
         }
-        console.log(url_gross_revenue);
-        fetch(url_gross_revenue)
+        fetch(url_gross_revenue,
+            {headers:
+                    {"Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")}}
+        )
             .then((response) => response.json())
             .then((data) => {
                 console.log("Revenue =", data);
@@ -48,15 +49,23 @@ const HomeAdmin = () => {
                 console.log(data);
             })
 
-        fetch(url_net_revenue)
+        fetch(url_net_revenue,
+            {headers:
+                    {"Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")}}
+        )
             .then((response) => response.json())
             .then((data) => {
                 console.log("Revenue =", data);
                 setNet(data);
                 console.log(data);
             })
-
-        fetch(url_loan_revenue)
+        console.log(localStorage.getItem("token"))
+        fetch(url_loan_revenue,
+            {headers:
+                    {"Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")}}
+        )
             .then((response) => response.json())
             .then((data) => {
                 console.log("Revenue =", data);
@@ -70,11 +79,12 @@ const HomeAdmin = () => {
     const [year, setYear] = useState(0);
 
     useEffect(() => {
-        let url_get_revenue_by_month = "http://localhost:8080/orders/admin";
+        let url_get_revenue_by_month = "/orders/admin";
         if (month!= null && year != null) {
             url_get_revenue_by_month = url_get_revenue_by_month+ "/findOrdersByMonthAndYear?month=" + month + "&&year=" + year; 
         }
-         fetch(url_get_revenue_by_month)
+         fetch(url_get_revenue_by_month,
+             {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then((response) => response.json())
             .then((data) => {
                 console.log("Revenue by month =", data);

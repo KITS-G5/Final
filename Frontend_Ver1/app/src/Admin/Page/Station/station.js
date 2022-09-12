@@ -17,25 +17,25 @@ const Station = () => {
 
     useEffect(() => {
         console.log('user use effect!!');
-        let url1 = 'http://localhost:8080/api/v1/stations';
+        let url1 = '/api/v1/stations/';
         if (searchKeys != '' || searchCity != '') {
-            url1 = 'http://localhost:8080/api/v1/stations' + '/search?q=' + searchKeys + "&&c=" + searchCity;
+            url1 = '/api/v1/stations' + '/search?q=' + searchKeys + "&&c=" + searchCity;
         }
         console.log(url1);
-        fetch(url1)
+        fetch(url1, {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then((response) => response.json())
             .then((data) => {
                 console.log('data', data);
                 setData(data);
             });
 
-        let url_district = 'http://localhost:8080/api/v1/districts';
-        fetch(url_district)
+        let url_district = '/api/v1/districts/';
+        fetch(url_district,{headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then(res => res.json())
             .then(data => setDistrict(data))
 
-        let url = 'http://localhost:8080/api/v1/cities';
-        fetch(url)
+        let url = '/api/v1/cities';
+        fetch(url, {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then(res => res.json())
             .then(data => setCity(data))
     }, [searchKeys, searchCity]);

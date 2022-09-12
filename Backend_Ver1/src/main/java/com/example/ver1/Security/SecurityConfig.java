@@ -89,11 +89,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(PUT, "/card-type/*").hasAnyAuthority("admin");
         http.authorizeRequests().antMatchers(DELETE, "/card-type/*").hasAnyAuthority("admin");
 
+        //district controller
+//        http.authorizeRequests().antMatchers(GET, "/api/v1/districts/").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/districts/").hasAnyAuthority("admin");
+
         //cities controller
+        http.authorizeRequests().antMatchers(GET, "/api/v1/cities").hasAnyAuthority("admin");
         http.authorizeRequests().antMatchers(GET, "/api/v1/cities").hasAnyAuthority("user");
+//        http.authorizeRequests().antMatchers(GET, "/api/v1/cities").permitAll();
 
 
         //orders controller
+        http.authorizeRequests().antMatchers(GET, "/orders").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/orders/admin/**").hasAnyAuthority("admin");
         http.authorizeRequests().antMatchers(PUT, "/orders/user/**").permitAll();
         http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
         http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
