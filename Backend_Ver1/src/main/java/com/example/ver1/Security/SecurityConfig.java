@@ -72,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         //Card controller
+        http.authorizeRequests().antMatchers(GET, "/api/v1/cards/user/**").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/v1/cardByPhoneNumber/**").permitAll(); //
         http.authorizeRequests().antMatchers(GET,"/api/v1").hasAnyAuthority("user"); //
         http.authorizeRequests().antMatchers(GET,"/api/v1/**").hasAnyAuthority("user"); //

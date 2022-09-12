@@ -129,7 +129,7 @@ const RentBike = () => {
         const [cardCcv, setCardCcv] = useState("");
         const [cardData, setCardData] = useState([]);
         useEffect(() => {
-            let url = 'http://localhost:8080/api/v1/cards/user/' + cardNum;
+            let url = '/api/v1/cards/user/' + cardNum;
             fetch(url)
                 .then(res => res.json())
                 .then(data => setCardData(data));
