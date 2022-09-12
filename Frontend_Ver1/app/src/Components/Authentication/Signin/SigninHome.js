@@ -38,6 +38,7 @@ const SigninHome = () => {
             //console.log(response.data);
             const token = response.data.access_tocken;
             const role = response.data.role;
+            const id_customer = response.data.id_customer;
             localStorage.setItem("token", token);
             localStorage.setItem("login", true);
             localStorage.setItem("role", role);

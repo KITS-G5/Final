@@ -14,12 +14,24 @@ const AdminUser = () => {
         alert("Invalid access");
         window.location.href = "/";
     }
+
     useEffect(() => {
         let url = 'http://localhost:8080/orders/user/' + params.cardNum;
         fetch(url)
             .then(res => res.json())
             .then(data => setOrderData(data));
     }, []);
+    const [cardDataCus, setCardDataCus] = useState(null);
+    useEffect(()=>{
+        let url = "/api/v1/cards/user/" + params.cardNum;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCardDataCus(data))
+    },[])
+    let custName = null;
+    if (cardDataCus != null) {
+        custName = cardDataCus.customer.name;
+    }
     useEffect(() => {
         let url = 'http://localhost:8080/api/v1/cards/user/' + params.cardNum;
         fetch(url,{
@@ -125,6 +137,7 @@ const AdminUser = () => {
             }
         }
     };
+
     const columns = [
         // {field: "id", headerName: "ID", width: 100},
         {field: 'rentstart', headerName: 'Rent Start', width: 350},
@@ -160,7 +173,7 @@ const AdminUser = () => {
         <>
             <HeaderAdmin/>
             <div style={{height: '80vh'}} className={'container mt-5'}>
-                <h1 className={'text-center'} style={{marginTop: '60px'}}>USER DATA</h1>
+                <h1 className={'text-center'} style={{marginTop: '60px'}}>WELCOME, {custName}</h1>
                 <h6>Your card number: {cardNum}</h6>
                 <h6>Remaining balance: {cardBal}</h6>
                 <DataGrid

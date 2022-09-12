@@ -102,6 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //orders controller
         http.authorizeRequests().antMatchers(GET, "/orders").permitAll();
         http.authorizeRequests().antMatchers(GET,"/orders/admin/**").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(GET, "/orders/user/**").permitAll();
         http.authorizeRequests().antMatchers(PUT, "/orders/user/**").permitAll();
         http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
         http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
