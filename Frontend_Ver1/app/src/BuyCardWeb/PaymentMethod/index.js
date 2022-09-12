@@ -31,7 +31,6 @@ const PaymentMethod = () => {
         console.log(url)
         fetch(url, requestOpt)
             .then(res => res.json())
-            .then(data=> alert(data.message))
             .then();
         setShow2(true);
     };

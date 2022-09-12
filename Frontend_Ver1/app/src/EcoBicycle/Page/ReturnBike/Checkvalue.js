@@ -41,7 +41,7 @@ export default function Checkvalue() {
                 cardCcv: cardCcv
             })
         };
-        let url = 'http://localhost:8080/orders/user/' + params.id
+        let url = '/orders/user/' + params.id
         console.log(url)
         fetch(url, requestOptions)
             .then(response => response.json())

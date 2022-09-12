@@ -72,13 +72,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         //Card controller
+        http.authorizeRequests().antMatchers(GET, "/api/v1/cards").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/v1/cards/user/**").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/v1/cardByPhoneNumber/**").permitAll(); //
         http.authorizeRequests().antMatchers(GET,"/api/v1").hasAnyAuthority("user"); //
         http.authorizeRequests().antMatchers(GET,"/api/v1/**").hasAnyAuthority("user"); //
         http.authorizeRequests().antMatchers(POST,"/api/v1/cards").hasAnyAuthority("admin"); //
         http.authorizeRequests().antMatchers(PUT,"/api/v1/cards/*").hasAnyAuthority("admin"); //
-        http.authorizeRequests().antMatchers(PUT,"/api/v1/topUpCard/**").hasAnyAuthority("user"); //
+        http.authorizeRequests().antMatchers(PUT,"/api/v1/topUpCard/**").permitAll(); //
 
 
         //card type controller
@@ -93,6 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         //orders controller
+        http.authorizeRequests().antMatchers(PUT, "/orders/user/**").permitAll();
         http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
         http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
         http.authorizeRequests().antMatchers( "/orders/**").hasAnyAuthority("admin");
