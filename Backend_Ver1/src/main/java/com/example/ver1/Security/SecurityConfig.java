@@ -65,13 +65,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //Station controller
         http.authorizeRequests().antMatchers(GET,"/api/v1/stations").permitAll(); //
-        http.authorizeRequests().antMatchers(GET,"/api/v1/station/**").permitAll(); //
-        http.authorizeRequests().antMatchers(POST,"/api/v1/station").hasAnyAuthority("admin"); //
-        http.authorizeRequests().antMatchers(PUT,"/api/v1/station/**").hasAnyAuthority("admin"); //
-        http.authorizeRequests().antMatchers(DELETE,"/api/v1/station/**").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(GET,"/api/v1/stations/").permitAll(); //
+        http.authorizeRequests().antMatchers(GET,"/api/v1/stations/**").permitAll(); //
+        http.authorizeRequests().antMatchers(POST,"/api/v1/stations").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(PUT,"/api/v1/stations/**").hasAnyAuthority("admin"); //
+        http.authorizeRequests().antMatchers(DELETE,"/api/v1/stations/**").hasAnyAuthority("admin"); //
 
 
         //Card controller
+        http.authorizeRequests().antMatchers(GET,"/api/v1/cardByPhoneNumber/**").permitAll(); //
+        http.authorizeRequests().antMatchers(GET,"/api/v1/card/user/**").permitAll(); //
         http.authorizeRequests().antMatchers(GET,"/api/v1").hasAnyAuthority("user"); //
         http.authorizeRequests().antMatchers(GET,"/api/v1/**").hasAnyAuthority("user"); //
         http.authorizeRequests().antMatchers(POST,"/api/v1/cards").hasAnyAuthority("admin"); //
@@ -89,8 +92,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //cities controller
         http.authorizeRequests().antMatchers(GET, "/api/v1/cities").hasAnyAuthority("user");
 
+        //orders controller
+        http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers( "/orders/**").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers( GET,"/orders/**").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers( POST,"/orders").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers( PUT,"/user?**").hasAnyAuthority("user");
 
-        http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
+
+        //customer controller
+        http.authorizeRequests().antMatchers("/customer").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers("/customer/**").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers( GET,"/customer/**").hasAnyAuthority("user");
+
+        //district controller
+        http.authorizeRequests().antMatchers("/api/v1/districts").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers("/api/v1/districts/**").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers("/api/v1/districts").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers("/api/v1/districts/**").hasAnyAuthority("user");
+
+        //role controller
+        http.authorizeRequests().antMatchers("/role").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers("/role/**").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(GET, "/role/**").hasAnyAuthority("user");
+
+        // stations controller
+        http.authorizeRequests().antMatchers("/api/v1/stations").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers("/api/v1/stations/**").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(GET,"/api/v1/stations").hasAnyAuthority("user");
+        http.authorizeRequests().antMatchers(GET,"/api/v1/stations/**").hasAnyAuthority("user");
+
+
+        // http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
         http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
         http.authorizeRequests().antMatchers("/swagger-ui/").permitAll();
         http.authorizeRequests().antMatchers("/swagger-ui/index.html").permitAll();
