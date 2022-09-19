@@ -17,7 +17,7 @@ export default function ReturnBikeTest() {
 
     useEffect(() => {
         // let url = '/api/v1/stations/'
-        let url = "http://projectfinaltest-env.eba-vh2mysap.ap-northeast-1.elasticbeanstalk.com/api/v1/stations/"
+        let url = "/api/v1/stations/"
         fetch(url)
             .then(res => res.json())
             .then(res => setStation(res))
