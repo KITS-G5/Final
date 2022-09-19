@@ -16,15 +16,13 @@ export default function ReturnBikeTest() {
 
 
     useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/stations/'
+        let url = '/api/v1/stations/'
         fetch(url)
             .then(res => res.json())
             .then(res => setStation(res))
     }, [searchKeys]);
-
-
     useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/cards/'
+        let url = '/api/v1/cards/'
         fetch(url)
             .then(res => res.json())
             .then(res => setCard(res))

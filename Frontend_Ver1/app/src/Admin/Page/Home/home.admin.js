@@ -192,28 +192,28 @@ const HomeAdmin = () => {
                 <h1 style={{marginTop: '80px'}}>DASHBOARD</h1>
                 {/*insert chart*/}
                 {/*add filter to filter orders by date, by station*/}
-                <div className="d-flex justify-content-between cards">
-                    <div className="card-div text-center">
-                        <h2 className={'mt-3'}>1500
-                        </h2>
-                        <h3>BIKES</h3>
-                    </div>
-                    <div className="card-div text-center">
-                        <h2 className={'mt-3'}>500
-                        </h2>
-                        <h2>STATIONS</h2>
-                    </div>
-                    <div className="card-div text-center">
-                        <h2 className={'mt-3'}>120.000
-                        </h2>
-                        <h3>USERS</h3>
-                    </div>
-                    <div className="card-div text-center">
-                        <h2 className={'mt-3'}>$1.000.000
-                        </h2>
-                        <h3>REVENUE</h3>
-                    </div>
-                </div>
+                {/*<div className="d-flex justify-content-between cards">*/}
+                {/*    <div className="card-div text-center">*/}
+                {/*        <h2 className={'mt-3'}>1500*/}
+                {/*        </h2>*/}
+                {/*        <h3>BIKES</h3>*/}
+                {/*    </div>*/}
+                {/*    <div className="card-div text-center">*/}
+                {/*        <h2 className={'mt-3'}>500*/}
+                {/*        </h2>*/}
+                {/*        <h2>STATIONS</h2>*/}
+                {/*    </div>*/}
+                {/*    <div className="card-div text-center">*/}
+                {/*        <h2 className={'mt-3'}>120.000*/}
+                {/*        </h2>*/}
+                {/*        <h3>USERS</h3>*/}
+                {/*    </div>*/}
+                {/*    <div className="card-div text-center">*/}
+                {/*        <h2 className={'mt-3'}>$1.000.000*/}
+                {/*        </h2>*/}
+                {/*        <h3>REVENUE</h3>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 {/*charts*/}
                 {/* get revenue for chart data */}
 
@@ -244,7 +244,7 @@ const HomeAdmin = () => {
                                 {/* <input onChange={(e) => setYear(e.target.value)}  className={'form-control mx-5'} type="text" name="year"/> */}
                                 <Form.Group className="mb-3 mx-5">
                                     <Form.Select name="id" onChange={(e) => setYear(e.target.value)}>
-                                        <option value="">Choose month</option>
+                                        <option value="">Choose year</option>
                                         <option value="2020">2020</option>
                                         <option value="2021">2021</option>
                                         <option value="2022">2022</option>
