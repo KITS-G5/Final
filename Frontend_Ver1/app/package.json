@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://final-sigma-two.vercel.app/",
   "dependencies": {
     "@babel/preset-react": "^7.18.6",
     "@coreui/react": "^4.3.1",
