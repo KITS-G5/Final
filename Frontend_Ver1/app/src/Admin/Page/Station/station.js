@@ -128,17 +128,20 @@ const Station = () => {
 
     const deleteStation = (id) => {
         //fetch station
-        let url = 'http://localhost:8080/api/v1/stations/deleteStation/' + id;
+        console.log(id)
+        let url = '/api/v1/stations/deleteStation/' + id;
         fetch(url, {
             method: 'DELETE',
-        }).then(() => {
+        })
+            .then(() => {
             console.log('delete successful!!');
             let result = [...data];
             result = result.filter((item) => {
                 return item.id != id;
             });
             setData(result);
-        });
+        })
+            .then(res=>res.json());
     };
 
     const opt = city.map((item) => {
@@ -176,14 +179,15 @@ const Station = () => {
 
     const deleteMulti = (e) => {
        rowsId.forEach(id => {
+           console.log(id)
            deleteStation(id);
        });
     }
 
-
     return (
         <div style={{ height: '80vh'}} className={'container mt-5'}>
             <h1 className={'text-center'} style={{ marginTop: '60px'}}>STATION MANAGEMENT SYSTEM</h1>
+
            <div className="d-flex justify-content-between">
                <div className="d-lex">
                    <Link to="#" class={'btn btn-danger'}>
