@@ -15,11 +15,17 @@ export default function ReturnBikeTest() {
     const [searchKeys, setSearchKeys] = useState('');
 
 
+    // useEffect(() => {
+    //     let url = '/api/v1/stations/'
+    //     fetch(url)
+    //         .then(res => res.json())
+    //         .then(res => setStation(res))
+    // }, [searchKeys]);
     useEffect(() => {
         let url = '/api/v1/stations/'
         fetch(url)
-            .then(res => res.json())
-            .then(res => setStation(res))
+            .then(res => res.text())
+            .then(text => setStation(text))
     }, [searchKeys]);
     useEffect(() => {
         let url = '/api/v1/cards/'
