@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {LoggerContext} from "../../../Context/GlobalContext";
 import {Link} from 'react-router-dom'
 import image from "../../../EcoBicycle/Components/image/Atm.png";
+import constantUrl from "../../ConstantUrl";
 
 
 const SigninHome = () => {
@@ -30,7 +31,7 @@ const SigninHome = () => {
         e.preventDefault()
         setError('')
 
-        axios.post('/api/auth/signin/', {
+        axios.post(constantUrl + '/api/auth/signin/', {
             cardNum:cardNum,
             cardPassword:cardPassword
         })
