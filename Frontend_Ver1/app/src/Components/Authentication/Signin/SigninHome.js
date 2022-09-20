@@ -30,13 +30,11 @@ const SigninHome = () => {
         }
         e.preventDefault()
         setError('')
-
         axios.post(constantUrl + '/api/auth/signin/', {
             cardNum:cardNum,
             cardPassword:cardPassword
         })
         .then(response => {
-            //console.log(response.data);
             const token = response.data.access_tocken;
             const role = response.data.role;
             const id_customer = response.data.id_customer;
