@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import {Form, InputGroup} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import {NavDropdown, Table} from "react-bootstrap";
+import constantUrl from "../../../Components/ConstantUrl";
 
 export default function ReturnBikeTest() {
 
@@ -14,17 +15,15 @@ export default function ReturnBikeTest() {
     const [card, setCard] = useState(null)
     const [searchKeys, setSearchKeys] = useState('');
 
-
     useEffect(() => {
-        // let url = '/api/v1/stations/'
-        let url = "https://projectfinaltest-env.eba-vh2mysap.ap-northeast-1.elasticbeanstalk.com/api/v1/stations/"
-        fetch(url)
+        let url = '/api/v1/stations/'
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(res => setStation(res))
     }, [searchKeys]);
     useEffect(() => {
         let url = '/api/v1/cards/'
-        fetch(url)
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(res => setCard(res))
     }, []);

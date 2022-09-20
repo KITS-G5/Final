@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import image from "../../Components/image/Atm.png";
 import {Button, Modal} from "react-bootstrap";
+import constantUrl from "../../../Components/ConstantUrl";
 
 export default function Checkvalue() {
     const params = useParams()
@@ -14,8 +15,8 @@ export default function Checkvalue() {
 
     useEffect(() => {
         if(cardNum === '') return
-        let url = 'http://localhost:8080/api/v1/cards/user/' + cardNum;
-        fetch(url)
+        let url = '/api/v1/cards/user/' + cardNum;
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then((res) => {
                 setIdCus(res.id)
@@ -43,7 +44,7 @@ export default function Checkvalue() {
         };
         let url = '/orders/user/' + params.id
         console.log(url)
-        fetch(url, requestOptions)
+        fetch(constantUrl  + url, requestOptions)
             .then(response => response.json())
             .then(data =>
                 // alert(data.message)

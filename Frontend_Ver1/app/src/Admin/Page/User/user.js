@@ -4,13 +4,12 @@ import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Link, NavLink} from 'react-router-dom'
+import constantUrl from "../../../Components/ConstantUrl";
 const User = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        console.log('user use effect!!');
-        let url = 'http://localhost:8080/customer/customers';
-        console.log(url);
-        fetch(url)
+        let url = '/customer/customers';
+        fetch(constantUrl + url)
             .then((response) => response.json())
             .then((data) => {
                 console.log('data', data);
@@ -29,8 +28,8 @@ const User = () => {
 
     const deleteUser = (id) => {
         //fetch bike
-        let url = 'http://localhost:8080/customer/' + id;
-        fetch(url, {
+        let url = '/customer/' + id;
+        fetch(constantUrl + url, {
           method: 'DELETE',
         }).then(() => {
           console.log('delete successful!!');

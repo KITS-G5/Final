@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {Form, InputGroup} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
+import constantUrl from "../../../Components/ConstantUrl";
 const Station = () => {
     const [data, setData] = useState([]);
     const [city, setCity] = useState([]);
@@ -22,7 +23,7 @@ const Station = () => {
             url1 = '/api/v1/stations' + '/search?q=' + searchKeys + "&&c=" + searchCity;
         }
         console.log(url1);
-        fetch(url1, {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
+        fetch(constantUrl + url1, {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then((response) => response.json())
             .then((data) => {
                 console.log('data', data);
@@ -30,12 +31,12 @@ const Station = () => {
             });
 
         let url_district = '/api/v1/districts/';
-        fetch(url_district,{headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
+        fetch(constantUrl + url_district,{headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then(res => res.json())
             .then(data => setDistrict(data))
 
         let url = '/api/v1/cities';
-        fetch(url, {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
+        fetch(constantUrl + url, {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then(res => res.json())
             .then(data => setCity(data))
     }, [searchKeys, searchCity]);
@@ -130,7 +131,7 @@ const Station = () => {
         //fetch station
         console.log(id)
         let url = '/api/v1/stations/deleteStation/' + id;
-        fetch(url, {
+        fetch(constantUrl + url, {
             method: 'DELETE',
         })
             .then(() => {

@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router";
 import {useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
 import './paymentMethod.css';
+import constantUrl from "../../Components/ConstantUrl";
 
 const PaymentMethod = () => {
     const params = useParams();
@@ -15,8 +16,8 @@ const PaymentMethod = () => {
     const [cardData, setCardData] = useState([]);
     const [cardId, setCardId] = useState("");
     useEffect(() => {
-        let url = "http://localhost:8080/api/v1/cards/user/" + params.cardNo;
-        fetch(url)
+        let url = "/api/v1/cards/user/" + params.cardNo;
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => setCardData(data));
     },[]);
@@ -27,9 +28,9 @@ const PaymentMethod = () => {
             headers: {"Content-Type": "application/json"}
         };
         // let url = "http://localhost:8080/api/v1/cards/" + cardId
-        let url = "http://localhost:8080/api/v1/topUpCard/" + params.cardNo + "/" + parseInt(params.output);
+        let url = "/api/v1/topUpCard/" + params.cardNo + "/" + parseInt(params.output);
         console.log(url)
-        fetch(url, requestOpt)
+        fetch(constantUrl + url, requestOpt)
             .then(res => res.json())
             .then();
         setShow2(true);

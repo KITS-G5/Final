@@ -6,6 +6,7 @@ import CardNum from "./CardNum";
 import card1 from "../../../BuyCardWeb/img/frontcard.png";
 import card2 from "../../../BuyCardWeb/img/backend.png";
 import {Button, Modal} from "react-bootstrap";
+import constantUrl from "../../../Components/ConstantUrl";
 
 const RentBike = () => {
 
@@ -34,9 +35,9 @@ const RentBike = () => {
         }*/
 
         useEffect(() => {
-            let url = 'http://localhost:8080/api/v1/stations/';
+            let url = '/api/v1/stations/';
             console.log(url);
-            fetch(url)
+            fetch(constantUrl + url)
                 .then((response) => response.json())
                 .then((data) => {
                     setStations(data);
@@ -68,10 +69,8 @@ const RentBike = () => {
 
 
         useEffect(() => {
-            console.log(stations)
-            let url = "http://localhost:8080/api/v1/station/bikes/" + selectedStationID;
-            console.log('check url', url);
-            fetch(url)
+            let url = "/api/v1/station/bikes/" + selectedStationID;
+            fetch(constantUrl + url)
                 .then((response) => response.json())
                 .then((data) => {
                     setBikes(data);
@@ -130,7 +129,7 @@ const RentBike = () => {
         const [cardData, setCardData] = useState([]);
         useEffect(() => {
             let url = '/api/v1/cards/user/' + cardNum;
-            fetch(url)
+            fetch(constantUrl + url)
                 .then(res => res.json())
                 .then(data => setCardData(data));
         }, [cardNum]);
@@ -160,7 +159,7 @@ const RentBike = () => {
                 body: JSON.stringify(rentData)
             };
             console.log(requestOption)
-            fetch("/orders", requestOption)
+            fetch(constantUrl + "/orders", requestOption)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)

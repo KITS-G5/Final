@@ -3,6 +3,7 @@ import image from '../../image/Atm.png'
 import Button from 'react-bootstrap/Button';
 import { useNavigate} from 'react-router-dom'
 import {useEffect} from "react";
+import constantUrl from "../../../../Components/ConstantUrl";
 
 const LoginAccount = () => {
     const [name, setName] = useState('')
@@ -32,7 +33,7 @@ const LoginAccount = () => {
         }
         let item = {name,address,phone,typeCard,cardNum, cardPassword}
         console.log(item)
-        let result = await fetch('http://localhost:8080/api/auth/signin/', {
+        let result = await fetch(constantUrl + '/api/auth/signin/', {
             method:'POST',
             headers: {
                 "Content-Type": "application/json",

@@ -80,8 +80,8 @@ const SigninHome = () => {
     const [role, setRole] = useState("");
     useEffect(() => {
         if(isLogger === '') return
-        let url = 'http://localhost:8080/api/v1/cards/user/' + isLogger;
-        fetch(url)
+        let url = '/api/v1/cards/user/' + isLogger;
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data=>{
                 setAdmin(data.roleSet[0].id)

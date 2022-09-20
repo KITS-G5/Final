@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import {useNavigate, useParams} from "react-router-dom";
 import image from "../../../image/Atm.png";
+import constantUrl from "../../../../../Components/ConstantUrl";
 
 const EcoCreateMember = () => {
 
@@ -44,7 +45,7 @@ const EcoCreateMember = () => {
         };
         console.log(requestOption)
         console.log(requestOption.body)
-        fetch("http://localhost:8080/api/auth/signup", requestOption)
+        fetch(constantUrl + "/api/auth/signup", requestOption)
             .then(res => res.json())
             .then(data => {
                 alert(data.message)

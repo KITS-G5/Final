@@ -9,6 +9,7 @@ import {Line} from "react-chartjs-2";
 import LineChart from 'react-linechart';
 
 import './styles.css'
+import constantUrl from "../../../Components/ConstantUrl";
 
 const HomeAdmin = () => {
     const [data, setData] = useState([]);
@@ -20,8 +21,8 @@ const HomeAdmin = () => {
     const [revenueByMonth, setRevenueByMonth] = useState([]);
     console.log(localStorage.getItem("role"))
     useEffect(() => {
-        let url = 'http://localhost:8080/orders';
-        fetch(url)
+        let url = '/orders';
+        fetch(constantUrl + url)
             .then((response) => response.json())
             .then((data) => {
                 console.log('data', data);
@@ -37,7 +38,7 @@ const HomeAdmin = () => {
             url_net_revenue = url_net_revenue + '?date1=' + from + '&&date2=' + to;
             url_loan_revenue = url_loan_revenue + '?date1=' + from + '&&date2=' + to;
         }
-        fetch(url_gross_revenue,
+        fetch(constantUrl + url_gross_revenue,
             {headers:
                     {"Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("token")}}
@@ -49,7 +50,7 @@ const HomeAdmin = () => {
                 console.log(data);
             })
 
-        fetch(url_net_revenue,
+        fetch(constantUrl + url_net_revenue,
             {headers:
                     {"Content-Type": "application/json",
                         "Authorization": "Bearer " + localStorage.getItem("token")}}
@@ -61,7 +62,7 @@ const HomeAdmin = () => {
                 console.log(data);
             })
         console.log(localStorage.getItem("token"))
-        fetch(url_loan_revenue,
+        fetch(constantUrl + url_loan_revenue,
             {headers:
                     {"Content-Type": "application/json",
                         "Authorization": "Bearer " + localStorage.getItem("token")}}
@@ -83,7 +84,7 @@ const HomeAdmin = () => {
         if (month!= null && year != null) {
             url_get_revenue_by_month = url_get_revenue_by_month+ "/findOrdersByMonthAndYear?month=" + month + "&&year=" + year; 
         }
-         fetch(url_get_revenue_by_month,
+         fetch(constantUrl + url_get_revenue_by_month,
              {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
             .then((response) => response.json())
             .then((data) => {

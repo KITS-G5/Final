@@ -5,13 +5,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddIcon from '@mui/icons-material/Add';
+import constantUrl from "../../../Components/ConstantUrl";
 const Card = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        console.log('user use effect!!');
-        let url = 'http://localhost:8080/api/v1/cards';
-        console.log(url);
-        fetch(url)
+        let url = '/api/v1/cards';
+        fetch(constantUrl + url)
             .then((response) => response.json())
             .then((data) => {
                 console.log('data', data);

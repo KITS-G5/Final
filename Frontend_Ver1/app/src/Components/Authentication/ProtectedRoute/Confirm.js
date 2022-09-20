@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import cardimae from '../../../BuyCardWeb/img/frontcard.png'
 import cardimage from '../../../BuyCardWeb/img/confirmcard.png'
+import constantUrl from "../../ConstantUrl";
 
 const Confirm = () => {
     const Navigate = useNavigate()
     const params = useParams()
     const [cardInfo, setCardInfo] = useState(null)
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/cardByPhoneNumber/' + params.phone)
+        fetch(constantUrl + '/api/v1/cardByPhoneNumber/' + params.phone)
             .then((res) => res.json())
             .then((res) => {
                 setCardInfo(res.object)

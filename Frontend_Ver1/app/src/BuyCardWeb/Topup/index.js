@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import './topup.css';
 import {Link} from "react-router-dom";
 import card from "../img/frontcard.png";
+import constantUrl from "../../Components/ConstantUrl";
 
 const Topup = () => {
     const [info, setInfo] = useState([]);
@@ -19,8 +20,8 @@ const Topup = () => {
     const [cardCheck, setCardCheck] = useState(false);
     // const validateClick = () => setShow(true);
     useEffect(() => {
-        let url = "http://localhost:8080/api/v1/cards";
-        fetch(url)
+        let url = "/api/v1/cards";
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => setCardData(data));
     }, []);

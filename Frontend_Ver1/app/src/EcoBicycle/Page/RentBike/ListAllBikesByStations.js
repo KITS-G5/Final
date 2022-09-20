@@ -1,6 +1,7 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import constantUrl from "../../../Components/ConstantUrl";
 
 const ListALlBikesBYStation = (props) => {
     console.log("check id from bikes", props.idStation )
@@ -11,9 +12,9 @@ const ListALlBikesBYStation = (props) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        let url = "http://localhost:8080/api/v1/station/bikes/" + {stationID} ;
+        let url = "/api/v1/station/bikes/" + {stationID} ;
         console.log('check url', url);
-        fetch(url)
+        fetch(constantUrl + url)
             .then((response) => response.json())
             .then((data) => {
                 setBikes(data);

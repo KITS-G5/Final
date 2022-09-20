@@ -7,6 +7,7 @@ import Geocode from 'react-geocode';
 
 //import api key from env
 import { useParams } from 'react-router-dom';
+import constantUrl from "../../../Components/ConstantUrl";
 
 const EditStation = () => {
     const [station, setStation] = useState([]);
@@ -16,8 +17,8 @@ const EditStation = () => {
     let navigate = useNavigate();
     // fetch station data
     useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/stations/' + params.id;
-        fetch(url)
+        let url = '/api/v1/stations/' + params.id;
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => {
                 console.log('data =' , data)
@@ -134,7 +135,7 @@ const EditStation = () => {
           body: JSON.stringify(station),
         };
         fetch(
-          'http://localhost:8080/api/v1/stations/updateStation/' + station.id,
+            constantUrl + '/api/v1/stations/updateStation/' + station.id,
           requestOptions
         )
           .then((response) => response.json())

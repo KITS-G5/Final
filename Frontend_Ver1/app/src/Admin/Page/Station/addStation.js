@@ -4,6 +4,7 @@ import { Form, FormControl, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import {click} from "@testing-library/user-event/dist/click";
 import Geocode from 'react-geocode';
+import constantUrl from "../../../Components/ConstantUrl";
 
 //import api key from env
 
@@ -29,8 +30,8 @@ const AddStation = () => {
         //     .then(data => setStation(data))
 
 
-        let url_district = 'http://localhost:8080/api/v1/districts';
-        fetch(url_district)
+        let url_district = '/api/v1/districts';
+        fetch(constantUrl + url_district)
             .then(res => res.json())
             .then(data => setDistrict(data))
     }, []);
@@ -132,7 +133,7 @@ const AddStation = () => {
           body: JSON.stringify(station),
         };
         fetch(
-          'http://localhost:8080/api/v1/stations',
+            constantUrl + '/api/v1/stations',
           requestOptions
         )
           .then((response) => response.json())

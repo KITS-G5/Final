@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
+import constantUrl from "../../../Components/ConstantUrl";
 
 const AddBike = () => {
     const [station, setStaton] = useState([]);
@@ -14,8 +15,8 @@ const AddBike = () => {
         initData.status = 'true';
         setBike(initData);
 
-        let url = 'http://localhost:8080/api/v1/stations';
-        fetch(url)
+        let url = '/api/v1/stations';
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => setStaton(data))
     }, []);
@@ -66,7 +67,7 @@ const AddBike = () => {
           body: JSON.stringify(bike),
         };
         fetch(
-          'http://localhost:8080/api/v1/bikes',
+            constantUrl + '/api/v1/bikes',
           requestOptions
         )
           .then((response) => response.json())

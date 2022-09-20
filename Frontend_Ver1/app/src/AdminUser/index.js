@@ -5,6 +5,7 @@ import HeaderAdmin from "../Admin/Layout/Header";
 import SideBarUser from "./SideBar";
 import {DataGrid} from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
+import constantUrl from "../Components/ConstantUrl";
 
 const AdminUser = () => {
     const params = useParams();
@@ -16,15 +17,15 @@ const AdminUser = () => {
     }
 
     useEffect(() => {
-        let url = 'http://localhost:8080/orders/user/' + params.cardNum;
-        fetch(url)
+        let url = '/orders/user/' + params.cardNum;
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => setOrderData(data));
     }, []);
     const [cardDataCus, setCardDataCus] = useState(null);
     useEffect(()=>{
         let url = "/api/v1/cards/user/" + params.cardNum;
-        fetch(url)
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => setCardDataCus(data))
     },[])
@@ -33,8 +34,8 @@ const AdminUser = () => {
         custName = cardDataCus.customer.name;
     }
     useEffect(() => {
-        let url = 'http://localhost:8080/api/v1/cards/user/' + params.cardNum;
-        fetch(url,{
+        let url = '/api/v1/cards/user/' + params.cardNum;
+        fetch(constantUrl + url,{
             headers: {'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + localStorage.getItem('token')}
         })
@@ -103,7 +104,7 @@ const AdminUser = () => {
                         balance: cardData.balance - fee
                     })
                 };
-                fetch('http://localhost:8080/api/v1/cards/' + cardData.id, requestOpt)
+                fetch(constantUrl + '/api/v1/cards/' + cardData.id, requestOpt)
                     // .then(res => res.json())
                     .then(data => setCardData(data.id));
 
@@ -116,7 +117,7 @@ const AdminUser = () => {
                         // paymentStatus: true
                     })
                 };
-                fetch('http://localhost:8080/orders/user/makePayment/' + params.cardNum, requestOpt2)
+                fetch(constantUrl + '/orders/user/makePayment/' + params.cardNum, requestOpt2)
                     .then(res => res.json())
                     .then(data => setOrderData(data.id));
                 window.location.reload();
@@ -131,7 +132,7 @@ const AdminUser = () => {
                         // paymentStatus: true
                     })
                 };
-                fetch('http://localhost:8080/orders/user/makePayment/' + params.cardNum, requestOpt2)
+                fetch(constantUrl + '/orders/user/makePayment/' + params.cardNum, requestOpt2)
                     .then(res => res.json())
                     .then(data => setOrderData(data.id));
             }

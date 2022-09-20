@@ -4,13 +4,14 @@ import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Link, NavLink} from 'react-router-dom'
+import constantUrl from "../../../Components/ConstantUrl";
 const Orders = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
         console.log('user use effect!!');
-        let url = 'http://localhost:8080/orders';
+        let url = '/orders';
         console.log(url);
-        fetch(url)
+        fetch(constantUrl + url)
             .then((response) => response.json())
             .then((data) => {
                 console.log('data', data);

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 // param
 import { useParams } from 'react-router-dom';
 import {FormControlLabel, Radio, RadioGroup} from "@mui/material";
+import constantUrl from "../../../Components/ConstantUrl";
 
 const EditBike = () => {
     const [station, setStaton] = useState([]);
@@ -26,8 +27,8 @@ const EditBike = () => {
         console.log("data");
         console.log(bike);
         console.log(params.id);
-        let url_bike = 'http://localhost:8080/api/v1/bikes/' + params.id;
-        fetch(url_bike)
+        let url_bike = '/api/v1/bikes/' + params.id;
+        fetch(constantUrl + url_bike)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -37,8 +38,8 @@ const EditBike = () => {
                 // alert(data);
             })
 
-        let url = 'http://localhost:8080/api/v1/stations';
-        fetch(url)
+        let url = '/api/v1/stations';
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => setStaton(data))
     }, [params.id]);
@@ -99,7 +100,7 @@ const EditBike = () => {
           body: JSON.stringify(bike),
         };
         fetch(
-          'http://localhost:8080/api/v1/bikes/updateBike/' + bike.id,
+            constantUrl + '/api/v1/bikes/updateBike/' + bike.id,
           requestOptions
         )
           .then((response) => response.json())

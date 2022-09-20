@@ -3,6 +3,7 @@ import axios from 'axios'
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react";
 import image from "../../image/Atm.png";
+import constantUrl from "../../../../Components/ConstantUrl";
 
 const Demo = () => {
 
@@ -24,7 +25,7 @@ const Demo = () => {
         e.preventDefault()
         setError('')
 
-        axios.post('http://localhost:8080/api/auth/signin/', {
+        axios.post(constantUrl + '/api/auth/signin/', {
             cardNum:cardNum,
             cardPassword:cardPassword
         })

@@ -5,6 +5,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import {AlgoliaProvider, SearchControl} from "leaflet-geosearch";
 import {useEffect, useState} from "react";
 import "leaflet-geosearch/dist/geosearch.css";
+import constantUrl from "../Components/ConstantUrl";
 
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -63,7 +64,7 @@ const Search = () => {
     const [geoList, setGeoList] = useState([]);
     useEffect(() => {
         let url = "/api/v1/stations/";
-        fetch(url)
+        fetch(constantUrl + url)
             .then(res => res.json())
             .then(data => setGeo(data));
         if (geo != null) {
