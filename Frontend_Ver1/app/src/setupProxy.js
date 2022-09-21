@@ -20,7 +20,7 @@ module.exports = function(app) {
     );
 
     app.use(
-        "/api/auth/signin/",
+        "/signin/",
         createProxyMiddleware({
             target: "http://projectfinaltest-env.eba-vh2mysap.ap-northeast-1.elasticbeanstalk.com/api/auth/signin/",
             changeOrigin: true,

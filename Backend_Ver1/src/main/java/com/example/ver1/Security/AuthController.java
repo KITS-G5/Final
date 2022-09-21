@@ -19,9 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +42,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @Slf4j
-@CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/auth")
+@CrossOrigin
+@RequestMapping(path = "/api/auth/")
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -54,15 +58,62 @@ public class AuthController {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @PostMapping("/signin")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
-/*        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getCardNum(), loginDto.getCardPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);*/
-    //    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
-        System.out.println("this is test!");
-        return new ResponseEntity<>(OK);
+
+    @PostMapping("/signin/")
+//    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
+///*        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+//                loginDto.getCardNum(), loginDto.getCardPassword()));
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        return new ResponseEntity<>("Card number signed-in successfully!.", HttpStatus.OK);*/
+//    //    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
+//
+//        System.out.println("this is test!");
+//        return new ResponseEntity<>(OK);
+//    }
+    public void authenticateUser(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
+      /*  String cardNum = request.getParameter("cardNum");
+        String cardPassword = request.getParameter("cardPassword");*/
+
+        String cardNum;
+        String cardPassword;
+        Map<String, String> requestMap = null;
+        try {
+            requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+            cardNum = requestMap.get("cardNum");
+            cardPassword = requestMap.get("cardPassword");
+        } catch (IOException e) {
+            throw new AuthenticationServiceException(e.getMessage(), e);
+        }
+
+        log.info("Card number is {}", cardNum);
+        log.info("Password is {}", cardPassword);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(cardNum, cardPassword);
+        Authentication newAuth = authenticationManager.authenticate(authenticationToken);
+        User user = (User) newAuth.getPrincipal();
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        String access_tocken = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .withIssuer(request.getRequestURI().toString())
+                .withClaim("roles", user.getAuthorities()
+                        .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList())).sign(algorithm);
+
+        String refresh_tocken = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
+                .withIssuer(request.getRequestURI().toString()).sign(algorithm);
+
+//        response.setHeader("access_tocken", access_tocken);
+//        response.setHeader("refresh_tocken", refresh_tocken);
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("access_tocken", access_tocken);
+        tokens.put("refresh_tocken", refresh_tocken);
+
+        tokens.put("username", user.getUsername());
+        tokens.put("role", (user.getAuthorities()).toString());
+
+        response.setContentType(APPLICATION_JSON_VALUE);
+        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }
     @GetMapping("/refreshTocken")
     public void refreshTocken(HttpServletRequest request, HttpServletResponse response) throws IOException {

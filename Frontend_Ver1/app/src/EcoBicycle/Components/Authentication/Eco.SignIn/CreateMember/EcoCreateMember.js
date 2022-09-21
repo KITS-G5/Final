@@ -50,7 +50,6 @@ const EcoCreateMember = () => {
             .then(data => {
                 alert(data.message)
                 console.log(data.body.slice(54,64))
-
             });
         // window.location.reload();
         const timeout = setTimeout(() => {

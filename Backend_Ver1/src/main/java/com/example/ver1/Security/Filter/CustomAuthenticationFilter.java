@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
@@ -36,27 +36,27 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         setFilterProcessesUrl("/api/auth/signin/"); // new added
     }
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-      /*  String cardNum = request.getParameter("cardNum");
-        String cardPassword = request.getParameter("cardPassword");*/
-
-        String cardNum;
-        String cardPassword;
-        Map<String, String> requestMap = null;
-        try {
-            requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
-            cardNum = requestMap.get("cardNum");
-            cardPassword = requestMap.get("cardPassword");
-        } catch (IOException e) {
-            throw new AuthenticationServiceException(e.getMessage(), e);
-        }
-
-        log.info("Card number is {}", cardNum);
-        log.info("Password is {}", cardPassword);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(cardNum, cardPassword);
-        return authenticationManager.authenticate(authenticationToken);
-    }
+//    @Override
+//    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+//      /*  String cardNum = request.getParameter("cardNum");
+//        String cardPassword = request.getParameter("cardPassword");*/
+//
+//        String cardNum;
+//        String cardPassword;
+//        Map<String, String> requestMap = null;
+//        try {
+//            requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+//            cardNum = requestMap.get("cardNum");
+//            cardPassword = requestMap.get("cardPassword");
+//        } catch (IOException e) {
+//            throw new AuthenticationServiceException(e.getMessage(), e);
+//        }
+//
+//        log.info("Card number is {}", cardNum);
+//        log.info("Password is {}", cardPassword);
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(cardNum, cardPassword);
+//        return authenticationManager.authenticate(authenticationToken);
+//    }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
