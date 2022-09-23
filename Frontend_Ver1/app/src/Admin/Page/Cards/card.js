@@ -21,7 +21,7 @@ const Card = () => {
         return {
             id: item.id,
             // cardNo: item.cardNo,
-            cardNo: 0,
+            cardNo: item.cardNum,
             cardType: item.cardType.cardType,
             balance: item.balance,
             customer: item.customer.name,
