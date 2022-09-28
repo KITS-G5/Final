@@ -75,26 +75,26 @@ const HomeAdmin = () => {
             })
     }, [from, to]);
 
-    //  useState set month, year to calculate revenue
-    const [month, setMonth] = useState(0);
-    const [year, setYear] = useState(0);
-
-    useEffect(() => {
-        let url_get_revenue_by_month = "/orders/admin";
-        if (month!= null && year != null) {
-            url_get_revenue_by_month = url_get_revenue_by_month+ "/findOrdersByMonthAndYear?month=" + month + "&&year=" + year; 
-        }
-         fetch(constantUrl + url_get_revenue_by_month,
-             {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Revenue by month =", data);
-                setRevenueByMonth(data);
-                console.log(data);
-            })
-
-
-    }, [month, year]);
+    // //  useState set month, year to calculate revenue
+    // const [month, setMonth] = useState(0);
+    // const [year, setYear] = useState(0);
+    //
+    // useEffect(() => {
+    //     let url_get_revenue_by_month = "/orders/admin";
+    //     if (month!= null && year != null) {
+    //         url_get_revenue_by_month = url_get_revenue_by_month+ "/findOrdersByMonthAndYear?month=" + month + "&&year=" + year;
+    //     }
+    //      fetch(constantUrl + url_get_revenue_by_month,
+    //          {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             console.log("Revenue by month =", data);
+    //             setRevenueByMonth(data);
+    //             console.log(data);
+    //         })
+    //
+    //
+    // }, [month, year]);
 
     // let revenueTbl = revenueByMonth.map(item => {
     //     return (
@@ -169,21 +169,47 @@ const HomeAdmin = () => {
                 );
             }
         }];
-    let pointsData = [];
-    let i=0;
-    pointsData = revenueByMonth.map((item) => {
-        return {
-            x: i++,
-            y: Math.random()
+    //
+    // let pointsData = [];
+    // let i=0;
+    // pointsData = revenueByMonth.map((item) => {
+    //     return {
+    //         x: i++,
+    //         y: Math.random()
+    //     }
+    // })
+
+    const [month, setMonth] = useState(0);
+    const [year, setYear] = useState(0);
+
+    const [chartData, setChartData] = useState([]);
+
+    //draw line chart
+    useEffect(() => {
+        let url = 'http://localhost:8080/orders/admin/sumTotalByMonthGroupByDate';
+        if (month != 0 && year != 0) {
+            url = url + '?month=' + month + '&&year=' + year;
         }
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                setChartData(data);
+                console.log("mot con vit xoe ra hai cai canh", data);
+                console.log(chartData)
+            })
+    }, [month, year]);
+
+    let data_data = [];
+    data_data = chartData.map(item => {
+        return { x: parseInt(item[0]), y: item[1] }
     })
 
     // let pointsData = [{x: 1, y: 2}, {x: 3, y: 5}, {x: 7, y: -3}]
     console.log(pointsData);
     const dataChart =  [
         {
-            color: "steelblue",
-            points: pointsData
+            color: "green",
+            points: data_data
         }
     ];
 

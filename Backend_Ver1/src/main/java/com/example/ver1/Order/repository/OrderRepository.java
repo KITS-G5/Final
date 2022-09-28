@@ -54,4 +54,8 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     //not paid revenue by date
     @Query(value = "SELECT sum(a.total_fee) FROM tbl_order a where a.payment_status = 0 and :date1 <= rent_start_date and :date2 >= rend_end_date", nativeQuery = true)
     Double notPaidRevenueByDate(@Param("date1")Date date1, @Param("date2") Date date2);
+
+    // selett total free by month and year group by date and date
+    @Query(value = "SELECT sum(a.total_fee) as total, date(a.rent_start_date) as date FROM tbl_order a where :month = (select month(a.rent_start_date) as month) and :year = (select year(a.rent_start_date) as year) group by date(a.rent_start_date)", nativeQuery = true)
+    List<Object[]> sumTotalByMonthAndYear(@Param("month") String month, @Param("year") String year);
 }

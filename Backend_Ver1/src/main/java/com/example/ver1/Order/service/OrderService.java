@@ -35,4 +35,6 @@ public interface OrderService {
     double notPaidRevenueByDate(Date date1, Date date2);
 
     List<Order> getOrdersByMonthAndYear(String month, String year);
+
+    List<Object[]> sumTotalByMonthAndYear(String month, String year);
 }

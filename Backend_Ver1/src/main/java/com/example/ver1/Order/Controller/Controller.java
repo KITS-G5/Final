@@ -215,4 +215,52 @@ public class Controller {
         }
         return list;
     }
+    @GetMapping(path = "admin/sumTotalByMonthGroupByDate")
+    List<Object[]> sumTotalByMonthGroupByDate(@RequestParam(value = "month", required = false) String month,
+                                              @RequestParam(value = "year", required = false) String year) {
+        List<Object[]> list = null;
+        List<Object[]> listRev = null;
+        Date thisMonth = new Date();
+        int getMonth = thisMonth.getMonth();
+        int getYear = thisMonth.getYear();
+        String month1 = String.valueOf(getMonth);
+        String year1 = String.valueOf(getYear);
+        int[] dateInMonth = new int[31];
+        if (month != null && year != null) {
+            month1 = month;
+            year1 = year;
+            listRev = orderService.sumTotalByMonthAndYear(month, year);
+        } else {
+            listRev = orderService.sumTotalByMonthAndYear(month1, year1);
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, Integer.parseInt(month1));
+        calendar.set(Calendar.YEAR, Integer.parseInt(year1));
+
+        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        for (int i = 0; i <= daysInMonth; i++) {
+            dateInMonth[i] = i + 1;
+        }
+        list = new ArrayList<Object[]>();
+        for (int i = 0; i < dateInMonth.length; i++) {
+            Object[] obj = new Object[2];
+            obj[0] = dateInMonth[i];
+            obj[1] = 0;
+            list.add(obj);
+        }
+        if (listRev != null) {
+            for (int j = 0; j < listRev.size(); j++) {
+                for (int i = 0; i < dateInMonth.length; i++) {
+                    if (String.valueOf(dateInMonth[i]).equals(String.valueOf(listRev.get(j)[1]))) {
+                        list.get(i)[1] = listRev.get(j)[0];
+                    }
+                }
+
+            }
+
+        }
+        return list;
+
+    }
 }

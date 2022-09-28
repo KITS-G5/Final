@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -222,6 +223,21 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<Order> getOrdersByMonthAndYear(String month, String year) {
         return orderRepository.findOrdersByMonthAndYear(month, year);
+    }
+
+    @Override
+    public List<Object[]> sumTotalByMonthAndYear(String month, String year) {
+        List<Object[]> list = orderRepository.sumTotalByMonthAndYear(month, year);
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            for (Object[] o : list) {
+                // just get date
+                o[1] = new SimpleDateFormat("dd/MM/yyyy").format(o[1]);
+                o[1] = ((String) o[1]).substring(0, 2);
+            }
+        }
+        return list;
     }
 
 }
