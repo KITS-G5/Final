@@ -25,10 +25,11 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired private CustomCardDetailService customCardDetailService;
+    @Autowired
+    private CustomCardDetailService customCardDetailService;
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -46,80 +47,105 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
 
-        //phần mở all authorization
-        //http.authorizeRequests().anyRequest().permitAll();
-
-        //authentication controller
-        http.authorizeRequests().antMatchers("/api/auth/signin/", "/refreshTocken").permitAll(); //login
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth/signup").permitAll(); //buy a new card api or signup
-        http.authorizeRequests().antMatchers("/error").permitAll();
-
-        http.authorizeRequests().antMatchers("/error").permitAll();
-
-        //bikes controller
-        http.authorizeRequests().antMatchers(GET, "/api/v1/bikes").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/v1/bikes/**").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/v1/station/bikes/*").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/v1/bikes").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers(DELETE, "/api/v1/bikes/*").hasAnyAuthority("admin");
-
-        //Station controller
-        http.authorizeRequests().antMatchers(GET,"/api/v1/stations/").permitAll(); //
-        http.authorizeRequests().antMatchers(GET,"/api/v1/station/**").permitAll(); //
-        http.authorizeRequests().antMatchers(POST,"/api/v1/station/").hasAnyAuthority("admin"); //
-        http.authorizeRequests().antMatchers(PUT,"/api/v1/station/**").hasAnyAuthority("admin"); //
-        http.authorizeRequests().antMatchers(DELETE,"/api/v1/station/**").hasAnyAuthority("admin"); //
-
-
-        //Card controller
-        http.authorizeRequests().antMatchers(GET, "/api/v1/cards").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/v1/cards/user/**").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/api/v1/cardByPhoneNumber/**").permitAll(); //
-        http.authorizeRequests().antMatchers(GET,"/api/v1").hasAnyAuthority("user"); //
-        http.authorizeRequests().antMatchers(GET,"/api/v1/**").hasAnyAuthority("user"); //
-        http.authorizeRequests().antMatchers(POST,"/api/v1/cards").hasAnyAuthority("admin"); //
-        http.authorizeRequests().antMatchers(PUT,"/api/v1/cards/*").hasAnyAuthority("admin"); //
-        http.authorizeRequests().antMatchers(PUT,"/api/v1/topUpCard/**").permitAll(); //
-
-
-        //card type controller
-        http.authorizeRequests().antMatchers(GET, "/card-type").hasAnyAuthority("user");
-        http.authorizeRequests().antMatchers(POST, "/card-type").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers(GET, "/card-type/*").hasAnyAuthority("user");
-        http.authorizeRequests().antMatchers(PUT, "/card-type/*").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers(DELETE, "/card-type/*").hasAnyAuthority("admin");
-
-        //district controller
-//        http.authorizeRequests().antMatchers(GET, "/api/v1/districts/").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/v1/districts/").hasAnyAuthority("admin");
-
-        //cities controller
-        http.authorizeRequests().antMatchers(GET, "/api/v1/cities").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/cities").hasAnyAuthority("user");
-//        http.authorizeRequests().antMatchers(GET, "/api/v1/cities").permitAll();
-
-
-        //orders controller
-        http.authorizeRequests().antMatchers(GET, "/orders").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/orders/admin/**").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers(GET, "/orders/user/**").permitAll();
-        http.authorizeRequests().antMatchers(PUT, "/orders/user/**").permitAll();
-        http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
-        http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers( "/orders/**").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers( GET,"/orders/**").hasAnyAuthority("user");
-        http.authorizeRequests().antMatchers( PUT,"/user?**").permitAll();
-        http.authorizeRequests().antMatchers( PUT,"/user?**").hasAnyAuthority("user");
-
-        http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
-        http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
-        http.authorizeRequests().antMatchers("/swagger-ui/").permitAll();
-        http.authorizeRequests().antMatchers("/swagger-ui/index.html").permitAll();
-        http.authorizeRequests().antMatchers("/api-docs/").permitAll();
+        // phần mở all authorization
         http.authorizeRequests().anyRequest().permitAll();
 
-        http.addFilter(customAuthenticationFilter);
-        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class); //lop filter kiem tra request
+        // authentication controller
+        // http.authorizeRequests().antMatchers("/api/auth/signin/",
+        // "/refreshTocken").permitAll(); //login
+        // http.authorizeRequests().antMatchers(HttpMethod.POST,
+        // "/api/auth/signup").permitAll(); //buy a new card api or signup
+        // http.authorizeRequests().antMatchers("/error").permitAll();
+
+        // http.authorizeRequests().antMatchers("/error").permitAll();
+
+        // //bikes controller
+        // http.authorizeRequests().antMatchers(GET, "/api/v1/bikes").permitAll();
+        // http.authorizeRequests().antMatchers(GET, "/api/v1/bikes/**").permitAll();
+        // http.authorizeRequests().antMatchers(GET,
+        // "/api/v1/station/bikes/*").permitAll();
+        // http.authorizeRequests().antMatchers(POST,
+        // "/api/v1/bikes").hasAnyAuthority("admin");
+        // http.authorizeRequests().antMatchers(DELETE,
+        // "/api/v1/bikes/*").hasAnyAuthority("admin");
+
+        // //Station controller
+        // http.authorizeRequests().antMatchers(GET,"/api/v1/stations/").permitAll(); //
+        // http.authorizeRequests().antMatchers(GET,"/api/v1/station/**").permitAll();
+        // //
+        // http.authorizeRequests().antMatchers(POST,"/api/v1/station/").hasAnyAuthority("admin");
+        // //
+        // http.authorizeRequests().antMatchers(PUT,"/api/v1/station/**").hasAnyAuthority("admin");
+        // //
+        // http.authorizeRequests().antMatchers(DELETE,"/api/v1/station/**").hasAnyAuthority("admin");
+        // //
+
+        // //Card controller
+        // http.authorizeRequests().antMatchers(GET, "/api/v1/cards").permitAll();
+        // http.authorizeRequests().antMatchers(GET,
+        // "/api/v1/cards/user/**").permitAll();
+        // http.authorizeRequests().antMatchers(GET,"/api/v1/cardByPhoneNumber/**").permitAll();
+        // //
+        // http.authorizeRequests().antMatchers(GET,"/api/v1").hasAnyAuthority("user");
+        // //
+        // http.authorizeRequests().antMatchers(GET,"/api/v1/**").hasAnyAuthority("user");
+        // //
+        // http.authorizeRequests().antMatchers(POST,"/api/v1/cards").hasAnyAuthority("admin");
+        // //
+        // http.authorizeRequests().antMatchers(PUT,"/api/v1/cards/*").hasAnyAuthority("admin");
+        // //
+        // http.authorizeRequests().antMatchers(PUT,"/api/v1/topUpCard/**").permitAll();
+        // //
+
+        // //card type controller
+        // http.authorizeRequests().antMatchers(GET,
+        // "/card-type").hasAnyAuthority("user");
+        // http.authorizeRequests().antMatchers(POST,
+        // "/card-type").hasAnyAuthority("admin");
+        // http.authorizeRequests().antMatchers(GET,
+        // "/card-type/*").hasAnyAuthority("user");
+        // http.authorizeRequests().antMatchers(PUT,
+        // "/card-type/*").hasAnyAuthority("admin");
+        // http.authorizeRequests().antMatchers(DELETE,
+        // "/card-type/*").hasAnyAuthority("admin");
+
+        // //district controller
+        // // http.authorizeRequests().antMatchers(GET,
+        // "/api/v1/districts/").permitAll();
+        // http.authorizeRequests().antMatchers(GET,
+        // "/api/v1/districts/").hasAnyAuthority("admin");
+
+        // //cities controller
+        // http.authorizeRequests().antMatchers(GET,
+        // "/api/v1/cities").hasAnyAuthority("admin");
+        // http.authorizeRequests().antMatchers(GET,
+        // "/api/v1/cities").hasAnyAuthority("user");
+        // // http.authorizeRequests().antMatchers(GET, "/api/v1/cities").permitAll();
+
+        // //orders controller
+        // http.authorizeRequests().antMatchers(GET, "/orders").permitAll();
+        // http.authorizeRequests().antMatchers(GET,"/orders/admin/**").hasAnyAuthority("admin");
+        // http.authorizeRequests().antMatchers(GET, "/orders/user/**").permitAll();
+        // http.authorizeRequests().antMatchers(PUT, "/orders/user/**").permitAll();
+        // http.authorizeRequests().antMatchers( POST,"/orders").permitAll();
+        // http.authorizeRequests().antMatchers( "/orders").hasAnyAuthority("admin");
+        // http.authorizeRequests().antMatchers( "/orders/**").hasAnyAuthority("admin");
+        // http.authorizeRequests().antMatchers(
+        // GET,"/orders/**").hasAnyAuthority("user");
+        // http.authorizeRequests().antMatchers( PUT,"/user?**").permitAll();
+        // http.authorizeRequests().antMatchers(
+        // PUT,"/user?**").hasAnyAuthority("user");
+
+        // http.authorizeRequests().antMatchers(GET, "/api/*").hasAnyAuthority("user");
+        // http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
+        // http.authorizeRequests().antMatchers("/swagger-ui/").permitAll();
+        // http.authorizeRequests().antMatchers("/swagger-ui/index.html").permitAll();
+        // http.authorizeRequests().antMatchers("/api-docs/").permitAll();
+        // http.authorizeRequests().anyRequest().permitAll();
+
+        // http.addFilter(customAuthenticationFilter);
+        // http.addFilterBefore(new CustomAuthorizationFilter(),
+        // UsernamePasswordAuthenticationFilter.class); //lop filter kiem tra request
     }
 
     @Override
@@ -128,13 +154,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    //    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        UserDetails ramesh = User.builder().username("ramesh").password(passwordEncoder()
-//                .encode("password")).roles("USER").build();
-//        UserDetails admin = User.builder().username("admin").password(passwordEncoder()
-//                .encode("admin")).roles("ADMIN").build();
-//        return new InMemoryUserDetailsManager(ramesh, admin);
-//    }
+    // @Override
+    // @Bean
+    // protected UserDetailsService userDetailsService() {
+    // UserDetails ramesh =
+    // User.builder().username("ramesh").password(passwordEncoder()
+    // .encode("password")).roles("USER").build();
+    // UserDetails admin =
+    // User.builder().username("admin").password(passwordEncoder()
+    // .encode("admin")).roles("ADMIN").build();
+    // return new InMemoryUserDetailsManager(ramesh, admin);
+    // }
 }

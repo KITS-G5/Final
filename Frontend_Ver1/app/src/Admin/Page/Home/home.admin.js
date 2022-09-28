@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {Link, NavLink} from 'react-router-dom';
-import {Form, InputGroup} from "react-bootstrap";
-import {Line} from "react-chartjs-2";
+import { Link, NavLink } from 'react-router-dom';
+import { Form, InputGroup } from "react-bootstrap";
+import { Line } from 'react-chartjs-2';
 import LineChart from 'react-linechart';
-
 import './styles.css'
 
 const HomeAdmin = () => {
@@ -37,11 +36,7 @@ const HomeAdmin = () => {
             url_net_revenue = url_net_revenue + '?date1=' + from + '&&date2=' + to;
             url_loan_revenue = url_loan_revenue + '?date1=' + from + '&&date2=' + to;
         }
-        fetch(url_gross_revenue,
-            {headers:
-                    {"Content-Type": "application/json",
-                    "Authorization": "Bearer " + localStorage.getItem("token")}}
-        )
+        fetch(url_gross_revenue)
             .then((response) => response.json())
             .then((data) => {
                 console.log("Revenue =", data);
@@ -49,11 +44,7 @@ const HomeAdmin = () => {
                 console.log(data);
             })
 
-        fetch(url_net_revenue,
-            {headers:
-                    {"Content-Type": "application/json",
-                        "Authorization": "Bearer " + localStorage.getItem("token")}}
-        )
+        fetch(url_net_revenue)
             .then((response) => response.json())
             .then((data) => {
                 console.log("Revenue =", data);
@@ -62,9 +53,13 @@ const HomeAdmin = () => {
             })
         console.log(localStorage.getItem("token"))
         fetch(url_loan_revenue,
-            {headers:
-                    {"Content-Type": "application/json",
-                        "Authorization": "Bearer " + localStorage.getItem("token")}}
+            {
+                headers:
+                {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            }
         )
             .then((response) => response.json())
             .then((data) => {
@@ -74,26 +69,6 @@ const HomeAdmin = () => {
             })
     }, [from, to]);
 
-    //  useState set month, year to calculate revenue
-    const [month, setMonth] = useState(0);
-    const [year, setYear] = useState(0);
-
-    useEffect(() => {
-        let url_get_revenue_by_month = "/orders/admin";
-        if (month!= null && year != null) {
-            url_get_revenue_by_month = url_get_revenue_by_month+ "/findOrdersByMonthAndYear?month=" + month + "&&year=" + year; 
-        }
-         fetch(url_get_revenue_by_month,
-             {headers : {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Revenue by month =", data);
-                setRevenueByMonth(data);
-                console.log(data);
-            })
-
-
-    }, [month, year]);
 
     // let revenueTbl = revenueByMonth.map(item => {
     //     return (
@@ -111,7 +86,7 @@ const HomeAdmin = () => {
     //         )
     // })
 
-    
+
     let table = revenueByMonth.map((item) => {
         return (
             <h5>{item.totalFee}</h5>
@@ -130,13 +105,13 @@ const HomeAdmin = () => {
         }
     })
 
-// get data table column
+    // get data table column
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'customer', headerName: 'Customer', width: 200 },
         { field: 'bike', headerName: 'Bike ', width: 150 },
-        { field: 'from', headerName: 'From', width: 300},
+        { field: 'from', headerName: 'From', width: 300 },
         { field: 'to', headerName: 'To', width: 300 },
         { field: 'total', headerName: 'Total', width: 300 },
         {
@@ -158,40 +133,64 @@ const HomeAdmin = () => {
                     <Button
                         variant="outlined"
                         color="error"
-                        // onClick={(event) => {
-                        //     deleteUser(cellValues.id);
-                        //     console.log('delete', cellValues.id);
-                        // }}
+                    // onClick={(event) => {
+                    //     deleteUser(cellValues.id);
+                    //     console.log('delete', cellValues.id);
+                    // }}
                     >
                         Delete
                     </Button>
                 );
             }
         }];
-    let pointsData = [];
-    let i=0;
-    pointsData = revenueByMonth.map((item) => {
-        return {
-            x: i++,
-            y: Math.random()
+
+    const [month, setMonth] = useState(0);
+    const [year, setYear] = useState(0);
+
+    const [chartData, setChartData] = useState([]);
+
+    //draw line chart
+    useEffect(() => {
+        let url = 'http://localhost:8080/orders/admin/sumTotalByMonthGroupByDate';
+        if (month != 0 && year != 0) {
+            url = url + '?month=' + month + '&&year=' + year;
         }
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                setChartData(data);
+                console.log("mot con vit xoe ra hai cai canh", data);
+                console.log(chartData)
+            })
+    }, [month, year]);
+
+    // let label = [];
+    // label = chartData.map(item => {
+    //     return item[0];
+    // })
+
+    // let data_data = [];
+    // data_data = chartData.map(item => {
+    //     return item[1];
+    // })
+
+    let data_data = [];
+    data_data = chartData.map(item => {
+        return { x: parseInt(item[0]), y: item[1] }
     })
 
-    // let pointsData = [{x: 1, y: 2}, {x: 3, y: 5}, {x: 7, y: -3}]
-    console.log(pointsData);
-    const dataChart =  [
+    const dataChart = [
         {
-            color: "steelblue",
-            points: pointsData
+            color: "green",
+            points: data_data
         }
     ];
 
+
     return (
         <>
-            <div style={{height: '80vh'}} className={'mx-auto dashboard-container'}>
-                <h1 style={{marginTop: '80px'}}>DASHBOARD</h1>
-                {/*insert chart*/}
-                {/*add filter to filter orders by date, by station*/}
+            <div style={{ height: '80vh' }} className={'mx-auto dashboard-container'}>
+                <h1 style={{ marginTop: '80px' }}>DASHBOARD</h1>
                 <div className="d-flex justify-content-between cards">
                     <div className="card-div text-center">
                         <h2 className={'mt-3'}>1500
@@ -221,7 +220,7 @@ const HomeAdmin = () => {
                     <div className="row collection justify-content-between">
                         <div className="">
                             <h5 className={'mt-5'}>Chooe period to list orders</h5>
-                            <br/>
+                            <br />
                             <div className="input-group ">
                                 {/* <input onChange={(e) => setMonth(e.target.value)} className={'form-control'} type="text" name="month"/> */}
                                 <Form.Group className="mb-3">
@@ -253,24 +252,24 @@ const HomeAdmin = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="chart-div">
+                    <div id="myChart">
                         <LineChart
-                            width={700}
+                            width={1000}
                             height={500}
                             data={dataChart}
                         />
                     </div>
                 </div>
-         
+
                 {/*Revenue report*/}
 
                 <div className="row collection justify-content-between">
                     <div className="col-lg-6 col-md-12">
                         <h5 className={'mt-5'}>Choose date to calculate revenue</h5>
-                        <br/>
+                        <br />
                         <div className="w-50 input-group ">
-                            <input onChange={(e) => setFrom(e.target.value)} className={'form-control'} type="date" name="from-date" id="from-date"/>
-                            <input onChange={(e) => setTo(e.target.value)}  className={'form-control mx-5'} type="date" name="to-date" id="to-date"/>
+                            <input onChange={(e) => setFrom(e.target.value)} className={'form-control'} type="date" name="from-date" id="from-date" />
+                            <input onChange={(e) => setTo(e.target.value)} className={'form-control mx-5'} type="date" name="to-date" id="to-date" />
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-12 mt-5">
@@ -297,7 +296,7 @@ const HomeAdmin = () => {
                 {/*end revenue report*/}
                 <h2 className={'mt-5'}>Orders</h2>
                 <DataGrid
-                    style={{marginTop: '30px'}}
+                    style={{ marginTop: '30px' }}
                     rows={dataTable}
                     columns={columns}
                     pageSize={10}

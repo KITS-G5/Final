@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public interface OrderService {
     List<Order> getAllOrders();
+
     Page<Order> getAllOrderByPage(int pageNo, int pageSize);
 
     Optional<Order> getOrderNotPaid(Card card, boolean paymentStatus);
@@ -25,14 +26,21 @@ public interface OrderService {
     int saveOrder(Order order);
 
     void updateOrder(Stations station, Order order, long id);
+
     int updateOrder(Card card, Stations stations);
+
     int makePayment(Card card);
 
     void deleteOrder(long id);
 
     double totalRevenueByDate(Date date1, Date date2);
+
     double netRevenueByDate(Date date1, Date date2);
+
     double notPaidRevenueByDate(Date date1, Date date2);
 
     List<Order> getOrdersByMonthAndYear(String month, String year);
+
+    List<Object[]> sumTotalByMonthAndYear(String month, String year);
+
 }
